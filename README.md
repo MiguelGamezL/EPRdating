@@ -99,7 +99,7 @@ See `examples/quickstart.py` and `examples/deconvolution_epraya.py`.
 - **v0.1** core: De, dose rate, EU/LU/US, age, Monte Carlo; validation against published ROSY/DATA ages.
 - **v0.2** spectra: EPRAYA-based deconvolution → De; comparison of intensity methods.
 - **v0.3** one-group beta attenuation in planar layers (Brennan et al. 1997) — done, with the geometry sampled in the Monte Carlo.
-- **v0.4** US-ESR, with cementum layers — done, validated against Shao et al. (2015) and Yu et al. (2026).
+- **v0.4** US-ESR, with cementum layers — done, validated against Shao et al. (2015) and De Nadale et al. (2026, J. Hum. Evol.).
 - **later** file readers (Bruker, JEOL), alpha escape at surfaces, JOSS paper.
 
 ## Validation against ROSY
