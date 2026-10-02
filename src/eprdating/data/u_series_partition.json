@@ -1,0 +1,7 @@
+{
+  "_comment": "Fraction of the secular-equilibrium U-238 (+U-235) dose rate carried by each chain segment, per radiation type. Fill in from Adamiec & Aitken (1998, Ancient TL 16:37-50) or Guérin et al. (2011, Ancient TL 29:5-8) and cite the source below. Each radiation's fractions must sum to 1. Segments: U238 = 238U-234Th-234Pa; U234 = 234U; Th230 = 230Th and all daughters to 206Pb; U235 = 235U chain.",
+  "source": null,
+  "alpha": {"U238": null, "U234": null, "Th230": null, "U235": null},
+  "beta":  {"U238": null, "U234": null, "Th230": null, "U235": null},
+  "gamma": {"U238": null, "U234": null, "Th230": null, "U235": null}
+}

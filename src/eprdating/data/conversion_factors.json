@@ -1,0 +1,135 @@
+{
+  "_meta": {
+    "units": "Gy/ka per ppm (U, Th) or per % (K), infinite matrix, secular equilibrium",
+    "source_note": "Values transcribed from the DRAC v1.x lookup tables (github.com/DRAC-calculator). Verify against the original publications before relying on them."
+  },
+  "adamiec_aitken_1998": {
+    "reference": "Adamiec G. & Aitken M.J. (1998) Dose-rate conversion factors: update. Ancient TL 16, 37-50.",
+    "factors": {
+      "U": {
+        "alpha": [
+          2.78,
+          0.010948801
+        ],
+        "beta": [
+          0.146,
+          0.000400274
+        ],
+        "gamma": [
+          0.113,
+          0.000202147
+        ]
+      },
+      "Th": {
+        "alpha": [
+          0.732,
+          0.00258061
+        ],
+        "beta": [
+          0.0273,
+          0.000893455
+        ],
+        "gamma": [
+          0.0476,
+          0.000197921
+        ]
+      },
+      "K": {
+        "beta": [
+          0.782,
+          0.007125952
+        ],
+        "gamma": [
+          0.243,
+          0.004669335
+        ]
+      }
+    }
+  },
+  "guerin_2011": {
+    "reference": "Guérin G., Mercier N. & Adamiec G. (2011) Dose-rate conversion factors: update. Ancient TL 29, 5-8.",
+    "factors": {
+      "U": {
+        "alpha": [
+          2.795,
+          0.011007877
+        ],
+        "beta": [
+          0.1457,
+          0.000399452
+        ],
+        "gamma": [
+          0.1116,
+          0.000199642
+        ]
+      },
+      "Th": {
+        "alpha": [
+          0.7375,
+          0.0026
+        ],
+        "beta": [
+          0.0277,
+          0.000906545
+        ],
+        "gamma": [
+          0.0479,
+          0.000199168
+        ]
+      },
+      "K": {
+        "beta": [
+          0.7982,
+          0.007273574
+        ],
+        "gamma": [
+          0.2491,
+          0.004786549
+        ]
+      }
+    }
+  },
+  "liritzis_2013": {
+    "reference": "Liritzis I. et al. (2013) Dose-rate conversion factors: update and uncertainties. Mediterranean Archaeology and Archaeometry 13, 1-15.",
+    "factors": {
+      "U": {
+        "alpha": [
+          2.793,
+          0.011
+        ],
+        "beta": [
+          0.1459,
+          0.0004
+        ],
+        "gamma": [
+          0.1118,
+          0.0002
+        ]
+      },
+      "Th": {
+        "alpha": [
+          0.7375,
+          0.0026
+        ],
+        "beta": [
+          0.0275,
+          0.0009
+        ],
+        "gamma": [
+          0.0481,
+          0.0002
+        ]
+      },
+      "K": {
+        "beta": [
+          0.8011,
+          0.0073
+        ],
+        "gamma": [
+          0.2498,
+          0.0048
+        ]
+      }
+    }
+  }
+}

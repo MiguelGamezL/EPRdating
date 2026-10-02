@@ -1,0 +1,45 @@
+[build-system]
+requires = ["hatchling>=1.24"]
+build-backend = "hatchling.build"
+
+[project]
+name = "eprdating"
+dynamic = ["version"]
+description = "ESR/EPR dating in Python: from spectra and dose-response curves to dose rates and ages."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+authors = [{ name = "Miguel Enrique Gámez López", email = "megamezl@unal.edu.co" }]
+keywords = ["ESR dating", "EPR", "geochronology", "tooth enamel", "dose rate", "trapped charge dating"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Intended Audience :: Science/Research",
+  "Topic :: Scientific/Engineering :: Physics",
+]
+dependencies = ["numpy>=1.24", "scipy>=1.10"]
+
+[project.optional-dependencies]
+# EPRAYA brings JAX, numba, ipywidgets, tkinter... keep it opt-in.
+spectra = ["epraya>=0.1.41"]
+plot = ["matplotlib>=3.7"]
+dev = ["pytest>=7", "pytest-cov", "ruff"]
+
+[project.urls]
+"EPRAYA" = "https://github.com/eprayadev/EPRAYA"
+
+[tool.hatch.version]
+path = "src/eprdating/__init__.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/eprdating"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+  "validation: reproduces published ages (needs case data filled in)",
+  "epraya: needs the optional EPRAYA backend",
+]
+
+[tool.ruff]
+line-length = 110
+src = ["src"]

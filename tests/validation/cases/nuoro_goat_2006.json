@@ -1,0 +1,22 @@
+{
+  "id": "nuoro_goat_2006",
+  "reference": "Baffa O., Kinoshita A., Figueiredo A.M.G., Brunetti A., Ginesu S. (2006) ESR dating of an ancient goat tooth from Nuoro, Sardinia, Italy. Radiation Protection Dosimetry 119(1-4), 446-449.",
+  "software_used": "ROSY",
+  "notes": "Fill the null inputs from the full paper (tables of U/Th by NAA, thicknesses, water, gamma/cosmic). Expected values come from the abstract.",
+  "inputs": {
+    "De_Gy": [211, 34],
+    "enamel_U_ppm": null,
+    "dentine_U_ppm": null,
+    "sediment": {"U_ppm": null, "Th_ppm": null, "K_pct": null, "water": null},
+    "beta_geometry": {"internal": null, "dentine": null, "external": null},
+    "gamma_Gy_ka": null,
+    "cosmic_Gy_ka": null,
+    "k_alpha": [0.13, 0.02],
+    "u234_u238_initial": null
+  },
+  "expected_ages_ka": {
+    "EU": [195, 30],
+    "LU": [247, 40]
+  },
+  "tolerance_rel": 0.05
+}
