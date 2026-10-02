@@ -57,7 +57,8 @@ def test_deconvolution_recovers_amplitudes_and_De():
     for a in amp_true:
         y = a * s1 / np.ptp(s1) + 300 * s2 / np.ptp(s2) + 0.02 * (B - 339) + 2 * rng.standard_normal(B.size)
         spectra.append(y)
-    amps, results = component_vs_dose(basis, spectra, "dating")
+    amps, errs, results = component_vs_dose(basis, spectra, "dating")
+    assert np.all(errs > 0)
     assert np.allclose(amps, amp_true, rtol=0.01)
     assert all(r.r2 > 0.99 for r in results)
     fit = fit_dose_response(doses, amps, "SSE")

@@ -56,6 +56,13 @@ Units: Gy, Gy/ka, ka, ppm (U, Th), % (K), mT, GHz.
 
 See `examples/quickstart.py` and `examples/deconvolution_epraya.py`.
 
+`examples/dose_series_dat.py` runs a real additive-dose series from raw
+spectra to De: it reads `.dat`/`.par` files, builds the CO2- template (the
+field-aligned average of the strong spectra, or the orthorhombic CO2- radical
+simulated with EPRAYA and broadened by the time constant), fits each
+spectrum's amplitude with a field-shift search and noise-injection errors, and
+fits the dose-response line.
+
 ## Modules
 
 | module | content |
@@ -69,7 +76,7 @@ See `examples/quickstart.py` and `examples/deconvolution_epraya.py`.
 | `alpha` | energy-dependent alpha efficiency, k ∝ R(E)/E (ROSY's "varies with energy" option) |
 | `usesr` | combined U-series/ESR (US-ESR): solves the age and the uptake parameter *p* of each tissue from its 230Th/234U and 234U/238U (Grün et al. 1988) |
 | `age` | generic solver `∫₀ᵀ Ḋ(t) dt = De` and the `ToothSample` model with Monte Carlo |
-| `spectra` | peak-to-peak, T1–B2, double integral, non-negative deconvolution, EPRAYA backend |
+| `spectra` | reading `.dat`/`.par` spectra; baseline, power/gain/mass normalisation, field alignment, pseudo-modulation and time-constant broadening of simulated shapes; peak-to-peak, T1–B2, double integral; template/component fits with field shift and noise-injection errors; EPRAYA backend |
 
 ## Known limitations (v0.1)
 
@@ -100,7 +107,8 @@ See `examples/quickstart.py` and `examples/deconvolution_epraya.py`.
 - **v0.2** spectra: EPRAYA-based deconvolution → De; comparison of intensity methods.
 - **v0.3** one-group beta attenuation in planar layers (Brennan et al. 1997) — done, with the geometry sampled in the Monte Carlo.
 - **v0.4** US-ESR, with cementum layers — done, validated against Shao et al. (2015) and De Nadale et al. (2026, J. Hum. Evol.).
-- **later** file readers (Bruker, JEOL), alpha escape at surfaces, JOSS paper.
+- **v0.5** real spectra: `.dat`/`.par` reader, template fits with honest errors, EPRAYA templates with instrumental broadening — first real series (M18) processed.
+- **later** Bruker/JEOL readers, alpha escape at surfaces, JOSS paper.
 
 ## Validation against ROSY
 

@@ -28,7 +28,7 @@ species = {
     "native": Species(g=2.0045, Hpp=[0, 0.8]),  # placeholder values
 }
 basis = basis_from_species(B, species, FREQ_GHZ)
-amps, fits = component_vs_dose(basis, spectra, "CO2- orthorhombic")
+amps, errs, fits = component_vs_dose(basis, spectra, "CO2- orthorhombic")
 drc = fit_dose_response(doses, amps, model="SSE", weighting="1/I^2")
 print(drc.summary())
 print("min R² of spectral fits:", min(f.r2 for f in fits))

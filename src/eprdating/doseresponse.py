@@ -65,6 +65,7 @@ class DoseResponseResult:
     chi2_red: float
     r2: float
     _popt: np.ndarray = field(repr=False, default=None)
+    De_min: float = 0.0
 
     @property
     def De(self) -> float:
@@ -129,6 +130,8 @@ def fit_dose_response(
     weighting: str = "none",
     p0: Sequence[float] | None = None,
     max_dose: float | None = None,
+    De_min: float = 0.0,
+    scale_errors: bool = True,
 ) -> DoseResponseResult:
     """Fit an additive-dose curve and return De with its uncertainty.
 
@@ -147,6 +150,15 @@ def fit_dose_response(
         Optional initial guess, in the order of ``PARAM_NAMES[model]``.
     max_dose
         Discard points with added dose above this value (Dmax test).
+    De_min
+        Lower bound of De (default 0). Use ``-np.inf`` to see where the data
+        really extrapolate: a negative De flags an inconsistent series (e.g.
+        weak low-dose points measured too low), which a bound at 0 would hide.
+    scale_errors
+        With explicit ``sigma``, inflate the covariance by ``chi2_red`` when
+        it exceeds 1 (Birge ratio), so scatter not explained by the
+        per-point errors (aliquot inhomogeneity, positioning in the cavity)
+        reaches the De uncertainty.
     """
     model = model.upper()
     if model not in MODELS:
@@ -172,7 +184,7 @@ def fit_dose_response(
 
     f = MODELS[model]
     guess = list(p0) if p0 is not None else _initial_guess(model, D, I)
-    lower = [0.0] + [0.0] * (npar - 1)
+    lower = [De_min] + [0.0] * (npar - 1)
     upper = [np.inf] * npar
     if model == "EXPLIN":
         lower[3] = -np.inf
@@ -180,10 +192,12 @@ def fit_dose_response(
         f, D, I, p0=guess, sigma=s, absolute_sigma=abs_sigma,
         bounds=(lower, upper), maxfev=20000,
     )
-    perr = np.sqrt(np.diag(pcov))
     resid = I - f(D, *popt)
     w = 1.0 if s is None else 1.0 / s**2
     chi2_red = float(np.sum(w * resid**2) / (len(D) - npar))
+    if abs_sigma and scale_errors and chi2_red > 1:
+        pcov = pcov * chi2_red
+    perr = np.sqrt(np.diag(pcov))
     ss_tot = np.sum((I - I.mean()) ** 2)
     r2 = float(1 - np.sum(resid**2) / ss_tot) if ss_tot > 0 else float("nan")
     names = PARAM_NAMES[model]
@@ -198,6 +212,7 @@ def fit_dose_response(
         chi2_red=chi2_red,
         r2=r2,
         _popt=popt,
+        De_min=De_min,
     )
 
 
@@ -211,7 +226,8 @@ def bootstrap_De(result: DoseResponseResult, n: int = 1000, seed: int | None = N
     for i in range(n):
         I_star = fitted + rng.choice(res, size=res.size, replace=True)
         try:
-            r = fit_dose_response(result.dose, I_star, result.model, sigma=result.sigma, p0=p0)
+            r = fit_dose_response(result.dose, I_star, result.model, sigma=result.sigma, p0=p0,
+                                  De_min=result.De_min)
             out[i] = r.De
         except RuntimeError:
             out[i] = np.nan
