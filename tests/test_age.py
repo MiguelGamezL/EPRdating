@@ -155,3 +155,15 @@ def test_mc_with_uncertain_ratio_and_radon():
     mc = _tooth(u234_u238_dentine=(1.3, 0.05), radon_loss_dentine=(0.3, 0.2)).age_mc(n=200, seed=2)
     assert mc.samples.size == 200
     assert mc.interval()[0] < mc.nominal.age < mc.interval()[1]
+
+
+def test_tooth_sample_with_onegroup_geometry():
+    from eprdating import ToothLayers
+
+    geo = ToothLayers(enamel_um=1000, strip_outer_um=50, strip_inner_um=50)
+    s = _tooth(beta=geo)
+    nominal = s.age()
+    assert nominal.age > 0
+    assert nominal.components["sediment beta"] > 0
+    mc = s.age_mc(n=100, seed=3)
+    assert mc.samples.size == 100

@@ -6,9 +6,9 @@ All numbers below are illustrative, not from a real sample.
 import numpy as np
 
 from eprdating import (
-    BetaGeometry,
     LinearUptake,
     Sediment,
+    ToothLayers,
     ToothSample,
     USModel,
     cosmic_dose_rate,
@@ -30,7 +30,8 @@ sample = ToothSample(
     enamel_U=(0.8, 0.08),
     dentine_U=(15.0, 1.5),
     sediment=Sediment(U=(2.1, 0.1), Th=(7.5, 0.4), K=(1.1, 0.05), water=(0.15, 0.05)),
-    beta=BetaGeometry(internal=(0.6, 0.03), dentine=(0.3, 0.02), external=(0.25, 0.02)),
+    # beta attenuation by one-group theory (as in ROSY)
+    beta=ToothLayers(enamel_um=1100, dentine_um=2000, strip_outer_um=50, strip_inner_um=50),
     cosmic=cosmic,
     uptake_enamel=LinearUptake(),
     uptake_dentine=USModel(p=0.5),

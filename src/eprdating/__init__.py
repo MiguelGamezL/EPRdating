@@ -5,7 +5,7 @@ Pipeline: spectra → intensity → dose-response → De → dose rate → age.
 
 from ._types import Value
 from .age import AgeMC, AgeResult, DoseRateComponent, ToothSample, solve_age
-from .beta import BetaGeometry, Layers
+from .beta import BetaGeometry
 from .dose_rate import (
     Sediment,
     available_factor_sets,
@@ -15,6 +15,7 @@ from .dose_rate import (
     water_correction,
 )
 from .doseresponse import DoseResponseResult, bootstrap_De, fit_dose_response
+from .onegroup import ToothLayers
 from .series import USeries
 from .uptake import EarlyUptake, LinearUptake, USModel
 
@@ -27,9 +28,9 @@ __all__ = [
     "DoseRateComponent",
     "DoseResponseResult",
     "EarlyUptake",
-    "Layers",
     "LinearUptake",
     "Sediment",
+    "ToothLayers",
     "ToothSample",
     "USModel",
     "USeries",

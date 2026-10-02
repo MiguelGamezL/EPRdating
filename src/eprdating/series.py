@@ -157,8 +157,15 @@ class USeries:
             return self.ratio - 1.0
         return (self.ratio - 1.0) * math.exp(LAMBDA["U234"] * tau)
 
-    def G(self, radiation: str):
+    def G(self, radiation: str, weights: dict[str, float] | None = None):
+        """Time-integrated dose function for one radiation type.
+
+        ``weights`` optionally scales each segment (e.g. per-segment beta
+        attenuation factors from :mod:`eprdating.onegroup`).
+        """
         frac = self.partition[radiation]
+        if weights is not None:
+            frac = {seg: f * weights.get(seg, 1.0) for seg, f in frac.items()}
         keep_rn = 1.0 - self.radon_loss
 
         def g(tau: float) -> float:

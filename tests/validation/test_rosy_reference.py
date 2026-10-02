@@ -14,7 +14,7 @@ from pathlib import Path
 
 import pytest
 
-from eprdating import BetaGeometry, Sediment, ToothSample, USeries, USModel, conversion_factors
+from eprdating import BetaGeometry, Sediment, ToothLayers, ToothSample, USeries, USModel, conversion_factors
 from eprdating.dose_rate import cosmic_dose_rate_sea_level, matrix_dose_rates, water_correction
 
 pytestmark = pytest.mark.validation
@@ -86,3 +86,34 @@ def test_end_to_end_age_within_3_percent(cid):
             factors="adamiec_aitken_1998",
         )
         assert s.age().age == pytest.approx(RES[cid][mode]["age"] / 1000, rel=0.03)
+
+
+# --- full ages with one-group beta attenuation ------------------------------
+AGE_CASES = [c for c in RES if c.startswith(("H_", "BR97"))]
+
+
+@pytest.mark.parametrize("cid", AGE_CASES)
+def test_ages_with_onegroup_within_2_percent_of_rosy(cid):
+    """End-to-end ages, including the six teeth of Brennan et al. (1997),
+    with beta attenuation computed by EPRdating's one-group solver."""
+    p = CASES[cid]
+    geo = ToothLayers(
+        enamel_um=_v(p["thick_en"]), dentine_um=_v(p["thick_den"]),
+        strip_outer_um=_v(p["strip_out"]), strip_inner_um=_v(p["strip_in"]),
+        enamel_density=_v(p["density_en"]), dentine_density=_v(p["density_den"]),
+        sediment_density=_v(p["density_sed"]),
+    )
+    if p["env_option"] == 2:
+        env = {"gamma": None, "cosmic": cosmic_dose_rate_sea_level(_v(p["depth"]), _v(p["overburden_density"]))}
+    else:
+        env = {"gamma": _v(p["gamma_cosmic"]) / 1000, "cosmic": 0.0}
+    cu = (-1.0 if p["uptake_en"] == 1 else 0.0, -1.0 if p["uptake_den"] == 1 else 0.0)
+    for mode, (pe, pd) in (("EU", (-1.0, -1.0)), ("LU", (0.0, 0.0)), ("CU", cu)):
+        s = ToothSample(
+            De=_v(p["De"]), enamel_U=_v(p["U_en"]), dentine_U=_v(p["U_den"]),
+            sediment=Sediment(U=_v(p["U_sed"]), Th=_v(p["Th_sed"]), K=_v(p["K_sed"]),
+                              water=_v(p["water_sed"]) / 100),
+            beta=geo, k_alpha=_v(p["alpha_eff"]), uptake_enamel=USModel(pe), uptake_dentine=USModel(pd),
+            factors="adamiec_aitken_1998", **env,
+        )
+        assert s.age().age == pytest.approx(RES[cid][mode]["age"] / 1000, rel=0.02), mode

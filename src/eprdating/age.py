@@ -17,7 +17,7 @@ from __future__ import annotations
 
 import warnings
 from collections.abc import Callable, Sequence
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 
 import numpy as np
 from scipy.optimize import brentq
@@ -33,6 +33,7 @@ from .dose_rate import (
     matrix_dose_rates,
     water_correction,
 )
+from .onegroup import ToothLayers
 from .series import USeries, load_partition
 from .uptake import USModel
 
@@ -155,7 +156,11 @@ class ToothSample:
     De : equivalent dose of the enamel.
     enamel_U, dentine_U : present-day U in each tissue.
     sediment : U, Th, K and water content of the surrounding sediment.
-    beta : geometry factors (see :class:`eprdating.beta.BetaGeometry`).
+    beta : either fixed geometry factors (:class:`eprdating.beta.BetaGeometry`)
+        or a layered geometry (:class:`eprdating.onegroup.ToothLayers`), in
+        which case beta attenuation is computed with one-group theory for each
+        emitter and U-series segment (as ROSY does). The one-group factors are
+        evaluated at the nominal geometry and water contents.
     gamma : external gamma dose rate. If None, computed from ``sediment``
         as an infinite matrix (use in-situ measurements when available).
     cosmic : cosmic dose rate (see :func:`eprdating.dose_rate.cosmic_dose_rate`).
@@ -177,7 +182,7 @@ class ToothSample:
     enamel_U: ValueLike
     dentine_U: ValueLike
     sediment: Sediment
-    beta: BetaGeometry
+    beta: BetaGeometry | ToothLayers
     cosmic: ValueLike
     gamma: ValueLike | None = None
     k_alpha: ValueLike = K_ENAMEL
@@ -204,8 +209,9 @@ class ToothSample:
             v["gamma"] = as_value(self.gamma).value
         for k in ("U", "Th", "K", "water"):
             v["sed_" + k] = as_value(getattr(self.sediment, k)).value
-        for k, val in self.beta.values().items():
-            v["beta_" + k] = val.value
+        if isinstance(self.beta, BetaGeometry):
+            for k, val in self.beta.values().items():
+                v["beta_" + k] = val.value
         return v
 
     def _sample(self, rng: np.random.Generator, n: int) -> dict[str, np.ndarray]:
@@ -214,8 +220,9 @@ class ToothSample:
             s["gamma"] = as_value(self.gamma).sample(rng, n)
         for k in ("U", "Th", "K", "water"):
             s["sed_" + k] = as_value(getattr(self.sediment, k)).sample(rng, n)
-        for k, val in self.beta.values().items():
-            s["beta_" + k] = val.sample(rng, n)
+        if isinstance(self.beta, BetaGeometry):
+            for k, val in self.beta.values().items():
+                s["beta_" + k] = val.sample(rng, n)
         # physical constraints: no negative concentrations / fractions
         for k, arr in s.items():
             np.clip(arr, 0.0, None, out=arr)
@@ -238,27 +245,66 @@ class ToothSample:
             self.partition = load_partition()
         return self.partition
 
+    # ---- one-group beta factors ------------------------------------------
+    def _onegroup(self) -> dict:
+        """Per-source, per-chain/segment one-group factors at nominal values."""
+        if getattr(self, "_og_cache", None) is None:
+            geo = replace(
+                self.beta,
+                sediment_water=as_value(self.sediment.water).value,
+                dentine_water=as_value(self.dentine_water).value,
+                _cache={},
+            )
+            segs = ("U238", "U234", "Th230", "Rn222", "U235", "Pa231")
+            self._og_cache = {
+                "enamel": {s: geo.chain_fraction("enamel", s) for s in segs},
+                "dentine": {s: geo.chain_fraction("dentine", s) for s in segs},
+                "enamel_U": geo.chain_fraction("enamel", "U"),
+                "dentine_U": geo.chain_fraction("dentine", "U"),
+                "sediment": {c: geo.chain_fraction("sediment", c) for c in ("U", "Th", "K")},
+            }
+        return self._og_cache
+
     # ---- model -----------------------------------------------------------
     def components(self, v: dict[str, float] | None = None) -> list[DoseRateComponent]:
         v = v or self._nominal()
         cf: ConversionFactors = conversion_factors(self.factors)
         cU = {r: cf.get("U", r).value for r in ("alpha", "beta", "gamma")}
         use, usd = self._useries("enamel", v), self._useries("dentine", v)
-        Ga_e = use.G("alpha") if use else None
-        Gb_e = use.G("beta") if use else None
-        Gb_d = usd.G("beta") if usd else None
         sed = {"U": v["sed_U"], "Th": v["sed_Th"], "K": v["sed_K"], "water": v["sed_water"]}
-        sed_beta = water_correction(matrix_dose_rates(sed["U"], sed["Th"], sed["K"], cf)["beta"], sed["water"], "beta")
+        dry = matrix_dose_rates(sed["U"], sed["Th"], sed["K"], cf)
         if "gamma" in v:
             gamma = v["gamma"]
         else:
-            gamma = water_correction(matrix_dose_rates(sed["U"], sed["Th"], sed["K"], cf)["gamma"], sed["water"], "gamma")
-        dentine_beta = water_correction(v["dentine_U"] * cU["beta"], v["dentine_water"], "beta")
+            gamma = water_correction(dry["gamma"], sed["water"], "gamma")
+        Ga_e = use.G("alpha") if use else None
+
+        if isinstance(self.beta, BetaGeometry):
+            Gb_e = use.G("beta") if use else None
+            Gb_d = usd.G("beta") if usd else None
+            en_beta = v["beta_internal"] * v["enamel_U"] * cU["beta"]
+            den_beta = v["beta_dentine"] * water_correction(v["dentine_U"] * cU["beta"], v["dentine_water"], "beta")
+            sed_beta = v["beta_external"] * water_correction(dry["beta"], sed["water"], "beta")
+        else:
+            og = self._onegroup()
+            # one-group factors are relative to the wet medium's own infinite-matrix
+            # dose, i.e. the dry dose rate diluted by (1 + water)
+            # rates are the attenuated equilibrium values; the per-segment factors
+            # enter G relative to the whole-chain factor
+            w_e = {s: f / og["enamel_U"] for s, f in og["enamel"].items()}
+            w_d = {s: f / og["dentine_U"] for s, f in og["dentine"].items()}
+            Gb_e = use.G("beta", w_e) if use else None
+            Gb_d = usd.G("beta", w_d) if usd else None
+            en_beta = v["enamel_U"] * cU["beta"] * og["enamel_U"]
+            den_beta = v["dentine_U"] * cU["beta"] / (1.0 + v["dentine_water"]) * og["dentine_U"]
+            sed_beta = sum(
+                sed[nuc] * cf.get(nuc, "beta").value * og["sediment"][nuc] for nuc in ("U", "Th", "K")
+            ) / (1.0 + sed["water"])
         return [
             DoseRateComponent("enamel alpha", v["k_alpha"] * v["enamel_U"] * cU["alpha"], self.uptake_enamel, Ga_e),
-            DoseRateComponent("enamel beta", v["beta_internal"] * v["enamel_U"] * cU["beta"], self.uptake_enamel, Gb_e),
-            DoseRateComponent("dentine beta", v["beta_dentine"] * dentine_beta, self.uptake_dentine, Gb_d),
-            DoseRateComponent("sediment beta", v["beta_external"] * sed_beta),
+            DoseRateComponent("enamel beta", en_beta, self.uptake_enamel, Gb_e),
+            DoseRateComponent("dentine beta", den_beta, self.uptake_dentine, Gb_d),
+            DoseRateComponent("sediment beta", sed_beta),
             DoseRateComponent("gamma", gamma),
             DoseRateComponent("cosmic", v["cosmic"]),
         ]

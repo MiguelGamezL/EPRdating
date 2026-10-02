@@ -94,3 +94,35 @@ power / energy at the mean beta energy; Lewis transport cross section for
 scattering; flux continuity at interfaces; dose in each layer = sum of a rising
 and a decaying exponential). The equations are in the follow-up report it
 announces for *Ancient TL* and in O'Brien et al. (1964).
+
+## One-group beta attenuation (`eprdating.onegroup`)
+
+Implemented from O'Brien et al. (1964), with the absorption coefficient
+μa = S(E)/E (Bethe collision stopping power) and the Lewis transport cross
+section μs of Prestwich & Chan (2000, eqs. 11–13). The coefficients reproduce
+the values Prestwich & Chan quote for H and O at 0.7 MeV (μs exactly, μa within
+0.5 %). Each beta emitter of the U, Th and K chains (energies from Adamiec &
+Aitken 1998) is transported separately at its mean energy; layers are
+sediment | (cementum) | enamel | dentine | sediment, with hydroxyapatite enamel,
+silica sediment and an indicative dentine (70 % mineral, 20 % collagen, 10 %
+water). No parameter was fitted to ROSY: the theoretical scattering cross
+section is used (Prestwich & Chan's factor of 0.42, which matches Monte Carlo,
+reproduces ROSY much worse).
+
+Against the factors measured from ROSY 2.0:
+
+| Source → 1000 µm enamel | EPRdating | ROSY 2.0 |
+|---|---|---|
+| Enamel U (self) | 0.702 | 0.692 |
+| Dentine U | 0.140 | 0.140 |
+| Sediment U / Th / K | 0.147 / 0.136 / 0.145 | 0.152 / 0.143 / 0.148 |
+
+Dentine factors agree to three decimals at all thicknesses (300–3000 µm),
+self-dose within 1–2.5 % and sediment within 2–5 %, the remaining differences
+probably coming from the enamel and sediment compositions ROSY assumes.
+
+Full ages with this geometry (`test_ages_with_onegroup_within_2_percent_of_rosy`)
+agree with ROSY 2.0 within **−1.2 % to +0.9 %** for EU, LU and CU, including
+the six real teeth of Brennan et al. (1997) with their thicknesses, stripping
+and water contents, using a constant alpha efficiency (ROSY's is energy
+dependent).
