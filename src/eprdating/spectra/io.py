@@ -6,10 +6,10 @@ Supported format
 ``.par`` file holds ``KEY : value`` lines::
 
     N : 512            points per scan
-    CF : 3350.0        centre field (G)
-    CF_ : 3354.0       second centre-field value (kept, not used for the axis)
-    SW : 499.1453      sweep width (G)
-    SW_ : 500.0
+    CF : 3350.0        actual centre field (G); the field axis is CF ± SW/2
+    CF_ : 3354.0       centre field set by the operator (kept, not used)
+    SW : 499.1453      actual sweep width (G)
+    SW_ : 500.0        sweep width set by the operator
     Nscans : 4
     Freq : 9.43        microwave frequency (GHz)
     TC, MA, OF, PH, RG, CT   time constant, modulation amplitude, offset,
