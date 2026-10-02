@@ -149,3 +149,47 @@ def test_mc_uncertainty_matches_rosy_error(cid):
     )
     mc = s.age_mc(n=400, seed=7)
     assert mc.std == pytest.approx(RES[cid]["EU"]["age_err"] / 1000, rel=0.25)
+
+
+# --- energy-dependent alpha efficiency ---------------------------------------
+@pytest.mark.parametrize("cid", [c for c in RES if c.startswith(("A_", "B_init", "C_", "D_"))])
+def test_energy_dependent_alpha_efficiency_matches_rosy(cid):
+    """ROSY's 'varies with energy' option: the effective k of the enamel alpha
+    dose follows from R(E)/E per emitter with the ingrowth model."""
+    from eprdating.alpha import segment_k_ratios
+
+    p = CASES[cid]
+    w = segment_k_ratios(5.3)
+    for mode, pp in (("EU", -1.0), ("LU", 0.0)):
+        d = RES[cid][mode]
+        T = d["age"] / 1000
+        us = USeries(ratio=p["ratio"], ratio_is="initial", radon_loss=1 - p["radon_en"])
+        base = USModel(pp).accumulated(T, us.G("alpha"))
+        predicted = p["alpha_eff"] * USModel(pp).accumulated(T, us.G("alpha", w)) / base
+        measured = (d["Enamel"][0] / 1000) / (p["U_en"] * CU["alpha"] * base / T)
+        assert predicted == pytest.approx(measured, rel=0.03)
+
+
+@pytest.mark.parametrize("cid", AGE_CASES)
+def test_ages_with_onegroup_and_energy_alpha_within_1_percent(cid):
+    p = CASES[cid]
+    geo = ToothLayers(
+        enamel_um=_v(p["thick_en"]), dentine_um=_v(p["thick_den"]),
+        strip_outer_um=_v(p["strip_out"]), strip_inner_um=_v(p["strip_in"]),
+        enamel_density=_v(p["density_en"]), dentine_density=_v(p["density_den"]),
+        sediment_density=_v(p["density_sed"]),
+    )
+    if p["env_option"] == 2:
+        env = {"gamma": None, "cosmic": cosmic_dose_rate_sea_level(_v(p["depth"]), _v(p["overburden_density"]))}
+    else:
+        env = {"gamma": _v(p["gamma_cosmic"]) / 1000, "cosmic": 0.0}
+    cu = (-1.0 if p["uptake_en"] == 1 else 0.0, -1.0 if p["uptake_den"] == 1 else 0.0)
+    for mode, (pe, pd) in (("EU", (-1.0, -1.0)), ("LU", (0.0, 0.0)), ("CU", cu)):
+        s = ToothSample(
+            De=_v(p["De"]), enamel_U=_v(p["U_en"]), dentine_U=_v(p["U_den"]),
+            sediment=Sediment(U=_v(p["U_sed"]), Th=_v(p["Th_sed"]), K=_v(p["K_sed"]),
+                              water=_v(p["water_sed"]) / 100),
+            beta=geo, k_alpha=_v(p["alpha_eff"]), alpha_efficiency="energy",
+            uptake_enamel=USModel(pe), uptake_dentine=USModel(pd), factors="adamiec_aitken_1998", **env,
+        )
+        assert s.age().age == pytest.approx(RES[cid][mode]["age"] / 1000, rel=0.01), mode

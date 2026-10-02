@@ -23,6 +23,7 @@ import numpy as np
 from scipy.optimize import brentq
 
 from ._types import ValueLike, as_value
+from .alpha import natural_u_k_ratio, segment_k_ratios
 from .beta import BetaGeometry
 from .dose_rate import (
     DEFAULT_FACTORS,
@@ -165,7 +166,12 @@ class ToothSample:
     gamma : external gamma dose rate. If None, computed from ``sediment``
         as an infinite matrix (use in-situ measurements when available).
     cosmic : cosmic dose rate (see :func:`eprdating.dose_rate.cosmic_dose_rate`).
-    k_alpha : alpha efficiency of enamel.
+    k_alpha : alpha efficiency of enamel. With ``alpha_efficiency="energy"``
+        it is the value at ``alpha_eref`` MeV.
+    alpha_efficiency : ``"constant"`` (default, as in DATA) or ``"energy"``
+        (as in ROSY): k varies with alpha energy as R(E)/E, so each U-series
+        segment gets its own efficiency (see :mod:`eprdating.alpha`).
+    alpha_eref : reference alpha energy for ``k_alpha`` in MeV (ROSY: 5.3).
     dentine_water : water content used for the dentine beta contribution.
     uptake_enamel, uptake_dentine : uptake models (EU, LU, US with p).
     u234_u238_enamel, u234_u238_dentine : present-day (measured) 234U/238U
@@ -201,6 +207,8 @@ class ToothSample:
     partition: dict | None = None
     factors: str = DEFAULT_FACTORS
     sample_geometry: bool = True
+    alpha_efficiency: str = "constant"
+    alpha_eref: float = 5.3
 
     _SCALARS = (
         "De", "enamel_U", "dentine_U", "cosmic", "k_alpha", "dentine_water",
@@ -294,7 +302,14 @@ class ToothSample:
             gamma = v["gamma"]
         else:
             gamma = water_correction(dry["gamma"], sed["water"], "gamma")
-        Ga_e = use.G("alpha") if use else None
+        if self.alpha_efficiency == "constant":
+            k_scale, Ga_e = 1.0, (use.G("alpha") if use else None)
+        elif self.alpha_efficiency == "energy":
+            seg_k = segment_k_ratios(self.alpha_eref)
+            k_scale = natural_u_k_ratio(self.alpha_eref)
+            Ga_e = use.G("alpha", {s: r / k_scale for s, r in seg_k.items()}) if use else None
+        else:
+            raise ValueError("alpha_efficiency must be 'constant' or 'energy'")
 
         if isinstance(self.beta, BetaGeometry):
             Gb_e = use.G("beta") if use else None
@@ -318,7 +333,8 @@ class ToothSample:
                 sed[nuc] * cf.get(nuc, "beta").value * og["sediment"][nuc] for nuc in ("U", "Th", "K")
             ) / (1.0 + sed["water"])
         return [
-            DoseRateComponent("enamel alpha", v["k_alpha"] * v["enamel_U"] * cU["alpha"], self.uptake_enamel, Ga_e),
+            DoseRateComponent("enamel alpha", k_scale * v["k_alpha"] * v["enamel_U"] * cU["alpha"],
+                              self.uptake_enamel, Ga_e),
             DoseRateComponent("enamel beta", en_beta, self.uptake_enamel, Gb_e),
             DoseRateComponent("dentine beta", den_beta, self.uptake_dentine, Gb_d),
             DoseRateComponent("sediment beta", sed_beta),

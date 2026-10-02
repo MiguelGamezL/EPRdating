@@ -177,3 +177,12 @@ def test_geometry_uncertainty_widens_mc():
     narrow = _tooth(beta=geo, dentine_U=(30.0, 0.1), sample_geometry=False).age_mc(n=200, seed=5)
     assert wide.nominal.age == pytest.approx(narrow.nominal.age)
     assert wide.std > narrow.std
+
+
+def test_alpha_efficiency_option():
+    young_const = _tooth(De=(20.0, 1.0), enamel_U=(5.0, 0.1)).age().age
+    young_energy = _tooth(De=(20.0, 1.0), enamel_U=(5.0, 0.1), alpha_efficiency="energy").age().age
+    # young U is dominated by low-energy 238U/234U alphas -> lower k -> older age
+    assert young_energy > young_const
+    with pytest.raises(ValueError):
+        _tooth(alpha_efficiency="whatever").age()

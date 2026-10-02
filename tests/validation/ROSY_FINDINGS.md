@@ -147,3 +147,24 @@ reports (EU, 1000 draws):
 Without sampling the geometry the error is underestimated by up to ~40 %
 (sample 1, enamel 1828 ± 360 µm). `test_mc_uncertainty_matches_rosy_error`
 checks the agreement within 25 % with 400 draws.
+
+## Energy-dependent alpha efficiency (`eprdating.alpha`)
+
+ROSY's default "varies with energy, Eref = 5.3 MeV" is reproduced with
+k(E) = k_ref · [R(E)/E] / [R(5.3)/5.3], R being the CSDA range of alphas in
+hydroxyapatite from the Bethe stopping power, applied per emitter (A&A 1998
+energies) and weighted per U-series segment inside the ingrowth integral.
+Segment ratios k/k_ref: 238U 0.875, 234U 0.931, 230Th+226Ra 0.931, post-radon
+1.103, 235U 0.884, 231Pa+ 1.102 (natural U in equilibrium 1.026). Nothing is
+fitted to ROSY.
+
+The effective k of the enamel alpha dose in the reference cases is predicted
+within −0.2 to +2.6 % (largest for total radon loss and the youngest case),
+and full ages with one-group beta plus energy-dependent alpha agree with ROSY
+within **−0.5 to +0.7 %** (mean |deviation| 0.4 %, against 0.6 % with constant
+k). A small residual remains for thin enamel (300 µm: ROSY's alpha dose is
+~1 % lower), which suggests ROSY also accounts for alpha escape at the layer
+surfaces; EPRdating does not.
+
+`ToothSample(alpha_efficiency="energy")` selects this option; the default
+remains a constant k, as in DATA.
