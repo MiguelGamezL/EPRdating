@@ -50,8 +50,8 @@ EXCLUDED = {"M18_5_19mW_4SCAN.dat": "no detectable signal at 100 Gy (failed meas
 # same aliquot measured with the narrow and the wide sweep (for the natural)
 BRIDGE = ("M18_9_19mW_4SCAN.dat", "M18_9_19mW_TOTAL.dat")
 REF_POWER = 19.0  # mW
-CENTER, HALF = 336.7, 4.0  # mT, fit window
-SIGNAL = (331.0, 342.5)  # mT, excluded from baseline/noise estimates
+CENTER, HALF = 337.1, 4.0  # mT (actual field), fit window
+SIGNAL = (331.4, 342.9)  # mT, excluded from baseline/noise estimates
 MAX_SHIFT = 0.6  # mT
 
 

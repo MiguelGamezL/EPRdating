@@ -6,10 +6,10 @@ Supported format
 ``.par`` file holds ``KEY : value`` lines::
 
     N : 512            points per scan
-    CF : 3350.0        actual centre field (G); the field axis is CF ± SW/2
-    CF_ : 3354.0       centre field set by the operator (kept, not used)
-    SW : 499.1453      actual sweep width (G)
-    SW_ : 500.0        sweep width set by the operator
+    CF : 3350.0        centre field set by the operator (G)
+    CF_ : 3354.0       actual centre field (G)
+    SW : 499.1453      sweep width (G)
+    SW_ : 500.0        second sweep-width value (kept, not used)
     Nscans : 4
     Freq : 9.43        microwave frequency (GHz)
     TC, MA, OF, PH, RG, CT   time constant, modulation amplitude, offset,
@@ -20,7 +20,12 @@ point index within the scan, field (G), signal, and a flag. Scans follow one
 another; a line with ``NaN`` signal may separate them, and an interrupted
 acquisition leaves a trailing incomplete scan, which is dropped.
 
-Fields are converted to mT, the unit used everywhere in :mod:`eprdating`.
+The field column is CF ± SW/2, i.e. it is built on the *set* centre field.
+:func:`read_dat` moves it by ``CF_ - CF`` so that the axis is the actual
+field (``actual_field=False`` keeps the raw axis). For the M18 series this
+correction (+0.4 mT) brings the CO2- signal to within 0.05 mT of the
+simulated one (literature g-values, nominal 9.43 GHz). Fields are in mT, as
+everywhere in :mod:`eprdating`.
 """
 
 from __future__ import annotations
@@ -94,12 +99,13 @@ def read_par(path: str | Path) -> dict[str, float]:
 
 
 def read_dat(path: str | Path, par: str | Path | None = None, power_mW: float | None = None,
-             field_unit: str = "G") -> Spectrum:
+             field_unit: str = "G", actual_field: bool = True) -> Spectrum:
     """Read a ``.dat`` spectrum (and its ``.par`` file if present).
 
     ``par`` defaults to the file with the same stem. ``power_mW`` defaults to
     the number before ``mW`` in the file name. ``field_unit`` is the unit of
-    the field column ("G" or "mT").
+    the field column ("G" or "mT"). With ``actual_field`` the axis is shifted
+    by ``CF_ - CF`` (actual minus set centre field) when both are present.
     """
     path = Path(path)
     par = Path(par) if par is not None else path.with_suffix(".par")
@@ -122,6 +128,8 @@ def read_dat(path: str | Path, par: str | Path | None = None, power_mW: float | 
         if not np.allclose(c[:, 1], B):
             raise ValueError(f"{path}: scans have different field axes")
     scale = {"G": 0.1, "mT": 1.0}[field_unit]
+    if actual_field and "CF" in params and "CF_" in params:
+        B = B + (params["CF_"] - params["CF"])
     if power_mW is None:
         m = _POWER_RE.search(path.stem)
         power_mW = float(m.group(1)) if m else None

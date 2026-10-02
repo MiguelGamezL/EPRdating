@@ -45,7 +45,9 @@ def test_read_dat_par(tmp_path):
     f = _write(tmp_path, "S_7_19mW_4SCAN", scans, B, trailing=5)
     s = read_dat(f)
     assert s.n_scans == 3 and s.dropped_points == 5
-    assert s.B[0] == pytest.approx(310.0) and s.B[-1] == pytest.approx(360.0)  # G -> mT
+    # G -> mT, moved by CF_ - CF = +4 G to the actual field
+    assert s.B[0] == pytest.approx(310.4) and s.B[-1] == pytest.approx(360.4)
+    assert read_dat(f, actual_field=False).B[0] == pytest.approx(310.0)
     np.testing.assert_allclose(s.y, scans.mean(0), rtol=1e-5)
     assert s.freq_GHz == 9.43 and s.power_mW == 19.0 and s.gain == 30
     w = s.window(330, 340)
