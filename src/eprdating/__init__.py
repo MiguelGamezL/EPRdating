@@ -18,7 +18,7 @@ from .doseresponse import DoseResponseResult, bootstrap_De, fit_dose_response
 from .onegroup import ToothLayers
 from .series import USeries
 from .uptake import EarlyUptake, LinearUptake, USModel
-from .usesr import USESRSample, UseriesData
+from .usesr import UseriesData, USESRSample
 
 __version__ = "0.1.0.dev0"
 
