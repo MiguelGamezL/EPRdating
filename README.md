@@ -12,9 +12,10 @@ spectra ─► intensity ─► dose-response curve ─► De ─► dose rate �
 Inspired by ROSY (Brennan et al. 1997, 1999) and DATA (Grün 2009), written as
 an independent, open implementation from the published equations.
 
-> **Status: 0.1.0.dev0 — pre-release.** Do not use it for published ages until
-> the validation cases in `tests/validation/` pass. See *Roadmap* and
-> *Known limitations*.
+> **Status: 0.1.0.dev0 — pre-release.** First validation against ROSY 2.0:
+> end-to-end ages agree within ~2 % when ROSY's beta geometry factors are
+> supplied (see `tests/validation/ROSY_FINDINGS.md`). Not yet for published
+> ages; see *Roadmap* and *Known limitations*.
 
 ## Install
 
@@ -73,7 +74,12 @@ See `examples/quickstart.py` and `examples/deconvolution_epraya.py`.
    parameter *p* is still an input: it is not yet derived from U-series
    data (US-ESR).
 2. **No one-group beta attenuation yet.** Beta geometry factors are user
-   inputs (published tables or Monte Carlo, e.g. DosiVox).
+   inputs (published tables, Monte Carlo such as DosiVox, or the factors
+   measured from ROSY in `ROSY_FINDINGS.md`). A single factor per source is
+   an approximation: ROSY's effective factors vary by a few percent with age
+   and radon loss.
+5. **Alpha efficiency** is constant; ROSY's default lets it vary with alpha
+   energy (k = 0.15 at 5.3 MeV), which shifts effective k by up to ~6 %.
 3. **No time-varying** water content or burial depth.
 4. **Data provenance.** Conversion factors and the Prescott & Stefan F/J/H
    table were transcribed from the DRAC lookup tables. The Adamiec & Aitken
@@ -85,6 +91,15 @@ See `examples/quickstart.py` and `examples/deconvolution_epraya.py`.
 - **v0.2** spectra: EPRAYA-based deconvolution → De; comparison of intensity methods.
 - **v0.3** one-group beta attenuation in planar layers (Brennan et al. 1997).
 - **later** US-ESR coupling with U-series data, radon loss, file readers (Bruker, JEOL), JOSS paper.
+
+## Validation against ROSY
+
+`tools/rosy_harness` batch-runs the original ROSY 2.0 under Wine (bring your
+own copy). Reference inputs and outputs live in
+`tests/validation/rosy_reference/`; `tests/validation/test_rosy_reference.py`
+locks in the agreement for gamma, cosmic, U-series ingrowth and end-to-end
+ages, and `ROSY_FINDINGS.md` summarises the campaign, including the beta
+geometry factors that the one-group solver has to reproduce.
 
 ## Testing
 

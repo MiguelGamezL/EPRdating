@@ -1,0 +1,6847 @@
+{
+ "A_enU_De10": {
+  "EU": {
+   "age": 50819.17,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    148.37,
+    48.4,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    148.37,
+    48.4,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    148.37,
+    48.4,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 196.78
+  },
+  "LU": {
+   "age": 94440.41,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    80.49,
+    25.4,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    80.49,
+    25.4,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    80.49,
+    25.4,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 105.89
+  },
+  "CU": {
+   "age": 50819.17,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    148.37,
+    48.4,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    148.37,
+    48.4,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    148.37,
+    48.4,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 196.78
+  }
+ },
+ "A_enU_De50": {
+  "EU": {
+   "age": 159528.33,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    246.35,
+    67.08,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    246.35,
+    67.08,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    246.35,
+    67.08,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 313.42
+  },
+  "LU": {
+   "age": 300756.06,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    131.17,
+    35.07,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    131.17,
+    35.07,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    131.17,
+    35.07,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 166.25
+  },
+  "CU": {
+   "age": 159528.33,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    246.35,
+    67.08,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    246.35,
+    67.08,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    246.35,
+    67.08,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 313.42
+  }
+ },
+ "A_enU_De100": {
+  "EU": {
+   "age": 265845.59,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    298.99,
+    77.17,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    298.99,
+    77.17,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    298.99,
+    77.17,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 376.16
+  },
+  "LU": {
+   "age": 510854.91,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    155.93,
+    39.82,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    155.93,
+    39.82,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    155.93,
+    39.82,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 195.75
+  },
+  "CU": {
+   "age": 265845.59,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    298.99,
+    77.17,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    298.99,
+    77.17,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    298.99,
+    77.17,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 376.16
+  }
+ },
+ "A_enU_De300": {
+  "EU": {
+   "age": 650418.28,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    370.34,
+    90.9,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    370.34,
+    90.9,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    370.34,
+    90.9,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 461.24
+  },
+  "LU": {
+   "age": 1287057.47,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    187.24,
+    45.85,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    187.24,
+    45.85,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    187.24,
+    45.85,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 233.09
+  },
+  "CU": {
+   "age": 650418.28,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    370.34,
+    90.9,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    370.34,
+    90.9,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    370.34,
+    90.9,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 461.24
+  }
+ },
+ "A_enU_De1000": {
+  "EU": {
+   "age": 1972300.21,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    408.72,
+    98.3,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    408.72,
+    98.3,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    408.72,
+    98.3,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 507.02
+  },
+  "LU": {
+   "age": 3939590.04,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    204.64,
+    49.2,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    204.64,
+    49.2,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    204.64,
+    49.2,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 253.83
+  },
+  "CU": {
+   "age": 1972300.21,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    408.72,
+    98.3,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    408.72,
+    98.3,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    408.72,
+    98.3,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 507.02
+  }
+ },
+ "B_init_r1.2": {
+  "EU": {
+   "age": 606262.32,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    399.03,
+    95.81,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    399.03,
+    95.81,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    399.03,
+    95.81,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 494.84
+  },
+  "LU": {
+   "age": 1210924.87,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    199.76,
+    47.99,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    199.76,
+    47.99,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    199.76,
+    47.99,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 247.74
+  },
+  "CU": {
+   "age": 606262.32,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    399.03,
+    95.81,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    399.03,
+    95.81,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    399.03,
+    95.81,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 494.84
+  }
+ },
+ "B_init_r1.5": {
+  "EU": {
+   "age": 546601.68,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    445.18,
+    103.66,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    445.18,
+    103.66,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    445.18,
+    103.66,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 548.85
+  },
+  "LU": {
+   "age": 1105230.49,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    220.0,
+    51.43,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    220.0,
+    51.43,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    220.0,
+    51.43,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 271.44
+  },
+  "CU": {
+   "age": 546601.68,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    445.18,
+    103.66,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    445.18,
+    103.66,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    445.18,
+    103.66,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 548.85
+  }
+ },
+ "B_pres_r1.5": {
+  "EU": {
+   "age": 464558.5,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    528.11,
+    117.66,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    528.11,
+    117.66,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    528.11,
+    117.66,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 645.77
+  },
+  "LU": {
+   "age": 952495.82,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    257.22,
+    57.74,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    257.22,
+    57.74,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    257.22,
+    57.74,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 314.96
+  },
+  "CU": {
+   "age": 464558.5,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    528.11,
+    117.66,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    528.11,
+    117.66,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    528.11,
+    117.66,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 645.77
+  }
+ },
+ "B_init_r2.0": {
+  "EU": {
+   "age": 464558.5,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    528.11,
+    117.66,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    528.11,
+    117.66,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    528.11,
+    117.66,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 645.77
+  },
+  "LU": {
+   "age": 952495.82,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    257.22,
+    57.74,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    257.22,
+    57.74,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    257.22,
+    57.74,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 314.96
+  },
+  "CU": {
+   "age": 464558.5,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    528.11,
+    117.66,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    528.11,
+    117.66,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    528.11,
+    117.66,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 645.77
+  }
+ },
+ "B_pres_r2.0": {
+  "EU": {
+   "age": 464558.5,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    528.11,
+    117.66,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    528.11,
+    117.66,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    528.11,
+    117.66,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 645.77
+  },
+  "LU": {
+   "age": 952495.82,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    257.22,
+    57.74,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    257.22,
+    57.74,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    257.22,
+    57.74,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 314.96
+  },
+  "CU": {
+   "age": 464558.5,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    528.11,
+    117.66,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    528.11,
+    117.66,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    528.11,
+    117.66,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 645.77
+  }
+ },
+ "C_radon0.0": {
+  "EU": {
+   "age": 1482713.43,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    164.64,
+    37.69,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    164.64,
+    37.69,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    164.64,
+    37.69,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 202.33
+  },
+  "LU": {
+   "age": 2961409.76,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    82.46,
+    18.85,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    82.46,
+    18.85,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    82.46,
+    18.85,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 101.3
+  },
+  "CU": {
+   "age": 1482713.43,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    164.64,
+    37.69,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    164.64,
+    37.69,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    164.64,
+    37.69,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 202.33
+  }
+ },
+ "C_radon0.5": {
+  "EU": {
+   "age": 885948.0,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    272.92,
+    65.7,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    272.92,
+    65.7,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    272.92,
+    65.7,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 338.62
+  },
+  "LU": {
+   "age": 1762775.59,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    137.22,
+    32.97,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    137.22,
+    32.97,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    137.22,
+    32.97,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 170.19
+  },
+  "CU": {
+   "age": 885948.0,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    272.92,
+    65.7,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    272.92,
+    65.7,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    272.92,
+    65.7,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 338.62
+  }
+ },
+ "D_enThick300": {
+  "EU": {
+   "age": 709491.8,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    371.06,
+    51.78,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    371.06,
+    51.78,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    371.06,
+    51.78,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 422.84
+  },
+  "LU": {
+   "age": 1405576.98,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    187.35,
+    26.09,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    187.35,
+    26.09,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    187.35,
+    26.09,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 213.44
+  },
+  "CU": {
+   "age": 709491.8,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    371.06,
+    51.78,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    371.06,
+    51.78,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    371.06,
+    51.78,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 422.84
+  }
+ },
+ "D_enThick600": {
+  "EU": {
+   "age": 673566.06,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    371.15,
+    74.24,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    371.15,
+    74.24,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    371.15,
+    74.24,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 445.39
+  },
+  "LU": {
+   "age": 1333532.51,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    187.53,
+    37.43,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    187.53,
+    37.43,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    187.53,
+    37.43,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 224.97
+  },
+  "CU": {
+   "age": 673566.06,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    371.15,
+    74.24,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    371.15,
+    74.24,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    371.15,
+    74.24,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 445.39
+  }
+ },
+ "D_enThick1500": {
+  "EU": {
+   "age": 635689.03,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    369.59,
+    102.34,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    369.59,
+    102.34,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    369.59,
+    102.34,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 471.93
+  },
+  "LU": {
+   "age": 1257482.97,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    186.95,
+    51.62,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    186.95,
+    51.62,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    186.95,
+    51.62,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 238.57
+  },
+  "CU": {
+   "age": 635689.03,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    369.59,
+    102.34,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    369.59,
+    102.34,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    369.59,
+    102.34,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 471.93
+  }
+ },
+ "D_enThick3000": {
+  "EU": {
+   "age": 619093.41,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    368.6,
+    115.98,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    368.6,
+    115.98,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    368.6,
+    115.98,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 484.58
+  },
+  "LU": {
+   "age": 1224166.65,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    186.55,
+    58.51,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    186.55,
+    58.51,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    186.55,
+    58.51,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 245.06
+  },
+  "CU": {
+   "age": 619093.41,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    368.6,
+    115.98,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    368.6,
+    115.98,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    368.6,
+    115.98,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 484.58
+  }
+ },
+ "E_denU_enThick300": {
+  "EU": {
+   "age": 754243.36,
+   "age_err": 0.0,
+   "Dentine": [
+    24.26,
+    373.49,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    24.26,
+    373.49,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    24.26,
+    373.49,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 397.75
+  },
+  "LU": {
+   "age": 1505794.68,
+   "age_err": 0.0,
+   "Dentine": [
+    11.38,
+    187.85,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    11.38,
+    187.85,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    11.38,
+    187.85,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 199.23
+  },
+  "CU": {
+   "age": 754243.36,
+   "age_err": 0.0,
+   "Dentine": [
+    24.26,
+    373.49,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    24.26,
+    373.49,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    24.26,
+    373.49,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 397.75
+  }
+ },
+ "E_denU_enThick600": {
+  "EU": {
+   "age": 1049796.9,
+   "age_err": 0.0,
+   "Dentine": [
+    12.62,
+    273.15,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    12.62,
+    273.15,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    12.62,
+    273.15,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 285.77
+  },
+  "LU": {
+   "age": 2099752.3,
+   "age_err": 0.0,
+   "Dentine": [
+    5.9,
+    136.97,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    5.9,
+    136.97,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    5.9,
+    136.97,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 142.87
+  },
+  "CU": {
+   "age": 1049796.9,
+   "age_err": 0.0,
+   "Dentine": [
+    12.62,
+    273.15,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    12.62,
+    273.15,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    12.62,
+    273.15,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 285.77
+  }
+ },
+ "E_denU_enThick1000": {
+  "EU": {
+   "age": 1478921.97,
+   "age_err": 0.0,
+   "Dentine": [
+    7.79,
+    195.06,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    7.79,
+    195.06,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    7.79,
+    195.06,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 202.85
+  },
+  "LU": {
+   "age": 2961238.53,
+   "age_err": 0.0,
+   "Dentine": [
+    3.64,
+    97.67,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    3.64,
+    97.67,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    3.64,
+    97.67,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 101.31
+  },
+  "CU": {
+   "age": 1478921.97,
+   "age_err": 0.0,
+   "Dentine": [
+    7.79,
+    195.06,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    7.79,
+    195.06,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    7.79,
+    195.06,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 202.85
+  }
+ },
+ "E_denU_enThick1500": {
+  "EU": {
+   "age": 2064832.8,
+   "age_err": 0.0,
+   "Dentine": [
+    5.29,
+    140.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    5.29,
+    140.0,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    5.29,
+    140.0,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 145.29
+  },
+  "LU": {
+   "age": 4136612.25,
+   "age_err": 0.0,
+   "Dentine": [
+    2.47,
+    70.05,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    2.47,
+    70.05,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    2.47,
+    70.05,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 72.52
+  },
+  "CU": {
+   "age": 2064832.8,
+   "age_err": 0.0,
+   "Dentine": [
+    5.29,
+    140.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    5.29,
+    140.0,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    5.29,
+    140.0,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 145.29
+  }
+ },
+ "F_sedK": {
+  "EU": {
+   "age": 2586128.94,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    116.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    116.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    0.0,
+    116.0,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 116.0
+  },
+  "LU": {
+   "age": 2586128.94,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    116.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    116.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    0.0,
+    116.0,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 116.0
+  },
+  "CU": {
+   "age": 2586128.94,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    116.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    116.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    0.0,
+    116.0,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 116.0
+  }
+ },
+ "G_env_depth0.5": {
+  "EU": {
+   "age": 350504.5,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    1.98,
+    149.9,
+    498.8,
+    null,
+    null
+   ],
+   "Uranium": [
+    0.96,
+    22.19,
+    113.0,
+    null,
+    null
+   ],
+   "Thorium": [
+    1.02,
+    11.7,
+    142.8,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    116.0,
+    243.0,
+    null,
+    null
+   ],
+   "Total": [
+    1.98,
+    149.9,
+    498.8,
+    205.23,
+    704.03
+   ],
+   "total_rate": 855.91
+  },
+  "LU": {
+   "age": 350504.5,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    1.98,
+    149.9,
+    498.8,
+    null,
+    null
+   ],
+   "Uranium": [
+    0.96,
+    22.19,
+    113.0,
+    null,
+    null
+   ],
+   "Thorium": [
+    1.02,
+    11.7,
+    142.8,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    116.0,
+    243.0,
+    null,
+    null
+   ],
+   "Total": [
+    1.98,
+    149.9,
+    498.8,
+    205.23,
+    704.03
+   ],
+   "total_rate": 855.91
+  },
+  "CU": {
+   "age": 350504.5,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    1.98,
+    149.9,
+    498.8,
+    null,
+    null
+   ],
+   "Uranium": [
+    0.96,
+    22.19,
+    113.0,
+    null,
+    null
+   ],
+   "Thorium": [
+    1.02,
+    11.7,
+    142.8,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    116.0,
+    243.0,
+    null,
+    null
+   ],
+   "Total": [
+    1.98,
+    149.9,
+    498.8,
+    205.23,
+    704.03
+   ],
+   "total_rate": 855.91
+  }
+ },
+ "G_env_depth1.0": {
+  "EU": {
+   "age": 360173.44,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    1.98,
+    149.9,
+    498.8,
+    null,
+    null
+   ],
+   "Uranium": [
+    0.96,
+    22.19,
+    113.0,
+    null,
+    null
+   ],
+   "Thorium": [
+    1.02,
+    11.7,
+    142.8,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    116.0,
+    243.0,
+    null,
+    null
+   ],
+   "Total": [
+    1.98,
+    149.9,
+    498.8,
+    182.26,
+    681.06
+   ],
+   "total_rate": 832.93
+  },
+  "LU": {
+   "age": 360173.44,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    1.98,
+    149.9,
+    498.8,
+    null,
+    null
+   ],
+   "Uranium": [
+    0.96,
+    22.19,
+    113.0,
+    null,
+    null
+   ],
+   "Thorium": [
+    1.02,
+    11.7,
+    142.8,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    116.0,
+    243.0,
+    null,
+    null
+   ],
+   "Total": [
+    1.98,
+    149.9,
+    498.8,
+    182.26,
+    681.06
+   ],
+   "total_rate": 832.93
+  },
+  "CU": {
+   "age": 360173.44,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    1.98,
+    149.9,
+    498.8,
+    null,
+    null
+   ],
+   "Uranium": [
+    0.96,
+    22.19,
+    113.0,
+    null,
+    null
+   ],
+   "Thorium": [
+    1.02,
+    11.7,
+    142.8,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    116.0,
+    243.0,
+    null,
+    null
+   ],
+   "Total": [
+    1.98,
+    149.9,
+    498.8,
+    182.26,
+    681.06
+   ],
+   "total_rate": 832.93
+  }
+ },
+ "G_env_depth3.0": {
+  "EU": {
+   "age": 381236.93,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    1.98,
+    149.9,
+    498.8,
+    null,
+    null
+   ],
+   "Uranium": [
+    0.96,
+    22.19,
+    113.0,
+    null,
+    null
+   ],
+   "Thorium": [
+    1.02,
+    11.7,
+    142.8,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    116.0,
+    243.0,
+    null,
+    null
+   ],
+   "Total": [
+    1.98,
+    149.9,
+    498.8,
+    136.24,
+    635.04
+   ],
+   "total_rate": 786.91
+  },
+  "LU": {
+   "age": 381236.93,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    1.98,
+    149.9,
+    498.8,
+    null,
+    null
+   ],
+   "Uranium": [
+    0.96,
+    22.19,
+    113.0,
+    null,
+    null
+   ],
+   "Thorium": [
+    1.02,
+    11.7,
+    142.8,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    116.0,
+    243.0,
+    null,
+    null
+   ],
+   "Total": [
+    1.98,
+    149.9,
+    498.8,
+    136.24,
+    635.04
+   ],
+   "total_rate": 786.91
+  },
+  "CU": {
+   "age": 381236.93,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    1.98,
+    149.9,
+    498.8,
+    null,
+    null
+   ],
+   "Uranium": [
+    0.96,
+    22.19,
+    113.0,
+    null,
+    null
+   ],
+   "Thorium": [
+    1.02,
+    11.7,
+    142.8,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    116.0,
+    243.0,
+    null,
+    null
+   ],
+   "Total": [
+    1.98,
+    149.9,
+    498.8,
+    136.24,
+    635.04
+   ],
+   "total_rate": 786.91
+  }
+ },
+ "G_env_water10": {
+  "EU": {
+   "age": 391617.89,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    1.74,
+    134.7,
+    447.35,
+    null,
+    null
+   ],
+   "Uranium": [
+    0.85,
+    19.94,
+    101.35,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.89,
+    10.52,
+    128.07,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    104.25,
+    217.94,
+    null,
+    null
+   ],
+   "Total": [
+    1.74,
+    134.7,
+    447.35,
+    182.26,
+    629.61
+   ],
+   "total_rate": 766.05
+  },
+  "LU": {
+   "age": 391617.89,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    1.74,
+    134.7,
+    447.35,
+    null,
+    null
+   ],
+   "Uranium": [
+    0.85,
+    19.94,
+    101.35,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.89,
+    10.52,
+    128.07,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    104.25,
+    217.94,
+    null,
+    null
+   ],
+   "Total": [
+    1.74,
+    134.7,
+    447.35,
+    182.26,
+    629.61
+   ],
+   "total_rate": 766.05
+  },
+  "CU": {
+   "age": 391617.89,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    1.74,
+    134.7,
+    447.35,
+    null,
+    null
+   ],
+   "Uranium": [
+    0.85,
+    19.94,
+    101.35,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.89,
+    10.52,
+    128.07,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    104.25,
+    217.94,
+    null,
+    null
+   ],
+   "Total": [
+    1.74,
+    134.7,
+    447.35,
+    182.26,
+    629.61
+   ],
+   "total_rate": 766.05
+  }
+ },
+ "B_init_r2.5": {
+  "EU": {
+   "age": 401628.21,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    614.83,
+    132.13,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    614.83,
+    132.13,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    614.83,
+    132.13,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 746.96
+  },
+  "LU": {
+   "age": 828000.54,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    297.76,
+    64.56,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    297.76,
+    64.56,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    297.76,
+    64.56,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 362.32
+  },
+  "CU": {
+   "age": 401628.21,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    614.83,
+    132.13,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    614.83,
+    132.13,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    614.83,
+    132.13,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 746.96
+  }
+ },
+ "B_init_r3.0": {
+  "EU": {
+   "age": 353506.55,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    702.12,
+    146.52,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    702.12,
+    146.52,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    702.12,
+    146.52,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 848.64
+  },
+  "LU": {
+   "age": 728216.34,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    340.31,
+    71.66,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    340.31,
+    71.66,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    340.31,
+    71.66,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 411.97
+  },
+  "CU": {
+   "age": 353506.55,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    702.12,
+    146.52,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    702.12,
+    146.52,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    702.12,
+    146.52,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 848.64
+  }
+ },
+ "E_denU30_enThick3000": {
+  "EU": {
+   "age": 1358056.61,
+   "age_err": 0.0,
+   "Dentine": [
+    7.74,
+    213.16,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    7.74,
+    213.16,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    7.74,
+    213.16,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 220.9
+  },
+  "LU": {
+   "age": 2718163.9,
+   "age_err": 0.0,
+   "Dentine": [
+    3.62,
+    106.75,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    3.62,
+    106.75,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    3.62,
+    106.75,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 110.37
+  },
+  "CU": {
+   "age": 1358056.61,
+   "age_err": 0.0,
+   "Dentine": [
+    7.74,
+    213.16,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    7.74,
+    213.16,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    7.74,
+    213.16,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 220.9
+  }
+ },
+ "F_sedU10_enThick300": {
+  "EU": {
+   "age": 633188.69,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    32.1,
+    441.69,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    32.1,
+    441.69,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    32.1,
+    441.69,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 473.79
+  },
+  "LU": {
+   "age": 633188.69,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    32.1,
+    441.69,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    32.1,
+    441.69,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    32.1,
+    441.69,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 473.79
+  },
+  "CU": {
+   "age": 633188.69,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    32.1,
+    441.69,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    32.1,
+    441.69,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    32.1,
+    441.69,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 473.79
+  }
+ },
+ "F_sedU10_enThick1000": {
+  "EU": {
+   "age": 1295750.71,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    9.63,
+    221.9,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    9.63,
+    221.9,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    9.63,
+    221.9,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 231.53
+  },
+  "LU": {
+   "age": 1295750.71,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    9.63,
+    221.9,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    9.63,
+    221.9,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    9.63,
+    221.9,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 231.53
+  },
+  "CU": {
+   "age": 1295750.71,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    9.63,
+    221.9,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    9.63,
+    221.9,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    9.63,
+    221.9,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 231.53
+  }
+ },
+ "F_sedU10_enThick3000": {
+  "EU": {
+   "age": 3557912.49,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    3.21,
+    81.11,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    3.21,
+    81.11,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    3.21,
+    81.11,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 84.32
+  },
+  "LU": {
+   "age": 3557912.49,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    3.21,
+    81.11,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    3.21,
+    81.11,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    3.21,
+    81.11,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 84.32
+  },
+  "CU": {
+   "age": 3557912.49,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    3.21,
+    81.11,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    3.21,
+    81.11,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    3.21,
+    81.11,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 84.32
+  }
+ },
+ "F_sedU10_strip50": {
+  "EU": {
+   "age": 1507014.49,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    199.07,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    0.0,
+    199.07,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    0.0,
+    199.07,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 199.07
+  },
+  "LU": {
+   "age": 1507014.49,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    199.07,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    0.0,
+    199.07,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    0.0,
+    199.07,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 199.07
+  },
+  "CU": {
+   "age": 1507014.49,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    199.07,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    0.0,
+    199.07,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    0.0,
+    199.07,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 199.07
+  }
+ },
+ "F_sedU10_strip100": {
+  "EU": {
+   "age": 1667354.58,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    179.93,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    0.0,
+    179.93,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    0.0,
+    179.93,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 179.93
+  },
+  "LU": {
+   "age": 1667354.58,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    179.93,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    0.0,
+    179.93,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    0.0,
+    179.93,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 179.93
+  },
+  "CU": {
+   "age": 1667354.58,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    0.0,
+    179.93,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    0.0,
+    179.93,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    0.0,
+    179.93,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 179.93
+  }
+ },
+ "F_sedTh30": {
+  "EU": {
+   "age": 2358584.01,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    10.16,
+    117.03,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    10.16,
+    117.03,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    10.16,
+    117.03,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 127.19
+  },
+  "LU": {
+   "age": 2358584.01,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    10.16,
+    117.03,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    10.16,
+    117.03,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    10.16,
+    117.03,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 127.19
+  },
+  "CU": {
+   "age": 2358584.01,
+   "age_err": 0.0,
+   "Dentine": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    10.16,
+    117.03,
+    null,
+    null,
+    null
+   ],
+   "Uranium": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Thorium": [
+    10.16,
+    117.03,
+    null,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Total": [
+    10.16,
+    117.03,
+    null,
+    null,
+    0.0
+   ],
+   "total_rate": 127.19
+  }
+ },
+ "H_realistic_De200": {
+  "EU": {
+   "age": 124624.06,
+   "age_err": 0.0,
+   "Dentine": [
+    7.99,
+    285.54,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    221.41,
+    62.22,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    3.48,
+    165.16,
+    676.77,
+    null,
+    null
+   ],
+   "Uranium": [
+    231.1,
+    387.63,
+    202.69,
+    null,
+    null
+   ],
+   "Thorium": [
+    1.79,
+    21.03,
+    256.14,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    104.25,
+    217.94,
+    null,
+    null
+   ],
+   "Total": [
+    232.88,
+    512.91,
+    676.77,
+    182.26,
+    859.03
+   ],
+   "total_rate": 1604.83
+  },
+  "LU": {
+   "age": 154329.51,
+   "age_err": 0.0,
+   "Dentine": [
+    3.01,
+    136.5,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    99.73,
+    29.02,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    3.48,
+    165.16,
+    676.77,
+    null,
+    null
+   ],
+   "Uranium": [
+    104.43,
+    205.4,
+    202.69,
+    null,
+    null
+   ],
+   "Thorium": [
+    1.79,
+    21.03,
+    256.14,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    104.25,
+    217.94,
+    null,
+    null
+   ],
+   "Total": [
+    106.22,
+    330.68,
+    676.77,
+    182.26,
+    859.03
+   ],
+   "total_rate": 1295.93
+  },
+  "CU": {
+   "age": 124624.06,
+   "age_err": 0.0,
+   "Dentine": [
+    7.99,
+    285.54,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    221.41,
+    62.22,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    3.48,
+    165.16,
+    676.77,
+    null,
+    null
+   ],
+   "Uranium": [
+    231.1,
+    387.63,
+    202.69,
+    null,
+    null
+   ],
+   "Thorium": [
+    1.79,
+    21.03,
+    256.14,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    104.25,
+    217.94,
+    null,
+    null
+   ],
+   "Total": [
+    232.88,
+    512.91,
+    676.77,
+    182.26,
+    859.03
+   ],
+   "total_rate": 1604.83
+  }
+ },
+ "H_realistic_De50": {
+  "EU": {
+   "age": 34821.27,
+   "age_err": 0.0,
+   "Dentine": [
+    4.05,
+    232.2,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    127.59,
+    44.4,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    3.48,
+    165.16,
+    676.77,
+    null,
+    null
+   ],
+   "Uranium": [
+    133.33,
+    316.48,
+    202.69,
+    null,
+    null
+   ],
+   "Thorium": [
+    1.79,
+    21.03,
+    256.14,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    104.25,
+    217.94,
+    null,
+    null
+   ],
+   "Total": [
+    135.12,
+    441.76,
+    676.77,
+    182.26,
+    859.03
+   ],
+   "total_rate": 1435.9
+  },
+  "LU": {
+   "age": 40936.37,
+   "age_err": 0.0,
+   "Dentine": [
+    1.27,
+    113.0,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    58.32,
+    21.16,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    3.48,
+    165.16,
+    676.77,
+    null,
+    null
+   ],
+   "Uranium": [
+    61.28,
+    174.04,
+    202.69,
+    null,
+    null
+   ],
+   "Thorium": [
+    1.79,
+    21.03,
+    256.14,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    104.25,
+    217.94,
+    null,
+    null
+   ],
+   "Total": [
+    63.06,
+    299.32,
+    676.77,
+    182.26,
+    859.03
+   ],
+   "total_rate": 1221.41
+  },
+  "CU": {
+   "age": 34821.27,
+   "age_err": 0.0,
+   "Dentine": [
+    4.05,
+    232.2,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    127.59,
+    44.4,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    3.48,
+    165.16,
+    676.77,
+    null,
+    null
+   ],
+   "Uranium": [
+    133.33,
+    316.48,
+    202.69,
+    null,
+    null
+   ],
+   "Thorium": [
+    1.79,
+    21.03,
+    256.14,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    104.25,
+    217.94,
+    null,
+    null
+   ],
+   "Total": [
+    135.12,
+    441.76,
+    676.77,
+    182.26,
+    859.03
+   ],
+   "total_rate": 1435.9
+  }
+ },
+ "H_realistic_De600": {
+  "EU": {
+   "age": 218730.9,
+   "age_err": 0.0,
+   "Dentine": [
+    20.82,
+    637.36,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    837.46,
+    219.79,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    3.48,
+    165.16,
+    676.77,
+    null,
+    null
+   ],
+   "Uranium": [
+    859.97,
+    897.03,
+    202.69,
+    null,
+    null
+   ],
+   "Thorium": [
+    1.79,
+    21.03,
+    256.14,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    104.25,
+    217.94,
+    null,
+    null
+   ],
+   "Total": [
+    861.76,
+    1022.31,
+    676.77,
+    182.26,
+    859.03
+   ],
+   "total_rate": 2743.1
+  },
+  "LU": {
+   "age": 322528.4,
+   "age_err": 0.0,
+   "Dentine": [
+    8.94,
+    312.95,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    403.72,
+    107.02,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    3.48,
+    165.16,
+    676.77,
+    null,
+    null
+   ],
+   "Uranium": [
+    414.35,
+    459.86,
+    202.69,
+    null,
+    null
+   ],
+   "Thorium": [
+    1.79,
+    21.03,
+    256.14,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    104.25,
+    217.94,
+    null,
+    null
+   ],
+   "Total": [
+    416.14,
+    585.13,
+    676.77,
+    182.26,
+    859.03
+   ],
+   "total_rate": 1860.3
+  },
+  "CU": {
+   "age": 218730.9,
+   "age_err": 0.0,
+   "Dentine": [
+    20.82,
+    637.36,
+    null,
+    null,
+    null
+   ],
+   "Enamel": [
+    837.46,
+    219.79,
+    null,
+    null,
+    null
+   ],
+   "Cementum": [
+    0.0,
+    0.0,
+    null,
+    null,
+    null
+   ],
+   "Sediment": [
+    3.48,
+    165.16,
+    676.77,
+    null,
+    null
+   ],
+   "Uranium": [
+    859.97,
+    897.03,
+    202.69,
+    null,
+    null
+   ],
+   "Thorium": [
+    1.79,
+    21.03,
+    256.14,
+    null,
+    null
+   ],
+   "Potassium": [
+    null,
+    104.25,
+    217.94,
+    null,
+    null
+   ],
+   "Total": [
+    861.76,
+    1022.31,
+    676.77,
+    182.26,
+    859.03
+   ],
+   "total_rate": 2743.1
+  }
+ }
+}
