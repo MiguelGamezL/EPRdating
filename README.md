@@ -77,8 +77,9 @@ See `examples/quickstart.py` and `examples/deconvolution_epraya.py`.
    measured 234U/238U per tissue are modelled, with segment fractions from
    Adamiec & Aitken (1998) (`tools/derive_u_series_partition.py`). The uptake
    parameter *p* can be derived from U-series data with `USESRSample`
-   (US-ESR); this solver is verified by synthetic round trips but **not yet
-   validated against published US-ESR results**.
+   (US-ESR). The p–T relation reproduces published results exactly; ages
+   differ by 2–9 % from the USESR program because its beta attenuation
+   differs from the one-group (ROSY) one (see `USESR_FINDINGS.md`).
 2. **Material compositions are fixed.** Enamel is hydroxyapatite, sediment
    silica and dentine an indicative mix (70 % mineral, 20 % collagen, 10 %
    water); thicknesses, stripping, densities and water contents are sampled
@@ -95,7 +96,7 @@ See `examples/quickstart.py` and `examples/deconvolution_epraya.py`.
 - **v0.1** core: De, dose rate, EU/LU/US, age, Monte Carlo; validation against published ROSY/DATA ages.
 - **v0.2** spectra: EPRAYA-based deconvolution → De; comparison of intensity methods.
 - **v0.3** one-group beta attenuation in planar layers (Brennan et al. 1997) — done, with the geometry sampled in the Monte Carlo.
-- **v0.4** US-ESR — implemented; validation against published US-ESR ages pending.
+- **v0.4** US-ESR, with cementum layers — done, validated against Shao et al. (2015) and Yu et al. (2026).
 - **later** file readers (Bruker, JEOL), alpha escape at surfaces, JOSS paper.
 
 ## Validation against ROSY

@@ -114,6 +114,7 @@ class USESRResult:
     min_age: float  # closed-system U-series bound, ka
     status: str  # "ok" or "no_solution"
     detail: AgeResult | None = None
+    p_cementum: float | None = None
 
     def summary(self) -> str:
         if self.status != "ok":
@@ -121,7 +122,8 @@ class USESRResult:
                     f"U-series age ({self.min_age:.4g} ka); uranium leaching is likely.")
         fmt = lambda x: "—" if x is None else f"{x:.3g}"
         return (f"US-ESR age = {self.age:.4g} ka   p(enamel) = {fmt(self.p_enamel)}, "
-                f"p(dentine) = {fmt(self.p_dentine)}   (U-series lower bound {self.min_age:.4g} ka)")
+                f"p(dentine) = {fmt(self.p_dentine)}, p(cementum) = {fmt(self.p_cementum)}   "
+                f"(U-series lower bound {self.min_age:.4g} ka)")
 
 
 @dataclass
@@ -130,6 +132,7 @@ class USESRMC:
     p_enamel: np.ndarray
     p_dentine: np.ndarray
     nominal: USESRResult
+    p_cementum: np.ndarray | None = None
     n_failed: int = 0
 
     @property
@@ -157,8 +160,9 @@ class USESRSample:
     tooth: ToothSample
     enamel: UseriesData | None = None
     dentine: UseriesData | None = None
+    cementum: UseriesData | None = None
 
-    _tissues = ("enamel", "dentine")
+    _tissues = ("enamel", "dentine", "cementum")
 
     # ---- inputs --------------------------------------------------------------
     def _has(self, tissue: str, v: dict) -> bool:
@@ -215,7 +219,8 @@ class USESRSample:
         saved = tooth.u234_u238_is
         tooth.u234_u238_is = "initial"
         try:
-            return tooth.components(v, uptake_enamel=ups["enamel"], uptake_dentine=ups["dentine"])
+            return tooth.components(v, uptake_enamel=ups["enamel"], uptake_dentine=ups["dentine"],
+                                    uptake_cementum=ups["cementum"])
         finally:
             tooth.u234_u238_is = saved
 
@@ -246,7 +251,8 @@ class USESRSample:
         detail = solve_age(De, self._components(vv, ups))
         pe = ups["enamel"].p if self._has("enamel", v) else None
         pd = ups["dentine"].p if self._has("dentine", v) else None
-        return USESRResult(T, pe, pd, rins["enamel"], rins["dentine"], t_min, "ok", detail)
+        pc = ups["cementum"].p if self._has("cementum", v) else None
+        return USESRResult(T, pe, pd, rins["enamel"], rins["dentine"], t_min, "ok", detail, pc)
 
     def age(self) -> USESRResult:
         """Nominal US-ESR age and uptake parameters."""
@@ -259,7 +265,7 @@ class USESRSample:
             nominal = self.age()
         rng = np.random.default_rng(seed)
         s = self._sample(rng, n)
-        ages, pe, pd = [], [], []
+        ages, pe, pd, pc = [], [], [], []
         failed = 0
         for i in range(n):
             v = {k: float(a[i]) for k, a in s.items()}
@@ -273,7 +279,9 @@ class USESRSample:
             ages.append(r.age)
             pe.append(np.nan if r.p_enamel is None else r.p_enamel)
             pd.append(np.nan if r.p_dentine is None else r.p_dentine)
-        return USESRMC(np.array(ages), np.array(pe), np.array(pd), nominal, failed)
+            pc.append(np.nan if r.p_cementum is None else r.p_cementum)
+        return USESRMC(np.array(ages), np.array(pe), np.array(pd), nominal,
+                       p_cementum=np.array(pc), n_failed=failed)
 
 
 __all__ = [

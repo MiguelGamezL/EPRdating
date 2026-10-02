@@ -173,6 +173,12 @@ class ToothSample:
         segment gets its own efficiency (see :mod:`eprdating.alpha`).
     alpha_eref : reference alpha energy for ``k_alpha`` in MeV (ROSY: 5.3).
     dentine_water : water content used for the dentine beta contribution.
+    enamel_water : water content of the enamel (corrects the internal alpha
+        and beta dose rates, Zimmerman coefficients).
+    cementum_U, cementum_water, uptake_cementum, u234_u238_cementum,
+    radon_loss_cementum : the same for a cementum layer on the outer side
+        of the enamel (needs a :class:`~eprdating.onegroup.ToothLayers`
+        geometry with ``cementum_um > 0``).
     uptake_enamel, uptake_dentine : uptake models (EU, LU, US with p).
     u234_u238_enamel, u234_u238_dentine : 234U/238U activity ratio of each
         tissue, measured today (``u234_u238_is="present"``, default) or of the
@@ -204,6 +210,12 @@ class ToothSample:
     u234_u238_dentine: ValueLike = 1.0
     radon_loss_enamel: ValueLike = 0.0
     radon_loss_dentine: ValueLike = 0.0
+    enamel_water: ValueLike = 0.0
+    cementum_U: ValueLike = 0.0
+    cementum_water: ValueLike = 0.0
+    uptake_cementum: USModel = field(default_factory=lambda: USModel(-1.0))
+    u234_u238_cementum: ValueLike = 1.0
+    radon_loss_cementum: ValueLike = 0.0
     ingrowth: bool = True
     partition: dict | None = None
     factors: str = DEFAULT_FACTORS
@@ -215,6 +227,7 @@ class ToothSample:
     _SCALARS = (
         "De", "enamel_U", "dentine_U", "cosmic", "k_alpha", "dentine_water",
         "u234_u238_enamel", "u234_u238_dentine", "radon_loss_enamel", "radon_loss_dentine",
+        "enamel_water", "cementum_U", "cementum_water", "u234_u238_cementum", "radon_loss_cementum",
     )
 
     # ---- parameter handling -------------------------------------------
@@ -247,7 +260,7 @@ class ToothSample:
         # physical constraints: no negative concentrations / fractions
         for k, arr in s.items():
             np.clip(arr, 0.0, None, out=arr)
-        for k in ("radon_loss_enamel", "radon_loss_dentine"):
+        for k in ("radon_loss_enamel", "radon_loss_dentine", "radon_loss_cementum"):
             np.clip(s[k], 0.0, 1.0, out=s[k])
         return s
 
@@ -273,13 +286,14 @@ class ToothSample:
         geo_vals = {k: v.get("geo_" + k, as_value(getattr(self.beta, k)).value) for k in self.beta.GEOMETRY}
         if not self.sample_geometry:
             geo_vals = self.beta.nominal_values()
-            water = (as_value(self.sediment.water).value, as_value(self.dentine_water).value)
+            water = tuple(as_value(x).value for x in (self.sediment.water, self.dentine_water, self.cementum_water))
         else:
-            water = (v["sed_water"], v["dentine_water"])
+            water = (v["sed_water"], v["dentine_water"], v["cementum_water"])
         key = (tuple(geo_vals.values()), water)
         cache = self.__dict__.setdefault("_og_cache", {})
         if key not in cache:
-            geo = self.beta.at(**geo_vals, sediment_water=water[0], dentine_water=water[1])
+            geo = self.beta.at(**geo_vals, sediment_water=water[0], dentine_water=water[1],
+                               cementum_water=water[2])
             segs = ("U238", "U234", "Th230", "Rn222", "U235", "Pa231")
             if len(cache) > 8:  # keep the nominal entries, not every MC draw
                 cache.clear()
@@ -288,6 +302,9 @@ class ToothSample:
                 "dentine": {s: geo.chain_fraction("dentine", s) for s in segs},
                 "enamel_U": geo.chain_fraction("enamel", "U"),
                 "dentine_U": geo.chain_fraction("dentine", "U"),
+                "cementum": ({s: geo.chain_fraction("cementum", s) for s in segs}
+                             if geo_vals["cementum_um"] > 0 else None),
+                "cementum_U": geo.chain_fraction("cementum", "U") if geo_vals["cementum_um"] > 0 else 0.0,
                 "sediment": {c: geo.chain_fraction("sediment", c) for c in ("U", "Th", "K")},
             }
         return cache[key]
@@ -298,6 +315,7 @@ class ToothSample:
         v: dict[str, float] | None = None,
         uptake_enamel: USModel | None = None,
         uptake_dentine: USModel | None = None,
+        uptake_cementum: USModel | None = None,
     ) -> list[DoseRateComponent]:
         """Dose-rate components for the input values ``v`` (nominal if None).
 
@@ -307,9 +325,10 @@ class ToothSample:
         v = v or self._nominal()
         up_e = uptake_enamel or self.uptake_enamel
         up_d = uptake_dentine or self.uptake_dentine
+        up_c = uptake_cementum or self.uptake_cementum
         cf: ConversionFactors = conversion_factors(self.factors)
         cU = {r: cf.get("U", r).value for r in ("alpha", "beta", "gamma")}
-        use, usd = self._useries("enamel", v), self._useries("dentine", v)
+        use, usd, usc = (self._useries(t, v) for t in ("enamel", "dentine", "cementum"))
         sed = {"U": v["sed_U"], "Th": v["sed_Th"], "K": v["sed_K"], "water": v["sed_water"]}
         dry = matrix_dose_rates(sed["U"], sed["Th"], sed["K"], cf)
         if "gamma" in v:
@@ -331,6 +350,9 @@ class ToothSample:
             en_beta = v["beta_internal"] * v["enamel_U"] * cU["beta"]
             den_beta = v["beta_dentine"] * water_correction(v["dentine_U"] * cU["beta"], v["dentine_water"], "beta")
             sed_beta = v["beta_external"] * water_correction(dry["beta"], sed["water"], "beta")
+            if v["cementum_U"] > 0:
+                raise ValueError("cementum U needs a ToothLayers geometry with a cementum layer")
+            cem_beta, Gb_c = 0.0, None
         else:
             og = self._onegroup(v)
             # one-group factors are relative to the wet medium's own infinite-matrix
@@ -346,11 +368,21 @@ class ToothSample:
             sed_beta = sum(
                 sed[nuc] * cf.get(nuc, "beta").value * og["sediment"][nuc] for nuc in ("U", "Th", "K")
             ) / (1.0 + sed["water"])
+            if v["cementum_U"] > 0:
+                if og["cementum"] is None:
+                    raise ValueError("cementum U needs a ToothLayers geometry with cementum_um > 0")
+                w_c = {s: f / og["cementum_U"] for s, f in og["cementum"].items()}
+                Gb_c = usc.G("beta", w_c) if usc else None
+                cem_beta = v["cementum_U"] * cU["beta"] / (1.0 + v["cementum_water"]) * og["cementum_U"]
+            else:
+                cem_beta, Gb_c = 0.0, None
+        en_alpha = water_correction(k_scale * v["k_alpha"] * v["enamel_U"] * cU["alpha"], v["enamel_water"], "alpha")
+        en_beta = water_correction(en_beta, v["enamel_water"], "beta")
         return [
-            DoseRateComponent("enamel alpha", k_scale * v["k_alpha"] * v["enamel_U"] * cU["alpha"],
-                              up_e, Ga_e),
+            DoseRateComponent("enamel alpha", en_alpha, up_e, Ga_e),
             DoseRateComponent("enamel beta", en_beta, up_e, Gb_e),
             DoseRateComponent("dentine beta", den_beta, up_d, Gb_d),
+            DoseRateComponent("cementum beta", cem_beta, up_c, Gb_c),
             DoseRateComponent("sediment beta", sed_beta),
             DoseRateComponent("gamma", gamma),
             DoseRateComponent("cosmic", v["cosmic"]),
