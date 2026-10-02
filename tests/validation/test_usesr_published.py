@@ -96,6 +96,21 @@ def test_denadale_cn55_has_no_solution():
     assert us.age().status == "no_solution"
 
 
+def test_denadale_cn55_monte_carlo_is_marginal():
+    """The Monte Carlo still gives an age for CN-55, but only about half of the
+    draws admit a solution, so it is flagged as marginal. The conditional age
+    agrees with the published one within its uncertainty."""
+    s = DN["samples"]["CN-55"]
+    us = USESRSample(_denadale_tooth(s),
+                     enamel=UseriesData(_t(s["enamel"]["th230_u234"]), _t(s["enamel"]["u234_u238"])),
+                     dentine=UseriesData(_t(s["dentine"]["th230_u234"]), _t(s["dentine"]["u234_u238"])))
+    mc = us.age_mc(n=200, seed=3)
+    assert 0.3 < mc.solved_fraction < 0.65
+    assert mc.marginal and "marginal" in mc.summary()
+    age, err = s["results"]["age_ka"]
+    assert abs(mc.mean - age) < err
+
+
 def test_shao2015_age_within_published_uncertainty():
     i = SHAO["inputs"]
     w = i["sediment"]["water_pct"][0] / (100 - i["sediment"]["water_pct"][0])

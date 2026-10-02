@@ -90,3 +90,14 @@ def test_monte_carlo():
     mc = us.age_mc(n=60, seed=1)
     assert mc.ages.size + mc.n_failed == 60
     assert 250 < mc.mean < 350 and mc.std > 0
+    assert mc.solved_fraction == pytest.approx(mc.ages.size / 60)
+    assert not mc.marginal and "WARNING" not in mc.summary()
+
+
+def test_monte_carlo_without_any_solution():
+    _, enamel, dentine = _synthetic(300.0, 0.0, 0.0, 1.2, 1.2)
+    us = USESRSample(ToothSample(De=(5.0, 0.2), **BASE), enamel=UseriesData(*enamel), dentine=UseriesData(*dentine))
+    mc = us.age_mc(n=10, seed=0)
+    assert mc.solved_fraction == 0.0 and mc.marginal
+    assert math.isnan(mc.mean)
+    assert "no draw has a solution" in mc.summary()

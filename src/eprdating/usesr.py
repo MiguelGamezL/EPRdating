@@ -119,7 +119,9 @@ class USESRResult:
     def summary(self) -> str:
         if self.status != "ok":
             return (f"No US-ESR solution: the ESR dose is reached before the closed-system "
-                    f"U-series age ({self.min_age:.4g} ka); uranium leaching is likely.")
+                    f"U-series age ({self.min_age:.4g} ka); uranium leaching is likely, or the "
+                    f"sample sits at the bound (check USESRSample.age_mc for the fraction of "
+                    f"draws that solve).")
         fmt = lambda x: "—" if x is None else f"{x:.3g}"
         return (f"US-ESR age = {self.age:.4g} ka   p(enamel) = {fmt(self.p_enamel)}, "
                 f"p(dentine) = {fmt(self.p_dentine)}, p(cementum) = {fmt(self.p_cementum)}   "
@@ -128,25 +130,66 @@ class USESRResult:
 
 @dataclass
 class USESRMC:
+    """Monte Carlo result of a US-ESR age.
+
+    Draws without a US-ESR solution (ESR dose exceeded before the U-series
+    bound, or numerical failure) are counted in ``n_failed`` and excluded from
+    the statistics. When the solved fraction is below ``marginal_below`` the
+    result is flagged ``marginal``: the age is conditional on the draws that
+    admit a solution and should be read with care (often a sample close to
+    the closed-system U-series bound, or affected by uranium leaching).
+    """
+
     ages: np.ndarray
     p_enamel: np.ndarray
     p_dentine: np.ndarray
     nominal: USESRResult
     p_cementum: np.ndarray | None = None
     n_failed: int = 0
+    marginal_below: float = 0.8
+
+    @property
+    def n(self) -> int:
+        return int(self.ages.size) + self.n_failed
+
+    @property
+    def solved_fraction(self) -> float:
+        """Fraction of draws with a US-ESR solution."""
+        return self.ages.size / self.n if self.n else 0.0
+
+    @property
+    def marginal(self) -> bool:
+        return self.solved_fraction < self.marginal_below
 
     @property
     def mean(self) -> float:
-        return float(np.mean(self.ages))
+        return float(np.mean(self.ages)) if self.ages.size else math.nan
 
     @property
     def std(self) -> float:
-        return float(np.std(self.ages, ddof=1))
+        return float(np.std(self.ages, ddof=1)) if self.ages.size > 1 else math.nan
+
+    @property
+    def interval68(self) -> tuple[float, float]:
+        if not self.ages.size:
+            return (math.nan, math.nan)
+        lo, hi = np.quantile(self.ages, [0.16, 0.84])
+        return float(lo), float(hi)
 
     def summary(self) -> str:
-        lo, hi = np.quantile(self.ages, [0.16, 0.84])
-        return (f"US-ESR MC: {self.mean:.4g} ± {self.std:.2g} ka (68 %: {lo:.4g}–{hi:.4g}; "
-                f"n = {self.ages.size}, failed {self.n_failed})")
+        frac = f"solution in {self.solved_fraction:.0%} of {self.n} draws"
+        if not self.ages.size:
+            return (f"US-ESR MC: no draw has a solution ({frac}); the ESR dose is reached "
+                    f"before the closed-system U-series age (~{self.nominal.min_age:.4g} ka).")
+        lo, hi = self.interval68
+        text = f"US-ESR MC: {self.mean:.4g} ± {self.std:.2g} ka (68 %: {lo:.4g}–{hi:.4g}; {frac})"
+        if self.marginal:
+            text += (f"\n  WARNING marginal: only {self.solved_fraction:.0%} of the draws have a "
+                     f"solution; the age is conditional on those draws.")
+            if self.nominal.status != "ok":
+                text += (f" The nominal inputs have none (dose reached before the U-series "
+                         f"bound, {self.nominal.min_age:.4g} ka).")
+        return text
 
 
 @dataclass
@@ -258,8 +301,13 @@ class USESRSample:
         """Nominal US-ESR age and uptake parameters."""
         return self._solve(self._nominal())
 
-    def age_mc(self, n: int = 1000, seed: int | None = None) -> USESRMC:
-        """Monte Carlo over all inputs, U-series ratios included."""
+    def age_mc(self, n: int = 1000, seed: int | None = None, marginal_below: float = 0.8) -> USESRMC:
+        """Monte Carlo over all inputs, U-series ratios included.
+
+        Always runs, even when the nominal inputs have no solution; the result
+        reports the fraction of draws that solve and is flagged ``marginal``
+        when that fraction is below ``marginal_below``.
+        """
         with warnings.catch_warnings():
             warnings.simplefilter("ignore")
             nominal = self.age()
@@ -281,7 +329,7 @@ class USESRSample:
             pd.append(np.nan if r.p_dentine is None else r.p_dentine)
             pc.append(np.nan if r.p_cementum is None else r.p_cementum)
         return USESRMC(np.array(ages), np.array(pe), np.array(pd), nominal,
-                       p_cementum=np.array(pc), n_failed=failed)
+                       p_cementum=np.array(pc), n_failed=failed, marginal_below=marginal_below)
 
 
 __all__ = [

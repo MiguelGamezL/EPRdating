@@ -44,13 +44,22 @@ Resulting ages:
 |---|---|---|
 | CN-857 | 77.1 ka; 77.3 ± 7.5 ka | 79 ± 9 ka |
 | CN-1322 | 65.8 ka; 67.6 ± 11 ka | 72 ± 11 ka |
-| CN-55 | no solution | 55 ± 11 ka |
+| CN-55 | no solution; 59.3 ± 7.9 ka, **marginal** (50 % of draws solve) | 55 ± 11 ka |
 | Shao et al. 2015 example (cementum 1000 µm assumed) | 689 ka | 726 +87/−84 ka |
 
 CN-55 sits at the closed-system U-series bound (p ≈ −0.9 in both tissues) and
 its authors flag it as unreliable (younger than the U/Th minimum age of the
-unit). With the higher one-group beta doses the ESR dose is reached before that
-bound, and EPRdating reports "no solution" instead of an age.
+unit). Its closed-system ages are 49.0 ka (enamel) and 47.5 ka (dentine). At
+49 ka the one-group doses give 41.9 Gy against De = 41.7 Gy: the dose is
+reached just before the bound (it would need ≤ 851 µGy/a; EPRdating gives 856,
+USESR 798), so the nominal inputs have no solution.
+
+`USESRSample.age_mc` always runs and reports the fraction of draws that admit
+a solution; below 80 % (`marginal_below`) the result is flagged as marginal
+and the age is conditional on the solving draws. For CN-55 (1000 draws):
+"59.26 ± 7.9 ka (68 %: 51.65–67.12; solution in 50 % of 1000 draws) —
+WARNING marginal", consistent with the published 55 ± 11 ka and with the
+authors' caveat.
 
 The Aves and Milo's samples (Yu et al. 2024, PeerJ 12:e17478) have 230Th/234U
 at or above secular equilibrium, which leaves p essentially unconstrained;

@@ -79,7 +79,10 @@ See `examples/quickstart.py` and `examples/deconvolution_epraya.py`.
    parameter *p* can be derived from U-series data with `USESRSample`
    (US-ESR). The p–T relation reproduces published results exactly; ages
    differ by 2–9 % from the USESR program because its beta attenuation
-   differs from the one-group (ROSY) one (see `USESR_FINDINGS.md`).
+   differs from the one-group (ROSY) one (see `USESR_FINDINGS.md`). Samples
+   at the closed-system U-series bound may have no nominal solution; the
+   Monte Carlo then reports the fraction of draws that solve and flags the
+   age as *marginal* when it is below 80 %.
 2. **Material compositions are fixed.** Enamel is hydroxyapatite, sediment
    silica and dentine an indicative mix (70 % mineral, 20 % collagen, 10 %
    water); thicknesses, stripping, densities and water contents are sampled
