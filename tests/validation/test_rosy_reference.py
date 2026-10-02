@@ -26,6 +26,11 @@ CF = conversion_factors("adamiec_aitken_1998")  # ROSY uses these factors (see f
 CU = {r: CF.get("U", r).value for r in ("alpha", "beta", "gamma")}
 
 
+def _v(x):
+    """Central value of an input stored as a number or a [value, error] pair."""
+    return x[0] if isinstance(x, list) else x
+
+
 def _avg(rad, T, p=-1.0, ratio=1.0, radon_loss=0.0):
     us = USeries(ratio=ratio, ratio_is="initial", radon_loss=radon_loss)
     return USModel(p).accumulated(T, us.G(rad)) / T
@@ -37,15 +42,15 @@ ENV_CASES = [c for c in RES if CASES[c].get("env_option") == 2]
 @pytest.mark.parametrize("cid", ENV_CASES)
 def test_gamma_matches_rosy(cid):
     p, eu = CASES[cid], RES[cid]["EU"]
-    m = matrix_dose_rates(p["U_sed"], p["Th_sed"], p["K_sed"], CF)
-    ours = water_correction(m["gamma"], p["water_sed"] / 100, "gamma")
+    m = matrix_dose_rates(_v(p["U_sed"]), _v(p["Th_sed"]), _v(p["K_sed"]), CF)
+    ours = water_correction(m["gamma"], _v(p["water_sed"]) / 100, "gamma")
     assert eu["Total"][2] / 1000 == pytest.approx(ours, rel=0.005)
 
 
 @pytest.mark.parametrize("cid", ENV_CASES)
 def test_cosmic_matches_rosy(cid):
     p, eu = CASES[cid], RES[cid]["EU"]
-    ours = cosmic_dose_rate_sea_level(p["depth"], p["overburden_density"])
+    ours = cosmic_dose_rate_sea_level(_v(p["depth"]), _v(p["overburden_density"]))
     assert eu["Total"][3] / 1000 == pytest.approx(ours, rel=0.015)
 
 
