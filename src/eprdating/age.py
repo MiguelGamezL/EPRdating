@@ -174,8 +174,9 @@ class ToothSample:
     alpha_eref : reference alpha energy for ``k_alpha`` in MeV (ROSY: 5.3).
     dentine_water : water content used for the dentine beta contribution.
     uptake_enamel, uptake_dentine : uptake models (EU, LU, US with p).
-    u234_u238_enamel, u234_u238_dentine : present-day (measured) 234U/238U
-        activity ratio of each tissue.
+    u234_u238_enamel, u234_u238_dentine : 234U/238U activity ratio of each
+        tissue, measured today (``u234_u238_is="present"``, default) or of the
+        incoming uranium (``"initial"``, used by :mod:`eprdating.usesr`).
     radon_loss_enamel, radon_loss_dentine : fraction of 222Rn escaping each
         tissue (0 to 1).
     ingrowth : model U-series daughter ingrowth after uptake (default). With
@@ -208,6 +209,7 @@ class ToothSample:
     factors: str = DEFAULT_FACTORS
     sample_geometry: bool = True
     alpha_efficiency: str = "constant"
+    u234_u238_is: str = "present"
     alpha_eref: float = 5.3
 
     _SCALARS = (
@@ -254,7 +256,7 @@ class ToothSample:
             return None
         return USeries(
             ratio=v[f"u234_u238_{tissue}"],
-            ratio_is="present",
+            ratio_is=self.u234_u238_is,
             radon_loss=v[f"radon_loss_{tissue}"],
             partition=self._partition(),
         )
@@ -291,8 +293,20 @@ class ToothSample:
         return cache[key]
 
     # ---- model -----------------------------------------------------------
-    def components(self, v: dict[str, float] | None = None) -> list[DoseRateComponent]:
+    def components(
+        self,
+        v: dict[str, float] | None = None,
+        uptake_enamel: USModel | None = None,
+        uptake_dentine: USModel | None = None,
+    ) -> list[DoseRateComponent]:
+        """Dose-rate components for the input values ``v`` (nominal if None).
+
+        ``uptake_enamel`` / ``uptake_dentine`` override the sample's uptake
+        models (used by the US-ESR solver).
+        """
         v = v or self._nominal()
+        up_e = uptake_enamel or self.uptake_enamel
+        up_d = uptake_dentine or self.uptake_dentine
         cf: ConversionFactors = conversion_factors(self.factors)
         cU = {r: cf.get("U", r).value for r in ("alpha", "beta", "gamma")}
         use, usd = self._useries("enamel", v), self._useries("dentine", v)
@@ -334,9 +348,9 @@ class ToothSample:
             ) / (1.0 + sed["water"])
         return [
             DoseRateComponent("enamel alpha", k_scale * v["k_alpha"] * v["enamel_U"] * cU["alpha"],
-                              self.uptake_enamel, Ga_e),
-            DoseRateComponent("enamel beta", en_beta, self.uptake_enamel, Gb_e),
-            DoseRateComponent("dentine beta", den_beta, self.uptake_dentine, Gb_d),
+                              up_e, Ga_e),
+            DoseRateComponent("enamel beta", en_beta, up_e, Gb_e),
+            DoseRateComponent("dentine beta", den_beta, up_d, Gb_d),
             DoseRateComponent("sediment beta", sed_beta),
             DoseRateComponent("gamma", gamma),
             DoseRateComponent("cosmic", v["cosmic"]),

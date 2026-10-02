@@ -18,6 +18,7 @@ from .doseresponse import DoseResponseResult, bootstrap_De, fit_dose_response
 from .onegroup import ToothLayers
 from .series import USeries
 from .uptake import EarlyUptake, LinearUptake, USModel
+from .usesr import USESRSample, UseriesData
 
 __version__ = "0.1.0.dev0"
 
@@ -32,8 +33,10 @@ __all__ = [
     "Sediment",
     "ToothLayers",
     "ToothSample",
+    "USESRSample",
     "USModel",
     "USeries",
+    "UseriesData",
     "Value",
     "available_factor_sets",
     "bootstrap_De",

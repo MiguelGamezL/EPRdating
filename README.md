@@ -67,6 +67,7 @@ See `examples/quickstart.py` and `examples/deconvolution_epraya.py`.
 | `onegroup` | one-group (double-P0) beta transport in planar layers (O'Brien et al. 1964; Brennan et al. 1997), per emitter and per U-series segment |
 | `beta` | fixed beta geometry factors, as an alternative to `onegroup` |
 | `alpha` | energy-dependent alpha efficiency, k ∝ R(E)/E (ROSY's "varies with energy" option) |
+| `usesr` | combined U-series/ESR (US-ESR): solves the age and the uptake parameter *p* of each tissue from its 230Th/234U and 234U/238U (Grün et al. 1988) |
 | `age` | generic solver `∫₀ᵀ Ḋ(t) dt = De` and the `ToothSample` model with Monte Carlo |
 | `spectra` | peak-to-peak, T1–B2, double integral, non-negative deconvolution, EPRAYA backend |
 
@@ -75,8 +76,9 @@ See `examples/quickstart.py` and `examples/deconvolution_epraya.py`.
 1. **U-series.** Daughter ingrowth (234U, 230Th, 231Pa), radon loss and a
    measured 234U/238U per tissue are modelled, with segment fractions from
    Adamiec & Aitken (1998) (`tools/derive_u_series_partition.py`). The uptake
-   parameter *p* is still an input: it is not yet derived from U-series
-   data (US-ESR).
+   parameter *p* can be derived from U-series data with `USESRSample`
+   (US-ESR); this solver is verified by synthetic round trips but **not yet
+   validated against published US-ESR results**.
 2. **Material compositions are fixed.** Enamel is hydroxyapatite, sediment
    silica and dentine an indicative mix (70 % mineral, 20 % collagen, 10 %
    water); thicknesses, stripping, densities and water contents are sampled
@@ -93,7 +95,8 @@ See `examples/quickstart.py` and `examples/deconvolution_epraya.py`.
 - **v0.1** core: De, dose rate, EU/LU/US, age, Monte Carlo; validation against published ROSY/DATA ages.
 - **v0.2** spectra: EPRAYA-based deconvolution → De; comparison of intensity methods.
 - **v0.3** one-group beta attenuation in planar layers (Brennan et al. 1997) — done, with the geometry sampled in the Monte Carlo.
-- **later** US-ESR coupling with U-series data, radon loss, file readers (Bruker, JEOL), JOSS paper.
+- **v0.4** US-ESR — implemented; validation against published US-ESR ages pending.
+- **later** file readers (Bruker, JEOL), alpha escape at surfaces, JOSS paper.
 
 ## Validation against ROSY
 
