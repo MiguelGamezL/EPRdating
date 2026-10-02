@@ -167,3 +167,13 @@ def test_tooth_sample_with_onegroup_geometry():
     assert nominal.components["sediment beta"] > 0
     mc = s.age_mc(n=100, seed=3)
     assert mc.samples.size == 100
+
+
+def test_geometry_uncertainty_widens_mc():
+    from eprdating import ToothLayers
+
+    geo = ToothLayers(enamel_um=(1000, 300), strip_outer_um=(50, 25), strip_inner_um=(50, 25))
+    wide = _tooth(beta=geo, dentine_U=(30.0, 0.1)).age_mc(n=200, seed=5)
+    narrow = _tooth(beta=geo, dentine_U=(30.0, 0.1), sample_geometry=False).age_mc(n=200, seed=5)
+    assert wide.nominal.age == pytest.approx(narrow.nominal.age)
+    assert wide.std > narrow.std

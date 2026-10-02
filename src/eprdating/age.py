@@ -17,7 +17,7 @@ from __future__ import annotations
 
 import warnings
 from collections.abc import Callable, Sequence
-from dataclasses import dataclass, field, replace
+from dataclasses import dataclass, field
 
 import numpy as np
 from scipy.optimize import brentq
@@ -159,8 +159,9 @@ class ToothSample:
     beta : either fixed geometry factors (:class:`eprdating.beta.BetaGeometry`)
         or a layered geometry (:class:`eprdating.onegroup.ToothLayers`), in
         which case beta attenuation is computed with one-group theory for each
-        emitter and U-series segment (as ROSY does). The one-group factors are
-        evaluated at the nominal geometry and water contents.
+        emitter and U-series segment (as ROSY does). Uncertainties on the
+        layer thicknesses, stripping and densities are sampled in
+        :meth:`age_mc` together with the water contents.
     gamma : external gamma dose rate. If None, computed from ``sediment``
         as an infinite matrix (use in-situ measurements when available).
     cosmic : cosmic dose rate (see :func:`eprdating.dose_rate.cosmic_dose_rate`).
@@ -176,6 +177,9 @@ class ToothSample:
     partition : optional custom U-series segment table
         (see :mod:`eprdating.series`).
     factors : name of the conversion-factor set.
+    sample_geometry : with a :class:`~eprdating.onegroup.ToothLayers`
+        geometry, recompute the one-group factors for every Monte Carlo draw
+        (default). With ``False`` they are kept at their nominal values.
     """
 
     De: ValueLike
@@ -196,6 +200,7 @@ class ToothSample:
     ingrowth: bool = True
     partition: dict | None = None
     factors: str = DEFAULT_FACTORS
+    sample_geometry: bool = True
 
     _SCALARS = (
         "De", "enamel_U", "dentine_U", "cosmic", "k_alpha", "dentine_water",
@@ -212,6 +217,9 @@ class ToothSample:
         if isinstance(self.beta, BetaGeometry):
             for k, val in self.beta.values().items():
                 v["beta_" + k] = val.value
+        else:
+            for k, val in self.beta.nominal_values().items():
+                v["geo_" + k] = val
         return v
 
     def _sample(self, rng: np.random.Generator, n: int) -> dict[str, np.ndarray]:
@@ -223,6 +231,9 @@ class ToothSample:
         if isinstance(self.beta, BetaGeometry):
             for k, val in self.beta.values().items():
                 s["beta_" + k] = val.sample(rng, n)
+        elif self.sample_geometry:
+            for k in self.beta.GEOMETRY:
+                s["geo_" + k] = as_value(getattr(self.beta, k)).sample(rng, n)
         # physical constraints: no negative concentrations / fractions
         for k, arr in s.items():
             np.clip(arr, 0.0, None, out=arr)
@@ -246,24 +257,30 @@ class ToothSample:
         return self.partition
 
     # ---- one-group beta factors ------------------------------------------
-    def _onegroup(self) -> dict:
-        """Per-source, per-chain/segment one-group factors at nominal values."""
-        if getattr(self, "_og_cache", None) is None:
-            geo = replace(
-                self.beta,
-                sediment_water=as_value(self.sediment.water).value,
-                dentine_water=as_value(self.dentine_water).value,
-                _cache={},
-            )
+    def _onegroup(self, v: dict[str, float]) -> dict:
+        """Per-source, per-chain/segment one-group factors for the geometry and
+        water contents in ``v`` (nominal geometry if ``v`` has none)."""
+        geo_vals = {k: v.get("geo_" + k, as_value(getattr(self.beta, k)).value) for k in self.beta.GEOMETRY}
+        if not self.sample_geometry:
+            geo_vals = self.beta.nominal_values()
+            water = (as_value(self.sediment.water).value, as_value(self.dentine_water).value)
+        else:
+            water = (v["sed_water"], v["dentine_water"])
+        key = (tuple(geo_vals.values()), water)
+        cache = self.__dict__.setdefault("_og_cache", {})
+        if key not in cache:
+            geo = self.beta.at(**geo_vals, sediment_water=water[0], dentine_water=water[1])
             segs = ("U238", "U234", "Th230", "Rn222", "U235", "Pa231")
-            self._og_cache = {
+            if len(cache) > 8:  # keep the nominal entries, not every MC draw
+                cache.clear()
+            cache[key] = {
                 "enamel": {s: geo.chain_fraction("enamel", s) for s in segs},
                 "dentine": {s: geo.chain_fraction("dentine", s) for s in segs},
                 "enamel_U": geo.chain_fraction("enamel", "U"),
                 "dentine_U": geo.chain_fraction("dentine", "U"),
                 "sediment": {c: geo.chain_fraction("sediment", c) for c in ("U", "Th", "K")},
             }
-        return self._og_cache
+        return cache[key]
 
     # ---- model -----------------------------------------------------------
     def components(self, v: dict[str, float] | None = None) -> list[DoseRateComponent]:
@@ -286,7 +303,7 @@ class ToothSample:
             den_beta = v["beta_dentine"] * water_correction(v["dentine_U"] * cU["beta"], v["dentine_water"], "beta")
             sed_beta = v["beta_external"] * water_correction(dry["beta"], sed["water"], "beta")
         else:
-            og = self._onegroup()
+            og = self._onegroup(v)
             # one-group factors are relative to the wet medium's own infinite-matrix
             # dose, i.e. the dry dose rate diluted by (1 + water)
             # rates are the attenuated equilibrium values; the per-segment factors

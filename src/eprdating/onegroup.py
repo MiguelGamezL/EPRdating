@@ -20,9 +20,11 @@ attenuation ν = 2 sqrt(μa (μa + μs)). Fluences are continuous at interfaces.
 from __future__ import annotations
 
 import math
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 
 import numpy as np
+
+from ._types import ValueLike, as_value
 
 N_A = 6.02214076e23
 R_E = 2.8179403262e-13  # cm
@@ -50,6 +52,8 @@ ELEMENTS = {
 #: emitters are treated at 25 keV, i.e. absorbed almost locally (as in
 #: Brennan et al. 1997 for Auger and conversion electrons).
 E_MIN = 0.025
+
+_COEF_CACHE: dict = {}
 
 
 def _kinematics(E):
@@ -92,17 +96,22 @@ class Material:
         f = {k: v for k, v in self.fractions.items()}
         f["H"] = f.get("H", 0) + water * 2 * 1.008 / 18.015
         f["O"] = f.get("O", 0) + water * 15.999 / 18.015
-        return Material(f"{self.name}+{water:g}water", f)
+        return Material(f"{self.name}+{water!r}water", f)
 
     def coefficients(self, E: float, scatter_factor: float = 1.0) -> tuple[float, float]:
         """(μa, μs) in cm²/g at energy E (MeV)."""
+        key = (self.name, round(E, 9), scatter_factor)
+        hit = _COEF_CACHE.get(key)
+        if hit is not None:
+            return hit
         E = max(E, E_MIN)
         za = sum(w * ELEMENTS[el][0] / ELEMENTS[el][1] for el, w in self.fractions.items())
         lnI = sum(w * ELEMENTS[el][0] / ELEMENTS[el][1] * math.log(ELEMENTS[el][2])
                   for el, w in self.fractions.items()) / za
         mua = bethe_stopping(za, math.exp(lnI), E) / E
         mus = sum(w * lewis_mus(ELEMENTS[el][0], ELEMENTS[el][1], E) for el, w in self.fractions.items())
-        return mua, scatter_factor * mus
+        _COEF_CACHE[key] = (mua, scatter_factor * mus)
+        return _COEF_CACHE[key]
 
 
 def _compound(name, formula: dict) -> Material:
@@ -253,17 +262,20 @@ class ToothLayers:
 
     Thicknesses in µm, densities in g/cm³, water in g per g of dry material.
     Order: outer sediment | cementum | enamel | dentine | inner sediment.
+    Geometric inputs accept a number, a ``(value, sigma)`` tuple or a
+    :class:`~eprdating.Value`; the uncertainties are sampled by
+    :meth:`eprdating.ToothSample.age_mc`.
     """
 
-    enamel_um: float
-    dentine_um: float = 2000.0
-    cementum_um: float = 0.0
-    strip_outer_um: float = 0.0
-    strip_inner_um: float = 0.0
-    enamel_density: float = 3.0
-    dentine_density: float = 2.82
-    cementum_density: float = 2.54
-    sediment_density: float = 2.0
+    enamel_um: ValueLike
+    dentine_um: ValueLike = 2000.0
+    cementum_um: ValueLike = 0.0
+    strip_outer_um: ValueLike = 0.0
+    strip_inner_um: ValueLike = 0.0
+    enamel_density: ValueLike = 3.0
+    dentine_density: ValueLike = 2.82
+    cementum_density: ValueLike = 2.54
+    sediment_density: ValueLike = 2.0
     sediment_water: float = 0.0
     dentine_water: float = 0.0
     cementum_water: float = 0.0
@@ -274,18 +286,41 @@ class ToothLayers:
     scatter_factor: float = 1.0
     _cache: dict = field(default_factory=dict, repr=False)
 
+    #: geometric inputs that may carry an uncertainty
+    GEOMETRY = (
+        "enamel_um", "dentine_um", "cementum_um", "strip_outer_um", "strip_inner_um",
+        "enamel_density", "dentine_density", "cementum_density", "sediment_density",
+    )
+
+    def _x(self, name: str) -> float:
+        return as_value(getattr(self, name)).value
+
+    def nominal_values(self) -> dict:
+        return {k: self._x(k) for k in self.GEOMETRY}
+
+    def at(self, **values) -> ToothLayers:
+        """Copy with the given fields set (floats), e.g. one Monte Carlo draw."""
+        geo = replace(self, _cache={}, **values)
+        en = geo._x("enamel_um")
+        if en <= 0:
+            raise ValueError("enamel thickness must be positive")
+        if geo._x("strip_outer_um") + geo._x("strip_inner_um") >= en:
+            raise ValueError("enamel stripped from both sides exceeds the enamel thickness")
+        return geo
+
     def _stack(self, source: str) -> tuple[list[Layer], int]:
+        x = self._x
         sed = self.sediment.with_water(self.sediment_water)
         layers = [Layer(sed, math.inf, 1.0 if source == "sediment" else 0.0)]
-        if self.cementum_um > 0:
+        if x("cementum_um") > 0:
             layers.append(Layer(self.cementum.with_water(self.cementum_water),
-                                self.cementum_um * 1e-4 * self.cementum_density,
+                                x("cementum_um") * 1e-4 * x("cementum_density"),
                                 1.0 if source == "cementum" else 0.0))
-        layers.append(Layer(self.enamel, self.enamel_um * 1e-4 * self.enamel_density,
+        layers.append(Layer(self.enamel, x("enamel_um") * 1e-4 * x("enamel_density"),
                             1.0 if source == "enamel" else 0.0))
         target = len(layers) - 1
         layers.append(Layer(self.dentine.with_water(self.dentine_water),
-                            self.dentine_um * 1e-4 * self.dentine_density,
+                            x("dentine_um") * 1e-4 * x("dentine_density"),
                             1.0 if source == "dentine" else 0.0))
         layers.append(Layer(sed, math.inf, 1.0 if source == "sediment_inner" else 0.0))
         return layers, target
@@ -297,8 +332,9 @@ class ToothLayers:
         if key not in self._cache:
             layers, t = self._stack(source)
             sol = solve_fluence(layers, E, self.scatter_factor)
-            z0 = self.strip_outer_um * 1e-4 * self.enamel_density
-            z1 = (self.enamel_um - self.strip_inner_um) * 1e-4 * self.enamel_density
+            x = self._x
+            z0 = x("strip_outer_um") * 1e-4 * x("enamel_density")
+            z1 = (x("enamel_um") - x("strip_inner_um")) * 1e-4 * x("enamel_density")
             self._cache[key] = mean_dose(sol, t, z0, z1, E) / E
         return self._cache[key]
 

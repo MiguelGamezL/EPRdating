@@ -126,3 +126,24 @@ agree with ROSY 2.0 within **−1.2 % to +0.9 %** for EU, LU and CU, including
 the six real teeth of Brennan et al. (1997) with their thicknesses, stripping
 and water contents, using a constant alpha efficiency (ROSY's is energy
 dependent).
+
+## Monte Carlo uncertainties
+
+`ToothSample.age_mc` samples the layer thicknesses, stripping, densities and
+water contents and recomputes the one-group factors for every draw (~4–5 ms
+per draw). For the six teeth of Brennan et al. (1997), with the input errors
+of their Table 1, the Monte Carlo spread matches the age errors ROSY 2.0
+reports (EU, 1000 draws):
+
+| Sample | ROSY 2.0 (ka) | EPRdating MC (ka) | MC, geometry fixed (ka) |
+|---|---|---|---|
+| 1 | 117.7 ± 12.2 | 116.8 ± 12.4 | ± 7.9 |
+| 2 | 32.5 ± 3.1 | 32.0 ± 3.0 | ± 2.9 |
+| 3 | 20.1 ± 2.9 | 20.1 ± 2.8 | ± 2.6 |
+| 4 | 94.8 ± 7.6 | 93.8 ± 7.6 | ± 7.6 |
+| 5 | 38.2 ± 1.4 | 37.6 ± 1.3 | ± 0.8 |
+| 6 | 39.0 ± 1.3 | 39.1 ± 1.3 | ± 1.2 |
+
+Without sampling the geometry the error is underestimated by up to ~40 %
+(sample 1, enamel 1828 ± 360 µm). `test_mc_uncertainty_matches_rosy_error`
+checks the agreement within 25 % with 400 draws.

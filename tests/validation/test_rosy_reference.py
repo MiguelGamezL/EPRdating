@@ -117,3 +117,35 @@ def test_ages_with_onegroup_within_2_percent_of_rosy(cid):
             factors="adamiec_aitken_1998", **env,
         )
         assert s.age().age == pytest.approx(RES[cid][mode]["age"] / 1000, rel=0.02), mode
+
+
+# --- Monte Carlo uncertainties vs ROSY's error propagation -------------------
+BR97 = [c for c in RES if c.startswith("BR97")]
+
+
+def _pair(x):
+    return tuple(x) if isinstance(x, list) else x
+
+
+@pytest.mark.parametrize("cid", BR97)
+def test_mc_uncertainty_matches_rosy_error(cid):
+    """With the geometry (thicknesses, stripping) sampled, the Monte Carlo
+    spread reproduces the age errors ROSY reports for the Brennan et al.
+    (1997) teeth."""
+    p = CASES[cid]
+    geo = ToothLayers(enamel_um=_pair(p["thick_en"]), dentine_um=_v(p["thick_den"]),
+                      strip_outer_um=_pair(p["strip_out"]), strip_inner_um=_pair(p["strip_in"]))
+    if p["env_option"] == 2:
+        env = {"gamma": None, "cosmic": cosmic_dose_rate_sea_level(_v(p["depth"]), _v(p["overburden_density"]))}
+    else:
+        env = {"gamma": _v(p["gamma_cosmic"]) / 1000, "cosmic": 0.0}
+    w = p["water_sed"]
+    s = ToothSample(
+        De=_pair(p["De"]), enamel_U=_pair(p["U_en"]), dentine_U=_pair(p["U_den"]),
+        sediment=Sediment(U=_pair(p["U_sed"]), Th=_pair(p["Th_sed"]), K=_pair(p["K_sed"]),
+                          water=(w[0] / 100, w[1] / 100) if isinstance(w, list) else w / 100),
+        beta=geo, k_alpha=0.15, uptake_enamel=USModel(-1.0), uptake_dentine=USModel(-1.0),
+        factors="adamiec_aitken_1998", **env,
+    )
+    mc = s.age_mc(n=400, seed=7)
+    assert mc.std == pytest.approx(RES[cid]["EU"]["age_err"] / 1000, rel=0.25)

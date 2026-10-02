@@ -72,3 +72,11 @@ def test_segments_differ_in_self_absorption():
     geo = ToothLayers(1000)
     # 234mPa (U238 segment) is a harder emitter than the post-radon betas on average
     assert geo.chain_fraction("enamel", "U238") < geo.chain_fraction("enamel", "U234")
+
+
+def test_geometry_with_uncertainties_and_validation():
+    geo = ToothLayers(enamel_um=(1000, 100), strip_outer_um=(50, 20))
+    assert geo.nominal_values()["enamel_um"] == 1000
+    assert geo.at(enamel_um=900.0).chain_fraction("enamel", "U") < geo.at(enamel_um=1100.0).chain_fraction("enamel", "U")
+    with pytest.raises(ValueError):
+        geo.at(enamel_um=60.0, strip_outer_um=40.0, strip_inner_um=30.0)

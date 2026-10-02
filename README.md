@@ -75,9 +75,10 @@ See `examples/quickstart.py` and `examples/deconvolution_epraya.py`.
    Adamiec & Aitken (1998) (`tools/derive_u_series_partition.py`). The uptake
    parameter *p* is still an input: it is not yet derived from U-series
    data (US-ESR).
-2. **One-group geometry is evaluated at nominal values.** In the Monte Carlo,
-   thicknesses, densities and water contents of the layers are not sampled,
-   and the default dentine and sediment compositions are indicative.
+2. **Material compositions are fixed.** Enamel is hydroxyapatite, sediment
+   silica and dentine an indicative mix (70 % mineral, 20 % collagen, 10 %
+   water); thicknesses, stripping, densities and water contents are sampled
+   in the Monte Carlo, compositions are not.
 3. **No time-varying** water content or burial depth.
 4. **Data provenance.** Conversion factors and the Prescott & Stefan F/J/H
    table were transcribed from the DRAC lookup tables. The Adamiec & Aitken
@@ -87,7 +88,7 @@ See `examples/quickstart.py` and `examples/deconvolution_epraya.py`.
 
 - **v0.1** core: De, dose rate, EU/LU/US, age, Monte Carlo; validation against published ROSY/DATA ages.
 - **v0.2** spectra: EPRAYA-based deconvolution → De; comparison of intensity methods.
-- **v0.3** one-group beta attenuation in planar layers (Brennan et al. 1997) — done; next: sample the geometry in the Monte Carlo.
+- **v0.3** one-group beta attenuation in planar layers (Brennan et al. 1997) — done, with the geometry sampled in the Monte Carlo.
 - **later** US-ESR coupling with U-series data, radon loss, file readers (Bruker, JEOL), JOSS paper.
 
 ## Validation against ROSY
