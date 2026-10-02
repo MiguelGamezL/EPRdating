@@ -162,8 +162,9 @@ class ToothSample:
     k_alpha : alpha efficiency of enamel.
     dentine_water : water content used for the dentine beta contribution.
     uptake_enamel, uptake_dentine : uptake models (EU, LU, US with p).
-    useries : :class:`eprdating.series.USeries` to account for 230Th
-        ingrowth; None assumes secular equilibrium (warns).
+    useries : :class:`eprdating.series.USeries` describing daughter ingrowth
+        of the incorporated U (default: no initial 234U excess, ``r0 = 1``).
+        Pass ``None`` to force secular equilibrium (warns).
     factors : name of the conversion-factor set.
     """
 
@@ -178,7 +179,7 @@ class ToothSample:
     dentine_water: ValueLike = 0.0
     uptake_enamel: USModel = field(default_factory=lambda: USModel(-1.0))
     uptake_dentine: USModel = field(default_factory=lambda: USModel(-1.0))
-    useries: USeries | None = None
+    useries: USeries | None = field(default_factory=USeries)
     factors: str = DEFAULT_FACTORS
 
     # ---- parameter handling -------------------------------------------

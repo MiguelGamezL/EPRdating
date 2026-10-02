@@ -5,10 +5,8 @@ only when all its inputs and at least one expected age are filled in;
 otherwise it is skipped with the list of missing fields, so this file doubles
 as a to-do list for the validation campaign.
 
-Note: until the U-series partition table is filled in
-(``eprdating/data/u_series_partition.json``) ages are computed in secular
-equilibrium, which is *not* what ROSY/DATA do, so agreement is not expected
-yet for most samples.
+ROSY uses one-group beta attenuation; until that is implemented here, take
+the beta geometry factors for each case from the original publication.
 """
 
 import json
@@ -47,10 +45,7 @@ def test_published_case(path):
     if missing or not expected:
         pytest.skip(f"{case['id']}: missing {missing or 'expected ages'}")
 
-    try:
-        useries = USeries(r0=inp.get("u234_u238_initial") or 1.0)
-    except ValueError:
-        useries = None
+    useries = USeries(r0=inp.get("u234_u238_initial") or 1.0)
     sed = inp["sediment"]
     for model, (age, _sigma) in expected.items():
         sample = ToothSample(

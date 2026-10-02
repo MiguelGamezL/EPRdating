@@ -60,8 +60,21 @@ def test_ingrowth_makes_older_ages():
 def test_partition_validation():
     with pytest.raises(ValueError):
         USeries(partition={r: {"U238": 0.5, "U234": 0.2, "Th230": 0.2, "U235": 0.0} for r in ("alpha", "beta", "gamma")})
-    with pytest.raises(ValueError, match="not filled"):
-        USeries()  # bundled table is still a template
+    with pytest.raises(ValueError, match="empty"):
+        USeries(partition={r: {"U238": None, "Th230": 1.0} for r in ("alpha", "beta", "gamma")})
+
+
+def test_bundled_partition_adamiec_aitken():
+    s = USeries()
+    for rad in ("alpha", "beta", "gamma"):
+        assert sum(s.partition[rad].values()) == pytest.approx(1.0, abs=1e-6)
+    # share of the equilibrium dose rate delivered by freshly incorporated U
+    fresh = {rad: s.G(rad)(1e-3) / 1e-3 for rad in ("alpha", "beta", "gamma")}
+    assert fresh["alpha"] == pytest.approx(0.203, abs=0.005)
+    assert fresh["beta"] == pytest.approx(0.387, abs=0.005)
+    assert fresh["gamma"] < 0.03
+    # 234U excess raises the dose of young U
+    assert USeries(r0=1.5).G("alpha")(10.0) > s.G("alpha")(10.0)
 
 
 def _tooth(**kw):
@@ -78,12 +91,16 @@ def _tooth(**kw):
 
 
 def test_tooth_sample_eu_lu_ordering():
-    with pytest.warns(UserWarning, match="equilibrium"):
-        eu = _tooth(uptake_enamel=EarlyUptake(), uptake_dentine=EarlyUptake()).age()
-    with pytest.warns(UserWarning):
-        lu = _tooth(uptake_enamel=LinearUptake(), uptake_dentine=LinearUptake()).age()
+    eu = _tooth(uptake_enamel=EarlyUptake(), uptake_dentine=EarlyUptake()).age()
+    lu = _tooth(uptake_enamel=LinearUptake(), uptake_dentine=LinearUptake()).age()
     assert lu.age > eu.age > 0
     assert sum(lu.accumulated.values()) == pytest.approx(200.0)
+
+
+def test_equilibrium_opt_in_warns_and_is_younger():
+    with pytest.warns(UserWarning, match="equilibrium"):
+        eq = _tooth(useries=None).age()
+    assert _tooth().age().age > eq.age
 
 
 def test_tooth_mc():

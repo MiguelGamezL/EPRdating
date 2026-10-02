@@ -11,16 +11,20 @@ evolves as (``tau`` = time since that U was incorporated, ``r0`` = initial
 
 * ``U238``  : 238U → 234Th → 234Pa                 ratio 1
 * ``U234``  : 234U                                  1 + (r0-1) e^{-λ4 τ}
-* ``Th230`` : 230Th and its daughters to 206Pb      Bateman ingrowth
+* ``Th230`` : 230Th and its daughters to 210Po      Bateman ingrowth
   (226Ra and below are assumed in equilibrium with 230Th; radon loss is
   not yet modelled)
-* ``U235``  : 235U chain, taken as constant (231Pa ingrowth ignored)
+* ``U235``  : 235U → 231Th                          ratio 1
+* ``Pa231`` : 231Pa and its daughters               1 - e^{-λPa τ}
 
-The fraction of the equilibrium dose rate carried by each segment, for each
-radiation type, must come from a published table (e.g. Adamiec & Aitken
-1998; Guérin et al. 2011). Those numbers are **not** bundled yet: fill
-``data/u_series_partition.json`` (the loader checks that each radiation's
-fractions sum to 1) or pass a dict to :class:`USeries`.
+The fraction of the equilibrium dose rate of natural U carried by each
+segment, per radiation type, is bundled in ``data/u_series_partition.json``.
+It is derived from the energies per disintegration of Adamiec & Aitken
+(1998, Tables 2, 3 and 5) by ``tools/derive_u_series_partition.py``. A
+different table can be passed to :class:`USeries` (fractions must sum to 1).
+
+For freshly incorporated U only ~20 % (alpha), ~39 % (beta) and ~2 %
+(gamma) of the equilibrium dose rate is delivered.
 """
 
 from __future__ import annotations
@@ -31,11 +35,11 @@ from dataclasses import dataclass, field
 from importlib import resources
 from pathlib import Path
 
-#: Half-lives in ka (Cheng et al. 2013 for 234U and 230Th).
-HALF_LIFE_KA = {"U238": 4.4683e6, "U234": 245.620, "Th230": 75.584}
+#: Half-lives in ka (Cheng et al. 2013 for 234U and 230Th; 32.76 ka for 231Pa).
+HALF_LIFE_KA = {"U238": 4.4683e6, "U234": 245.620, "Th230": 75.584, "Pa231": 32.76}
 LAMBDA = {k: math.log(2) / v for k, v in HALF_LIFE_KA.items()}
 
-SEGMENTS = ("U238", "U234", "Th230", "U235")
+SEGMENTS = ("U238", "U234", "Th230", "U235", "Pa231")
 
 
 def load_partition(path: str | None = None) -> dict[str, dict[str, float]]:
@@ -51,12 +55,7 @@ def load_partition(path: str | None = None) -> dict[str, dict[str, float]]:
 def _check_partition(part: dict[str, dict[str, float]]) -> None:
     for rad, seg in part.items():
         if any(v is None for v in seg.values()):
-            raise ValueError(
-                "U-series partition table is not filled in yet "
-                "(eprdating/data/u_series_partition.json). Add the per-segment "
-                "fractions from Adamiec & Aitken (1998) or Guérin et al. (2011), "
-                "or pass `partition=` explicitly."
-            )
+            raise ValueError(f"U-series partition table has empty entries for {rad}")
         unknown = set(seg) - set(SEGMENTS)
         if unknown:
             raise ValueError(f"unknown segments {unknown}; expected {SEGMENTS}")
@@ -81,7 +80,12 @@ def _G_Th230(tau: float, r0: float) -> float:
     return tau - e0 + (r0 - 1.0) * l0 / (l0 - l4) * (e4 - e0)
 
 
-_G = {"U238": _G_U238, "U234": _G_U234, "Th230": _G_Th230, "U235": _G_U238}
+def _G_Pa231(tau: float, r0: float) -> float:
+    lp = LAMBDA["Pa231"]
+    return tau - (1.0 - math.exp(-lp * tau)) / lp
+
+
+_G = {"U238": _G_U238, "U234": _G_U234, "Th230": _G_Th230, "U235": _G_U238, "Pa231": _G_Pa231}
 
 
 def activity_ratio_Th230_U238(tau: float, r0: float = 1.0) -> float:

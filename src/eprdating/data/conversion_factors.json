@@ -1,7 +1,7 @@
 {
   "_meta": {
     "units": "Gy/ka per ppm (U, Th) or per % (K), infinite matrix, secular equilibrium",
-    "source_note": "Values transcribed from the DRAC v1.x lookup tables (github.com/DRAC-calculator). Verify against the original publications before relying on them."
+    "source_note": "Values transcribed from the DRAC v1.x lookup tables (github.com/DRAC-calculator). The adamiec_aitken_1998 set has been checked against Tables 5 and 6 of the original paper; verify the other sets against their publications before relying on them."
   },
   "adamiec_aitken_1998": {
     "reference": "Adamiec G. & Aitken M.J. (1998) Dose-rate conversion factors: update. Ancient TL 16, 37-50.",

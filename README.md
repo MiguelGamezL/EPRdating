@@ -66,17 +66,17 @@ See `examples/quickstart.py` and `examples/deconvolution_epraya.py`.
 
 ## Known limitations (v0.1)
 
-1. **U-series partition table not bundled.** `data/u_series_partition.json`
-   is a template: the fraction of the U-chain dose rate carried by each
-   segment must be filled in from Adamiec & Aitken (1998) or Guérin et al.
-   (2011). Until then `ToothSample` computes in secular equilibrium and
-   warns; this overestimates the internal dose rate of young teeth.
+1. **U-series ingrowth without radon loss.** Daughter ingrowth after uptake
+   (234U, 230Th, 231Pa) is modelled with segment fractions derived from
+   Adamiec & Aitken (1998) (`tools/derive_u_series_partition.py`); radon
+   escape and a measured initial 234U/238U per tissue are still to come
+   (`USeries(r0=...)` accepts a single ratio).
 2. **No one-group beta attenuation yet.** Beta geometry factors are user
    inputs (published tables or Monte Carlo, e.g. DosiVox).
-3. **No radon loss**, no 231Pa ingrowth, no time-varying water or burial depth.
+3. **No time-varying** water content or burial depth.
 4. **Data provenance.** Conversion factors and the Prescott & Stefan F/J/H
-   table were transcribed from the DRAC lookup tables; check them against
-   the original papers.
+   table were transcribed from the DRAC lookup tables. The Adamiec & Aitken
+   (1998) set is checked against the paper; the others still need checking.
 
 ## Roadmap
 
@@ -100,6 +100,7 @@ pytest -m epraya            # EPRAYA integration (needs the extra)
 - Grün R., Schwarcz H.P., Chadam J. (1988) ESR dating of tooth enamel: coupled correction for U-uptake and U-series disequilibrium. *Nuclear Tracks and Radiation Measurements* 14, 237–241.
 - Durcan J.A., King G.E., Duller G.A.T. (2015) DRAC: Dose Rate and Age Calculator for trapped charge dating. *Quaternary Geochronology* 28, 54–61.
 - Prescott J.R., Hutton J.T. (1994) Cosmic ray contributions to dose rates for luminescence and ESR dating. *Radiation Measurements* 23, 497–500.
+- Adamiec G., Aitken M. (1998) Dose-rate conversion factors: update. *Ancient TL* 16, 37–50. doi:10.26034/la.atl.1998.292
 - Guérin G., Mercier N., Adamiec G. (2011) Dose-rate conversion factors: update. *Ancient TL* 29, 5–8.
 
 ## License
