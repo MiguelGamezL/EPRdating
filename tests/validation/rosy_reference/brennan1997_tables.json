@@ -1,0 +1,418 @@
+{
+ "reference": "Brennan B.J., Rink W.J., McGuirl E.L., Schwarcz H.P., Prestwich W.V. (1997) Beta doses in tooth enamel by 'one-group' theory and the ROSY ESR dating software. Radiation Measurements 27(2), 307-314. Tables 1 and 2.",
+ "notes": [
+  "Dose rates in microGy/a, ages in ka, as printed for ROSY (1997 version).",
+  "Inputs not given in the paper (dentine thickness, densities, 234U/238U, alpha efficiency, overburden density) were left at ROSY 2.0 defaults in the BR97_* reference runs.",
+  "Sample 6: gamma + cosmic = 530 microGy/a measured by TL. Dentine and enamel water = 0 %.",
+  "CU = early uptake in enamel, linear uptake in dentine."
+ ],
+ "inputs": {
+  "1": {
+   "enamel_thickness_um": [
+    1828,
+    360
+   ],
+   "outer_removed_um": [
+    50,
+    25
+   ],
+   "inner_removed_um": [
+    44,
+    22
+   ],
+   "De_Gy": [
+    162.9,
+    2.7
+   ],
+   "enamel_U_ppm": [
+    0.22,
+    0.1
+   ],
+   "dentine_U_ppm": [
+    63.8,
+    0.1
+   ],
+   "sediment_U_ppm": [
+    1.6,
+    0.19
+   ],
+   "sediment_Th_ppm": [
+    6.92,
+    1.36
+   ],
+   "sediment_K_pct": [
+    0.78,
+    0.13
+   ],
+   "sediment_moisture_pct_dry": [
+    10.0,
+    10.0
+   ],
+   "burial_depth_m": [
+    4.3,
+    0.13
+   ]
+  },
+  "2": {
+   "enamel_thickness_um": [
+    697,
+    76
+   ],
+   "outer_removed_um": [
+    62,
+    31
+   ],
+   "inner_removed_um": [
+    44,
+    22
+   ],
+   "De_Gy": [
+    34.0,
+    3.3
+   ],
+   "enamel_U_ppm": [
+    1.18,
+    0.1
+   ],
+   "dentine_U_ppm": [
+    23.4,
+    0.1
+   ],
+   "sediment_U_ppm": [
+    1.65,
+    0.12
+   ],
+   "sediment_Th_ppm": [
+    2.06,
+    0.08
+   ],
+   "sediment_K_pct": [
+    0.12,
+    0.01
+   ],
+   "sediment_moisture_pct_dry": [
+    12.9,
+    2.8
+   ],
+   "burial_depth_m": [
+    1.0,
+    0.5
+   ]
+  },
+  "3": {
+   "enamel_thickness_um": [
+    775,
+    108
+   ],
+   "outer_removed_um": [
+    40,
+    20
+   ],
+   "inner_removed_um": [
+    40,
+    20
+   ],
+   "De_Gy": [
+    70.9,
+    2.7
+   ],
+   "enamel_U_ppm": [
+    3.92,
+    0.1
+   ],
+   "dentine_U_ppm": [
+    148.4,
+    0.1
+   ],
+   "sediment_U_ppm": [
+    6.94,
+    3.84
+   ],
+   "sediment_Th_ppm": [
+    1.06,
+    0.2
+   ],
+   "sediment_K_pct": [
+    0.14,
+    0.03
+   ],
+   "sediment_moisture_pct_dry": [
+    10.0,
+    10.0
+   ],
+   "burial_depth_m": [
+    4.0,
+    1.0
+   ]
+  },
+  "4": {
+   "enamel_thickness_um": [
+    968,
+    71
+   ],
+   "outer_removed_um": [
+    54,
+    27
+   ],
+   "inner_removed_um": [
+    48,
+    27
+   ],
+   "De_Gy": [
+    747.1,
+    80.4
+   ],
+   "enamel_U_ppm": [
+    26.0,
+    0.1
+   ],
+   "dentine_U_ppm": [
+    32.6,
+    0.1
+   ],
+   "sediment_U_ppm": [
+    0.97,
+    0.1
+   ],
+   "sediment_Th_ppm": [
+    4.48,
+    1.48
+   ],
+   "sediment_K_pct": [
+    1.57,
+    0.12
+   ],
+   "sediment_moisture_pct_dry": [
+    10.0,
+    10.0
+   ],
+   "burial_depth_m": [
+    80.0,
+    20.0
+   ]
+  },
+  "5": {
+   "enamel_thickness_um": [
+    1129,
+    67
+   ],
+   "outer_removed_um": [
+    54,
+    27
+   ],
+   "inner_removed_um": [
+    39,
+    20
+   ],
+   "De_Gy": [
+    147.1,
+    2.9
+   ],
+   "enamel_U_ppm": [
+    6.22,
+    0.1
+   ],
+   "dentine_U_ppm": [
+    186.4,
+    0.1
+   ],
+   "sediment_U_ppm": [
+    1.56,
+    0.1
+   ],
+   "sediment_Th_ppm": [
+    6.27,
+    0.18
+   ],
+   "sediment_K_pct": [
+    0.67,
+    0.04
+   ],
+   "sediment_moisture_pct_dry": [
+    14.0,
+    10.0
+   ],
+   "burial_depth_m": [
+    3.0,
+    2.0
+   ]
+  },
+  "6": {
+   "enamel_thickness_um": [
+    1020,
+    1.32
+   ],
+   "outer_removed_um": [
+    41,
+    20
+   ],
+   "inner_removed_um": [
+    49,
+    25
+   ],
+   "De_Gy": [
+    25.5,
+    0.7
+   ],
+   "enamel_U_ppm": [
+    0.0,
+    0.0
+   ],
+   "dentine_U_ppm": [
+    0.15,
+    0.1
+   ],
+   "sediment_U_ppm": [
+    3.09,
+    0.01
+   ],
+   "sediment_Th_ppm": [
+    8.19,
+    0.46
+   ],
+   "sediment_K_pct": [
+    0.52,
+    0.03
+   ],
+   "sediment_moisture_pct_dry": [
+    20.0,
+    10.0
+   ],
+   "burial_depth_m": null
+  }
+ },
+ "rosy_1997_outputs": {
+  "1": {
+   "gamma": 657,
+   "cosmic": 89,
+   "sediment_beta": 78,
+   "dentine_beta": 556,
+   "enamel_alpha_plus_beta": 72,
+   "total_dose_rate": 1452,
+   "age_EU_ka": [
+    112,
+    12
+   ],
+   "age_LU_ka": [
+    145,
+    16
+   ],
+   "age_CU_ka": [
+    139,
+    15
+   ],
+   "enamel_alpha": 60,
+   "enamel_beta": 12
+  },
+  "2": {
+   "gamma": 282,
+   "cosmic": 147,
+   "sediment_beta": 67,
+   "dentine_beta": 351,
+   "enamel_alpha_plus_beta": 229,
+   "total_dose_rate": 1076,
+   "age_EU_ka": [
+    32,
+    3
+   ],
+   "age_LU_ka": [
+    44,
+    4
+   ],
+   "age_CU_ka": [
+    37,
+    3
+   ],
+   "enamel_alpha": 195,
+   "enamel_beta": 34
+  },
+  "3": {
+   "gamma": 787,
+   "cosmic": 93,
+   "sediment_beta": 185,
+   "dentine_beta": 1991,
+   "enamel_alpha_plus_beta": 664,
+   "total_dose_rate": 3720,
+   "age_EU_ka": [
+    19,
+    3
+   ],
+   "age_LU_ka": [
+    30,
+    6
+   ],
+   "age_CU_ka": [
+    25,
+    4
+   ],
+   "enamel_alpha": 559,
+   "enamel_beta": 105
+  },
+  "4": {
+   "gamma": 651,
+   "cosmic": 0,
+   "sediment_beta": 210,
+   "dentine_beta": 612,
+   "enamel_alpha_plus_beta": 7654,
+   "total_dose_rate": 9127,
+   "age_EU_ka": [
+    82,
+    7
+   ],
+   "age_LU_ka": [
+    144,
+    12
+   ],
+   "age_CU_ka": [
+    84,
+    7
+   ],
+   "enamel_alpha": 6228,
+   "enamel_beta": 1426
+  },
+  "5": {
+   "gamma": 574,
+   "cosmic": 109,
+   "sediment_beta": 108,
+   "dentine_beta": 2092,
+   "enamel_alpha_plus_beta": 1266,
+   "total_dose_rate": 4149,
+   "age_EU_ka": [
+    35,
+    2
+   ],
+   "age_LU_ka": [
+    59,
+    3
+   ],
+   "age_CU_ka": [
+    45,
+    3
+   ],
+   "enamel_alpha": 1070,
+   "enamel_beta": 196
+  },
+  "6": {
+   "gamma": 530,
+   "cosmic": null,
+   "sediment_beta": 122,
+   "dentine_beta": 2,
+   "enamel_alpha_plus_beta": 0,
+   "total_dose_rate": 654,
+   "age_EU_ka": [
+    39,
+    5
+   ],
+   "age_LU_ka": [
+    39,
+    5
+   ],
+   "age_CU_ka": [
+    39,
+    5
+   ],
+   "enamel_alpha": 0,
+   "enamel_beta": 0
+  }
+ }
+}

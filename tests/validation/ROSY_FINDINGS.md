@@ -58,3 +58,39 @@ its own coefficient.
   energy-dependent option.
 - Ages ROSY reports for "combination uptake" (CU) use the per-tissue uptake
   models; EU and LU apply early or linear uptake to every tissue.
+
+## Brennan et al. (1997) samples rerun in ROSY 2.0
+
+`rosy_reference/brennan1997_tables.json` transcribes Tables 1 and 2 of
+Brennan et al. (1997, *Radiation Measurements* 27, 307–314): six real teeth
+with inputs and the outputs of the 1997 ROSY. The `BR97_*` cases rerun them in
+ROSY 2.0 with the missing inputs left at defaults (dentine 2000 µm, 234U/238U
+= 1.0, k = 0.15).
+
+| Sample | EU age 1997 → 2.0 (ka) | LU | CU |
+|---|---|---|---|
+| 1 | 112 → 117.7 | 145 → 149.8 | 139 → 144.7 |
+| 2 | 32 → 32.5 | 44 → 43.9 | 37 → 38.5 |
+| 3 | 19 → 20.1 | 30 → 30.8 | 25 → 27.1 |
+| 4 | 82 → 94.8 | 144 → 165.7 | 84 → 96.9 |
+| 5 | 35 → 38.2 | 59 → 62.9 | 45 → 49.5 |
+| 6 | 39 → 39.0 | 39 → 39.1 | 39 → 39.1 |
+
+Ages agree within ~0–9 % except sample 4 (high enamel U, 80 m burial,
++16 %). The component breakdowns differ more, which points to differences
+between the 1997 and 2.0 versions rather than to the inputs:
+
+- Gamma is ~3–5 % higher in 1997, consistent with the older (Nambi & Aitken
+  1986) conversion factors; ROSY 2.0 uses Adamiec & Aitken (1998).
+- Cosmic dose rates differ (e.g. 89 vs 115 µGy/a at 4.3 m): 1997 used
+  Prescott & Stephan (1982), 2.0 behaves like Prescott & Hutton (1994).
+- Dentine beta in 1997 is ~2–3 times the ROSY 2.0 value. ROSY 2.0 prints
+  time-averaged dose rates (De/T); the 1997 table may list present-day rates,
+  which for linear uptake are about twice the average. Unconfirmed.
+
+The paper describes the one-group method only qualitatively ("double-P0"
+approximation after O'Brien et al. 1964; absorption cross section = stopping
+power / energy at the mean beta energy; Lewis transport cross section for
+scattering; flux continuity at interfaces; dose in each layer = sum of a rising
+and a decaying exponential). The equations are in the follow-up report it
+announces for *Ancient TL* and in O'Brien et al. (1964).

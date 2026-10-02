@@ -1984,6 +1984,462 @@
    "env_option": 2,
    "alpha_type": "Varies with energy, Eref=5.3MeV",
    "ratio_type": "Initial Ratio"
+  },
+  "BR97_s1_r1.0": {
+   "De": [
+    162.9,
+    2.7
+   ],
+   "ratio": 1.0,
+   "alpha_eff": 0.15,
+   "U_sed": [
+    1.6,
+    0.19
+   ],
+   "U_cem": 0,
+   "U_en": [
+    0.22,
+    0.1
+   ],
+   "U_den": [
+    63.8,
+    0.1
+   ],
+   "Th_sed": [
+    6.92,
+    1.36
+   ],
+   "Th_cem": 0,
+   "Th_en": 0,
+   "Th_den": 0,
+   "K_sed": [
+    0.78,
+    0.13
+   ],
+   "K_cem": 0,
+   "K_en": 0,
+   "K_den": 0,
+   "density_sed": 2.0,
+   "density_cem": 2.54,
+   "density_en": 3.0,
+   "density_den": 2.82,
+   "radon_sed": 1.0,
+   "radon_cem": 1.0,
+   "radon_en": 1.0,
+   "radon_den": 1.0,
+   "water_sed": [
+    10.0,
+    10.0
+   ],
+   "water_cem": 0,
+   "water_den": 0,
+   "thick_cem": 0,
+   "thick_en": [
+    1828,
+    360
+   ],
+   "thick_den": 2000,
+   "strip_out": [
+    50,
+    25
+   ],
+   "strip_in": [
+    44,
+    22
+   ],
+   "gamma_cosmic": 0,
+   "gamma": 0,
+   "depth": [
+    4.3,
+    0.13
+   ],
+   "overburden_density": 2.13,
+   "uptake_cem": 1,
+   "uptake_en": 1,
+   "uptake_den": 2,
+   "env_option": 2,
+   "alpha_type": "Varies with energy, Eref=5.3MeV",
+   "ratio_type": "Initial Ratio"
+  },
+  "BR97_s2_r1.0": {
+   "De": [
+    34.0,
+    3.3
+   ],
+   "ratio": 1.0,
+   "alpha_eff": 0.15,
+   "U_sed": [
+    1.65,
+    0.12
+   ],
+   "U_cem": 0,
+   "U_en": [
+    1.18,
+    0.1
+   ],
+   "U_den": [
+    23.4,
+    0.1
+   ],
+   "Th_sed": [
+    2.06,
+    0.08
+   ],
+   "Th_cem": 0,
+   "Th_en": 0,
+   "Th_den": 0,
+   "K_sed": [
+    0.12,
+    0.01
+   ],
+   "K_cem": 0,
+   "K_en": 0,
+   "K_den": 0,
+   "density_sed": 2.0,
+   "density_cem": 2.54,
+   "density_en": 3.0,
+   "density_den": 2.82,
+   "radon_sed": 1.0,
+   "radon_cem": 1.0,
+   "radon_en": 1.0,
+   "radon_den": 1.0,
+   "water_sed": [
+    12.9,
+    2.8
+   ],
+   "water_cem": 0,
+   "water_den": 0,
+   "thick_cem": 0,
+   "thick_en": [
+    697,
+    76
+   ],
+   "thick_den": 2000,
+   "strip_out": [
+    62,
+    31
+   ],
+   "strip_in": [
+    44,
+    22
+   ],
+   "gamma_cosmic": 0,
+   "gamma": 0,
+   "depth": [
+    1.0,
+    0.5
+   ],
+   "overburden_density": 2.13,
+   "uptake_cem": 1,
+   "uptake_en": 1,
+   "uptake_den": 2,
+   "env_option": 2,
+   "alpha_type": "Varies with energy, Eref=5.3MeV",
+   "ratio_type": "Initial Ratio"
+  },
+  "BR97_s3_r1.0": {
+   "De": [
+    70.9,
+    2.7
+   ],
+   "ratio": 1.0,
+   "alpha_eff": 0.15,
+   "U_sed": [
+    6.94,
+    3.84
+   ],
+   "U_cem": 0,
+   "U_en": [
+    3.92,
+    0.1
+   ],
+   "U_den": [
+    148.4,
+    0.1
+   ],
+   "Th_sed": [
+    1.06,
+    0.2
+   ],
+   "Th_cem": 0,
+   "Th_en": 0,
+   "Th_den": 0,
+   "K_sed": [
+    0.14,
+    0.03
+   ],
+   "K_cem": 0,
+   "K_en": 0,
+   "K_den": 0,
+   "density_sed": 2.0,
+   "density_cem": 2.54,
+   "density_en": 3.0,
+   "density_den": 2.82,
+   "radon_sed": 1.0,
+   "radon_cem": 1.0,
+   "radon_en": 1.0,
+   "radon_den": 1.0,
+   "water_sed": [
+    10.0,
+    10.0
+   ],
+   "water_cem": 0,
+   "water_den": 0,
+   "thick_cem": 0,
+   "thick_en": [
+    775,
+    108
+   ],
+   "thick_den": 2000,
+   "strip_out": [
+    40,
+    20
+   ],
+   "strip_in": [
+    40,
+    20
+   ],
+   "gamma_cosmic": 0,
+   "gamma": 0,
+   "depth": [
+    4.0,
+    1.0
+   ],
+   "overburden_density": 2.13,
+   "uptake_cem": 1,
+   "uptake_en": 1,
+   "uptake_den": 2,
+   "env_option": 2,
+   "alpha_type": "Varies with energy, Eref=5.3MeV",
+   "ratio_type": "Initial Ratio"
+  },
+  "BR97_s4_r1.0": {
+   "De": [
+    747.1,
+    80.4
+   ],
+   "ratio": 1.0,
+   "alpha_eff": 0.15,
+   "U_sed": [
+    0.97,
+    0.1
+   ],
+   "U_cem": 0,
+   "U_en": [
+    26.0,
+    0.1
+   ],
+   "U_den": [
+    32.6,
+    0.1
+   ],
+   "Th_sed": [
+    4.48,
+    1.48
+   ],
+   "Th_cem": 0,
+   "Th_en": 0,
+   "Th_den": 0,
+   "K_sed": [
+    1.57,
+    0.12
+   ],
+   "K_cem": 0,
+   "K_en": 0,
+   "K_den": 0,
+   "density_sed": 2.0,
+   "density_cem": 2.54,
+   "density_en": 3.0,
+   "density_den": 2.82,
+   "radon_sed": 1.0,
+   "radon_cem": 1.0,
+   "radon_en": 1.0,
+   "radon_den": 1.0,
+   "water_sed": [
+    10.0,
+    10.0
+   ],
+   "water_cem": 0,
+   "water_den": 0,
+   "thick_cem": 0,
+   "thick_en": [
+    968,
+    71
+   ],
+   "thick_den": 2000,
+   "strip_out": [
+    54,
+    27
+   ],
+   "strip_in": [
+    48,
+    27
+   ],
+   "gamma_cosmic": 0,
+   "gamma": 0,
+   "depth": [
+    80.0,
+    20.0
+   ],
+   "overburden_density": 2.13,
+   "uptake_cem": 1,
+   "uptake_en": 1,
+   "uptake_den": 2,
+   "env_option": 2,
+   "alpha_type": "Varies with energy, Eref=5.3MeV",
+   "ratio_type": "Initial Ratio"
+  },
+  "BR97_s5_r1.0": {
+   "De": [
+    147.1,
+    2.9
+   ],
+   "ratio": 1.0,
+   "alpha_eff": 0.15,
+   "U_sed": [
+    1.56,
+    0.1
+   ],
+   "U_cem": 0,
+   "U_en": [
+    6.22,
+    0.1
+   ],
+   "U_den": [
+    186.4,
+    0.1
+   ],
+   "Th_sed": [
+    6.27,
+    0.18
+   ],
+   "Th_cem": 0,
+   "Th_en": 0,
+   "Th_den": 0,
+   "K_sed": [
+    0.67,
+    0.04
+   ],
+   "K_cem": 0,
+   "K_en": 0,
+   "K_den": 0,
+   "density_sed": 2.0,
+   "density_cem": 2.54,
+   "density_en": 3.0,
+   "density_den": 2.82,
+   "radon_sed": 1.0,
+   "radon_cem": 1.0,
+   "radon_en": 1.0,
+   "radon_den": 1.0,
+   "water_sed": [
+    14.0,
+    10.0
+   ],
+   "water_cem": 0,
+   "water_den": 0,
+   "thick_cem": 0,
+   "thick_en": [
+    1129,
+    67
+   ],
+   "thick_den": 2000,
+   "strip_out": [
+    54,
+    27
+   ],
+   "strip_in": [
+    39,
+    20
+   ],
+   "gamma_cosmic": 0,
+   "gamma": 0,
+   "depth": [
+    3.0,
+    2.0
+   ],
+   "overburden_density": 2.13,
+   "uptake_cem": 1,
+   "uptake_en": 1,
+   "uptake_den": 2,
+   "env_option": 2,
+   "alpha_type": "Varies with energy, Eref=5.3MeV",
+   "ratio_type": "Initial Ratio"
+  },
+  "BR97_s6_r1.0": {
+   "De": [
+    25.5,
+    0.7
+   ],
+   "ratio": 1.0,
+   "alpha_eff": 0.15,
+   "U_sed": [
+    3.09,
+    0.01
+   ],
+   "U_cem": 0,
+   "U_en": [
+    0.0,
+    0.0
+   ],
+   "U_den": [
+    0.15,
+    0.1
+   ],
+   "Th_sed": [
+    8.19,
+    0.46
+   ],
+   "Th_cem": 0,
+   "Th_en": 0,
+   "Th_den": 0,
+   "K_sed": [
+    0.52,
+    0.03
+   ],
+   "K_cem": 0,
+   "K_en": 0,
+   "K_den": 0,
+   "density_sed": 2.0,
+   "density_cem": 2.54,
+   "density_en": 3.0,
+   "density_den": 2.82,
+   "radon_sed": 1.0,
+   "radon_cem": 1.0,
+   "radon_en": 1.0,
+   "radon_den": 1.0,
+   "water_sed": [
+    20.0,
+    10.0
+   ],
+   "water_cem": 0,
+   "water_den": 0,
+   "thick_cem": 0,
+   "thick_en": [
+    1020,
+    1.32
+   ],
+   "thick_den": 2000,
+   "strip_out": [
+    41,
+    20
+   ],
+   "strip_in": [
+    49,
+    25
+   ],
+   "gamma_cosmic": [
+    530,
+    0
+   ],
+   "gamma": 0,
+   "depth": 0,
+   "overburden_density": 2.13,
+   "uptake_cem": 1,
+   "uptake_en": 1,
+   "uptake_den": 2,
+   "env_option": 0,
+   "alpha_type": "Varies with energy, Eref=5.3MeV",
+   "ratio_type": "Initial Ratio"
   }
  },
  "failed": {

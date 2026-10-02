@@ -1,0 +1,140 @@
+COMMENTS
+
+
+********************************************************* ROSY VER 2.0 *****
+         NAME OF SAMPLE:   95012a14_v2
+           NAME OF FILE:   res_BR97_s5_r1.0
+              SITE NAME:   
+                 SQUARE:   
+                  LEVEL:   
+                  TAXON:   
+          ELEVATION [m]:   
+                   DATE:   9/2/2026
+   EQUIVALENT DOSE [Gy]:     147.10    2.90
+            CALCULATING:       Ages
+  RATIO OF U234 TO U238:       1.00    0.00   Initial Ratio
+       ALPHA EFFICIENCY:       0.15    0.00   Varies with energy, Eref=5.3MeV
+                       SEDIMENT      CEMENTUM        ENAMEL       DENTINE
+  U           [ppm]   1.56  0.10    0.00  0.00    6.22  0.10  186.40  0.10  
+  TH          [ppm]   6.27  0.18    0.00  0.00    0.00  0.00    0.00  0.00  
+  K           [wt%]   0.67  0.04    0.00  0.00    0.00  0.00    0.00  0.00  
+  DENSITY    [g/cc]   2.00  0.00    2.54  0.00    3.00  0.00    2.82  0.00  
+  FR. OF RADON        1.00  0.00    1.00  0.00    1.00  0.00    1.00  0.00  
+  % WATER     (Dry)  14.00 10.00    0.00  0.00    0.00  0.00    0.00  0.00  
+  THICKNESS [microns]     --          0.    0.   1129.   67.   2000.    0.  
+  UPTAKE 1=EARLY/2=LINEAR                1             1             2
+  ENAMEL STRIPPED FROM OUTSIDE [microns]:     54.00   27.00
+  ENAMEL STRIPPED FROM INSIDE  [microns]:     39.00   20.00
+  OPTION 3: COMPUTE GAMMA DOSE AND COSMIC DOSE
+  DEPTH & DENSITY FOR COSMIC  [m & g/cc]:      3.00    2.00    2.13    0.00
+********************************************************* ROSY VER 2.0 *****
+
+                ***   EARLY UPTAKE   ***
+                 Calculated Dose (Gy) =      147.10
+    ROSY V2.0 EU Age Estimate (years) =    38191.34 +/-   1360.72
+
+ Breakdown of dose rates (microGy/a): 
+ (" - " if not calculated or applicable)
+
+                Alpha      Beta     Gamma    Cosmic  Gamma+Cosmic
+ Dentine         0.00   1943.07       -         -         -  
+ Enamel        825.13    301.75       -         -         -  
+ Cementum        0.00      0.00       -         -         -  
+ Sediment        0.00     96.34    549.13       -         -  
+ Uranium       825.13   2269.62    151.83       -         -  
+ Thorium         0.00     17.23    257.06       -         -  
+ Potassium        -       54.31    140.23       -         -  
+ Total         825.13   2341.16    549.13    136.24    685.37
+
+   (Alpha+beta) dose rate (microGy/a) =     3166.29
+          Total dose rate (microGy/a) =     3851.66
+
+********************************************************* ROSY VER 2.0 *****
+
+                ***   LINEAR UPTAKE   ***
+                 Calculated Dose (Gy) =      147.10
+    ROSY V2.0 LU Age Estimate (years) =    62856.52 +/-   2556.73
+
+ Breakdown of dose rates (microGy/a): 
+ (" - " if not calculated or applicable)
+
+                Alpha      Beta     Gamma    Cosmic  Gamma+Cosmic
+ Dentine         0.00    980.27       -         -         -  
+ Enamel        424.91    153.36       -         -         -  
+ Cementum        0.00      0.00       -         -         -  
+ Sediment        0.00     96.34    549.13       -         -  
+ Uranium       424.91   1158.42    151.83       -         -  
+ Thorium         0.00     17.23    257.06       -         -  
+ Potassium        -       54.31    140.23       -         -  
+ Total         424.91   1229.97    549.13    136.24    685.37
+
+   (Alpha+beta) dose rate (microGy/a) =     1654.88
+          Total dose rate (microGy/a) =     2340.25
+
+********************************************************* ROSY VER 2.0 *****
+
+                ***   COMBINATION UPTAKE   ***
+                 Calculated Dose (Gy) =      147.10
+    ROSY V2.0 CU Age Estimate (years) =    49485.97 +/-   1581.41
+
+ Breakdown of dose rates (microGy/a): 
+ (" - " if not calculated or applicable)
+
+                Alpha      Beta     Gamma    Cosmic  Gamma+Cosmic
+ Dentine         0.00    954.70       -         -         -  
+ Enamel        916.20    319.95       -         -         -  
+ Cementum        0.00      0.00       -         -         -  
+ Sediment        0.00     96.34    549.13       -         -  
+ Uranium       916.20   1299.44    151.83       -         -  
+ Thorium         0.00     17.23    257.06       -         -  
+ Potassium        -       54.31    140.23       -         -  
+ Total         916.20   1370.99    549.13    136.24    685.37
+
+   (Alpha+beta) dose rate (microGy/a) =     2287.19
+          Total dose rate (microGy/a) =     2972.56
+
+********************************************************* ROSY VER 2.0 *****
+
+DATA FOR INPUT
+  147.1000       2.9000       1.0000       0.0000       0.1500
+    0.0000       1.5600       0.1000       0.0000       0.0000
+    6.2200       0.1000     186.4000       0.1000       6.2700
+    0.1800       0.0000       0.0000       0.0000       0.0000
+    0.0000       0.0000       0.6700       0.0400       0.0000
+    0.0000       0.0000       0.0000       0.0000       0.0000
+    2.0000       0.0000       2.5400       0.0000       3.0000
+    0.0000       2.8200       0.0000       1.0000       0.0000
+    1.0000       0.0000       1.0000       0.0000       1.0000
+    0.0000      14.0000      10.0000       0.0000       0.0000
+    0.0000       0.0000       0.0000       0.0000    1129.0000
+   67.0000    2000.0000       0.0000      54.0000      27.0000
+   39.0000      20.0000       0.0000       0.0000       0.0000
+    0.0000       3.0000       2.0000       2.1300       0.0000
+1  1  2  2  0  
+  0.002222  0.047234  0.000000  0.047234
+  0.005454  0.144330  0.000000  0.144330
+  0.000000  0.041990  0.000000  0.041990
+  0.443324  0.446096  0.510240  0.446096
+  0.007000  0.000000  0.000000  0.000000
+  0.004000  0.002200  0.000000  0.002200
+  0.000000  0.000000  0.191209  0.000000
+  0.000000  0.000000  0.298549  0.000000
+  0.174000  0.104970  0.000000  0.104970
+  0.000000  0.003150  0.000000  0.003150
+  0.003000  0.000000  0.000000  0.000000
+  0.003000  0.000000  0.000000  0.000000
+  0.358000  0.209930  0.000000  0.209930
+  0.000000  0.000000  0.000000  0.000000
+  0.000000  0.000000  0.000000  0.000000
+(Dry)   Varies with energy, Eref=5.3MeV
+    0.0000       0.0000       0.0000
+
+
+NON-CALCULATION DATA
+
+
+
+
+
+9/2/2026
+
