@@ -13,7 +13,7 @@ from eprdating import (
     USModel,
     solve_age,
 )
-from eprdating.series import activity_ratio_Th230_U238
+from eprdating.series import LAMBDA, activity_ratio_Th230_U238
 
 # A synthetic partition (NOT published values) used only to test the algebra.
 FAKE_PARTITION = {
@@ -44,7 +44,7 @@ def test_quadrature_matches_closed_form_in_equilibrium():
 def test_ingrowth_limits():
     assert activity_ratio_Th230_U238(0.0) == 0.0
     assert activity_ratio_Th230_U238(5000.0) == pytest.approx(1.0, abs=1e-6)
-    s = USeries(r0=1.0, partition=FAKE_PARTITION)
+    s = USeries(ratio=1.0, partition=FAKE_PARTITION)
     g = s.G("alpha")
     # young: only U segments contribute (45 %); old: tends to equilibrium
     assert g(0.01) / 0.01 == pytest.approx(0.45, rel=1e-3)
@@ -53,7 +53,7 @@ def test_ingrowth_limits():
 
 def test_ingrowth_makes_older_ages():
     eq = DoseRateComponent("int", 1.0, EarlyUptake())
-    dis = DoseRateComponent("int", 1.0, EarlyUptake(), USeries(1.0, FAKE_PARTITION).G("alpha"))
+    dis = DoseRateComponent("int", 1.0, EarlyUptake(), USeries(1.0, partition=FAKE_PARTITION).G("alpha"))
     assert solve_age(50.0, [dis]).age > solve_age(50.0, [eq]).age
 
 
@@ -74,7 +74,7 @@ def test_bundled_partition_adamiec_aitken():
     assert fresh["beta"] == pytest.approx(0.387, abs=0.005)
     assert fresh["gamma"] < 0.03
     # 234U excess raises the dose of young U
-    assert USeries(r0=1.5).G("alpha")(10.0) > s.G("alpha")(10.0)
+    assert USeries(ratio=1.5, ratio_is="initial").G("alpha")(10.0) > s.G("alpha")(10.0)
 
 
 def _tooth(**kw):
@@ -99,7 +99,7 @@ def test_tooth_sample_eu_lu_ordering():
 
 def test_equilibrium_opt_in_warns_and_is_younger():
     with pytest.warns(UserWarning, match="equilibrium"):
-        eq = _tooth(useries=None).age()
+        eq = _tooth(ingrowth=False).age()
     assert _tooth().age().age > eq.age
 
 
@@ -110,3 +110,48 @@ def test_tooth_mc():
     lo, hi = mc.interval()
     assert lo < mc.nominal.age < hi
     assert math.isfinite(mc.std)
+
+
+# --- radon loss and 234U/238U ------------------------------------------------
+
+
+def test_full_radon_loss_matches_pre_rn_factors():
+    # Adamiec & Aitken (1998) Table 5, natural U: pre-Rn / full series
+    expected = {"alpha": 1.26 / 2.78, "beta": 0.060 / 0.146, "gamma": 0.0044 / 0.113}
+    s = USeries(radon_loss=1.0)
+    for rad, ratio in expected.items():
+        tau = 1e5  # long enough for full ingrowth
+        assert s.G(rad)(tau) / tau == pytest.approx(ratio, rel=0.03), rad
+
+
+def test_present_ratio_equals_back_corrected_initial():
+    r_now, T = 1.3, 150.0
+    present = USeries(ratio=r_now, ratio_is="present")
+    r0 = present.initial_ratio(T)
+    assert r0 == pytest.approx(1 + 0.3 * math.exp(LAMBDA["U234"] * T))
+    initial = USeries(ratio=r0, ratio_is="initial")
+    for rad in ("alpha", "beta", "gamma"):
+        assert present.G(rad)(T) == pytest.approx(initial.G(rad)(T), rel=1e-12)
+
+
+def test_useries_input_validation():
+    with pytest.raises(ValueError):
+        USeries(radon_loss=1.5)
+    with pytest.raises(ValueError):
+        USeries(ratio_is="today")
+    with pytest.raises(ValueError, match="Rn222"):
+        USeries(radon_loss=0.2, partition=FAKE_PARTITION)
+
+
+def test_radon_loss_and_ratio_shift_tooth_age():
+    base = _tooth().age().age
+    assert _tooth(radon_loss_dentine=0.5, radon_loss_enamel=0.5).age().age > base
+    assert _tooth(u234_u238_dentine=1.4).age().age < base
+    # each tissue uses its own ratio
+    assert _tooth(u234_u238_enamel=1.4).age().age != _tooth(u234_u238_dentine=1.4).age().age
+
+
+def test_mc_with_uncertain_ratio_and_radon():
+    mc = _tooth(u234_u238_dentine=(1.3, 0.05), radon_loss_dentine=(0.3, 0.2)).age_mc(n=200, seed=2)
+    assert mc.samples.size == 200
+    assert mc.interval()[0] < mc.nominal.age < mc.interval()[1]

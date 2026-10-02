@@ -33,7 +33,7 @@ from .dose_rate import (
     matrix_dose_rates,
     water_correction,
 )
-from .series import USeries
+from .series import USeries, load_partition
 from .uptake import USModel
 
 
@@ -162,9 +162,14 @@ class ToothSample:
     k_alpha : alpha efficiency of enamel.
     dentine_water : water content used for the dentine beta contribution.
     uptake_enamel, uptake_dentine : uptake models (EU, LU, US with p).
-    useries : :class:`eprdating.series.USeries` describing daughter ingrowth
-        of the incorporated U (default: no initial 234U excess, ``r0 = 1``).
-        Pass ``None`` to force secular equilibrium (warns).
+    u234_u238_enamel, u234_u238_dentine : present-day (measured) 234U/238U
+        activity ratio of each tissue.
+    radon_loss_enamel, radon_loss_dentine : fraction of 222Rn escaping each
+        tissue (0 to 1).
+    ingrowth : model U-series daughter ingrowth after uptake (default). With
+        ``False`` the tissues are taken in secular equilibrium (warns).
+    partition : optional custom U-series segment table
+        (see :mod:`eprdating.series`).
     factors : name of the conversion-factor set.
     """
 
@@ -179,19 +184,22 @@ class ToothSample:
     dentine_water: ValueLike = 0.0
     uptake_enamel: USModel = field(default_factory=lambda: USModel(-1.0))
     uptake_dentine: USModel = field(default_factory=lambda: USModel(-1.0))
-    useries: USeries | None = field(default_factory=USeries)
+    u234_u238_enamel: ValueLike = 1.0
+    u234_u238_dentine: ValueLike = 1.0
+    radon_loss_enamel: ValueLike = 0.0
+    radon_loss_dentine: ValueLike = 0.0
+    ingrowth: bool = True
+    partition: dict | None = None
     factors: str = DEFAULT_FACTORS
+
+    _SCALARS = (
+        "De", "enamel_U", "dentine_U", "cosmic", "k_alpha", "dentine_water",
+        "u234_u238_enamel", "u234_u238_dentine", "radon_loss_enamel", "radon_loss_dentine",
+    )
 
     # ---- parameter handling -------------------------------------------
     def _nominal(self) -> dict[str, float]:
-        v = {
-            "De": as_value(self.De).value,
-            "enamel_U": as_value(self.enamel_U).value,
-            "dentine_U": as_value(self.dentine_U).value,
-            "cosmic": as_value(self.cosmic).value,
-            "k_alpha": as_value(self.k_alpha).value,
-            "dentine_water": as_value(self.dentine_water).value,
-        }
+        v = {k: as_value(getattr(self, k)).value for k in self._SCALARS}
         if self.gamma is not None:
             v["gamma"] = as_value(self.gamma).value
         for k in ("U", "Th", "K", "water"):
@@ -201,8 +209,7 @@ class ToothSample:
         return v
 
     def _sample(self, rng: np.random.Generator, n: int) -> dict[str, np.ndarray]:
-        s = {k: as_value(getattr(self, k)).sample(rng, n)
-             for k in ("De", "enamel_U", "dentine_U", "cosmic", "k_alpha", "dentine_water")}
+        s = {k: as_value(getattr(self, k)).sample(rng, n) for k in self._SCALARS}
         if self.gamma is not None:
             s["gamma"] = as_value(self.gamma).sample(rng, n)
         for k in ("U", "Th", "K", "water"):
@@ -212,15 +219,34 @@ class ToothSample:
         # physical constraints: no negative concentrations / fractions
         for k, arr in s.items():
             np.clip(arr, 0.0, None, out=arr)
+        for k in ("radon_loss_enamel", "radon_loss_dentine"):
+            np.clip(s[k], 0.0, 1.0, out=s[k])
         return s
+
+    def _useries(self, tissue: str, v: dict[str, float]) -> USeries | None:
+        if not self.ingrowth:
+            return None
+        return USeries(
+            ratio=v[f"u234_u238_{tissue}"],
+            ratio_is="present",
+            radon_loss=v[f"radon_loss_{tissue}"],
+            partition=self._partition(),
+        )
+
+    def _partition(self) -> dict:
+        if self.partition is None:
+            self.partition = load_partition()
+        return self.partition
 
     # ---- model -----------------------------------------------------------
     def components(self, v: dict[str, float] | None = None) -> list[DoseRateComponent]:
         v = v or self._nominal()
         cf: ConversionFactors = conversion_factors(self.factors)
         cU = {r: cf.get("U", r).value for r in ("alpha", "beta", "gamma")}
-        Ga = self.useries.G("alpha") if self.useries else None
-        Gb = self.useries.G("beta") if self.useries else None
+        use, usd = self._useries("enamel", v), self._useries("dentine", v)
+        Ga_e = use.G("alpha") if use else None
+        Gb_e = use.G("beta") if use else None
+        Gb_d = usd.G("beta") if usd else None
         sed = {"U": v["sed_U"], "Th": v["sed_Th"], "K": v["sed_K"], "water": v["sed_water"]}
         sed_beta = water_correction(matrix_dose_rates(sed["U"], sed["Th"], sed["K"], cf)["beta"], sed["water"], "beta")
         if "gamma" in v:
@@ -229,9 +255,9 @@ class ToothSample:
             gamma = water_correction(matrix_dose_rates(sed["U"], sed["Th"], sed["K"], cf)["gamma"], sed["water"], "gamma")
         dentine_beta = water_correction(v["dentine_U"] * cU["beta"], v["dentine_water"], "beta")
         return [
-            DoseRateComponent("enamel alpha", v["k_alpha"] * v["enamel_U"] * cU["alpha"], self.uptake_enamel, Ga),
-            DoseRateComponent("enamel beta", v["beta_internal"] * v["enamel_U"] * cU["beta"], self.uptake_enamel, Gb),
-            DoseRateComponent("dentine beta", v["beta_dentine"] * dentine_beta, self.uptake_dentine, Gb),
+            DoseRateComponent("enamel alpha", v["k_alpha"] * v["enamel_U"] * cU["alpha"], self.uptake_enamel, Ga_e),
+            DoseRateComponent("enamel beta", v["beta_internal"] * v["enamel_U"] * cU["beta"], self.uptake_enamel, Gb_e),
+            DoseRateComponent("dentine beta", v["beta_dentine"] * dentine_beta, self.uptake_dentine, Gb_d),
             DoseRateComponent("sediment beta", v["beta_external"] * sed_beta),
             DoseRateComponent("gamma", gamma),
             DoseRateComponent("cosmic", v["cosmic"]),
@@ -239,9 +265,9 @@ class ToothSample:
 
     def age(self) -> AgeResult:
         """Nominal age with the central value of every input."""
-        if self.useries is None and (as_value(self.enamel_U).value > 0 or as_value(self.dentine_U).value > 0):
+        if not self.ingrowth and (as_value(self.enamel_U).value > 0 or as_value(self.dentine_U).value > 0):
             warnings.warn(
-                "Secular equilibrium assumed for U in the dental tissues (useries=None). "
+                "Secular equilibrium assumed for U in the dental tissues (ingrowth=False). "
                 "This ignores 230Th ingrowth and overestimates the internal dose rate, "
                 "especially for samples younger than a few hundred ka.",
                 stacklevel=2,

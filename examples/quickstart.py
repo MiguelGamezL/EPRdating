@@ -34,6 +34,8 @@ sample = ToothSample(
     cosmic=cosmic,
     uptake_enamel=LinearUptake(),
     uptake_dentine=USModel(p=0.5),
+    u234_u238_dentine=(1.25, 0.02),  # measured today
+    radon_loss_dentine=(0.3, 0.1),
 )
 
 print(sample.age().summary(), "\n")

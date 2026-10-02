@@ -42,6 +42,7 @@ sample = ToothSample(
     beta=BetaGeometry(internal=(0.6, 0.03), dentine=(0.3, 0.02), external=(0.25, 0.02)),
     cosmic=cosmic_dose_rate(depth_m=1.5, density=1.9, lat_deg=4.6, lon_deg=-74.1, altitude_m=2600),
     uptake_enamel=LinearUptake(), uptake_dentine=LinearUptake(),
+    u234_u238_dentine=(1.25, 0.02), radon_loss_dentine=(0.3, 0.1),
 )
 print(sample.age().summary())
 print(sample.age_mc(n=2000, seed=42).summary())
@@ -59,18 +60,18 @@ See `examples/quickstart.py` and `examples/deconvolution_epraya.py`.
 | `doseresponse` | additive-dose fits (SSE, EXPLIN, DSE, LIN), weighting, Dmax cut, covariance and bootstrap De |
 | `dose_rate` | conversion factors (Adamiec & Aitken 1998, Guérin et al. 2011, Liritzis et al. 2013), water correction, alpha efficiency, cosmic dose rate (Prescott & Hutton 1994) |
 | `uptake` | US model `U(t) = U_m (t/T)^(p+1)`; EU (p = −1), LU (p = 0) |
-| `series` | 230Th / 234U ingrowth after uptake (Bateman, analytic time integrals) |
+| `series` | U-series ingrowth after uptake (234U, 230Th, 231Pa), radon loss, measured or initial 234U/238U |
 | `beta` | beta geometry factors; one-group solver planned |
 | `age` | generic solver `∫₀ᵀ Ḋ(t) dt = De` and the `ToothSample` model with Monte Carlo |
 | `spectra` | peak-to-peak, T1–B2, double integral, non-negative deconvolution, EPRAYA backend |
 
 ## Known limitations (v0.1)
 
-1. **U-series ingrowth without radon loss.** Daughter ingrowth after uptake
-   (234U, 230Th, 231Pa) is modelled with segment fractions derived from
-   Adamiec & Aitken (1998) (`tools/derive_u_series_partition.py`); radon
-   escape and a measured initial 234U/238U per tissue are still to come
-   (`USeries(r0=...)` accepts a single ratio).
+1. **U-series.** Daughter ingrowth (234U, 230Th, 231Pa), radon loss and a
+   measured 234U/238U per tissue are modelled, with segment fractions from
+   Adamiec & Aitken (1998) (`tools/derive_u_series_partition.py`). The uptake
+   parameter *p* is still an input: it is not yet derived from U-series
+   data (US-ESR).
 2. **No one-group beta attenuation yet.** Beta geometry factors are user
    inputs (published tables or Monte Carlo, e.g. DosiVox).
 3. **No time-varying** water content or burial depth.

@@ -15,10 +15,11 @@ from pathlib import Path
 
 import pytest
 
-from eprdating import BetaGeometry, Sediment, ToothSample, USeries, USModel
+from eprdating import BetaGeometry, Sediment, ToothSample, USModel
 
 CASES = sorted((Path(__file__).parent / "cases").glob("*.json"))
 UPTAKE = {"EU": -1.0, "LU": 0.0}
+OPTIONAL = {"u234_u238_enamel", "u234_u238_dentine", "radon_loss_enamel", "radon_loss_dentine"}
 
 
 def _missing(d, prefix=""):
@@ -26,7 +27,7 @@ def _missing(d, prefix=""):
     for k, v in d.items():
         if isinstance(v, dict):
             out += _missing(v, f"{prefix}{k}.")
-        elif v is None and k != "u234_u238_initial":
+        elif v is None and k not in OPTIONAL:
             out.append(prefix + k)
     return out
 
@@ -45,7 +46,6 @@ def test_published_case(path):
     if missing or not expected:
         pytest.skip(f"{case['id']}: missing {missing or 'expected ages'}")
 
-    useries = USeries(r0=inp.get("u234_u238_initial") or 1.0)
     sed = inp["sediment"]
     for model, (age, _sigma) in expected.items():
         sample = ToothSample(
@@ -59,7 +59,10 @@ def test_published_case(path):
             k_alpha=_v(inp["k_alpha"]),
             uptake_enamel=USModel(UPTAKE[model]),
             uptake_dentine=USModel(UPTAKE[model]),
-            useries=useries,
+            u234_u238_enamel=_v(inp.get("u234_u238_enamel") or 1.0),
+            u234_u238_dentine=_v(inp.get("u234_u238_dentine") or 1.0),
+            radon_loss_enamel=_v(inp.get("radon_loss_enamel") or 0.0),
+            radon_loss_dentine=_v(inp.get("radon_loss_dentine") or 0.0),
         )
         with warnings.catch_warnings():
             warnings.simplefilter("ignore")
