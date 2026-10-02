@@ -12,10 +12,11 @@ spectra ─► intensity ─► dose-response curve ─► De ─► dose rate �
 Inspired by ROSY (Brennan et al. 1997, 1999) and DATA (Grün 2009), written as
 an independent, open implementation from the published equations.
 
-> **Status: 0.1.0.dev0 — pre-release.** Validated against ROSY 2.0: with its
-> own one-group beta attenuation, EPRdating reproduces ROSY's EU, LU and CU
-> ages within ±1.2 % for synthetic cases and the six teeth of Brennan et al.
-> (1997) (see `tests/validation/ROSY_FINDINGS.md`). Still pre-release; see
+> **Status: 0.1.0.dev0 — pre-release.** Validated against ROSY 2.0: with
+> one-group beta attenuation and energy-dependent alpha efficiency, EPRdating
+> reproduces ROSY's EU, LU and CU ages within −0.5 to +0.7 %, and its age
+> errors, for synthetic cases and the six teeth of Brennan et al. (1997)
+> (see `tests/validation/ROSY_FINDINGS.md`). Still pre-release; see
 > *Known limitations*.
 
 ## Install
@@ -65,6 +66,7 @@ See `examples/quickstart.py` and `examples/deconvolution_epraya.py`.
 | `series` | U-series ingrowth after uptake (234U, 230Th, 231Pa), radon loss, measured or initial 234U/238U |
 | `onegroup` | one-group (double-P0) beta transport in planar layers (O'Brien et al. 1964; Brennan et al. 1997), per emitter and per U-series segment |
 | `beta` | fixed beta geometry factors, as an alternative to `onegroup` |
+| `alpha` | energy-dependent alpha efficiency, k ∝ R(E)/E (ROSY's "varies with energy" option) |
 | `age` | generic solver `∫₀ᵀ Ḋ(t) dt = De` and the `ToothSample` model with Monte Carlo |
 | `spectra` | peak-to-peak, T1–B2, double integral, non-negative deconvolution, EPRAYA backend |
 
@@ -83,6 +85,8 @@ See `examples/quickstart.py` and `examples/deconvolution_epraya.py`.
 4. **Data provenance.** Conversion factors and the Prescott & Stefan F/J/H
    table were transcribed from the DRAC lookup tables. The Adamiec & Aitken
    (1998) set is checked against the paper; the others still need checking.
+5. **Alpha escape at layer surfaces** is not modelled (ROSY's alpha dose is
+   ~1 % lower for 300 µm enamel without stripping).
 
 ## Roadmap
 
