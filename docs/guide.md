@@ -108,7 +108,10 @@ sediment = r.sediment(water=0.10)   # -> ToothSample(sediment=...)
 * **Lines**: K from 40K; U from 214Pb/214Bi (226Ra, equilibrium assumed);
   Th from 228Ac, 212Pb, 208Tl. 234Th and 234mPa give 238U directly, and
   `r.activity_ratio_ra226_u238` tests the equilibrium (seal the containers
-  for 3–4 weeks before measuring so that radon grows back).
+  for 3–4 weeks before measuring so that radon grows back). If it departs
+  from 1, `r.sediment(water, equilibrium=False)` uses 238U for the top of
+  the chain and 226Ra for the rest (`Sediment(U=..., U_ra226=...)`); the
+  dose rates then follow each part of the chain.
 * **Masses**: `mass_g` is the dry mass of the sample; references default to
   500 g (`Reference(..., mass_g=...)`). Only mass is corrected: keep the
   fill height and density close to those of the references.

@@ -170,9 +170,19 @@ class GammaResult:
     def K(self) -> Value:
         return self.groups["K"].content
 
-    def sediment(self, water: ValueLike = 0.0) -> Sediment:
-        """A :class:`~eprdating.Sediment` with these (dry-mass) contents."""
-        return Sediment(U=self.U, Th=self.Th, K=self.K, water=water)
+    def sediment(self, water: ValueLike = 0.0, equilibrium: bool = True) -> Sediment:
+        """A :class:`~eprdating.Sediment` with these (dry-mass) contents.
+
+        With ``equilibrium=False`` the U chain is split: 238U from the
+        234Th/234mPa lines and 226Ra (+ daughters) from 214Pb/214Bi, which are
+        independent measurements. Use it when the samples were sealed long
+        enough for radon to grow back and the 226Ra/238U ratio departs from 1.
+        """
+        if equilibrium:
+            return Sediment(U=self.U, Th=self.Th, K=self.K, water=water)
+        if "U238" not in self.groups:
+            raise ValueError("no 238U (234Th/234mPa) lines measured")
+        return Sediment(U=self.groups["U238"].content, Th=self.Th, K=self.K, water=water, U_ra226=self.U)
 
     def summary(self) -> str:
         unit = {"K": "%", "U": "µg/g", "Th": "µg/g"}

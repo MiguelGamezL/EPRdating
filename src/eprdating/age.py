@@ -28,10 +28,12 @@ from .beta import BetaGeometry
 from .dose_rate import (
     DEFAULT_FACTORS,
     K_ENAMEL,
+    RA226_SHARE_OF_TH230,
     ConversionFactors,
     Sediment,
     conversion_factors,
     matrix_dose_rates,
+    u_series_split,
     water_correction,
 )
 from .onegroup import ToothLayers
@@ -237,6 +239,8 @@ class ToothSample:
             v["gamma"] = as_value(self.gamma).value
         for k in ("U", "Th", "K", "water"):
             v["sed_" + k] = as_value(getattr(self.sediment, k)).value
+        if self.sediment.U_ra226 is not None:
+            v["sed_U_ra226"] = as_value(self.sediment.U_ra226).value
         if isinstance(self.beta, BetaGeometry):
             for k, val in self.beta.values().items():
                 v["beta_" + k] = val.value
@@ -251,6 +255,8 @@ class ToothSample:
             s["gamma"] = as_value(self.gamma).sample(rng, n)
         for k in ("U", "Th", "K", "water"):
             s["sed_" + k] = as_value(getattr(self.sediment, k)).sample(rng, n)
+        if self.sediment.U_ra226 is not None:
+            s["sed_U_ra226"] = as_value(self.sediment.U_ra226).sample(rng, n)
         if isinstance(self.beta, BetaGeometry):
             for k, val in self.beta.values().items():
                 s["beta_" + k] = val.sample(rng, n)
@@ -306,6 +312,7 @@ class ToothSample:
                              if geo_vals["cementum_um"] > 0 else None),
                 "cementum_U": geo.chain_fraction("cementum", "U") if geo_vals["cementum_um"] > 0 else 0.0,
                 "sediment": {c: geo.chain_fraction("sediment", c) for c in ("U", "Th", "K")},
+                "sediment_seg": {s: geo.chain_fraction("sediment", s) for s in segs},
             }
         return cache[key]
 
@@ -330,7 +337,8 @@ class ToothSample:
         cU = {r: cf.get("U", r).value for r in ("alpha", "beta", "gamma")}
         use, usd, usc = (self._useries(t, v) for t in ("enamel", "dentine", "cementum"))
         sed = {"U": v["sed_U"], "Th": v["sed_Th"], "K": v["sed_K"], "water": v["sed_water"]}
-        dry = matrix_dose_rates(sed["U"], sed["Th"], sed["K"], cf)
+        ura = v.get("sed_U_ra226")
+        dry = matrix_dose_rates(sed["U"], sed["Th"], sed["K"], cf, U_ra226=ura)
         if "gamma" in v:
             gamma = v["gamma"]
         else:
@@ -349,7 +357,7 @@ class ToothSample:
             Gb_d = usd.G("beta") if usd else None
             en_beta = v["beta_internal"] * v["enamel_U"] * cU["beta"]
             den_beta = v["beta_dentine"] * water_correction(v["dentine_U"] * cU["beta"], v["dentine_water"], "beta")
-            sed_beta = v["beta_external"] * water_correction(dry["beta"], sed["water"], "beta")
+            sed_beta = v["beta_external"] * water_correction(dry["beta"], sed["water"], "beta")  # diseq. via dry
             if v["cementum_U"] > 0:
                 raise ValueError("cementum U needs a ToothLayers geometry with a cementum layer")
             cem_beta, Gb_c = 0.0, None
@@ -365,8 +373,22 @@ class ToothSample:
             Gb_d = usd.G("beta", w_d) if usd else None
             en_beta = v["enamel_U"] * cU["beta"] * og["enamel_U"]
             den_beta = v["dentine_U"] * cU["beta"] / (1.0 + v["dentine_water"]) * og["dentine_U"]
-            sed_beta = sum(
-                sed[nuc] * cf.get(nuc, "beta").value * og["sediment"][nuc] for nuc in ("U", "Th", "K")
+            u_beta = sed["U"] * og["sediment"]["U"]
+            if ura is not None and sed["U"] > 0:
+                # U chain out of equilibrium: rescale with the per-segment attenuation
+                pb = self._partition()["beta"]
+                sh = RA226_SHARE_OF_TH230["beta"]
+                seg = og["sediment_seg"]
+                mult = {s: 1.0 for s in seg}
+                mult["Rn222"] = ura / sed["U"]
+                mult["Th230"] = 1.0 + (ura / sed["U"] - 1.0) * sh
+                eq = sum(pb[s] * seg[s] for s in seg)
+                u_beta *= sum(pb[s] * seg[s] * mult[s] for s in seg) / eq
+            elif ura is not None:
+                u_beta = ura * og["sediment"]["U"] * u_series_split("beta")[1]
+            sed_beta = (
+                u_beta * cf.get("U", "beta").value
+                + sum(sed[nuc] * cf.get(nuc, "beta").value * og["sediment"][nuc] for nuc in ("Th", "K"))
             ) / (1.0 + sed["water"])
             if v["cementum_U"] > 0:
                 if og["cementum"] is None:

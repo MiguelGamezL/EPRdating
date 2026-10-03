@@ -68,21 +68,54 @@ def conversion_factors(key: str = DEFAULT_FACTORS) -> ConversionFactors:
     return ConversionFactors(key, raw[key]["reference"], table)
 
 
+#: share of the 230Th+226Ra segment carried by 226Ra (A&A 1998, Table 2 energies:
+#: 230Th 4.58 / 0.013 / 0.0014 MeV, 226Ra 4.77 / 0.0038 / 0.0074 MeV for alpha / beta / gamma)
+RA226_SHARE_OF_TH230 = {"alpha": 4.77 / (4.58 + 4.77), "beta": 0.0038 / (0.013 + 0.0038),
+                        "gamma": 0.0074 / (0.0014 + 0.0074)}
+
+
+def u_series_split(radiation: str) -> tuple[float, float]:
+    """Fractions of the natural-U dose rate emitted before and from 226Ra on.
+
+    "Before" is 238U, 234Th, 234Pa, 234U, 230Th and the 235U chain; "from
+    226Ra" is 226Ra, 222Rn and its daughters. Returns ``(pre, post)``.
+    """
+    from .series import load_partition
+
+    p = load_partition()[radiation]
+    share = RA226_SHARE_OF_TH230[radiation]
+    post = p["Th230"] * share + p["Rn222"]
+    return 1.0 - post, post
+
+
+def u_disequilibrium_factor(radiation: str, U: float, U_ra226: float | None) -> float:
+    """U-equivalent content giving the dose rate of a chain whose 226Ra and
+    daughters correspond to ``U_ra226`` ppm while the rest follows ``U``."""
+    if U_ra226 is None:
+        return U
+    pre, post = u_series_split(radiation)
+    return U * pre + U_ra226 * post
+
+
 def matrix_dose_rates(
     U: float = 0.0,
     Th: float = 0.0,
     K: float = 0.0,
     factors: ConversionFactors | None = None,
+    U_ra226: float | None = None,
 ) -> dict[str, float]:
     """Dry infinite-matrix alpha/beta/gamma dose rates (Gy/ka).
 
-    ``U`` and ``Th`` in ppm, ``K`` in %. Secular equilibrium is assumed.
+    ``U`` and ``Th`` in ppm, ``K`` in %. The Th chain is taken in secular
+    equilibrium; so is the U chain unless ``U_ra226`` (226Ra and daughters
+    expressed as ppm of U in equilibrium, as measured by gamma spectrometry
+    through 214Pb/214Bi) differs from ``U`` (238U).
     """
     cf = factors or conversion_factors()
     out = {}
     for rad in ("alpha", "beta", "gamma"):
         out[rad] = (
-            U * cf.get("U", rad).value
+            u_disequilibrium_factor(rad, U, U_ra226) * cf.get("U", rad).value
             + Th * cf.get("Th", rad).value
             + K * cf.get("K", rad).value
         )
@@ -162,18 +195,25 @@ def cosmic_dose_rate(
 
 @dataclass
 class Sediment:
-    """Radionuclide content of a sediment or soil (U, Th in ppm, K in %)."""
+    """Radionuclide content of a sediment or soil (U, Th in ppm, K in %).
+
+    ``U_ra226``: 226Ra and its daughters as ppm of U in equilibrium, when it
+    differs from the 238U content ``U`` (e.g. from gamma spectrometry, 214Pb
+    and 214Bi lines vs 234Th and 234mPa). ``None`` means equilibrium.
+    """
 
     U: ValueLike = 0.0
     Th: ValueLike = 0.0
     K: ValueLike = 0.0
     water: ValueLike = 0.0  # mass water / dry mass
+    U_ra226: ValueLike | None = None
 
     def dose_rate(self, radiation: str, factors: ConversionFactors | None = None, values=None) -> float:
         """Wet dose rate for one radiation type. ``values`` overrides the inputs
         (used by the Monte Carlo engine)."""
         v = values or {k: as_value(getattr(self, k)).value for k in ("U", "Th", "K", "water")}
-        dry = matrix_dose_rates(v["U"], v["Th"], v["K"], factors)[radiation]
+        ura = v.get("U_ra226", None if self.U_ra226 is None else as_value(self.U_ra226).value)
+        dry = matrix_dose_rates(v["U"], v["Th"], v["K"], factors, U_ra226=ura)[radiation]
         return water_correction(dry, v["water"], radiation)
 
 
