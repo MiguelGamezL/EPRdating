@@ -1,0 +1,532 @@
+{
+ "study_id": "richard2023_lovedale",
+ "reference": "Richard, M., Kaplan-Ashiri, I., Alonso, M.-J., Pons-Branchu, E., Dapoigny, A., Rossouw, L., Toffolo, M.B. (2023). New ESR dates from Lovedale, Free State, South Africa: implications for the study of tooth diagenesis. South African Archaeological Bulletin 78(219): 95-103. (DOI not printed in the repository PDF)",
+ "url": "https://cir.cenieh.es/bitstream/20.500.12136/3165/1/New%20ESR%20dates%20from%20Lovedale%2c%20Free%20State%2c%20South%20Africa%20Implications%20for%20the%20study%20of%20tooth%20diagenesis_Richard%20et%20al_2023.pdf",
+ "software": "DATA",
+ "conventions": {
+  "conversion_factors": null,
+  "k_alpha": [
+   0.13,
+   0.02
+  ],
+  "beta_attenuation": "Monte Carlo beta attenuation factors from Brennan et al. 1997",
+  "water_basis": null,
+  "u234_u238_meaning": "measured present-day, entered in DATA's U-series screen (the paper reports that US-ESR could not be applied)",
+  "radon_loss": null,
+  "cosmic": "Prescott & Hutton 1988 equations; overburden 4.6 ± 1 m; site 28°54'2.35\"S, 25°41'7.69\"E, 1220 m a.s.l.",
+  "gamma_source": "in situ, Canberra Inspector 1000 portable multichannel analyser with NaI(Tl) probe",
+  "uptake_model": "EU (early uptake) ages only",
+  "enamel_water_pct": 0,
+  "software_statement": "Ages (1σ) were calculated using the DATA programme (Grün 2009).",
+  "thickness_meaning": "initial (Table 2 header 'Initial')"
+ },
+ "samples": [
+  {
+   "sample": "LOV2072",
+   "De_Gy": [
+    297,
+    21
+   ],
+   "geometry": "SED/EN/DE",
+   "enamel": {
+    "U_ppm": [
+     2.77,
+     0.02
+    ],
+    "u234_u238": [
+     2.2653,
+     0.0037
+    ],
+    "th230_u234": [
+     0.4926,
+     0.0013
+    ],
+    "thickness_um": [
+     670,
+     null
+    ],
+    "removed_outer_um": [
+     59,
+     null
+    ],
+    "removed_inner_um": [
+     40,
+     null
+    ],
+    "density": null,
+    "water_pct": [
+     0,
+     null
+    ]
+   },
+   "dentine": {
+    "U_ppm": [
+     178.67,
+     1.48
+    ],
+    "u234_u238": [
+     2.3661,
+     0.0036
+    ],
+    "th230_u234": [
+     0.5953,
+     0.0043
+    ],
+    "water_pct": [
+     7,
+     5
+    ],
+    "radon_loss_pct": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     2.86,
+     0.2
+    ],
+    "Th_ppm": [
+     7.72,
+     0.77
+    ],
+    "K_pct": [
+     1.48,
+     0.1
+    ],
+    "water_pct": [
+     15,
+     5
+    ]
+   },
+   "gamma_uGy_a": [
+    872,
+    31
+   ],
+   "cosmic_uGy_a": [
+    115,
+    13
+   ],
+   "depth_m": [
+    4.6,
+    1.0
+   ],
+   "lat_deg": -28.90065,
+   "lon_deg": 25.68547,
+   "altitude_m": 1220,
+   "published": {
+    "dose_rates_uGy_a": {
+     "internal": [
+      960,
+      115
+     ],
+     "beta_dentine": [
+      3156,
+      250
+     ],
+     "beta_sediment": [
+      249,
+      31
+     ],
+     "gamma_cosmic": [
+      987,
+      24
+     ],
+     "total": [
+      5347,
+      278
+     ]
+    },
+    "p_enamel": null,
+    "p_dentine": null,
+    "ages_ka": {
+     "EU": [
+      56,
+      5
+     ]
+    }
+   },
+   "provenance": "De, dose rates, EU-ESR age: Table 1 (p. 100); sediment U/Th/K, in situ gamma, enamel thickness and removed thickness (side 1 = dentine, side 2 = sediment): Table 2 (p. 101); enamel (E) and dentine (D) U-series: Table 3 (p. 102). Page numbers as reported by the reader for the CENIEH repository PDF.",
+   "notes": "Published internal dose is printed as 'Enamel (alpha+beta)'. Thickness errors not printed. U-series ratios measured on tissue (present-day activity ratios); not used in EU age model except U concentrations. Depth = 'sediment thickness covering the samples of 4.6 ± 1 m' used for cosmic. Lat/long converted from 28°54'2.35\"S, 25°41'7.69\"E. LOV2072 and LOV1986 share one in situ gamma measurement. | Verified: cosmic 115 ± 13 µGy/a from the text (gamma+cosmic = in situ gamma + 115). Text says ~20 µm removed per side, Table 2 prints 20–59 µm (table values used)."
+  },
+  {
+   "sample": "LOV1963",
+   "De_Gy": [
+    528,
+    50
+   ],
+   "geometry": "SED/EN/DE",
+   "enamel": {
+    "U_ppm": [
+     5.75,
+     0.05
+    ],
+    "u234_u238": [
+     2.0006,
+     0.0022
+    ],
+    "th230_u234": [
+     0.6134,
+     0.0011
+    ],
+    "thickness_um": [
+     468,
+     null
+    ],
+    "removed_outer_um": [
+     35,
+     null
+    ],
+    "removed_inner_um": [
+     20,
+     null
+    ],
+    "density": null,
+    "water_pct": [
+     0,
+     null
+    ]
+   },
+   "dentine": {
+    "U_ppm": [
+     112.33,
+     0.9
+    ],
+    "u234_u238": [
+     2.1075,
+     0.0031
+    ],
+    "th230_u234": [
+     0.7136,
+     0.007
+    ],
+    "water_pct": [
+     7,
+     5
+    ],
+    "radon_loss_pct": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     3.66,
+     0.26
+    ],
+    "Th_ppm": [
+     8.06,
+     0.81
+    ],
+    "K_pct": [
+     1.5,
+     0.11
+    ],
+    "water_pct": [
+     15,
+     5
+    ]
+   },
+   "gamma_uGy_a": [
+    881,
+    31
+   ],
+   "cosmic_uGy_a": [
+    115,
+    13
+   ],
+   "depth_m": [
+    4.6,
+    1.0
+   ],
+   "lat_deg": -28.90065,
+   "lon_deg": 25.68547,
+   "altitude_m": 1220,
+   "published": {
+    "dose_rates_uGy_a": {
+     "internal": [
+      2140,
+      245
+     ],
+     "beta_dentine": [
+      2793,
+      220
+     ],
+     "beta_sediment": [
+      354,
+      41
+     ],
+     "gamma_cosmic": [
+      996,
+      34
+     ],
+     "total": [
+      6283,
+      333
+     ]
+    },
+    "p_enamel": null,
+    "p_dentine": null,
+    "ages_ka": {
+     "EU": [
+      84,
+      9
+     ]
+    }
+   },
+   "provenance": "De, dose rates, EU-ESR age: Table 1 (p. 100); sediment U/Th/K, in situ gamma, enamel thickness and removed thickness (side 1 = dentine, side 2 = sediment): Table 2 (p. 101); enamel (E) and dentine (D) U-series: Table 3 (p. 102). Page numbers as reported by the reader for the CENIEH repository PDF.",
+   "notes": "Published internal dose is printed as 'Enamel (alpha+beta)'. Thickness errors not printed. U-series ratios measured on tissue (present-day activity ratios); not used in EU age model except U concentrations. Depth = 'sediment thickness covering the samples of 4.6 ± 1 m' used for cosmic. Lat/long converted from 28°54'2.35\"S, 25°41'7.69\"E. | Verified: cosmic 115 ± 13 µGy/a from the text (gamma+cosmic = in situ gamma + 115). Text says ~20 µm removed per side, Table 2 prints 20–59 µm (table values used)."
+  },
+  {
+   "sample": "LOV1986",
+   "De_Gy": [
+    339,
+    19
+   ],
+   "geometry": "SED/EN/DE",
+   "enamel": {
+    "U_ppm": [
+     3.48,
+     0.03
+    ],
+    "u234_u238": [
+     2.0766,
+     0.002
+    ],
+    "th230_u234": [
+     0.5908,
+     0.0015
+    ],
+    "thickness_um": [
+     631,
+     null
+    ],
+    "removed_outer_um": [
+     20,
+     null
+    ],
+    "removed_inner_um": [
+     20,
+     null
+    ],
+    "density": null,
+    "water_pct": [
+     0,
+     null
+    ]
+   },
+   "dentine": {
+    "U_ppm": [
+     127.27,
+     1.03
+    ],
+    "u234_u238": [
+     2.1835,
+     0.0022
+    ],
+    "th230_u234": [
+     0.6754,
+     0.0044
+    ],
+    "water_pct": [
+     7,
+     5
+    ],
+    "radon_loss_pct": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     2.77,
+     0.19
+    ],
+    "Th_ppm": [
+     6.81,
+     0.68
+    ],
+    "K_pct": [
+     1.47,
+     0.1
+    ],
+    "water_pct": [
+     15,
+     5
+    ]
+   },
+   "gamma_uGy_a": [
+    872,
+    31
+   ],
+   "cosmic_uGy_a": [
+    115,
+    13
+   ],
+   "depth_m": [
+    4.6,
+    1.0
+   ],
+   "lat_deg": -28.90065,
+   "lon_deg": 25.68547,
+   "altitude_m": 1220,
+   "published": {
+    "dose_rates_uGy_a": {
+     "internal": [
+      1243,
+      145
+     ],
+     "beta_dentine": [
+      2463,
+      199
+     ],
+     "beta_sediment": [
+      271,
+      32
+     ],
+     "gamma_cosmic": [
+      987,
+      34
+     ],
+     "total": [
+      4964,
+      250
+     ]
+    },
+    "p_enamel": null,
+    "p_dentine": null,
+    "ages_ka": {
+     "EU": [
+      68,
+      5
+     ]
+    }
+   },
+   "provenance": "De, dose rates, EU-ESR age: Table 1 (p. 100); sediment U/Th/K, in situ gamma, enamel thickness and removed thickness (side 1 = dentine, side 2 = sediment): Table 2 (p. 101); enamel (E) and dentine (D) U-series: Table 3 (p. 102). Page numbers as reported by the reader for the CENIEH repository PDF.",
+   "notes": "Published internal dose is printed as 'Enamel (alpha+beta)'. Thickness errors not printed. U-series ratios measured on tissue (present-day activity ratios); not used in EU age model except U concentrations. Depth = 'sediment thickness covering the samples of 4.6 ± 1 m' used for cosmic. Lat/long converted from 28°54'2.35\"S, 25°41'7.69\"E. LOV2072 and LOV1986 share one in situ gamma measurement. | Verified: cosmic 115 ± 13 µGy/a from the text (gamma+cosmic = in situ gamma + 115). Text says ~20 µm removed per side, Table 2 prints 20–59 µm (table values used)."
+  },
+  {
+   "sample": "LOV1998",
+   "De_Gy": [
+    530,
+    69
+   ],
+   "geometry": "SED/EN/DE",
+   "enamel": {
+    "U_ppm": [
+     13.98,
+     0.12
+    ],
+    "u234_u238": [
+     1.9354,
+     0.0033
+    ],
+    "th230_u234": [
+     0.5956,
+     0.0088
+    ],
+    "thickness_um": [
+     964,
+     null
+    ],
+    "removed_outer_um": [
+     20,
+     null
+    ],
+    "removed_inner_um": [
+     20,
+     null
+    ],
+    "density": null,
+    "water_pct": [
+     0,
+     null
+    ]
+   },
+   "dentine": {
+    "U_ppm": [
+     197.59,
+     1.62
+    ],
+    "u234_u238": [
+     1.9625,
+     0.003
+    ],
+    "th230_u234": [
+     0.69,
+     0.0054
+    ],
+    "water_pct": [
+     7,
+     5
+    ],
+    "radon_loss_pct": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     2.9,
+     0.2
+    ],
+    "Th_ppm": [
+     8.23,
+     0.82
+    ],
+    "K_pct": [
+     1.53,
+     0.11
+    ],
+    "water_pct": [
+     15,
+     5
+    ]
+   },
+   "gamma_uGy_a": [
+    933,
+    32
+   ],
+   "cosmic_uGy_a": [
+    115,
+    13
+   ],
+   "depth_m": [
+    4.6,
+    1.0
+   ],
+   "lat_deg": -28.90065,
+   "lon_deg": 25.68547,
+   "altitude_m": 1220,
+   "published": {
+    "dose_rates_uGy_a": {
+     "internal": [
+      4672,
+      468
+     ],
+     "beta_dentine": [
+      2641,
+      255
+     ],
+     "beta_sediment": [
+      204,
+      27
+     ],
+     "gamma_cosmic": [
+      1048,
+      34
+     ],
+     "total": [
+      8565,
+      535
+     ]
+    },
+    "p_enamel": null,
+    "p_dentine": null,
+    "ages_ka": {
+     "EU": [
+      62,
+      9
+     ]
+    }
+   },
+   "provenance": "De, dose rates, EU-ESR age: Table 1 (p. 100); sediment U/Th/K, in situ gamma, enamel thickness and removed thickness (side 1 = dentine, side 2 = sediment): Table 2 (p. 101); enamel (E) and dentine (D) U-series: Table 3 (p. 102). Page numbers as reported by the reader for the CENIEH repository PDF.",
+   "notes": "Published internal dose is printed as 'Enamel (alpha+beta)'. Thickness errors not printed. U-series ratios measured on tissue (present-day activity ratios); not used in EU age model except U concentrations. Depth = 'sediment thickness covering the samples of 4.6 ± 1 m' used for cosmic. Lat/long converted from 28°54'2.35\"S, 25°41'7.69\"E. | Verified: cosmic 115 ± 13 µGy/a from the text (gamma+cosmic = in situ gamma + 115). Text says ~20 µm removed per side, Table 2 prints 20–59 µm (table values used)."
+  }
+ ],
+ "completeness": "partial: only EU-ESR ages (no US/CSUS), no p-values; dose-rate conversion factors not cited; thickness errors and dentine thickness not given; cosmic dose not printed separately (gamma+cosmic only)",
+ "extraction_notes": "Read twice via WebFetch with different prompts (table-verbatim and per-sample); all values agreed. Water content is printed as 'weight %' (15 ± 5 sediment, 0 enamel, 7 ± 5 dentine) without wet/dry specification. Side 1/side 2 in Table 2 are the thicknesses removed from the dentine and sediment sides respectively ('enamel thickness used to calculate the beta attenuation (side 1 = internal dentine; side 2 = sediment)'). Beta dose from sediment derived from sediment U/Th/K (mass spectrometry).",
+ "benchmark": true
+}

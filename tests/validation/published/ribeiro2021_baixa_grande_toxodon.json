@@ -1,0 +1,1060 @@
+{
+ "study_id": "ribeiro2021_baixa_grande_toxodon",
+ "reference": "Ribeiro, R.C., Kinoshita, A., Araújo-Júnior, H.I., Figueiredo, A.M.G., Carvalho, I.S., Baffa, O. (2021) ESR dating of Toxodon teeth from Baixa Grande, Bahia, Brazil. Journal of South American Earth Sciences 112, 103616. https://doi.org/10.1016/j.jsames.2021.103616",
+ "url": "https://igeo.ufrj.br/inc/isc/3/3_102-RibeiroR.C._ESR_dating_of_Toxodon_teeth_2021_JSAES.pdf",
+ "software": "ROSY",
+ "conventions": {
+  "conversion_factors": null,
+  "k_alpha": null,
+  "beta_attenuation": "ROSY (Brennan et al. 1999) one-group; not further specified",
+  "water_basis": null,
+  "u234_u238_meaning": null,
+  "radon_loss": null,
+  "cosmic": "190 uGy/a, Prescott & Hutton (1994), coordinates 11°32'07\"S 40°07'11\"W, altitude 386 m and depth of collection site (depth value not given in this paper)",
+  "gamma_source": "computed from sediment U/Th/K (NAA) in ROSY; no in situ dosimetry"
+ },
+ "samples": [
+  {
+   "sample": "1",
+   "De_Gy": [
+    53.0,
+    2.0
+   ],
+   "geometry": null,
+   "enamel": {
+    "U_ppm": null,
+    "U_ppm_upper_limit": 0.05,
+    "Th_ppm": null,
+    "Th_ppm_upper_limit": 0.01,
+    "K_pct": null,
+    "K_pct_upper_limit": 0.075,
+    "u234_u238": null,
+    "th230_u234": null,
+    "thickness_um": null,
+    "removed_outer_um": null,
+    "removed_inner_um": null,
+    "density": null
+   },
+   "dentine": {
+    "U_ppm": [
+     4.32,
+     0.43
+    ],
+    "Th_ppm": null,
+    "Th_ppm_upper_limit": 0.01,
+    "K_pct": null,
+    "K_pct_upper_limit": 0.075,
+    "u234_u238": null,
+    "th230_u234": null,
+    "water_pct": null,
+    "radon_loss_pct": null,
+    "thickness_um": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     2.08,
+     0.19
+    ],
+    "Th_ppm": [
+     13.5,
+     0.64
+    ],
+    "K_pct": [
+     0.2,
+     0.07
+    ],
+    "water_pct": [
+     11,
+     null
+    ]
+   },
+   "gamma_uGy_a": null,
+   "cosmic_uGy_a": [
+    190,
+    null
+   ],
+   "depth_m": null,
+   "lat_deg": -11.535277777777777,
+   "lon_deg": -40.11972222222222,
+   "altitude_m": 386,
+   "published": {
+    "dose_rates_uGy_a": null,
+    "p_enamel": null,
+    "p_dentine": null,
+    "ages_ka": {
+     "EU": [
+      42.0,
+      2.0
+     ],
+     "LU": [
+      43.0,
+      2.0
+     ],
+     "CU": [
+      43.0,
+      2.0
+     ]
+    }
+   },
+   "provenance": "Table 1 (De and NAA U/Th/K), Table 2 (ages), specimen 1; pp. 3-4",
+   "notes": "Upper limits ('<x') given as value null plus *_upper_limit; how ROSY treated them is not stated. Sediment U/Th/K are per-specimen values in Table 1. 'CU' = Combined Uptake (EU dentine + LU enamel in ROSY)."
+  },
+  {
+   "sample": "2",
+   "De_Gy": [
+    65.0,
+    5.0
+   ],
+   "geometry": null,
+   "enamel": {
+    "U_ppm": [
+     0.09,
+     0.001
+    ],
+    "Th_ppm": null,
+    "Th_ppm_upper_limit": 0.01,
+    "K_pct": null,
+    "K_pct_upper_limit": 0.075,
+    "u234_u238": null,
+    "th230_u234": null,
+    "thickness_um": null,
+    "removed_outer_um": null,
+    "removed_inner_um": null,
+    "density": null
+   },
+   "dentine": {
+    "U_ppm": [
+     5.7,
+     0.57
+    ],
+    "Th_ppm": null,
+    "Th_ppm_upper_limit": 0.01,
+    "K_pct": null,
+    "K_pct_upper_limit": 0.075,
+    "u234_u238": null,
+    "th230_u234": null,
+    "water_pct": null,
+    "radon_loss_pct": null,
+    "thickness_um": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     3.5,
+     0.44
+    ],
+    "Th_ppm": [
+     13.3,
+     1.5
+    ],
+    "K_pct": [
+     0.32,
+     0.1
+    ],
+    "water_pct": [
+     11,
+     null
+    ]
+   },
+   "gamma_uGy_a": null,
+   "cosmic_uGy_a": [
+    190,
+    null
+   ],
+   "depth_m": null,
+   "lat_deg": -11.535277777777777,
+   "lon_deg": -40.11972222222222,
+   "altitude_m": 386,
+   "published": {
+    "dose_rates_uGy_a": null,
+    "p_enamel": null,
+    "p_dentine": null,
+    "ages_ka": {
+     "EU": [
+      44.0,
+      4.0
+     ],
+     "LU": [
+      45.0,
+      4.0
+     ],
+     "CU": [
+      44.0,
+      4.0
+     ]
+    }
+   },
+   "provenance": "Table 1 (De and NAA U/Th/K), Table 2 (ages), specimen 2; pp. 3-4",
+   "notes": "Upper limits ('<x') given as value null plus *_upper_limit; how ROSY treated them is not stated. Sediment U/Th/K are per-specimen values in Table 1. 'CU' = Combined Uptake (EU dentine + LU enamel in ROSY)."
+  },
+  {
+   "sample": "3",
+   "De_Gy": [
+    62.0,
+    6.0
+   ],
+   "geometry": null,
+   "enamel": {
+    "U_ppm": null,
+    "U_ppm_upper_limit": 0.05,
+    "Th_ppm": null,
+    "Th_ppm_upper_limit": 0.01,
+    "K_pct": null,
+    "K_pct_upper_limit": 0.075,
+    "u234_u238": null,
+    "th230_u234": null,
+    "thickness_um": null,
+    "removed_outer_um": null,
+    "removed_inner_um": null,
+    "density": null
+   },
+   "dentine": {
+    "U_ppm": [
+     1.28,
+     0.13
+    ],
+    "Th_ppm": null,
+    "Th_ppm_upper_limit": 0.01,
+    "K_pct": null,
+    "K_pct_upper_limit": 0.075,
+    "u234_u238": null,
+    "th230_u234": null,
+    "water_pct": null,
+    "radon_loss_pct": null,
+    "thickness_um": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     2.07,
+     0.1
+    ],
+    "Th_ppm": [
+     15.2,
+     5.5
+    ],
+    "K_pct": [
+     0.7,
+     0.36
+    ],
+    "water_pct": [
+     11,
+     null
+    ]
+   },
+   "gamma_uGy_a": null,
+   "cosmic_uGy_a": [
+    190,
+    null
+   ],
+   "depth_m": null,
+   "lat_deg": -11.535277777777777,
+   "lon_deg": -40.11972222222222,
+   "altitude_m": 386,
+   "published": {
+    "dose_rates_uGy_a": null,
+    "p_enamel": null,
+    "p_dentine": null,
+    "ages_ka": {
+     "EU": [
+      40.0,
+      9.0
+     ],
+     "LU": [
+      40.0,
+      9.0
+     ],
+     "CU": [
+      40.0,
+      9.0
+     ]
+    }
+   },
+   "provenance": "Table 1 (De and NAA U/Th/K), Table 2 (ages), specimen 3; pp. 3-4",
+   "notes": "Upper limits ('<x') given as value null plus *_upper_limit; how ROSY treated them is not stated. Sediment U/Th/K are per-specimen values in Table 1. 'CU' = Combined Uptake (EU dentine + LU enamel in ROSY)."
+  },
+  {
+   "sample": "4",
+   "De_Gy": [
+    46.0,
+    6.0
+   ],
+   "geometry": null,
+   "enamel": {
+    "U_ppm": [
+     0.062,
+     0.001
+    ],
+    "Th_ppm": null,
+    "Th_ppm_upper_limit": 0.01,
+    "K_pct": null,
+    "K_pct_upper_limit": 0.075,
+    "u234_u238": null,
+    "th230_u234": null,
+    "thickness_um": null,
+    "removed_outer_um": null,
+    "removed_inner_um": null,
+    "density": null
+   },
+   "dentine": {
+    "U_ppm": [
+     0.89,
+     0.09
+    ],
+    "Th_ppm": [
+     0.3,
+     0.1
+    ],
+    "K_pct": null,
+    "K_pct_upper_limit": 0.075,
+    "u234_u238": null,
+    "th230_u234": null,
+    "water_pct": null,
+    "radon_loss_pct": null,
+    "thickness_um": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     3.63,
+     0.36
+    ],
+    "Th_ppm": [
+     10.1,
+     0.32
+    ],
+    "K_pct": [
+     0.25,
+     0.11
+    ],
+    "water_pct": [
+     11,
+     null
+    ]
+   },
+   "gamma_uGy_a": null,
+   "cosmic_uGy_a": [
+    190,
+    null
+   ],
+   "depth_m": null,
+   "lat_deg": -11.535277777777777,
+   "lon_deg": -40.11972222222222,
+   "altitude_m": 386,
+   "published": {
+    "dose_rates_uGy_a": null,
+    "p_enamel": null,
+    "p_dentine": null,
+    "ages_ka": {
+     "EU": [
+      39.0,
+      5.0
+     ],
+     "LU": [
+      39.0,
+      5.0
+     ],
+     "CU": [
+      39.0,
+      5.0
+     ]
+    }
+   },
+   "provenance": "Table 1 (De and NAA U/Th/K), Table 2 (ages), specimen 4; pp. 3-4",
+   "notes": "Upper limits ('<x') given as value null plus *_upper_limit; how ROSY treated them is not stated. Sediment U/Th/K are per-specimen values in Table 1. 'CU' = Combined Uptake (EU dentine + LU enamel in ROSY)."
+  },
+  {
+   "sample": "5",
+   "De_Gy": [
+    72.0,
+    11.0
+   ],
+   "geometry": null,
+   "enamel": {
+    "U_ppm": null,
+    "U_ppm_upper_limit": 0.05,
+    "Th_ppm": null,
+    "Th_ppm_upper_limit": 0.01,
+    "K_pct": null,
+    "K_pct_upper_limit": 0.075,
+    "u234_u238": null,
+    "th230_u234": null,
+    "thickness_um": null,
+    "removed_outer_um": null,
+    "removed_inner_um": null,
+    "density": null
+   },
+   "dentine": {
+    "U_ppm": [
+     2.1,
+     0.21
+    ],
+    "Th_ppm": null,
+    "Th_ppm_upper_limit": 0.01,
+    "K_pct": null,
+    "K_pct_upper_limit": 0.075,
+    "u234_u238": null,
+    "th230_u234": null,
+    "water_pct": null,
+    "radon_loss_pct": null,
+    "thickness_um": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     3.62,
+     0.14
+    ],
+    "Th_ppm": [
+     12.7,
+     3.9
+    ],
+    "K_pct": [
+     0.21,
+     0.08
+    ],
+    "water_pct": [
+     11,
+     null
+    ]
+   },
+   "gamma_uGy_a": null,
+   "cosmic_uGy_a": [
+    190,
+    null
+   ],
+   "depth_m": null,
+   "lat_deg": -11.535277777777777,
+   "lon_deg": -40.11972222222222,
+   "altitude_m": 386,
+   "published": {
+    "dose_rates_uGy_a": null,
+    "p_enamel": null,
+    "p_dentine": null,
+    "ages_ka": {
+     "EU": [
+      51.0,
+      8.0
+     ],
+     "LU": [
+      51.0,
+      8.0
+     ],
+     "CU": [
+      51.0,
+      8.0
+     ]
+    }
+   },
+   "provenance": "Table 1 (De and NAA U/Th/K), Table 2 (ages), specimen 5; pp. 3-4",
+   "notes": "Upper limits ('<x') given as value null plus *_upper_limit; how ROSY treated them is not stated. Sediment U/Th/K are per-specimen values in Table 1. 'CU' = Combined Uptake (EU dentine + LU enamel in ROSY)."
+  },
+  {
+   "sample": "6",
+   "De_Gy": [
+    45.0,
+    7.0
+   ],
+   "geometry": null,
+   "enamel": {
+    "U_ppm": null,
+    "U_ppm_upper_limit": 0.05,
+    "Th_ppm": null,
+    "Th_ppm_upper_limit": 0.01,
+    "K_pct": null,
+    "K_pct_upper_limit": 0.075,
+    "u234_u238": null,
+    "th230_u234": null,
+    "thickness_um": null,
+    "removed_outer_um": null,
+    "removed_inner_um": null,
+    "density": null
+   },
+   "dentine": {
+    "U_ppm": [
+     3.83,
+     0.38
+    ],
+    "Th_ppm": null,
+    "Th_ppm_upper_limit": 0.01,
+    "K_pct": null,
+    "K_pct_upper_limit": 0.075,
+    "u234_u238": null,
+    "th230_u234": null,
+    "water_pct": null,
+    "radon_loss_pct": null,
+    "thickness_um": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     3.51,
+     0.2
+    ],
+    "Th_ppm": [
+     10.7,
+     0.4
+    ],
+    "K_pct": [
+     0.465,
+     0.24
+    ],
+    "water_pct": [
+     11,
+     null
+    ]
+   },
+   "gamma_uGy_a": null,
+   "cosmic_uGy_a": [
+    190,
+    null
+   ],
+   "depth_m": null,
+   "lat_deg": -11.535277777777777,
+   "lon_deg": -40.11972222222222,
+   "altitude_m": 386,
+   "published": {
+    "dose_rates_uGy_a": null,
+    "p_enamel": null,
+    "p_dentine": null,
+    "ages_ka": {
+     "EU": [
+      34.0,
+      6.0
+     ],
+     "LU": [
+      34.0,
+      6.0
+     ],
+     "CU": [
+      34.0,
+      6.0
+     ]
+    }
+   },
+   "provenance": "Table 1 (De and NAA U/Th/K), Table 2 (ages), specimen 6; pp. 3-4",
+   "notes": "Upper limits ('<x') given as value null plus *_upper_limit; how ROSY treated them is not stated. Sediment U/Th/K are per-specimen values in Table 1. 'CU' = Combined Uptake (EU dentine + LU enamel in ROSY)."
+  },
+  {
+   "sample": "7",
+   "De_Gy": [
+    49.0,
+    3.0
+   ],
+   "geometry": null,
+   "enamel": {
+    "U_ppm": null,
+    "U_ppm_upper_limit": 0.05,
+    "Th_ppm": null,
+    "Th_ppm_upper_limit": 0.01,
+    "K_pct": null,
+    "K_pct_upper_limit": 0.075,
+    "u234_u238": null,
+    "th230_u234": null,
+    "thickness_um": null,
+    "removed_outer_um": null,
+    "removed_inner_um": null,
+    "density": null
+   },
+   "dentine": {
+    "U_ppm": [
+     2.67,
+     0.27
+    ],
+    "Th_ppm": null,
+    "Th_ppm_upper_limit": 0.01,
+    "K_pct": null,
+    "K_pct_upper_limit": 0.075,
+    "u234_u238": null,
+    "th230_u234": null,
+    "water_pct": null,
+    "radon_loss_pct": null,
+    "thickness_um": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     2.03,
+     0.15
+    ],
+    "Th_ppm": [
+     12.53,
+     1.7
+    ],
+    "K_pct": [
+     0.16,
+     0.09
+    ],
+    "water_pct": [
+     11,
+     null
+    ]
+   },
+   "gamma_uGy_a": null,
+   "cosmic_uGy_a": [
+    190,
+    null
+   ],
+   "depth_m": null,
+   "lat_deg": -11.535277777777777,
+   "lon_deg": -40.11972222222222,
+   "altitude_m": 386,
+   "published": {
+    "dose_rates_uGy_a": null,
+    "p_enamel": null,
+    "p_dentine": null,
+    "ages_ka": {
+     "EU": [
+      41.0,
+      4.0
+     ],
+     "LU": [
+      42.0,
+      4.0
+     ],
+     "CU": [
+      41.0,
+      4.0
+     ]
+    }
+   },
+   "provenance": "Table 1 (De and NAA U/Th/K), Table 2 (ages), specimen 7; pp. 3-4",
+   "notes": "Upper limits ('<x') given as value null plus *_upper_limit; how ROSY treated them is not stated. Sediment U/Th/K are per-specimen values in Table 1. 'CU' = Combined Uptake (EU dentine + LU enamel in ROSY)."
+  },
+  {
+   "sample": "8",
+   "De_Gy": [
+    52.0,
+    2.0
+   ],
+   "geometry": null,
+   "enamel": {
+    "U_ppm": [
+     0.196,
+     0.003
+    ],
+    "Th_ppm": null,
+    "Th_ppm_upper_limit": 0.01,
+    "K_pct": null,
+    "K_pct_upper_limit": 0.075,
+    "u234_u238": null,
+    "th230_u234": null,
+    "thickness_um": null,
+    "removed_outer_um": null,
+    "removed_inner_um": null,
+    "density": null
+   },
+   "dentine": {
+    "U_ppm": [
+     14.7,
+     1.5
+    ],
+    "Th_ppm": [
+     0.72,
+     0.12
+    ],
+    "K_pct": null,
+    "K_pct_upper_limit": 0.075,
+    "u234_u238": null,
+    "th230_u234": null,
+    "water_pct": null,
+    "radon_loss_pct": null,
+    "thickness_um": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     4.73,
+     0.06
+    ],
+    "Th_ppm": [
+     7.63,
+     0.99
+    ],
+    "K_pct": null,
+    "K_pct_upper_limit": 0.075,
+    "water_pct": [
+     11,
+     null
+    ]
+   },
+   "gamma_uGy_a": null,
+   "cosmic_uGy_a": [
+    190,
+    null
+   ],
+   "depth_m": null,
+   "lat_deg": -11.535277777777777,
+   "lon_deg": -40.11972222222222,
+   "altitude_m": 386,
+   "published": {
+    "dose_rates_uGy_a": null,
+    "p_enamel": null,
+    "p_dentine": null,
+    "ages_ka": {
+     "EU": [
+      37.0,
+      2.0
+     ],
+     "LU": [
+      40.0,
+      2.0
+     ],
+     "CU": [
+      38.0,
+      2.0
+     ]
+    }
+   },
+   "provenance": "Table 1 (De and NAA U/Th/K), Table 2 (ages), specimen 8; pp. 3-4",
+   "notes": "Upper limits ('<x') given as value null plus *_upper_limit; how ROSY treated them is not stated. Sediment U/Th/K are per-specimen values in Table 1. 'CU' = Combined Uptake (EU dentine + LU enamel in ROSY)."
+  },
+  {
+   "sample": "9",
+   "De_Gy": [
+    57.0,
+    4.0
+   ],
+   "geometry": null,
+   "enamel": {
+    "U_ppm": null,
+    "U_ppm_upper_limit": 0.05,
+    "Th_ppm": null,
+    "Th_ppm_upper_limit": 0.01,
+    "K_pct": null,
+    "K_pct_upper_limit": 0.075,
+    "u234_u238": null,
+    "th230_u234": null,
+    "thickness_um": null,
+    "removed_outer_um": null,
+    "removed_inner_um": null,
+    "density": null
+   },
+   "dentine": {
+    "U_ppm": [
+     1.75,
+     0.18
+    ],
+    "Th_ppm": null,
+    "Th_ppm_upper_limit": 0.01,
+    "K_pct": null,
+    "K_pct_upper_limit": 0.075,
+    "u234_u238": null,
+    "th230_u234": null,
+    "water_pct": null,
+    "radon_loss_pct": null,
+    "thickness_um": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     2.51,
+     0.09
+    ],
+    "Th_ppm": [
+     11.5,
+     1.55
+    ],
+    "K_pct": [
+     0.21,
+     0.07
+    ],
+    "water_pct": [
+     11,
+     null
+    ]
+   },
+   "gamma_uGy_a": null,
+   "cosmic_uGy_a": [
+    190,
+    null
+   ],
+   "depth_m": null,
+   "lat_deg": -11.535277777777777,
+   "lon_deg": -40.11972222222222,
+   "altitude_m": 386,
+   "published": {
+    "dose_rates_uGy_a": null,
+    "p_enamel": null,
+    "p_dentine": null,
+    "ages_ka": {
+     "EU": [
+      47.0,
+      5.0
+     ],
+     "LU": [
+      48.0,
+      4.0
+     ],
+     "CU": [
+      47.0,
+      4.0
+     ]
+    }
+   },
+   "provenance": "Table 1 (De and NAA U/Th/K), Table 2 (ages), specimen 9; pp. 3-4",
+   "notes": "Upper limits ('<x') given as value null plus *_upper_limit; how ROSY treated them is not stated. Sediment U/Th/K are per-specimen values in Table 1. 'CU' = Combined Uptake (EU dentine + LU enamel in ROSY)."
+  },
+  {
+   "sample": "10",
+   "De_Gy": [
+    66.0,
+    4.0
+   ],
+   "geometry": null,
+   "enamel": {
+    "U_ppm": null,
+    "U_ppm_upper_limit": 0.05,
+    "Th_ppm": null,
+    "Th_ppm_upper_limit": 0.01,
+    "K_pct": null,
+    "K_pct_upper_limit": 0.075,
+    "u234_u238": null,
+    "th230_u234": null,
+    "thickness_um": null,
+    "removed_outer_um": null,
+    "removed_inner_um": null,
+    "density": null
+   },
+   "dentine": {
+    "U_ppm": [
+     0.47,
+     0.05
+    ],
+    "Th_ppm": null,
+    "Th_ppm_upper_limit": 0.01,
+    "K_pct": null,
+    "K_pct_upper_limit": 0.075,
+    "u234_u238": null,
+    "th230_u234": null,
+    "water_pct": null,
+    "radon_loss_pct": null,
+    "thickness_um": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     2.13,
+     0.1
+    ],
+    "Th_ppm": [
+     11.0,
+     0.35
+    ],
+    "K_pct": null,
+    "K_pct_upper_limit": 0.075,
+    "water_pct": [
+     11,
+     null
+    ]
+   },
+   "gamma_uGy_a": null,
+   "cosmic_uGy_a": [
+    190,
+    null
+   ],
+   "depth_m": null,
+   "lat_deg": -11.535277777777777,
+   "lon_deg": -40.11972222222222,
+   "altitude_m": 386,
+   "published": {
+    "dose_rates_uGy_a": null,
+    "p_enamel": null,
+    "p_dentine": null,
+    "ages_ka": {
+     "EU": [
+      60.0,
+      6.0
+     ],
+     "LU": [
+      60.0,
+      6.0
+     ],
+     "CU": [
+      60.0,
+      6.0
+     ]
+    }
+   },
+   "provenance": "Table 1 (De and NAA U/Th/K), Table 2 (ages), specimen 10; pp. 3-4",
+   "notes": "Upper limits ('<x') given as value null plus *_upper_limit; how ROSY treated them is not stated. Sediment U/Th/K are per-specimen values in Table 1. 'CU' = Combined Uptake (EU dentine + LU enamel in ROSY)."
+  },
+  {
+   "sample": "11",
+   "De_Gy": [
+    48.0,
+    3.0
+   ],
+   "geometry": null,
+   "enamel": {
+    "U_ppm": null,
+    "U_ppm_upper_limit": 0.05,
+    "Th_ppm": null,
+    "Th_ppm_upper_limit": 0.01,
+    "K_pct": null,
+    "K_pct_upper_limit": 0.075,
+    "u234_u238": null,
+    "th230_u234": null,
+    "thickness_um": null,
+    "removed_outer_um": null,
+    "removed_inner_um": null,
+    "density": null
+   },
+   "dentine": {
+    "U_ppm": [
+     1.62,
+     0.16
+    ],
+    "Th_ppm": null,
+    "Th_ppm_upper_limit": 0.01,
+    "K_pct": null,
+    "K_pct_upper_limit": 0.075,
+    "u234_u238": null,
+    "th230_u234": null,
+    "water_pct": null,
+    "radon_loss_pct": null,
+    "thickness_um": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     2.61,
+     0.16
+    ],
+    "Th_ppm": [
+     11.16,
+     1.15
+    ],
+    "K_pct": [
+     0.43,
+     0.03
+    ],
+    "water_pct": [
+     11,
+     null
+    ]
+   },
+   "gamma_uGy_a": null,
+   "cosmic_uGy_a": [
+    190,
+    null
+   ],
+   "depth_m": null,
+   "lat_deg": -11.535277777777777,
+   "lon_deg": -40.11972222222222,
+   "altitude_m": 386,
+   "published": {
+    "dose_rates_uGy_a": null,
+    "p_enamel": null,
+    "p_dentine": null,
+    "ages_ka": {
+     "EU": [
+      42.0,
+      3.0
+     ],
+     "LU": [
+      42.0,
+      3.0
+     ],
+     "CU": [
+      42.0,
+      3.0
+     ]
+    }
+   },
+   "provenance": "Table 1 (De and NAA U/Th/K), Table 2 (ages), specimen 11; pp. 3-4",
+   "notes": "Upper limits ('<x') given as value null plus *_upper_limit; how ROSY treated them is not stated. Sediment U/Th/K are per-specimen values in Table 1. 'CU' = Combined Uptake (EU dentine + LU enamel in ROSY)."
+  },
+  {
+   "sample": "12",
+   "De_Gy": [
+    53.0,
+    7.0
+   ],
+   "geometry": null,
+   "enamel": {
+    "U_ppm": null,
+    "U_ppm_upper_limit": 0.05,
+    "Th_ppm": null,
+    "Th_ppm_upper_limit": 0.01,
+    "K_pct": null,
+    "K_pct_upper_limit": 0.075,
+    "u234_u238": null,
+    "th230_u234": null,
+    "thickness_um": null,
+    "removed_outer_um": null,
+    "removed_inner_um": null,
+    "density": null
+   },
+   "dentine": {
+    "U_ppm": [
+     0.83,
+     0.08
+    ],
+    "Th_ppm": null,
+    "Th_ppm_upper_limit": 0.01,
+    "K_pct": null,
+    "K_pct_upper_limit": 0.075,
+    "u234_u238": null,
+    "th230_u234": null,
+    "water_pct": null,
+    "radon_loss_pct": null,
+    "thickness_um": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     1.92,
+     0.08
+    ],
+    "Th_ppm": [
+     12.3,
+     1.83
+    ],
+    "K_pct": [
+     0.36,
+     0.3
+    ],
+    "water_pct": [
+     11,
+     null
+    ]
+   },
+   "gamma_uGy_a": null,
+   "cosmic_uGy_a": [
+    190,
+    null
+   ],
+   "depth_m": null,
+   "lat_deg": -11.535277777777777,
+   "lon_deg": -40.11972222222222,
+   "altitude_m": 386,
+   "published": {
+    "dose_rates_uGy_a": null,
+    "p_enamel": null,
+    "p_dentine": null,
+    "ages_ka": {
+     "EU": [
+      46.0,
+      7.0
+     ],
+     "LU": [
+      46.0,
+      7.0
+     ],
+     "CU": [
+      46.0,
+      7.0
+     ]
+    }
+   },
+   "provenance": "Table 1 (De and NAA U/Th/K), Table 2 (ages), specimen 12; pp. 3-4",
+   "notes": "Upper limits ('<x') given as value null plus *_upper_limit; how ROSY treated them is not stated. Sediment U/Th/K are per-specimen values in Table 1. 'CU' = Combined Uptake (EU dentine + LU enamel in ROSY)."
+  }
+ ],
+ "completeness": "partial: no enamel/dentine thicknesses or removed layers (text says thickness was recorded but not reported), no 234U/238U, no k-value, no dentine water, no dose-rate components; enamel U, Th, K mostly below detection limits",
+ "extraction_notes": "Tables 1 and 2 read twice via WebFetch (two separate prompts) with identical results. Sediment moisture 11% (basis not stated) from text. Units as printed: U, Th in ppm; K in %. lat/lon converted from the DMS printed in the paper (south/west negative). Enamel Th/K and dentine Th/K given as extra keys because ROSY uses them.",
+ "benchmark": false,
+ "benchmark_reason": "no dose rates, thicknesses, k or 234U/238U; enamel U mostly below detection"
+}

@@ -1,0 +1,323 @@
+{
+ "study_id": "kinoshita2008_pernambuco_stegomastodon",
+ "reference": "Kinoshita, A., Barreto, A., Alves, R., Figueiredo, A.M., Sarkis, J.E.S., Dias, M.L., Baffa, O. (2008) ESR dating of teeth from northeastern Brazilian megafauna. Radiation Measurements 43, 809-812. https://doi.org/10.1016/j.radmeas.2007.11.075",
+ "url": "https://repositorio.ipen.br/bitstreams/14a03423-2dc9-410d-81e6-a6f4bc5cff7c/download",
+ "software": "ROSY",
+ "conventions": {
+  "conversion_factors": null,
+  "k_alpha": [
+   0.15,
+   null
+  ],
+  "beta_attenuation": "ROSY (Brennan et al.) one-group",
+  "water_basis": null,
+  "u234_u238_meaning": "initial (assumed 1.4)",
+  "radon_loss": null,
+  "cosmic": "250 uGy/a stated as 'the cosmic rays dose' (one passage also reads 'cosmic and gamma rays dose ... 250 uGy/yr'; Table 3 shows the sediment gamma separately, so 250 is cosmic only)",
+  "gamma_source": "computed by ROSY from soil U/Th/K (NAA and ICP-MS); alpha from soil neglected (~500 um outer layer removed)"
+ },
+ "samples": [
+  {
+   "sample": "1",
+   "De_Gy": [
+    120,
+    1
+   ],
+   "geometry": null,
+   "enamel": {
+    "U_ppm": [
+     0.24,
+     0.02
+    ],
+    "Th_ppm": [
+     0.127,
+     0.009
+    ],
+    "K_pct": [
+     0.0407,
+     0.002
+    ],
+    "u234_u238": null,
+    "th230_u234": null,
+    "thickness_um": null,
+    "removed_outer_um": [
+     500,
+     null
+    ],
+    "removed_inner_um": null,
+    "density": null
+   },
+   "dentine": {
+    "U_ppm": [
+     0.31,
+     0.02
+    ],
+    "Th_ppm": [
+     0.089,
+     0.006
+    ],
+    "K_pct": [
+     0.0482,
+     0.002
+    ],
+    "u234_u238": null,
+    "th230_u234": null,
+    "water_pct": null,
+    "radon_loss_pct": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     1.95,
+     0.24
+    ],
+    "Th_ppm": [
+     13.28,
+     3.5
+    ],
+    "K_pct": [
+     2.65,
+     0.63
+    ],
+    "water_pct": null
+   },
+   "gamma_uGy_a": null,
+   "cosmic_uGy_a": [
+    250,
+    null
+   ],
+   "depth_m": "1.8-2.0",
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "published": {
+    "dose_rates_uGy_a": {
+     "components_by_model": {
+      "enamel_internal": {
+       "EU": {
+        "alpha": 65.42,
+        "beta": 53.22,
+        "gamma": 0.0
+       },
+       "LU": {
+        "alpha": 36.49,
+        "beta": 42.45,
+        "gamma": 0.0
+       },
+       "CU": {
+        "alpha": 65.43,
+        "beta": 53.22,
+        "gamma": 0.0
+       }
+      },
+      "dentine": {
+       "EU": {
+        "alpha": 0.0,
+        "beta": 1.24,
+        "gamma": 0.0
+       },
+       "LU": {
+        "alpha": 0.0,
+        "beta": 0.87,
+        "gamma": 0.0
+       },
+       "CU": {
+        "alpha": 0.0,
+        "beta": 0.87,
+        "gamma": 0.0
+       }
+      },
+      "sediment": {
+       "EU": {
+        "alpha": 0.0,
+        "beta": 42.79,
+        "gamma": 1496.43
+       },
+       "LU": {
+        "alpha": 0.0,
+        "beta": 42.79,
+        "gamma": 1496.43
+       },
+       "CU": {
+        "alpha": 0.0,
+        "beta": 42.79,
+        "gamma": 1496.43
+       }
+      }
+     }
+    },
+    "p_enamel": null,
+    "p_dentine": null,
+    "ages_ka": {
+     "EU": [
+      63,
+      8
+     ],
+     "LU": [
+      64,
+      8
+     ],
+     "CU": [
+      63,
+      8
+     ]
+    }
+   },
+   "provenance": "Table 1 (AD, ages), Table 2 (U/Th/K), Table 3 (ROSY dose rates) rows for sample 1; p. 811",
+   "notes": "Table 3 gives alpha/beta/gamma dose rates (uGy/a) from enamel, dentine and sediment to the enamel, as calculated by ROSY, for each uptake model; the sediment gamma (1496.43 / 1526.62) excludes the cosmic 250 uGy/a. Check: sample 1 EU sum of Table 3 components + 250 = 1909 uGy/a -> 120/1.909 = 62.9 ka (published 63 +- 8). 'CU' = combination uptake (EU dentine, LU enamel). removed_outer_um: text says \"an external layer of ~500 um was eliminated\" (approximate, side(s) not specified)."
+  },
+  {
+   "sample": "2",
+   "De_Gy": [
+    112,
+    1
+   ],
+   "geometry": null,
+   "enamel": {
+    "U_ppm": [
+     0.008,
+     0.001
+    ],
+    "Th_ppm": [
+     0.075,
+     0.005
+    ],
+    "K_pct": [
+     0.032,
+     0.002
+    ],
+    "u234_u238": null,
+    "th230_u234": null,
+    "thickness_um": null,
+    "removed_outer_um": [
+     500,
+     null
+    ],
+    "removed_inner_um": null,
+    "density": null
+   },
+   "dentine": {
+    "U_ppm": [
+     0.015,
+     0.001
+    ],
+    "Th_ppm": [
+     0.075,
+     0.005
+    ],
+    "K_pct": [
+     0.0465,
+     0.002
+    ],
+    "u234_u238": null,
+    "th230_u234": null,
+    "water_pct": null,
+    "radon_loss_pct": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     2.22,
+     1.2
+    ],
+    "Th_ppm": [
+     15.06,
+     3.7
+    ],
+    "K_pct": [
+     2.3,
+     0.6
+    ],
+    "water_pct": null
+   },
+   "gamma_uGy_a": null,
+   "cosmic_uGy_a": [
+    250,
+    null
+   ],
+   "depth_m": "1.8-2.0",
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "published": {
+    "dose_rates_uGy_a": {
+     "components_by_model": {
+      "enamel_internal": {
+       "EU": {
+        "alpha": 10.85,
+        "beta": 25.37,
+        "gamma": 0.0
+       },
+       "LU": {
+        "alpha": 9.89,
+        "beta": 25.02,
+        "gamma": 0.0
+       },
+       "CU": {
+        "alpha": 10.85,
+        "beta": 25.37,
+        "gamma": 0.0
+       }
+      },
+      "dentine": {
+       "EU": {
+        "alpha": 0.0,
+        "beta": 0.56,
+        "gamma": 0.0
+       },
+       "LU": {
+        "alpha": 0.0,
+        "beta": 0.55,
+        "gamma": 0.0
+       },
+       "CU": {
+        "alpha": 0.0,
+        "beta": 0.55,
+        "gamma": 0.0
+       }
+      },
+      "sediment": {
+       "EU": {
+        "alpha": 0.0,
+        "beta": 40.65,
+        "gamma": 1526.62
+       },
+       "LU": {
+        "alpha": 0.0,
+        "beta": 40.65,
+        "gamma": 1526.62
+       },
+       "CU": {
+        "alpha": 0.0,
+        "beta": 40.65,
+        "gamma": 1526.62
+       }
+      }
+     }
+    },
+    "p_enamel": null,
+    "p_dentine": null,
+    "ages_ka": {
+     "EU": [
+      60,
+      9
+     ],
+     "LU": [
+      60,
+      9
+     ],
+     "CU": [
+      60,
+      9
+     ]
+    }
+   },
+   "provenance": "Table 1 (AD, ages), Table 2 (U/Th/K), Table 3 (ROSY dose rates) rows for sample 2; p. 811",
+   "notes": "Table 3 gives alpha/beta/gamma dose rates (uGy/a) from enamel, dentine and sediment to the enamel, as calculated by ROSY, for each uptake model; the sediment gamma (1496.43 / 1526.62) excludes the cosmic 250 uGy/a. Check: sample 1 EU sum of Table 3 components + 250 = 1909 uGy/a -> 120/1.909 = 62.9 ka (published 63 +- 8). 'CU' = combination uptake (EU dentine, LU enamel). removed_outer_um: text says \"an external layer of ~500 um was eliminated\" (approximate, side(s) not specified)."
+  }
+ ],
+ "completeness": "partial: no enamel/dentine thicknesses (only ~500 um outer layer removed), no water content, no 234U/238U measured (initial 1.4 assumed); but full ROSY dose-rate components per source and per model are published",
+ "extraction_notes": "Site Fazenda Logradouro, Pernambuco (UTM 9094505/0812382), depth 1.8-2.0 m. Stegomastodon waringi teeth. All three tables read twice (separate WebFetch prompts) with identical numbers. Table 2 K in %; enamel/dentine Th and K given as extra keys since ROSY uses them. The paper uses 'AD' (archaeological dose) for De and 'ky' for ka.",
+ "benchmark": false,
+ "benchmark_reason": "no enamel thickness or water"
+}

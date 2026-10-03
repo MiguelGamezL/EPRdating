@@ -1,0 +1,286 @@
+{
+ "study_id": "duval2021_olieboomspoort",
+ "reference": "Duval, M., Zhao, J.-X. (2021). Combined U-series/ESR dating of fossil teeth from Olieboomspoort (Limpopo Province, South Africa). Unpublished technical report to SAHRA, permit 2861 (permit holder: Aurore Val), February 2021.",
+ "url": "https://sahris.sahra.org.za/sites/default/files/heritagereports/SAHRA%20report_ESR%20dating%20OBP.pdf",
+ "software": "USESR",
+ "conventions": {
+  "conversion_factors": "Guerin et al. 2011",
+  "k_alpha": [
+   0.13,
+   0.02
+  ],
+  "beta_attenuation": "Monte-Carlo beta attenuation factors from Marsh 1999",
+  "water_basis": null,
+  "u234_u238_meaning": "measured present-day",
+  "radon_loss": "Post-Rn equilibrium considered in dental tissues and sediment (no radon loss)",
+  "cosmic": "Computed (Prescott & Hutton-type); report says depth was the main source of uncertainty; depth/lat/long/alt values not printed; cosmic value not printed separately (only gamma+cosmic)",
+  "gamma_source": "Calculated from U, Th, K of dry raw sediment by ICP-OES/MS (four-acid digest); no in situ gamma measurement"
+ },
+ "samples": [
+  {
+   "sample": "#536",
+   "De_Gy": [
+    171.2,
+    8.4
+   ],
+   "geometry": "SED/EN/DE",
+   "enamel": {
+    "U_ppm": [
+     0.098,
+     0.0
+    ],
+    "u234_u238": [
+     1.539,
+     0.002
+    ],
+    "th230_u234": [
+     0.546,
+     0.003
+    ],
+    "thickness_um": [
+     1143,
+     114
+    ],
+    "removed_outer_um": [
+     158,
+     16
+    ],
+    "removed_inner_um": [
+     152,
+     15
+    ],
+    "density": null
+   },
+   "dentine": {
+    "U_ppm": [
+     8.42,
+     0.026
+    ],
+    "u234_u238": [
+     1.448,
+     0.003
+    ],
+    "th230_u234": [
+     0.049,
+     0.0
+    ],
+    "water_pct": [
+     5,
+     3
+    ],
+    "radon_loss_pct": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     3.47,
+     0.14
+    ],
+    "Th_ppm": [
+     11.34,
+     0.48
+    ],
+    "K_pct": [
+     0.34,
+     0.01
+    ],
+    "water_pct": [
+     15,
+     5
+    ]
+   },
+   "gamma_uGy_a": null,
+   "cosmic_uGy_a": null,
+   "depth_m": null,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "published": {
+    "dose_rates_uGy_a": {
+     "internal": [
+      19,
+      4
+     ],
+     "beta_dentine": [
+      9,
+      2
+     ],
+     "beta_sediment": [
+      88,
+      7
+     ],
+     "gamma_cosmic": [
+      1032,
+      44
+     ],
+     "total": [
+      1141,
+      107
+     ]
+    },
+    "p_enamel": [
+     -0.4,
+     null
+    ],
+    "p_dentine": [
+     24.7,
+     null
+    ],
+    "ages_ka": {
+     "US": [
+      150,
+      12,
+      12
+     ]
+    }
+   },
+   "provenance": "Table 3 (pp. 4-5), 'Data inputs and outputs corresponding to the combined US-ESR age calculations'; U-series inputs from Table 2 (p. 3); De from SSE fitting (Table 1, p. 2) with 2.3% source-calibration error added",
+   "notes": "Enamel water 0%. Enamel removed on sediment side = 'Removed thickness' printed in the Sediment block (158 ± 16); removed on dentine side printed in Dentine block as 'Removed enamel thickness' (152 ± 15). 'Initial enamel thickness' 1143 ± 114 µm (before removal). p values printed without errors. Report also mentions CSUS-ESR ages computed with DATA, 2-3% older than US-ESR, but numbers not printed. Enamel U printed '0.098 ± 0.000' (Table 2 gives 0.0979 ± 0.0003). | Verified: components sum to 1148, printed total 1141 (the age uses 1141)."
+  },
+  {
+   "sample": "#537",
+   "De_Gy": [
+    158.7,
+    12.5
+   ],
+   "geometry": "CEM/EN/DE",
+   "enamel": {
+    "U_ppm": [
+     0.166,
+     0.0
+    ],
+    "u234_u238": [
+     1.521,
+     0.001
+    ],
+    "th230_u234": [
+     0.534,
+     0.002
+    ],
+    "thickness_um": [
+     1436,
+     144
+    ],
+    "removed_outer_um": [
+     133,
+     13
+    ],
+    "removed_inner_um": [
+     49,
+     5
+    ],
+    "density": null
+   },
+   "dentine": {
+    "U_ppm": [
+     3.498,
+     0.002
+    ],
+    "u234_u238": [
+     1.493,
+     0.002
+    ],
+    "th230_u234": [
+     0.394,
+     0.001
+    ],
+    "water_pct": [
+     5,
+     3
+    ],
+    "radon_loss_pct": null
+   },
+   "dentine2_or_cementum": {
+    "U_ppm": [
+     5.37,
+     0.001
+    ],
+    "u234_u238": [
+     1.523,
+     0.001
+    ],
+    "th230_u234": [
+     0.45,
+     0.0
+    ],
+    "water_pct": [
+     5,
+     3
+    ],
+    "radon_loss_pct": null
+   },
+   "sediment": {
+    "U_ppm": [
+     2.83,
+     0.12
+    ],
+    "Th_ppm": [
+     12.04,
+     0.51
+    ],
+    "K_pct": [
+     0.36,
+     0.01
+    ],
+    "water_pct": [
+     15,
+     5
+    ]
+   },
+   "gamma_uGy_a": null,
+   "cosmic_uGy_a": null,
+   "depth_m": null,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "published": {
+    "dose_rates_uGy_a": {
+     "internal": [
+      32,
+      6
+     ],
+     "beta_dentine": [
+      12,
+      2
+     ],
+     "beta_sediment": [
+      18,
+      null
+     ],
+     "gamma_cosmic": [
+      1004,
+      44
+     ],
+     "total": [
+      1065,
+      136
+     ]
+    },
+    "p_enamel": [
+     -0.3,
+     null
+    ],
+    "p_dentine": [
+     0.5,
+     null
+    ],
+    "p_cementum": [
+     0.1,
+     null
+    ],
+    "ages_ka": {
+     "US": [
+      149,
+      15,
+      15
+     ]
+    }
+   },
+   "provenance": "Table 3 (pp. 4-5); U-series data Table 2 (p. 3); De Table 1 (p. 2)",
+   "notes": "Outer side is cement (geometry cement/enamel/dentine per text). In the Cement block of Table 3 the rows are LABELLED 'U (ppm)', 'Th (ppm)', 'K (%)' with values 5.370 ± 0.001, 1.523 ± 0.001, 0.450 ± 0.000; these appear to be a label typo: 1.523 equals cement 234U/238U in Table 2 and 0.450 equals 230Th/238U(0.686)/234U/238U(1.523), i.e. 230Th/234U. Transcribed here as u234_u238 and th230_u234 -- verify. 'beta_sediment' here is the beta dose from cement ('Beta dose rate, sediment or cement'); its error (± 2) was read in one pass and cut off in another. 'p_cementum' is an extra key (not in schema). No sediment removed thickness (n.a.)."
+  }
+ ],
+ "completeness": "partial: no depth/cosmic value printed separately (gamma+cosmic only); CSUS ages not printed; water basis not stated",
+ "extraction_notes": "Read via WebFetch (small-model PDF reading) four times with different prompts; Table 3 values consistent across reads. Values copied as printed. The sediment block 'Removed thickness' (#536) and cement block 'Removed thickness' (#537) mapped to removed_outer_um; the dentine block 'Removed enamel thickness' mapped to removed_inner_um.",
+ "benchmark": true
+}

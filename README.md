@@ -19,7 +19,9 @@ an independent, open implementation from the published equations.
 > (see `tests/validation/ROSY_FINDINGS.md`). Against DATA (Grün 2009),
 > ages agree within −2.6 to +1.6 % with DATA's single beta factor for the U
 > chain, and its US-ESR and CS-US ages within −1.4 to +0.7 % and 1 %
-> (`tests/validation/DATA_FINDINGS.md`). Still pre-release; see
+> (`tests/validation/DATA_FINDINGS.md`). 58 published ages from nine studies
+> are reproduced within −9.5 to +3.4 %, 56 within the published 1σ
+> (`tests/validation/PUBLISHED_FINDINGS.md`). Still pre-release; see
 > *Known limitations*.
 
 ## Install
@@ -125,6 +127,7 @@ reference materials to U, Th, K and the infinite-matrix dose rates.
 - **v0.6** sediment U/Th/K from HPGe spectra (comparative method) — reproduces an independent analysis of the corte 0 sediment within 1 %.
 - **v0.7** general use: Bruker and common gamma file formats, automatic gamma calibration, user guide; readers checked on EasySpin and becquerel test files.
 - **v0.8** CSUS-ESR; validation against DATA: EU/LU (82 runs), US-ESR and CS-US (40 cases) — `beta_by_segment` option, sediment-on-both-sides fix.
+- **v0.9** published-age benchmark: 58 ages from nine studies (DATA, USESR, ROSY).
 - **later** JEOL readers, alpha escape at surfaces, JOSS paper.
 
 ## Validation against ROSY
@@ -150,6 +153,15 @@ segment (`ToothSample(beta_by_segment=False)` reproduces DATA).
 `test_data_useries.py` checks US-ESR ages and p values, CS-US ages and three
 DATA limitations: the dentine p does not always converge, there is no result
 near the closed-system bound, and CS-US ages can be younger than the uptake.
+
+## Published ages
+
+`tests/validation/published/` holds the inputs and published results of 18
+studies, transcribed from the papers with the provenance of every value and
+checked independently. `published_cases.py` recomputes the nine complete
+ones with the conventions of the program each study used.
+`test_published_ages.py` locks the agreement in, and
+`tools/plot_published_ages.py` draws the figure.
 
 ## Testing
 

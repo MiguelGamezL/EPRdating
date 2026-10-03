@@ -1,0 +1,831 @@
+{
+ "study_id": "bahain2020_tourville_mnhn",
+ "reference": "Bahain, J.-J., Duval, M., Voinchet, P., Tissoux, H., Falguères, C., Grün, R., Moreno, D., Shao, Q., Tombret, O., Jamet, G., Faivre, J.-P., Cliquet, D. (2020). ESR and ESR/U-series chronology of the Middle Pleistocene site of Tourville-la-Rivière (Normandy, France) - A multi-laboratory approach. Quaternary International 556: 66-78. https://doi.org/10.1016/j.quaint.2019.06.015 (MNHN dataset, Table 4)",
+ "url": "https://cir.cenieh.es/bitstream/20.500.12136/2120/1/ESR%20and%20ESRU-series%20chronology%20of%20the%20Middle%20Pleistocene%20site%20of%20tourville-la-rivi%c3%a8re%20%28Normandy%2c%20France%29%20%20A%20multi-laboratory%20approach_Bahain_et_al_2020.pdf (author accepted manuscript, CC BY-NC-ND 3.0)",
+ "software": "USESR",
+ "conventions": {
+  "conversion_factors": "Adamiec & Aitken 1998",
+  "k_alpha": [
+   0.13,
+   0.02
+  ],
+  "beta_attenuation": "Brennan et al. 1997",
+  "water_basis": null,
+  "u234_u238_meaning": "measured present-day",
+  "radon_loss": "Determined by cross-checking HRGS and alpha-spectrometry data (Bahain et al. 1992); 222Rn/230Th per tissue given in Table 4",
+  "cosmic": "Three-stage burial model based on Jamet (2015) geological interpretation, Prescott & Hutton 1988/1994; mean cosmic about 100 µGy/a (text); mean depth 14 ± 3 m estimated from chronostratigraphy (Table 4 footnote)",
+  "gamma_source": "in situ NaI probe + Canberra Inspector 1000, threshold method; mean of 4 in situ measurements in layer D2: 417 ± 21 µGy/a (text); gamma+cosmic 517 ± 29 µGy/a in Table 4",
+  "enamel_water_pct": 0,
+  "dentine_water_pct": [
+   7,
+   5
+  ],
+  "sediment_water_pct": [
+   15,
+   5
+  ],
+  "U_series_method": "solution alpha spectrometry, bulk",
+  "sediment_radioelements": "HRGS; used for beta dose only",
+  "software_detail": "US ages: USESR (Shao et al. 2014); CSUS ages: DATA (Grün 2009)",
+  "De_fitting": "SSE, 1/I^2 weighting, Dmax 5000 Gy, T1B2 peak-to-peak, Origin",
+  "thickness_meaning": "initial (header 'Initial enamel thickness')"
+ },
+ "samples": [
+  {
+   "sample": "TVL 157",
+   "De_Gy": [
+    220.08,
+    2.33
+   ],
+   "geometry": null,
+   "enamel": {
+    "U_ppm": [
+     0.594,
+     0.024
+    ],
+    "u234_u238": [
+     1.441,
+     0.069
+    ],
+    "th230_u238": [
+     1.222,
+     0.101
+    ],
+    "th230_u234": null,
+    "rn222_th230": 0.334,
+    "thickness_um": [
+     959,
+     17
+    ],
+    "removed_side1_um": [
+     21,
+     3
+    ],
+    "removed_side2_um": [
+     74,
+     9
+    ],
+    "removed_outer_um": null,
+    "removed_inner_um": null,
+    "density": null
+   },
+   "dentine": {
+    "U_ppm": [
+     25.342,
+     0.58
+    ],
+    "u234_u238": [
+     1.306,
+     0.026
+    ],
+    "th230_u238": [
+     1.028,
+     0.052
+    ],
+    "th230_u234": null,
+    "rn222_th230": 0.366,
+    "water_pct": [
+     7,
+     5
+    ],
+    "radon_loss_pct": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     1.072,
+     0.086
+    ],
+    "Th_ppm": [
+     4.005,
+     0.114
+    ],
+    "K_pct": [
+     0.894,
+     0.014
+    ],
+    "water_pct": [
+     15,
+     5
+    ]
+   },
+   "gamma_uGy_a": [
+    417,
+    21
+   ],
+   "cosmic_uGy_a": null,
+   "depth_m": [
+    14,
+    3
+   ],
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "published": {
+    "dose_rates_uGy_a": {
+     "gamma_cosmic": [
+      517,
+      29
+     ],
+     "total": [
+      961,
+      58
+     ],
+     "alpha_internal": [
+      139,
+      27
+     ],
+     "beta_all": [
+      305,
+      42
+     ]
+    },
+    "p_enamel": [
+     -0.83,
+     0.04
+    ],
+    "p_dentine": [
+     -0.72,
+     0.05
+    ],
+    "ages_ka": {
+     "US": [
+      229,
+      13,
+      13
+     ],
+     "CSUS": [
+      252,
+      16
+     ]
+    }
+   },
+   "provenance": "Table 4 (MNHN team), Bahain et al. 2020 Quat. Int. 556 (p. 73 per reader)",
+   "notes": "Apparent U-series ages as printed: enamel 174 ka, dentine 153 ka. 222Rn/230Th (radon retention, from HRGS vs alpha spectrometry) printed without error: enamel 0.334, dentine 0.366. Dα and Dβ printed as single columns: Dα presumably internal (enamel) dose rate, Dβ presumably total external beta (dentine + sediment) -- labels not defined in text. Removed thickness '(1)' printed on enamel line and '(2)' on dentine line; side assignment not stated. Initial enamel thickness printed '959 ± 17' (other samples have ~12.5% errors; possibly a typo for ± 117 -- copied as printed)."
+  },
+  {
+   "sample": "TVL 160",
+   "De_Gy": [
+    207.72,
+    2.72
+   ],
+   "geometry": null,
+   "enamel": {
+    "U_ppm": [
+     0.402,
+     0.016
+    ],
+    "u234_u238": [
+     1.313,
+     0.06
+    ],
+    "th230_u238": [
+     1.155,
+     0.102
+    ],
+    "th230_u234": null,
+    "rn222_th230": 1.0,
+    "thickness_um": [
+     1050,
+     131
+    ],
+    "removed_side1_um": [
+     28,
+     3
+    ],
+    "removed_side2_um": [
+     160,
+     20
+    ],
+    "removed_outer_um": null,
+    "removed_inner_um": null,
+    "density": null
+   },
+   "dentine": {
+    "U_ppm": [
+     22.504,
+     0.486
+    ],
+    "u234_u238": [
+     1.333,
+     0.026
+    ],
+    "th230_u238": [
+     1.152,
+     0.049
+    ],
+    "th230_u234": null,
+    "rn222_th230": 0.34,
+    "water_pct": [
+     7,
+     5
+    ],
+    "radon_loss_pct": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     1.252,
+     0.074
+    ],
+    "Th_ppm": [
+     4.341,
+     0.099
+    ],
+    "K_pct": [
+     0.902,
+     0.011
+    ],
+    "water_pct": [
+     15,
+     5
+    ]
+   },
+   "gamma_uGy_a": [
+    417,
+    21
+   ],
+   "cosmic_uGy_a": null,
+   "depth_m": [
+    14,
+    3
+   ],
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "published": {
+    "dose_rates_uGy_a": {
+     "gamma_cosmic": [
+      517,
+      29
+     ],
+     "total": [
+      911,
+      56
+     ],
+     "alpha_internal": [
+      100,
+      19
+     ],
+     "beta_all": [
+      294,
+      44
+     ]
+    },
+    "p_enamel": [
+     -0.91,
+     0.03
+    ],
+    "p_dentine": [
+     -0.88,
+     0.03
+    ],
+    "ages_ka": {
+     "US": [
+      228,
+      13,
+      13
+     ],
+     "CSUS": [
+      239,
+      12
+     ]
+    }
+   },
+   "provenance": "Table 4 (MNHN team), Bahain et al. 2020 Quat. Int. 556 (p. 73 per reader)",
+   "notes": "Apparent U-series ages as printed: enamel 195 ka, dentine 186 ka. 222Rn/230Th (radon retention, from HRGS vs alpha spectrometry) printed without error: enamel 1.0, dentine 0.34. Dα and Dβ printed as single columns: Dα presumably internal (enamel) dose rate, Dβ presumably total external beta (dentine + sediment) -- labels not defined in text. Removed thickness '(1)' printed on enamel line and '(2)' on dentine line; side assignment not stated."
+  },
+  {
+   "sample": "TVL 219",
+   "De_Gy": [
+    204.54,
+    2.49
+   ],
+   "geometry": null,
+   "enamel": {
+    "U_ppm": [
+     0.671,
+     0.022
+    ],
+    "u234_u238": [
+     1.259,
+     0.043
+    ],
+    "th230_u238": [
+     0.993,
+     0.081
+    ],
+    "th230_u234": null,
+    "rn222_th230": 0.405,
+    "thickness_um": [
+     1027,
+     128
+    ],
+    "removed_side1_um": [
+     14,
+     2
+    ],
+    "removed_side2_um": [
+     167,
+     21
+    ],
+    "removed_outer_um": null,
+    "removed_inner_um": null,
+    "density": null
+   },
+   "dentine": {
+    "U_ppm": [
+     31.541,
+     0.636
+    ],
+    "u234_u238": [
+     1.274,
+     0.022
+    ],
+    "th230_u238": [
+     0.956,
+     0.048
+    ],
+    "th230_u234": null,
+    "rn222_th230": 0.378,
+    "water_pct": [
+     7,
+     5
+    ],
+    "radon_loss_pct": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     1.293,
+     0.076
+    ],
+    "Th_ppm": [
+     3.807,
+     0.102
+    ],
+    "K_pct": [
+     0.853,
+     0.012
+    ],
+    "water_pct": [
+     15,
+     5
+    ]
+   },
+   "gamma_uGy_a": [
+    417,
+    21
+   ],
+   "cosmic_uGy_a": null,
+   "depth_m": [
+    14,
+    3
+   ],
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "published": {
+    "dose_rates_uGy_a": {
+     "gamma_cosmic": [
+      517,
+      29
+     ],
+     "total": [
+      1008,
+      61
+     ],
+     "alpha_internal": [
+      142,
+      28
+     ],
+     "beta_all": [
+      349,
+      55
+     ]
+    },
+    "p_enamel": [
+     -0.82,
+     0.05
+    ],
+    "p_dentine": [
+     -0.73,
+     0.05
+    ],
+    "ages_ka": {
+     "US": [
+      203,
+      13,
+      13
+     ],
+     "CSUS": [
+      223,
+      14
+     ]
+    }
+   },
+   "provenance": "Table 4 (MNHN team), Bahain et al. 2020 Quat. Int. 556 (p. 73 per reader)",
+   "notes": "Apparent U-series ages as printed: enamel 155 ka, dentine 140 ka. 222Rn/230Th (radon retention, from HRGS vs alpha spectrometry) printed without error: enamel 0.405, dentine 0.378. Dα and Dβ printed as single columns: Dα presumably internal (enamel) dose rate, Dβ presumably total external beta (dentine + sediment) -- labels not defined in text. Removed thickness '(1)' printed on enamel line and '(2)' on dentine line; side assignment not stated."
+  },
+  {
+   "sample": "TRV 923",
+   "De_Gy": [
+    204.56,
+    1.09
+   ],
+   "geometry": null,
+   "enamel": {
+    "U_ppm": [
+     0.49,
+     0.018
+    ],
+    "u234_u238": [
+     1.301,
+     0.054
+    ],
+    "th230_u238": [
+     1.106,
+     0.094
+    ],
+    "th230_u234": null,
+    "rn222_th230": 0.259,
+    "thickness_um": [
+     958,
+     120
+    ],
+    "removed_side1_um": [
+     68,
+     9
+    ],
+    "removed_side2_um": [
+     76,
+     9
+    ],
+    "removed_outer_um": null,
+    "removed_inner_um": null,
+    "density": null
+   },
+   "dentine": {
+    "U_ppm": [
+     29.026,
+     0.741
+    ],
+    "u234_u238": [
+     1.261,
+     0.028
+    ],
+    "th230_u238": [
+     1.005,
+     0.058
+    ],
+    "th230_u234": null,
+    "rn222_th230": 0.293,
+    "water_pct": [
+     7,
+     5
+    ],
+    "radon_loss_pct": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     1.065,
+     0.063
+    ],
+    "Th_ppm": [
+     3.716,
+     0.084
+    ],
+    "K_pct": [
+     0.837,
+     0.01
+    ],
+    "water_pct": [
+     15,
+     5
+    ]
+   },
+   "gamma_uGy_a": [
+    417,
+    21
+   ],
+   "cosmic_uGy_a": null,
+   "depth_m": [
+    14,
+    3
+   ],
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "published": {
+    "dose_rates_uGy_a": {
+     "gamma_cosmic": [
+      517,
+      29
+     ],
+     "total": [
+      934,
+      59
+     ],
+     "alpha_internal": [
+      103,
+      21
+     ],
+     "beta_all": [
+      314,
+      47
+     ]
+    },
+    "p_enamel": [
+     -0.88,
+     0.04
+    ],
+    "p_dentine": [
+     -0.78,
+     0.04
+    ],
+    "ages_ka": {
+     "US": [
+      219,
+      13,
+      13
+     ],
+     "CSUS": [
+      232,
+      14
+     ]
+    }
+   },
+   "provenance": "Table 4 (MNHN team), Bahain et al. 2020 Quat. Int. 556 (p. 73 per reader)",
+   "notes": "Apparent U-series ages as printed: enamel 181 ka, dentine 159 ka. 222Rn/230Th (radon retention, from HRGS vs alpha spectrometry) printed without error: enamel 0.259, dentine 0.293. Dα and Dβ printed as single columns: Dα presumably internal (enamel) dose rate, Dβ presumably total external beta (dentine + sediment) -- labels not defined in text. Removed thickness '(1)' printed on enamel line and '(2)' on dentine line; side assignment not stated."
+  },
+  {
+   "sample": "TRV 928",
+   "De_Gy": [
+    191.33,
+    5.82
+   ],
+   "geometry": null,
+   "enamel": {
+    "U_ppm": [
+     0.296,
+     0.014
+    ],
+    "u234_u238": [
+     1.409,
+     0.076
+    ],
+    "th230_u238": [
+     1.305,
+     0.116
+    ],
+    "th230_u234": null,
+    "rn222_th230": 0.258,
+    "thickness_um": [
+     1268,
+     159
+    ],
+    "removed_side1_um": [
+     200,
+     25
+    ],
+    "removed_side2_um": [
+     148,
+     18
+    ],
+    "removed_outer_um": null,
+    "removed_inner_um": null,
+    "density": null
+   },
+   "dentine": {
+    "U_ppm": [
+     19.976,
+     0.348
+    ],
+    "u234_u238": [
+     1.311,
+     0.021
+    ],
+    "th230_u238": [
+     1.053,
+     0.083
+    ],
+    "th230_u234": null,
+    "rn222_th230": 0.523,
+    "water_pct": [
+     7,
+     5
+    ],
+    "radon_loss_pct": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     1.12,
+     0.078
+    ],
+    "Th_ppm": [
+     3.735,
+     0.103
+    ],
+    "K_pct": [
+     0.799,
+     0.012
+    ],
+    "water_pct": [
+     15,
+     5
+    ]
+   },
+   "gamma_uGy_a": [
+    417,
+    21
+   ],
+   "cosmic_uGy_a": null,
+   "depth_m": [
+    14,
+    3
+   ],
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "published": {
+    "dose_rates_uGy_a": {
+     "gamma_cosmic": [
+      517,
+      29
+     ],
+     "total": [
+      768,
+      55
+     ],
+     "alpha_internal": [
+      75,
+      26
+     ],
+     "beta_all": [
+      176,
+      39
+     ]
+    },
+    "p_enamel": [
+     -0.93,
+     0.03
+    ],
+    "p_dentine": [
+     -0.69,
+     0.05
+    ],
+    "ages_ka": {
+     "US": [
+      249,
+      15,
+      15
+     ],
+     "CSUS": [
+      268,
+      15
+     ]
+    }
+   },
+   "provenance": "Table 4 (MNHN team), Bahain et al. 2020 Quat. Int. 556 (p. 73 per reader)",
+   "notes": "Apparent U-series ages as printed: enamel 217 ka, dentine 159 ka. 222Rn/230Th (radon retention, from HRGS vs alpha spectrometry) printed without error: enamel 0.258, dentine 0.523. Dα and Dβ printed as single columns: Dα presumably internal (enamel) dose rate, Dβ presumably total external beta (dentine + sediment) -- labels not defined in text. Removed thickness '(1)' printed on enamel line and '(2)' on dentine line; side assignment not stated."
+  },
+  {
+   "sample": "TVL 929(a)",
+   "De_Gy": [
+    191.95,
+    2.73
+   ],
+   "geometry": null,
+   "enamel": {
+    "U_ppm": [
+     0.374,
+     0.013
+    ],
+    "u234_u238": [
+     1.236,
+     0.047
+    ],
+    "th230_u238": [
+     0.973,
+     0.086
+    ],
+    "th230_u234": null,
+    "rn222_th230": 0.247,
+    "thickness_um": [
+     1200,
+     150
+    ],
+    "removed_side1_um": [
+     112,
+     14
+    ],
+    "removed_side2_um": [
+     60,
+     8
+    ],
+    "removed_outer_um": null,
+    "removed_inner_um": null,
+    "density": null
+   },
+   "dentine": {
+    "U_ppm": [
+     3.046,
+     0.067
+    ],
+    "u234_u238": [
+     1.263,
+     0.025
+    ],
+    "th230_u238": [
+     0.988,
+     0.054
+    ],
+    "th230_u234": null,
+    "rn222_th230": 1.0,
+    "water_pct": [
+     7,
+     5
+    ],
+    "radon_loss_pct": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     1.151,
+     0.086
+    ],
+    "Th_ppm": [
+     3.678,
+     0.114
+    ],
+    "K_pct": [
+     0.807,
+     0.014
+    ],
+    "water_pct": [
+     15,
+     5
+    ]
+   },
+   "gamma_uGy_a": [
+    417,
+    21
+   ],
+   "cosmic_uGy_a": null,
+   "depth_m": [
+    14,
+    3
+   ],
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "published": {
+    "dose_rates_uGy_a": {
+     "gamma_cosmic": [
+      517,
+      29
+     ],
+     "total": [
+      853,
+      54
+     ],
+     "alpha_internal": [
+      65,
+      14
+     ],
+     "beta_all": [
+      271,
+      43
+     ]
+    },
+    "p_enamel": [
+     -0.74,
+     0.04
+    ],
+    "p_dentine": [
+     -0.73,
+     0.05
+    ],
+    "ages_ka": {
+     "US": [
+      225,
+      13,
+      13
+     ],
+     "CSUS": [
+      240,
+      13
+     ]
+    }
+   },
+   "provenance": "Table 4 (MNHN team), Bahain et al. 2020 Quat. Int. 556 (p. 73 per reader)",
+   "notes": "Apparent U-series ages as printed: enamel 155 ka, dentine 153 ka. 222Rn/230Th (radon retention, from HRGS vs alpha spectrometry) printed without error: enamel 0.247, dentine 1.0. Dα and Dβ printed as single columns: Dα presumably internal (enamel) dose rate, Dβ presumably total external beta (dentine + sediment) -- labels not defined in text. Removed thickness '(1)' printed on enamel line and '(2)' on dentine line; side assignment not stated. Dentine U (3.046 ppm) much lower than the other teeth, as printed.",
+   "exclude": "the printed dentine U (3.046 ppm, confirmed in the source) contradicts the paper's own Dβ (271 µGy/a needs ~15–20 ppm); error in the source"
+  }
+ ],
+ "completeness": "partial: geometry/side of removed thicknesses not stated; Dβ not split into dentine/sediment; cosmic per sample not printed (text: ~100 µGy/a); water basis not stated ('% wgt')",
+ "extraction_notes": "Table 4 read twice via WebFetch (raw text extraction and a CSV re-extraction with a different prompt); all numbers agreed. A third per-sample read conflated removed thickness (2) with depth -- rejected in favour of the raw layout (enamel line: '(1) x ± y', dentine line: '(2) x ± y', then 'Mean depth 14 ± 3'). US-ESR errors printed symmetric (±). U-series ratios printed as 234U/238U and 230Th/238U (stored as th230_u238; th230_u234 null). Table 7 gives recalculated De values (Dmax 1000 Gy) not used for these ages. | Dose-rate columns renamed after extraction: Dα + Dβ + γ+cosmic = printed total for every sample, so Dα is the enamel alpha dose rate ('alpha_internal') and Dβ all beta, internal included ('beta_all').",
+ "benchmark": true
+}

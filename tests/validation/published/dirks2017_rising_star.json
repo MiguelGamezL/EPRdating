@@ -1,0 +1,1612 @@
+{
+ "study_id": "dirks2017_rising_star",
+ "reference": "Dirks PHGM, Roberts EM, Hilbert-Wolf H, Kramers JD, Hawks J, Dosseto A, Duval M, Elliott M, Evans M, Grun R, Hellstrom J, Herries AIR, Joannes-Boyau R, Makhubela TV, Placzek CJ, Robbins J, Spandler C, Wiersma J, Woodhead J, Berger LR (2017) The age of Homo naledi and associated sediments in the Rising Star Cave, South Africa. eLife 6:e24231. https://doi.org/10.7554/eLife.24231",
+ "url": "eLife JATS XML elife-24231-v1.xml from github.com/elifesciences/elife-article-xml (sparse git clone); cross-checked table list via https://wiredspace.wits.ac.za/bitstreams/0083c10f-e451-4b44-b482-c8f9adf13ed0/download",
+ "software": "USESR",
+ "conventions": {
+  "conversion_factors": "Guerin et al. 2011 (as used by the US-ESR program of Shao et al. 2014)",
+  "k_alpha": [
+   0.13,
+   0.02
+  ],
+  "beta_attenuation": null,
+  "water_basis": null,
+  "u234_u238_meaning": "measured present-day",
+  "radon_loss": "Two scenarios for sediment: (1) 80% 222Rn loss (measured today by HPGe on sediment next to 1841; maximum-age scenario) and (2) no Rn loss (minimum-age scenario). Post-230Th daughters assumed in equilibrium in dental tissues.",
+  "cosmic": "15 +/- 1 uGy/a for all samples, assuming 20 m dolomite roof of density 2.80 +/- 0.05 g/cm3 (Barbouti & Rastin 1983)",
+  "gamma_source": "Calculated from sediment U/Th/K (ICP-MS total dissolution) averaged over a vertical profile in the sondage, infinite matrix, water 25 +/- 10%: 534 +/- 69 uGy/a (80% Rn loss) and 724 +/- 116 uGy/a (no Rn loss); same gamma for all samples. In situ portable gamma spectrometry was done but not used for the ages."
+ },
+ "samples": [
+  {
+   "sample": "1767 SCU [scenario 1]",
+   "De_Gy": [
+    194,
+    4
+   ],
+   "geometry": "SED/EN/DE",
+   "enamel": {
+    "U_ppm": [
+     2.52,
+     0.53
+    ],
+    "u234_u238": [
+     6.21,
+     0.03
+    ],
+    "th230_u234": [
+     0.37,
+     0.05
+    ],
+    "thickness_um": [
+     1027,
+     210
+    ],
+    "removed_outer_um": [
+     100,
+     null
+    ],
+    "removed_inner_um": null,
+    "density": null,
+    "water_pct": [
+     0,
+     null
+    ]
+   },
+   "dentine": {
+    "U_ppm": [
+     7.88,
+     0.66
+    ],
+    "u234_u238": [
+     6.28,
+     0.09
+    ],
+    "th230_u234": [
+     0.35,
+     0.11
+    ],
+    "water_pct": [
+     10,
+     5
+    ],
+    "radon_loss_pct": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     3.0,
+     0.3
+    ],
+    "Th_ppm": [
+     7.9,
+     0.4
+    ],
+    "K_pct": [
+     1.17,
+     0.14
+    ],
+    "water_pct": [
+     25,
+     10
+    ],
+    "radon_loss_pct": 80
+   },
+   "gamma_uGy_a": [
+    534,
+    69
+   ],
+   "cosmic_uGy_a": [
+    15,
+    1
+   ],
+   "depth_m": 0,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "published": {
+    "dose_rates_uGy_a": {
+     "internal": [
+      1142,
+      515
+     ],
+     "alpha_external": [
+      0,
+      null
+     ],
+     "beta_dentine": [
+      73,
+      33
+     ],
+     "beta_sediment": [
+      101,
+      24
+     ],
+     "gamma_cosmic": [
+      549,
+      69
+     ],
+     "total": [
+      1865,
+      521
+     ]
+    },
+    "p_enamel": [
+     -0.03,
+     null
+    ],
+    "p_dentine": [
+     0.08,
+     null
+    ],
+    "ages_ka": {
+     "US": [
+      104,
+      29,
+      29
+     ]
+    }
+   },
+   "provenance": "Table 6 column 1767/SCU (inputs); Table 7 Scenario 1 column 1767/SCU (outputs)",
+   "notes": "H. naledi upper premolar U.W.101-1767, surface find. Enamel U ~20x high; age considered unreliable and excluded by authors. Table 7 errors are 2 sigma. SCU: dentine attached to fragment removed (thickness not stated), 100 um removed from outer surface with rotary tool (no error stated). De from X-ray irradiated fragment, MCDOSE 2.0, SSE, Dmax 1264 Gy. depth_m is depth below cave floor (0 cm); cosmic based on 20 m rock overburden."
+  },
+  {
+   "sample": "1767 SCU [scenario 2]",
+   "De_Gy": [
+    194,
+    4
+   ],
+   "geometry": "SED/EN/DE",
+   "enamel": {
+    "U_ppm": [
+     2.52,
+     0.53
+    ],
+    "u234_u238": [
+     6.21,
+     0.03
+    ],
+    "th230_u234": [
+     0.37,
+     0.05
+    ],
+    "thickness_um": [
+     1027,
+     210
+    ],
+    "removed_outer_um": [
+     100,
+     null
+    ],
+    "removed_inner_um": null,
+    "density": null,
+    "water_pct": [
+     0,
+     null
+    ]
+   },
+   "dentine": {
+    "U_ppm": [
+     7.88,
+     0.66
+    ],
+    "u234_u238": [
+     6.28,
+     0.09
+    ],
+    "th230_u234": [
+     0.35,
+     0.11
+    ],
+    "water_pct": [
+     10,
+     5
+    ],
+    "radon_loss_pct": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     3.0,
+     0.3
+    ],
+    "Th_ppm": [
+     7.9,
+     0.4
+    ],
+    "K_pct": [
+     1.17,
+     0.14
+    ],
+    "water_pct": [
+     25,
+     10
+    ],
+    "radon_loss_pct": 0
+   },
+   "gamma_uGy_a": [
+    724,
+    116
+   ],
+   "cosmic_uGy_a": [
+    15,
+    1
+   ],
+   "depth_m": 0,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "published": {
+    "dose_rates_uGy_a": {
+     "internal": [
+      1277,
+      552
+     ],
+     "alpha_external": [
+      0,
+      null
+     ],
+     "beta_dentine": [
+      82,
+      35
+     ],
+     "beta_sediment": [
+      132,
+      26
+     ],
+     "gamma_cosmic": [
+      739,
+      116
+     ],
+     "total": [
+      2230,
+      586
+     ]
+    },
+    "p_enamel": [
+     -0.31,
+     null
+    ],
+    "p_dentine": [
+     -0.22,
+     null
+    ],
+    "ages_ka": {
+     "US": [
+      87,
+      22,
+      22
+     ]
+    }
+   },
+   "provenance": "Table 6 column 1767/SCU; Table 7 Scenario 2 column 1767/SCU",
+   "notes": "See scenario 1 entry. 2 sigma errors."
+  },
+  {
+   "sample": "1788 SCU [scenario 1]",
+   "De_Gy": [
+    231,
+    8
+   ],
+   "geometry": "SED/EN/DE",
+   "enamel": {
+    "U_ppm": [
+     0.38,
+     0.17
+    ],
+    "u234_u238": [
+     5.95,
+     0.32
+    ],
+    "th230_u234": [
+     0.55,
+     0.52
+    ],
+    "thickness_um": [
+     1049,
+     277
+    ],
+    "removed_outer_um": [
+     100,
+     null
+    ],
+    "removed_inner_um": null,
+    "density": null,
+    "water_pct": [
+     0,
+     null
+    ]
+   },
+   "dentine": {
+    "U_ppm": [
+     5.76,
+     0.86
+    ],
+    "u234_u238": [
+     6.4,
+     0.03
+    ],
+    "th230_u234": [
+     0.62,
+     0.02
+    ],
+    "water_pct": [
+     10,
+     5
+    ],
+    "radon_loss_pct": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     2.9,
+     0.1
+    ],
+    "Th_ppm": [
+     8.3,
+     0.6
+    ],
+    "K_pct": [
+     1.21,
+     0.14
+    ],
+    "water_pct": [
+     25,
+     10
+    ],
+    "radon_loss_pct": 80
+   },
+   "gamma_uGy_a": [
+    534,
+    69
+   ],
+   "cosmic_uGy_a": [
+    15,
+    1
+   ],
+   "depth_m": 0.02,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "published": {
+    "dose_rates_uGy_a": {
+     "internal": [
+      190,
+      129
+     ],
+     "alpha_external": [
+      0,
+      null
+     ],
+     "beta_dentine": [
+      91,
+      62
+     ],
+     "beta_sediment": [
+      105,
+      31
+     ],
+     "gamma_cosmic": [
+      549,
+      69
+     ],
+     "total": [
+      935,
+      162
+     ]
+    },
+    "p_enamel": [
+     0.49,
+     null
+    ],
+    "p_dentine": [
+     0.13,
+     null
+    ],
+    "ages_ka": {
+     "US": [
+      247,
+      42,
+      42
+     ],
+     "combined_SCU_CENIEH_GU": [
+      229,
+      60,
+      46
+     ]
+    }
+   },
+   "provenance": "Table 6 column 1788/SCU; Table 7 Scenario 1 column 1788/SCU",
+   "notes": "H. naledi lower right M2 U.W.101-1788, ~2 cm below surface. Table 7 prints 247 +/- 42; the Results text says 247 +/- 41 ka. 2 sigma errors. Dmax 2465 Gy."
+  },
+  {
+   "sample": "1788 SCU [scenario 2]",
+   "De_Gy": [
+    231,
+    8
+   ],
+   "geometry": "SED/EN/DE",
+   "enamel": {
+    "U_ppm": [
+     0.38,
+     0.17
+    ],
+    "u234_u238": [
+     5.95,
+     0.32
+    ],
+    "th230_u234": [
+     0.55,
+     0.52
+    ],
+    "thickness_um": [
+     1049,
+     277
+    ],
+    "removed_outer_um": [
+     100,
+     null
+    ],
+    "removed_inner_um": null,
+    "density": null,
+    "water_pct": [
+     0,
+     null
+    ]
+   },
+   "dentine": {
+    "U_ppm": [
+     5.76,
+     0.86
+    ],
+    "u234_u238": [
+     6.4,
+     0.03
+    ],
+    "th230_u234": [
+     0.62,
+     0.02
+    ],
+    "water_pct": [
+     10,
+     5
+    ],
+    "radon_loss_pct": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     2.9,
+     0.1
+    ],
+    "Th_ppm": [
+     8.3,
+     0.6
+    ],
+    "K_pct": [
+     1.21,
+     0.14
+    ],
+    "water_pct": [
+     25,
+     10
+    ],
+    "radon_loss_pct": 0
+   },
+   "gamma_uGy_a": [
+    724,
+    116
+   ],
+   "cosmic_uGy_a": [
+    15,
+    1
+   ],
+   "depth_m": 0.02,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "published": {
+    "dose_rates_uGy_a": {
+     "internal": [
+      216,
+      165
+     ],
+     "alpha_external": [
+      0,
+      null
+     ],
+     "beta_dentine": [
+      102,
+      78
+     ],
+     "beta_sediment": [
+      134,
+      33
+     ],
+     "gamma_cosmic": [
+      739,
+      116
+     ],
+     "total": [
+      1191,
+      219
+     ]
+    },
+    "p_enamel": [
+     0.06,
+     null
+    ],
+    "p_dentine": [
+     -0.22,
+     null
+    ],
+    "ages_ka": {
+     "US": [
+      194,
+      34,
+      34
+     ],
+     "combined_SCU_CENIEH_GU": [
+      179,
+      49,
+      40
+     ]
+    }
+   },
+   "provenance": "Table 6 column 1788/SCU; Table 7 Scenario 2 column 1788/SCU",
+   "notes": "2 sigma errors."
+  },
+  {
+   "sample": "1788 CENIEH-GU [scenario 1]",
+   "De_Gy": [
+    159,
+    10
+   ],
+   "geometry": "SED/EN/DE",
+   "enamel": {
+    "U_ppm": [
+     0.07,
+     0.07
+    ],
+    "u234_u238": [
+     6.258,
+     0.349
+    ],
+    "th230_u234": [
+     0.598,
+     0.038
+    ],
+    "thickness_um": [
+     1486,
+     248
+    ],
+    "removed_outer_um": [
+     0,
+     null
+    ],
+    "removed_inner_um": [
+     0,
+     null
+    ],
+    "density": null,
+    "water_pct": [
+     0,
+     null
+    ]
+   },
+   "dentine": {
+    "U_ppm": [
+     4.71,
+     0.27
+    ],
+    "u234_u238": [
+     6.448,
+     0.046
+    ],
+    "th230_u234": [
+     0.608,
+     0.012
+    ],
+    "water_pct": [
+     10,
+     5
+    ],
+    "radon_loss_pct": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     2.9,
+     0.1
+    ],
+    "Th_ppm": [
+     8.3,
+     0.6
+    ],
+    "K_pct": [
+     1.21,
+     0.14
+    ],
+    "water_pct": [
+     25,
+     10
+    ],
+    "radon_loss_pct": 80
+   },
+   "gamma_uGy_a": [
+    534,
+    69
+   ],
+   "cosmic_uGy_a": [
+    15,
+    1
+   ],
+   "depth_m": 0.02,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "published": {
+    "dose_rates_uGy_a": {
+     "internal": [
+      47,
+      47
+     ],
+     "alpha_external": [
+      8,
+      2
+     ],
+     "beta_dentine": [
+      64,
+      16
+     ],
+     "beta_sediment": [
+      86,
+      17
+     ],
+     "gamma_cosmic": [
+      549,
+      69
+     ],
+     "total": [
+      754,
+      87
+     ]
+    },
+    "p_enamel": [
+     -0.02,
+     null
+    ],
+    "p_dentine": [
+     -0.06,
+     null
+    ],
+    "ages_ka": {
+     "US": [
+      211,
+      28,
+      28
+     ],
+     "combined_SCU_CENIEH_GU": [
+      229,
+      60,
+      46
+     ]
+    }
+   },
+   "provenance": "Table 6 column 1788/Cenieh-gu; Table 7 Scenario 1 column 1788/Cenieh-gu",
+   "notes": "Blind duplicate on a different enamel fragment of the same tooth. CENIEH: enamel layer 'not cleaned on both sides', so an external alpha dose rate of 8 +/- 2 uGy/a (Grun 1987 alpha attenuation) was added; removed thicknesses stored as 0 on that basis. Gamma-irradiated fragment, Origin SSE fit (Dmax in Table 10, not transcribed). U-series by LA-MC-ICP-MS at ANU (Table 5). 2 sigma errors."
+  },
+  {
+   "sample": "1788 CENIEH-GU [scenario 2]",
+   "De_Gy": [
+    159,
+    10
+   ],
+   "geometry": "SED/EN/DE",
+   "enamel": {
+    "U_ppm": [
+     0.07,
+     0.07
+    ],
+    "u234_u238": [
+     6.258,
+     0.349
+    ],
+    "th230_u234": [
+     0.598,
+     0.038
+    ],
+    "thickness_um": [
+     1486,
+     248
+    ],
+    "removed_outer_um": [
+     0,
+     null
+    ],
+    "removed_inner_um": [
+     0,
+     null
+    ],
+    "density": null,
+    "water_pct": [
+     0,
+     null
+    ]
+   },
+   "dentine": {
+    "U_ppm": [
+     4.71,
+     0.27
+    ],
+    "u234_u238": [
+     6.448,
+     0.046
+    ],
+    "th230_u234": [
+     0.608,
+     0.012
+    ],
+    "water_pct": [
+     10,
+     5
+    ],
+    "radon_loss_pct": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     2.9,
+     0.1
+    ],
+    "Th_ppm": [
+     8.3,
+     0.6
+    ],
+    "K_pct": [
+     1.21,
+     0.14
+    ],
+    "water_pct": [
+     25,
+     10
+    ],
+    "radon_loss_pct": 0
+   },
+   "gamma_uGy_a": [
+    724,
+    116
+   ],
+   "cosmic_uGy_a": [
+    15,
+    1
+   ],
+   "depth_m": 0.02,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "published": {
+    "dose_rates_uGy_a": {
+     "internal": [
+      51,
+      51
+     ],
+     "alpha_external": [
+      8,
+      2
+     ],
+     "beta_dentine": [
+      69,
+      18
+     ],
+     "beta_sediment": [
+      111,
+      19
+     ],
+     "gamma_cosmic": [
+      739,
+      116
+     ],
+     "total": [
+      978,
+      129
+     ]
+    },
+    "p_enamel": [
+     -0.37,
+     null
+    ],
+    "p_dentine": [
+     -0.4,
+     null
+    ],
+    "ages_ka": {
+     "US": [
+      163,
+      24,
+      24
+     ],
+     "combined_SCU_CENIEH_GU": [
+      179,
+      49,
+      40
+     ]
+    }
+   },
+   "provenance": "Table 6 column 1788/Cenieh-gu; Table 7 Scenario 2 column 1788/Cenieh-gu",
+   "notes": "See scenario 1 entry. 2 sigma errors."
+  },
+  {
+   "sample": "1810 SCU [scenario 1]",
+   "De_Gy": [
+    296,
+    14
+   ],
+   "geometry": "SED/EN/DE",
+   "enamel": {
+    "U_ppm": [
+     0.32,
+     0.12
+    ],
+    "u234_u238": [
+     4.04,
+     0.18
+    ],
+    "th230_u234": [
+     0.92,
+     0.05
+    ],
+    "thickness_um": [
+     1150,
+     250
+    ],
+    "removed_outer_um": [
+     100,
+     null
+    ],
+    "removed_inner_um": null,
+    "density": null,
+    "water_pct": [
+     0,
+     null
+    ]
+   },
+   "dentine": {
+    "U_ppm": [
+     9.08,
+     0.44
+    ],
+    "u234_u238": [
+     5.93,
+     0.03
+    ],
+    "th230_u234": [
+     0.52,
+     0.09
+    ],
+    "water_pct": [
+     10,
+     5
+    ],
+    "radon_loss_pct": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     3.2,
+     0.3
+    ],
+    "Th_ppm": [
+     8.6,
+     0.4
+    ],
+    "K_pct": [
+     1.23,
+     0.14
+    ],
+    "water_pct": [
+     25,
+     10
+    ],
+    "radon_loss_pct": 80
+   },
+   "gamma_uGy_a": [
+    534,
+    69
+   ],
+   "cosmic_uGy_a": [
+    15,
+    1
+   ],
+   "depth_m": 0.05,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "published": {
+    "dose_rates_uGy_a": {
+     "internal": [
+      323,
+      175
+     ],
+     "alpha_external": [
+      0,
+      null
+     ],
+     "beta_dentine": [
+      75,
+      41
+     ],
+     "beta_sediment": [
+      95,
+      24
+     ],
+     "gamma_cosmic": [
+      549,
+      69
+     ],
+     "total": [
+      1042,
+      194
+     ]
+    },
+    "p_enamel": [
+     -0.7,
+     null
+    ],
+    "p_dentine": [
+     1.02,
+     null
+    ],
+    "ages_ka": {
+     "US": [
+      284,
+      51,
+      51
+     ],
+     "combined_SCU_CENIEH_GU": [
+      276,
+      59,
+      77
+     ]
+    }
+   },
+   "provenance": "Table 6 column 1810/SCU; Table 7 Scenario 1 column 1810/SCU",
+   "notes": "H. naledi lower left P3 (or P4) U.W.101-1810, ~5 cm below surface. Dmax 2735 Gy. 2 sigma errors."
+  },
+  {
+   "sample": "1810 SCU [scenario 2]",
+   "De_Gy": [
+    296,
+    14
+   ],
+   "geometry": "SED/EN/DE",
+   "enamel": {
+    "U_ppm": [
+     0.32,
+     0.12
+    ],
+    "u234_u238": [
+     4.04,
+     0.18
+    ],
+    "th230_u234": [
+     0.92,
+     0.05
+    ],
+    "thickness_um": [
+     1150,
+     250
+    ],
+    "removed_outer_um": [
+     100,
+     null
+    ],
+    "removed_inner_um": null,
+    "density": null,
+    "water_pct": [
+     0,
+     null
+    ]
+   },
+   "dentine": {
+    "U_ppm": [
+     9.08,
+     0.44
+    ],
+    "u234_u238": [
+     5.93,
+     0.03
+    ],
+    "th230_u234": [
+     0.52,
+     0.09
+    ],
+    "water_pct": [
+     10,
+     5
+    ],
+    "radon_loss_pct": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     3.2,
+     0.3
+    ],
+    "Th_ppm": [
+     8.6,
+     0.4
+    ],
+    "K_pct": [
+     1.23,
+     0.14
+    ],
+    "water_pct": [
+     25,
+     10
+    ],
+    "radon_loss_pct": 0
+   },
+   "gamma_uGy_a": [
+    724,
+    116
+   ],
+   "cosmic_uGy_a": [
+    15,
+    1
+   ],
+   "depth_m": 0.05,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "published": {
+    "dose_rates_uGy_a": {
+     "internal": [
+      335,
+      193
+     ],
+     "alpha_external": [
+      0,
+      null
+     ],
+     "beta_dentine": [
+      87,
+      50
+     ],
+     "beta_sediment": [
+      126,
+      26
+     ],
+     "gamma_cosmic": [
+      739,
+      116
+     ],
+     "total": [
+      1287,
+      232
+     ]
+    },
+    "p_enamel": [
+     -0.83,
+     null
+    ],
+    "p_dentine": [
+     0.54,
+     null
+    ],
+    "ages_ka": {
+     "US": [
+      230,
+      40,
+      40
+     ],
+     "combined_SCU_CENIEH_GU": [
+      220,
+      50,
+      60
+     ]
+    }
+   },
+   "provenance": "Table 6 column 1810/SCU; Table 7 Scenario 2 column 1810/SCU",
+   "notes": "2 sigma errors."
+  },
+  {
+   "sample": "1810 CENIEH-GU [scenario 1]",
+   "De_Gy": [
+    232,
+    30
+   ],
+   "geometry": "SED/EN/DE",
+   "enamel": {
+    "U_ppm": [
+     0.16,
+     0.16
+    ],
+    "u234_u238": [
+     4.773,
+     0.06
+    ],
+    "th230_u234": [
+     0.95,
+     0.034
+    ],
+    "thickness_um": [
+     1527,
+     257
+    ],
+    "removed_outer_um": [
+     0,
+     null
+    ],
+    "removed_inner_um": [
+     0,
+     null
+    ],
+    "density": null,
+    "water_pct": [
+     0,
+     null
+    ]
+   },
+   "dentine": {
+    "U_ppm": [
+     5.81,
+     0.37
+    ],
+    "u234_u238": [
+     5.969,
+     0.035
+    ],
+    "th230_u234": [
+     0.572,
+     0.01
+    ],
+    "water_pct": [
+     10,
+     5
+    ],
+    "radon_loss_pct": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     3.2,
+     0.3
+    ],
+    "Th_ppm": [
+     8.6,
+     0.4
+    ],
+    "K_pct": [
+     1.23,
+     0.14
+    ],
+    "water_pct": [
+     25,
+     10
+    ],
+    "radon_loss_pct": 80
+   },
+   "gamma_uGy_a": [
+    534,
+    69
+   ],
+   "cosmic_uGy_a": [
+    15,
+    1
+   ],
+   "depth_m": 0.05,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "published": {
+    "dose_rates_uGy_a": {
+     "internal": [
+      176,
+      176
+     ],
+     "alpha_external": [
+      8,
+      2
+     ],
+     "beta_dentine": [
+      51,
+      14
+     ],
+     "beta_sediment": [
+      86,
+      18
+     ],
+     "gamma_cosmic": [
+      549,
+      69
+     ],
+     "total": [
+      870,
+      190
+     ]
+    },
+    "p_enamel": [
+     -0.77,
+     null
+    ],
+    "p_dentine": [
+     0.54,
+     null
+    ],
+    "ages_ka": {
+     "US": [
+      267,
+      68,
+      68
+     ],
+     "combined_SCU_CENIEH_GU": [
+      276,
+      59,
+      77
+     ]
+    }
+   },
+   "provenance": "Table 6 column 1810/Cenieh-gu; Table 7 Scenario 1 column 1810/Cenieh-gu",
+   "notes": "Blind duplicate; enamel not cleaned on either side, external alpha 8 +/- 2 uGy/a added. 2 sigma errors."
+  },
+  {
+   "sample": "1810 CENIEH-GU [scenario 2]",
+   "De_Gy": [
+    232,
+    30
+   ],
+   "geometry": "SED/EN/DE",
+   "enamel": {
+    "U_ppm": [
+     0.16,
+     0.16
+    ],
+    "u234_u238": [
+     4.773,
+     0.06
+    ],
+    "th230_u234": [
+     0.95,
+     0.034
+    ],
+    "thickness_um": [
+     1527,
+     257
+    ],
+    "removed_outer_um": [
+     0,
+     null
+    ],
+    "removed_inner_um": [
+     0,
+     null
+    ],
+    "density": null,
+    "water_pct": [
+     0,
+     null
+    ]
+   },
+   "dentine": {
+    "U_ppm": [
+     5.81,
+     0.37
+    ],
+    "u234_u238": [
+     5.969,
+     0.035
+    ],
+    "th230_u234": [
+     0.572,
+     0.01
+    ],
+    "water_pct": [
+     10,
+     5
+    ],
+    "radon_loss_pct": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     3.2,
+     0.3
+    ],
+    "Th_ppm": [
+     8.6,
+     0.4
+    ],
+    "K_pct": [
+     1.23,
+     0.14
+    ],
+    "water_pct": [
+     25,
+     10
+    ],
+    "radon_loss_pct": 0
+   },
+   "gamma_uGy_a": [
+    724,
+    116
+   ],
+   "cosmic_uGy_a": [
+    15,
+    1
+   ],
+   "depth_m": 0.05,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "published": {
+    "dose_rates_uGy_a": {
+     "internal": [
+      184,
+      184
+     ],
+     "alpha_external": [
+      8,
+      2
+     ],
+     "beta_dentine": [
+      59,
+      16
+     ],
+     "beta_sediment": [
+      112,
+      19
+     ],
+     "gamma_cosmic": [
+      739,
+      116
+     ],
+     "total": [
+      1102,
+      219
+     ]
+    },
+    "p_enamel": [
+     -0.91,
+     null
+    ],
+    "p_dentine": [
+     0.1,
+     null
+    ],
+    "ages_ka": {
+     "US": [
+      210,
+      50,
+      50
+     ],
+     "combined_SCU_CENIEH_GU": [
+      220,
+      50,
+      60
+     ]
+    }
+   },
+   "provenance": "Table 6 column 1810/Cenieh-gu; Table 7 Scenario 2 column 1810/Cenieh-gu",
+   "notes": "2 sigma errors."
+  },
+  {
+   "sample": "1841 SCU [scenario 1]",
+   "De_Gy": [
+    1676,
+    127
+   ],
+   "geometry": "SED/EN/SED",
+   "enamel": {
+    "U_ppm": [
+     2.28,
+     0.48
+    ],
+    "u234_u238": [
+     5.87,
+     0.03
+    ],
+    "th230_u234": [
+     0.785,
+     0.038
+    ],
+    "thickness_um": [
+     650,
+     145
+    ],
+    "removed_outer_um": [
+     100,
+     null
+    ],
+    "removed_inner_um": null,
+    "density": null,
+    "water_pct": [
+     0,
+     null
+    ]
+   },
+   "dentine": null,
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     0.64,
+     0.06
+    ],
+    "Th_ppm": [
+     4.72,
+     0.47
+    ],
+    "K_pct": [
+     1.47,
+     0.15
+    ],
+    "water_pct": [
+     25,
+     10
+    ],
+    "radon_loss_pct": 80
+   },
+   "gamma_uGy_a": [
+    534,
+    69
+   ],
+   "cosmic_uGy_a": [
+    15,
+    1
+   ],
+   "depth_m": 0.55,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "published": {
+    "dose_rates_uGy_a": {
+     "internal": [
+      1411,
+      596
+     ],
+     "alpha_external": [
+      0,
+      null
+     ],
+     "beta_dentine": null,
+     "beta_sediment": [
+      358,
+      74
+     ],
+     "gamma_cosmic": [
+      549,
+      69
+     ],
+     "total": [
+      2318,
+      606
+     ]
+    },
+    "p_enamel": [
+     0.91,
+     null
+    ],
+    "p_dentine": null,
+    "ages_ka": {
+     "US": [
+      723,
+      181,
+      181
+     ]
+    }
+   },
+   "provenance": "Table 6 column 1841/SCU; Table 7 Scenario 1 column 1841/SCU",
+   "notes": "Baboon (Papio sp.) unerupted lower left M2 crown, no dentine, filled with sediment: sediment on both sides of enamel (Table 7 footnote: beta from sediment on both sides; external alpha 0 'considered as negligible'). Sediment U/Th/K errors are assumed 10% relative (Table 6 footnote). Measured sediment water next to 1841 = 27.7%; HPGe showed ~80% Rn loss. Dmax 3526 Gy. 2 sigma errors."
+  },
+  {
+   "sample": "1841 SCU [scenario 2]",
+   "De_Gy": [
+    1676,
+    127
+   ],
+   "geometry": "SED/EN/SED",
+   "enamel": {
+    "U_ppm": [
+     2.28,
+     0.48
+    ],
+    "u234_u238": [
+     5.87,
+     0.03
+    ],
+    "th230_u234": [
+     0.785,
+     0.038
+    ],
+    "thickness_um": [
+     650,
+     145
+    ],
+    "removed_outer_um": [
+     100,
+     null
+    ],
+    "removed_inner_um": null,
+    "density": null,
+    "water_pct": [
+     0,
+     null
+    ]
+   },
+   "dentine": null,
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     0.64,
+     0.06
+    ],
+    "Th_ppm": [
+     4.72,
+     0.47
+    ],
+    "K_pct": [
+     1.47,
+     0.15
+    ],
+    "water_pct": [
+     25,
+     10
+    ],
+    "radon_loss_pct": 0
+   },
+   "gamma_uGy_a": [
+    724,
+    116
+   ],
+   "cosmic_uGy_a": [
+    15,
+    1
+   ],
+   "depth_m": 0.55,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "published": {
+    "dose_rates_uGy_a": {
+     "internal": [
+      1520,
+      630
+     ],
+     "alpha_external": [
+      0,
+      null
+     ],
+     "beta_dentine": null,
+     "beta_sediment": [
+      380,
+      81
+     ],
+     "gamma_cosmic": [
+      739,
+      116
+     ],
+     "total": [
+      2639,
+      647
+     ]
+    },
+    "p_enamel": [
+     0.67,
+     null
+    ],
+    "p_dentine": null,
+    "ages_ka": {
+     "US": [
+      635,
+      148,
+      148
+     ]
+    }
+   },
+   "provenance": "Table 6 column 1841/SCU; Table 7 Scenario 2 column 1841/SCU",
+   "notes": "See scenario 1 entry. 2 sigma errors."
+  }
+ ],
+ "completeness": "complete for USESR inputs and outputs (De, enamel/dentine U and U-series ratios, initial enamel thickness, sediment U/Th/K/water, gamma per scenario, cosmic, dose-rate components, p-values, ages); partial on preparation detail: SCU removed 100 um from the outer surface (no error) and attached dentine (thickness not stated); CENIEH-GU did not clean the enamel (external alpha added instead); beta attenuation method and water basis not stated",
+ "extraction_notes": "Tables 6 and 7 parsed directly from the eLife JATS XML (machine-readable cells, so no OCR/LLM transcription risk); methods text from the same XML (sections 'Methodology for combined U-series and ESR dating', 'Determining the environmental dose rate', 'Combined US-ESR age calculations'). Each tooth/lab combination appears twice ('[scenario 1]' = 80% Rn loss in sediment, maximum age; '[scenario 2]' = no Rn loss, minimum age); suffixes ours. Sediment radon_loss_pct is an extra key encoding the scenario. All Table 7 values are 2 sigma; the sigma level of Table 6 inputs is not stated in its caption (Tables 4-5 U-series are 2 sigma). Table 7 reports 'gamma and cosmic' combined (549 = 534 + 15; 739 = 724 + 15). Enamel water 0%, dentine 10 +/- 5%, sediment 25 +/- 10%. Table 6 alpha efficiency footnote reads 'After Woodroffe et al. (1991)' (apparently a misplaced footnote). Per-spot LA U-series data are in Tables 4 (SCU-UoW) and 5 (GU-ANU) and were not transcribed; Table 6 gives the means used. CSUS-ESR ages computed but not reported (<4% different).",
+ "benchmark": true
+}

@@ -1,0 +1,288 @@
+{
+ "study_id": "kinoshita2014_serrote_das_moendas",
+ "reference": "Kinoshita, A., Skinner, A.R., Guidon, N., Ignacio, E., Felice, G.D., Buco, C.A., Tatumi, S., Yee, M., Figueiredo, A.M.G., Baffa, O. (2014) Dating human occupation at Toca do Serrote das Moendas, São Raimundo Nonato, Piauí-Brasil by electron spin resonance and optically stimulated luminescence. Journal of Human Evolution 77, 187-195. https://doi.org/10.1016/j.jhevol.2014.09.006",
+ "url": "https://repositorio.ipen.br/bitstreams/2c75c308-5aa0-4d06-9cfe-68ee413d19f8/download",
+ "software": "ROSY",
+ "conventions": {
+  "conversion_factors": null,
+  "k_alpha": null,
+  "beta_attenuation": "ROSY (Brennan et al. 1999) one-group",
+  "water_basis": null,
+  "u234_u238_meaning": null,
+  "radon_loss": null,
+  "cosmic": "0.934 mGy/a, Prescott & Hutton (1994) (as printed)",
+  "gamma_source": "computed from sediment U/Th/K (NAA at IPEN and analysis at McMaster); 'gamma contribution with 20 cm of sediment homogeneously distributed is 97% of total' cited"
+ },
+ "samples": [
+  {
+   "sample": "Tooth 1 (USP)",
+   "De_Gy": [
+    37,
+    4
+   ],
+   "geometry": null,
+   "enamel": {
+    "U_ppm": null,
+    "U_ppm_upper_limit": 0.05,
+    "u234_u238": null,
+    "th230_u234": null,
+    "thickness_um": [
+     300,
+     null
+    ],
+    "initial_thickness_um": [
+     500,
+     null
+    ],
+    "removed_outer_um": [
+     100,
+     null
+    ],
+    "removed_inner_um": [
+     100,
+     null
+    ],
+    "density": null
+   },
+   "dentine": {
+    "U_ppm": [
+     7.5,
+     0.9
+    ],
+    "u234_u238": null,
+    "th230_u234": null,
+    "water_pct": null,
+    "radon_loss_pct": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": null,
+   "sediment_measurements": [
+    {
+     "lab": "IPEN (NAA)",
+     "U_ppm": [
+      3.6,
+      0.4
+     ],
+     "Th_ppm": [
+      6.74,
+      0.03
+     ],
+     "K_ppm": [
+      10000,
+      280
+     ]
+    },
+    {
+     "lab": "McMaster",
+     "U_ppm": [
+      3.29,
+      0.02
+     ],
+     "Th_ppm": [
+      8.45,
+      0.02
+     ],
+     "K_ppm": [
+      9800,
+      300
+     ]
+    }
+   ],
+   "gamma_uGy_a": null,
+   "cosmic_uGy_a": [
+    934,
+    null
+   ],
+   "depth_m": null,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "published": {
+    "dose_rates_uGy_a": {
+     "EU": {
+      "beta": [
+       305,
+       6
+      ],
+      "gamma": [
+       970,
+       60
+      ]
+     },
+     "LU": {
+      "beta": [
+       214,
+       3
+      ],
+      "gamma": [
+       970,
+       60
+      ]
+     },
+     "CU": {
+      "beta": [
+       305,
+       6
+      ],
+      "gamma": [
+       970,
+       60
+      ]
+     }
+    },
+    "p_enamel": null,
+    "p_dentine": null,
+    "ages_ka": {
+     "EU": [
+      29,
+      3
+     ],
+     "LU": [
+      32,
+      4
+     ],
+     "CU": [
+      29,
+      3
+     ]
+    }
+   },
+   "provenance": "Table 2 (radioisotopes), Table 3 (Dbeta, Dgamma), Table 4 (De, ages); p. 192; thickness from Methods text (USP lab)",
+   "notes": "Prepared at USP (Ribeirão Preto). Enamel 500 um before and 300 um after HCl 1:10 etch; paper says the etch removed about 100 um from each side. Enamel U below detection (<0.05 ppm; Table 2 also lists <0.01 and K <750 ppm for enamel/dentine 1, column assignment ambiguous). Dose-rate units printed 'mGy/a' but are clearly uGy/a (37 Gy/(305+970) uGy/a = 29.0 ka matches EU age). Dgamma (970) apparently includes cosmic; cosmic stated as 0.934 mGy/a (Prescott & Hutton 1994) which looks inconsistent with Dgamma=970 unless 934 is gamma+cosmic -- recorded as printed."
+  },
+  {
+   "sample": "Tooth 2 (WC)",
+   "De_Gy": [
+    32,
+    2
+   ],
+   "geometry": null,
+   "enamel": {
+    "U_ppm": null,
+    "U_ppm_upper_limit": 0.01,
+    "K_ppm_upper_limit": 30,
+    "u234_u238": null,
+    "th230_u234": null,
+    "thickness_um": null,
+    "removed_outer_um": [
+     20,
+     null
+    ],
+    "removed_inner_um": [
+     20,
+     null
+    ],
+    "density": null
+   },
+   "dentine": {
+    "U_ppm": [
+     8.77,
+     0.4
+    ],
+    "u234_u238": null,
+    "th230_u234": null,
+    "water_pct": null,
+    "radon_loss_pct": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": null,
+   "sediment_measurements": [
+    {
+     "lab": "IPEN (NAA)",
+     "U_ppm": [
+      3.6,
+      0.4
+     ],
+     "Th_ppm": [
+      6.74,
+      0.03
+     ],
+     "K_ppm": [
+      10000,
+      280
+     ]
+    },
+    {
+     "lab": "McMaster",
+     "U_ppm": [
+      3.29,
+      0.02
+     ],
+     "Th_ppm": [
+      8.45,
+      0.02
+     ],
+     "K_ppm": [
+      9800,
+      300
+     ]
+    }
+   ],
+   "gamma_uGy_a": null,
+   "cosmic_uGy_a": [
+    934,
+    null
+   ],
+   "depth_m": null,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "published": {
+    "dose_rates_uGy_a": {
+     "EU": {
+      "beta": [
+       352,
+       6
+      ],
+      "gamma": [
+       1010,
+       60
+      ]
+     },
+     "LU": {
+      "beta": [
+       242,
+       3
+      ],
+      "gamma": [
+       1010,
+       60
+      ]
+     },
+     "CU": {
+      "beta": [
+       352,
+       6
+      ],
+      "gamma": [
+       1010,
+       60
+      ]
+     }
+    },
+    "p_enamel": null,
+    "p_dentine": null,
+    "ages_ka": {
+     "EU": [
+      24,
+      1
+     ],
+     "LU": [
+      26,
+      1
+     ],
+     "CU": [
+      24,
+      1
+     ]
+    }
+   },
+   "provenance": "Table 2, Table 3, Table 4; p. 192; removal from Methods text (Williams College lab)",
+   "notes": "Prepared and measured at Williams College (A.R. Skinner): dentine removed mechanically, thickness measured (value not reported), 20 um removed from each side; 137Cs irradiation. Ages also calculated with ROSY. Check: 32/(352+1010) = 23.5 ka vs published EU 24 +- 1."
+  }
+ ],
+ "completeness": "partial: enamel U below detection (internal dose ~0), no water content, no k, no 234U/238U, enamel thickness only for tooth 1, dentine thickness not given; sediment measured by two labs and which values entered ROSY is not stated; published Dbeta and Dgamma by uptake model are given",
+ "extraction_notes": "Two cervid teeth associated with human skeleton 3. Tables 2-4 read twice. Table 2 layout (IPEN vs McMaster columns) was garbled in extraction: sediment values are reliable, enamel/dentine detection limits ambiguous. K in Table 2 given in ppm. Volume/pages 77, 187-195 confirmed from IPEN repository record. The OSL part (Table 7) not transcribed.",
+ "benchmark": false,
+ "benchmark_reason": "enamel U below detection; two sediment analyses, the one used is not stated"
+}

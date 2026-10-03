@@ -1,0 +1,1984 @@
+{
+ "study_id": "falgueres2025_fumane",
+ "reference": "Falguères, C., et al. (2025). Dating the Middle Palaeolithic of Fumane Cave (Italy) by the ESR/U-series method. Journal of Quaternary Science 40(5): 862-875. https://doi.org/10.1002/jqs.3719 (CC BY)",
+ "url": "https://sfera.unife.it/retrieve/b0ea4640-6e31-49d3-98ee-0bf50be47868/Falgu%C3%A9res_ESR%20U%E2%80%90series%20Fumane_JQS2025.pdf",
+ "software": "DATA",
+ "conventions": {
+  "conversion_factors": "Adamiec & Aitken 1998 for DATA ages; Guerin et al. 2011 for AU-ESR ages",
+  "k_alpha": [
+   0.13,
+   0.02
+  ],
+  "beta_attenuation": "Monte-Carlo beta attenuation factors (Brennan et al., 1997) based on enamel thickness, accounting for the removal of outer layers",
+  "water_basis": null,
+  "u234_u238_meaning": "measured present-day",
+  "radon_loss": "Rn/Ra loss assessed by combining alpha and gamma spectrometry (Bahain et al. 1992); values not printed",
+  "cosmic": "Prescott & Hutton 1994, from deposit thickness and shelter roof coverage; values not printed",
+  "gamma_source": "In situ TL dosimeters (10, buried 2005 for 1 year) giving 'new estimates for the external dose rates'; sediment U/Th/K by high-resolution Ge gamma spectrometry (Table 1)",
+  "enamel_water_pct": 0,
+  "dentine_water_pct": [
+   7,
+   3
+  ],
+  "sediment_water_pct": [
+   15,
+   5
+  ],
+  "U_series_method": "alpha spectrometry on separated enamel, dentine, cement",
+  "models": "US-ESR in DATA where p >= -1; AU-ESR (Shao et al. 2012) where U leaching (p < -1) -- the AU values (n) are small negative numbers like -0.0108",
+  "De_fitting": "SSE",
+  "thickness_meaning": "initial (Table 2 header 'Initial thickness enamel')",
+  "water_statement": "Water content was estimated to be 7% ± 3% in the dentine and 15% ± 5% in sediment (measured as dry weight vs. wet sediment dried in an oven at 35°C)."
+ },
+ "samples": [
+  {
+   "sample": "FU0001",
+   "layer": "A2",
+   "De_Gy": [
+    16.7,
+    0.86
+   ],
+   "geometry": "CEM/EN/DE",
+   "enamel": {
+    "U_ppm": [
+     0.27,
+     0.03
+    ],
+    "u234_u238": [
+     1.034,
+     0.096
+    ],
+    "th230_u234": [
+     0.366,
+     0.062
+    ],
+    "thickness_um": [
+     1557,
+     156
+    ],
+    "removed_outer_um": [
+     136,
+     null
+    ],
+    "removed_inner_um": [
+     184,
+     null
+    ],
+    "density": null
+   },
+   "dentine": {
+    "U_ppm": [
+     11.6,
+     1.2
+    ],
+    "u234_u238": [
+     1.012,
+     0.027
+    ],
+    "th230_u234": [
+     0.13,
+     0.008
+    ],
+    "water_pct": [
+     7,
+     3
+    ],
+    "radon_loss_pct": null
+   },
+   "dentine2_or_cementum": {
+    "tissue": "cement",
+    "U_ppm": [
+     21.45,
+     2.15
+    ],
+    "u234_u238": [
+     1.024,
+     0.016
+    ],
+    "th230_u234": [
+     0.214,
+     0.008
+    ],
+    "water_pct": null,
+    "radon_loss_pct": null
+   },
+   "sediment": {
+    "U_ppm": [
+     2.23,
+     0.08
+    ],
+    "Th_ppm": [
+     4.29,
+     0.07
+    ],
+    "K_pct": [
+     0.64,
+     0.01
+    ],
+    "water_pct": [
+     15,
+     5
+    ],
+    "table1_layer": "A2a"
+   },
+   "gamma_uGy_a": null,
+   "cosmic_uGy_a": null,
+   "depth_m": null,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "tl_dosimeter_uGy_a_as_printed": "Dos 1: 291",
+   "published": {
+    "dose_rates_uGy_a": {
+     "internal": [
+      72,
+      42
+     ],
+     "beta_dentine": [
+      104,
+      49
+     ],
+     "beta_gamma_sediment_plus_cosmic": [
+      348,
+      30
+     ],
+     "total": [
+      524,
+      71
+     ]
+    },
+    "p_enamel": [
+     -1.25,
+     0.06
+    ],
+    "p_dentine": [
+     0.06,
+     0.24
+    ],
+    "p_cementum": [
+     -0.77,
+     0.13
+    ],
+    "ages_ka": {
+     "reported": [
+      32,
+      4
+     ]
+    }
+   },
+   "age_model": "unclear (enamel p < -1, U leaching)",
+   "provenance": "Table 2 (p. 867: U-series, thicknesses), Table 3 (p. 868: De, dose rates, p/n, ages), Table 1 (p. 866: sediment U/Th/K, TL dosimeters), Falguères et al. 2025 JQS 40(5)",
+   "notes": "Footnote a: 'FU0001 sample shows a strong uranium leaching in the enamel tissue though it was not possible to determine an n parameter.' Enamel 234U/238U error printed '0,096' (comma). Cement present (CEM side): beta 'dentine and cement' combined. Single age printed; column (new vs recalculated previous) not resolvable from extracted text."
+  },
+  {
+   "sample": "FU0002",
+   "layer": "A2",
+   "De_Gy": [
+    28.9,
+    2.96
+   ],
+   "geometry": "SED/EN/DE",
+   "enamel": {
+    "U_ppm": [
+     1.96,
+     0.2
+    ],
+    "u234_u238": [
+     1.067,
+     0.05
+    ],
+    "th230_u234": [
+     0.09,
+     0.011
+    ],
+    "thickness_um": [
+     747,
+     75
+    ],
+    "removed_outer_um": [
+     68,
+     null
+    ],
+    "removed_inner_um": [
+     96,
+     null
+    ],
+    "density": null
+   },
+   "dentine": {
+    "U_ppm": [
+     42.45,
+     4.25
+    ],
+    "u234_u238": [
+     1.031,
+     0.017
+    ],
+    "th230_u234": [
+     0.081,
+     0.004
+    ],
+    "water_pct": [
+     7,
+     3
+    ],
+    "radon_loss_pct": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     2.23,
+     0.08
+    ],
+    "Th_ppm": [
+     4.29,
+     0.07
+    ],
+    "K_pct": [
+     0.64,
+     0.01
+    ],
+    "water_pct": [
+     15,
+     5
+    ],
+    "table1_layer": "A2a"
+   },
+   "gamma_uGy_a": null,
+   "cosmic_uGy_a": null,
+   "depth_m": null,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "tl_dosimeter_uGy_a_as_printed": "Dos 1: 291",
+   "published": {
+    "dose_rates_uGy_a": {
+     "internal": [
+      59,
+      50
+     ],
+     "beta_dentine": [
+      69,
+      60
+     ],
+     "beta_gamma_sediment_plus_cosmic": [
+      475,
+      25
+     ],
+     "total": [
+      603,
+      107
+     ]
+    },
+    "p_enamel": [
+     2.42,
+     0.63
+    ],
+    "p_dentine": [
+     2.94,
+     0.71
+    ],
+    "p_cementum": null,
+    "ages_ka": {
+     "US": [
+      47,
+      7,
+      7
+     ]
+    }
+   },
+   "age_model": "US (DATA)",
+   "provenance": "Table 2 (p. 867: U-series, thicknesses), Table 3 (p. 868: De, dose rates, p/n, ages), Table 1 (p. 866: sediment U/Th/K, TL dosimeters), Falguères et al. 2025 JQS 40(5)",
+   "notes": "Single age printed; column assignment (new vs previously published recalculated) not resolvable from extracted text."
+  },
+  {
+   "sample": "FU0003",
+   "layer": "A4-1",
+   "De_Gy": [
+    25.1,
+    0.72
+   ],
+   "geometry": "SED/EN/DE",
+   "enamel": {
+    "U_ppm": [
+     0.18,
+     0.02
+    ],
+    "u234_u238": [
+     1.175,
+     0.095
+    ],
+    "th230_u234": [
+     0.414,
+     0.041
+    ],
+    "thickness_um": [
+     1269,
+     127
+    ],
+    "removed_outer_um": [
+     142,
+     null
+    ],
+    "removed_inner_um": [
+     93,
+     null
+    ],
+    "density": null
+   },
+   "dentine": {
+    "U_ppm": [
+     18.23,
+     1.82
+    ],
+    "u234_u238": [
+     0.99,
+     0.028
+    ],
+    "th230_u234": [
+     0.207,
+     0.011
+    ],
+    "water_pct": [
+     7,
+     3
+    ],
+    "radon_loss_pct": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     2.65,
+     0.08
+    ],
+    "Th_ppm": [
+     7.6,
+     0.08
+    ],
+    "K_pct": [
+     1.18,
+     0.01
+    ],
+    "water_pct": [
+     15,
+     5
+    ],
+    "table1_layer": "A4"
+   },
+   "gamma_uGy_a": null,
+   "cosmic_uGy_a": null,
+   "depth_m": null,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "tl_dosimeter_uGy_a_as_printed": "Dos 14: 730",
+   "published": {
+    "dose_rates_uGy_a": {
+     "internal": [
+      27,
+      12
+     ],
+     "beta_dentine": [
+      98,
+      12
+     ],
+     "beta_gamma_sediment_plus_cosmic": [
+      870,
+      41
+     ],
+     "total": [
+      995,
+      48
+     ]
+    },
+    "p_enamel": null,
+    "p_dentine": null,
+    "p_cementum": null,
+    "ages_ka": {
+     "previous_recalculated": [
+      44,
+      7
+     ]
+    }
+   },
+   "age_model": "NC",
+   "provenance": "Table 2 (p. 867: U-series, thicknesses), Table 3 (p. 868: De, dose rates, p/n, ages), Table 1 (p. 866: sediment U/Th/K, TL dosimeters), Falguères et al. 2025 JQS 40(5)",
+   "notes": "Footnote b: 'FU0003 and FU9606 samples cannot yield ages either by US or by AU models when using the new dosimetry!' p printed 'NC'. The 44 ± 7 ka printed is presumably the column-d age (previous Peresani et al. 2008 dosimetry)."
+  },
+  {
+   "sample": "FU9606",
+   "layer": "A5+A6",
+   "De_Gy": [
+    17.7,
+    0.53
+   ],
+   "geometry": "SED/EN/DE",
+   "enamel": {
+    "U_ppm": [
+     0.24,
+     0.02
+    ],
+    "u234_u238": [
+     1.134,
+     0.095
+    ],
+    "th230_u234": [
+     0.426,
+     0.042
+    ],
+    "thickness_um": [
+     1632,
+     163
+    ],
+    "removed_outer_um": [
+     100,
+     null
+    ],
+    "removed_inner_um": [
+     100,
+     null
+    ],
+    "density": null
+   },
+   "dentine": {
+    "U_ppm": [
+     14.06,
+     1.41
+    ],
+    "u234_u238": [
+     1.041,
+     0.022
+    ],
+    "th230_u234": [
+     0.093,
+     0.005
+    ],
+    "water_pct": [
+     7,
+     3
+    ],
+    "radon_loss_pct": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     2.51,
+     0.09
+    ],
+    "Th_ppm": [
+     6.95,
+     0.08
+    ],
+    "K_pct": [
+     1.1,
+     0.02
+    ],
+    "water_pct": [
+     15,
+     5
+    ],
+    "table1_layer": "A6"
+   },
+   "gamma_uGy_a": null,
+   "cosmic_uGy_a": null,
+   "depth_m": null,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "tl_dosimeter_uGy_a_as_printed": "Dos 2: 691",
+   "published": {
+    "dose_rates_uGy_a": {
+     "internal": [
+      32,
+      7
+     ],
+     "beta_dentine": [
+      29,
+      6
+     ],
+     "beta_gamma_sediment_plus_cosmic": [
+      787,
+      15
+     ],
+     "total": [
+      850,
+      18
+     ]
+    },
+    "p_enamel": null,
+    "p_dentine": null,
+    "p_cementum": null,
+    "ages_ka": {
+     "previous_recalculated": [
+      38,
+      6
+     ]
+    }
+   },
+   "age_model": "NC",
+   "provenance": "Table 2 (p. 867: U-series, thicknesses), Table 3 (p. 868: De, dose rates, p/n, ages), Table 1 (p. 866: sediment U/Th/K, TL dosimeters), Falguères et al. 2025 JQS 40(5)",
+   "notes": "See FU0003 (footnote b). Sediment: layer printed 'A5 + A6'; Table 1 has only A6 -- assignment of A6 sediment is my mapping, not stated. Removed 100/100 is 'an arbitrary mean value' (footnote, teeth from 1996)."
+  },
+  {
+   "sample": "FU9607",
+   "layer": "A6",
+   "De_Gy": [
+    37.6,
+    1.28
+   ],
+   "geometry": "SED/EN/DE",
+   "enamel": {
+    "U_ppm": [
+     0.53,
+     0.05
+    ],
+    "u234_u238": [
+     1.113,
+     0.069
+    ],
+    "th230_u234": [
+     0.247,
+     0.024
+    ],
+    "thickness_um": [
+     1696,
+     170
+    ],
+    "removed_outer_um": [
+     100,
+     null
+    ],
+    "removed_inner_um": [
+     100,
+     null
+    ],
+    "density": null
+   },
+   "dentine": {
+    "U_ppm": [
+     24.28,
+     2.43
+    ],
+    "u234_u238": [
+     1.016,
+     0.027
+    ],
+    "th230_u234": [
+     0.215,
+     0.009
+    ],
+    "water_pct": [
+     7,
+     3
+    ],
+    "radon_loss_pct": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     2.51,
+     0.09
+    ],
+    "Th_ppm": [
+     6.95,
+     0.08
+    ],
+    "K_pct": [
+     1.1,
+     0.02
+    ],
+    "water_pct": [
+     15,
+     5
+    ],
+    "table1_layer": "A6"
+   },
+   "gamma_uGy_a": null,
+   "cosmic_uGy_a": null,
+   "depth_m": null,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "tl_dosimeter_uGy_a_as_printed": "Dos 2: 691",
+   "published": {
+    "dose_rates_uGy_a": {
+     "internal": [
+      64,
+      40
+     ],
+     "beta_dentine": [
+      69,
+      44
+     ],
+     "beta_gamma_sediment_plus_cosmic": [
+      807,
+      50
+     ],
+     "total": [
+      940,
+      78
+     ]
+    },
+    "p_enamel": [
+     -0.72,
+     0.08
+    ],
+    "p_dentine": [
+     -0.52,
+     0.1
+    ],
+    "p_cementum": null,
+    "ages_ka": {
+     "US": [
+      40,
+      3,
+      3
+     ],
+     "previous_recalculated": [
+      38,
+      6
+     ]
+    }
+   },
+   "age_model": "US (DATA)",
+   "provenance": "Table 2 (p. 867: U-series, thicknesses), Table 3 (p. 868: De, dose rates, p/n, ages), Table 1 (p. 866: sediment U/Th/K, TL dosimeters), Falguères et al. 2025 JQS 40(5)",
+   "notes": "Two ages printed: 40 ± 3 (this study) and 38 ± 6 (column d, recalculated previous). Removed 100/100 arbitrary."
+  },
+  {
+   "sample": "FU0004",
+   "layer": "A9",
+   "De_Gy": [
+    24.5,
+    0.65
+   ],
+   "geometry": "SED/EN/DE",
+   "enamel": {
+    "U_ppm": [
+     0.65,
+     0.07
+    ],
+    "u234_u238": [
+     1.011,
+     0.133
+    ],
+    "th230_u234": [
+     0.506,
+     0.09
+    ],
+    "thickness_um": [
+     954,
+     95
+    ],
+    "removed_outer_um": [
+     89,
+     null
+    ],
+    "removed_inner_um": [
+     116,
+     null
+    ],
+    "density": null
+   },
+   "dentine": {
+    "U_ppm": [
+     20.56,
+     2.06
+    ],
+    "u234_u238": [
+     1.066,
+     0.023
+    ],
+    "th230_u234": [
+     0.201,
+     0.01
+    ],
+    "water_pct": [
+     7,
+     3
+    ],
+    "radon_loss_pct": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     2.68,
+     null
+    ],
+    "Th_ppm": [
+     3.22,
+     0.07
+    ],
+    "K_pct": [
+     0.47,
+     0.01
+    ],
+    "water_pct": [
+     15,
+     5
+    ],
+    "table1_layer": "A9-A11a"
+   },
+   "gamma_uGy_a": null,
+   "cosmic_uGy_a": null,
+   "depth_m": null,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "tl_dosimeter_uGy_a_as_printed": "Dos 13/Dos 12: 519/439",
+   "published": {
+    "dose_rates_uGy_a": {
+     "internal": [
+      91,
+      39
+     ],
+     "beta_dentine": [
+      130,
+      26
+     ],
+     "beta_gamma_sediment_plus_cosmic": [
+      678,
+      51
+     ],
+     "total": [
+      899,
+      70
+     ]
+    },
+    "p_enamel": [
+     -0.9,
+     0.11
+    ],
+    "p_dentine": [
+     -0.9,
+     0.11
+    ],
+    "p_cementum": null,
+    "ages_ka": {
+     "US_minimum": [
+      24,
+      null
+     ],
+     "previous_recalculated": [
+      46,
+      7
+     ]
+    }
+   },
+   "age_model": "US (DATA), minimum",
+   "provenance": "Table 2 (p. 867: U-series, thicknesses), Table 3 (p. 868: De, dose rates, p/n, ages), Table 1 (p. 866: sediment U/Th/K, TL dosimeters), Falguères et al. 2025 JQS 40(5)",
+   "notes": "Footnote c: 'FU0004 and FU0005 yield minimum ages ... practically under closed conditions'. Printed '>24' and '46 ± 7'. Sediment A9-A11a U printed '2.68 ± 0.0.8' (typo; error left null)."
+  },
+  {
+   "sample": "FU0005",
+   "layer": "A11a",
+   "De_Gy": [
+    30.5,
+    0.45
+   ],
+   "geometry": "SED/EN/DE",
+   "enamel": {
+    "U_ppm": [
+     0.12,
+     0.01
+    ],
+    "u234_u238": [
+     1.316,
+     0.127
+    ],
+    "th230_u234": [
+     0.694,
+     0.074
+    ],
+    "thickness_um": [
+     1262,
+     126
+    ],
+    "removed_outer_um": [
+     99,
+     null
+    ],
+    "removed_inner_um": [
+     102,
+     null
+    ],
+    "density": null
+   },
+   "dentine": {
+    "U_ppm": [
+     17.5,
+     1.75
+    ],
+    "u234_u238": [
+     1.069,
+     0.018
+    ],
+    "th230_u234": [
+     0.439,
+     0.015
+    ],
+    "water_pct": [
+     7,
+     3
+    ],
+    "radon_loss_pct": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     2.68,
+     null
+    ],
+    "Th_ppm": [
+     3.22,
+     0.07
+    ],
+    "K_pct": [
+     0.47,
+     0.01
+    ],
+    "water_pct": [
+     15,
+     5
+    ],
+    "table1_layer": "A9-A11a"
+   },
+   "gamma_uGy_a": null,
+   "cosmic_uGy_a": null,
+   "depth_m": null,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "tl_dosimeter_uGy_a_as_printed": "Dos 13/Dos 12: 519/439",
+   "published": {
+    "dose_rates_uGy_a": {
+     "internal": [
+      22,
+      10
+     ],
+     "beta_dentine": [
+      107,
+      20
+     ],
+     "beta_gamma_sediment_plus_cosmic": [
+      579,
+      22
+     ],
+     "total": [
+      708,
+      32
+     ]
+    },
+    "p_enamel": [
+     -0.9,
+     0.05
+    ],
+    "p_dentine": [
+     -0.91,
+     0.05
+    ],
+    "p_cementum": null,
+    "ages_ka": {
+     "US_minimum": [
+      39,
+      null
+     ],
+     "previous_recalculated": [
+      49,
+      7
+     ]
+    }
+   },
+   "age_model": "US (DATA), minimum",
+   "provenance": "Table 2 (p. 867: U-series, thicknesses), Table 3 (p. 868: De, dose rates, p/n, ages), Table 1 (p. 866: sediment U/Th/K, TL dosimeters), Falguères et al. 2025 JQS 40(5)",
+   "notes": "Footnote c. Printed '>39' and '49 ± 7'."
+  },
+  {
+   "sample": "FU0006",
+   "layer": "BR9",
+   "De_Gy": [
+    132.1,
+    2.02
+   ],
+   "geometry": "SED/EN/DE",
+   "enamel": {
+    "U_ppm": [
+     0.7,
+     0.07
+    ],
+    "u234_u238": [
+     1.175,
+     0.049
+    ],
+    "th230_u234": [
+     0.688,
+     0.035
+    ],
+    "thickness_um": [
+     1030,
+     103
+    ],
+    "removed_outer_um": [
+     84,
+     null
+    ],
+    "removed_inner_um": [
+     192,
+     null
+    ],
+    "density": null
+   },
+   "dentine": {
+    "U_ppm": [
+     14.27,
+     1.43
+    ],
+    "u234_u238": [
+     1.096,
+     0.036
+    ],
+    "th230_u234": [
+     0.762,
+     0.041
+    ],
+    "water_pct": [
+     7,
+     3
+    ],
+    "radon_loss_pct": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     3.27,
+     0.12
+    ],
+    "Th_ppm": [
+     6.03,
+     0.1
+    ],
+    "K_pct": [
+     0.86,
+     0.02
+    ],
+    "water_pct": [
+     15,
+     5
+    ],
+    "table1_layer": "BR9a"
+   },
+   "gamma_uGy_a": null,
+   "cosmic_uGy_a": null,
+   "depth_m": null,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "tl_dosimeter_uGy_a_as_printed": "Dos 10: 569",
+   "published": {
+    "dose_rates_uGy_a": {
+     "internal": [
+      153,
+      57
+     ],
+     "beta_dentine": [
+      88,
+      33
+     ],
+     "beta_gamma_sediment_plus_cosmic": [
+      745,
+      30
+     ],
+     "total": [
+      986,
+      73
+     ]
+    },
+    "p_enamel": [
+     -0.93,
+     0.05
+    ],
+    "p_dentine": [
+     -0.0108,
+     0.0006
+    ],
+    "p_cementum": null,
+    "ages_ka": {
+     "US_AU_mixed": [
+      134,
+      9
+     ]
+    }
+   },
+   "age_model": "mixed: enamel p (US), dentine n (AU-ESR, Shao et al. 2012)",
+   "provenance": "Table 2 (p. 867: U-series, thicknesses), Table 3 (p. 868: De, dose rates, p/n, ages), Table 1 (p. 866: sediment U/Th/K, TL dosimeters), Falguères et al. 2025 JQS 40(5)",
+   "notes": "Dentine parameter -0.0108 ± 0.0006 is an AU-model n value, not p; age not reproducible with DATA alone."
+  },
+  {
+   "sample": "FU0007",
+   "layer": "BR11b",
+   "De_Gy": [
+    131.1,
+    0.55
+   ],
+   "geometry": "SED/EN/DE",
+   "enamel": {
+    "U_ppm": [
+     1.41,
+     0.14
+    ],
+    "u234_u238": [
+     1.054,
+     0.035
+    ],
+    "th230_u234": [
+     0.417,
+     0.021
+    ],
+    "thickness_um": [
+     1037,
+     104
+    ],
+    "removed_outer_um": [
+     75,
+     null
+    ],
+    "removed_inner_um": [
+     161,
+     null
+    ],
+    "density": null
+   },
+   "dentine": {
+    "U_ppm": [
+     59.33,
+     5.93
+    ],
+    "u234_u238": [
+     1.077,
+     0.012
+    ],
+    "th230_u234": [
+     0.556,
+     0.016
+    ],
+    "water_pct": [
+     7,
+     3
+    ],
+    "radon_loss_pct": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     2.77,
+     0.09
+    ],
+    "Th_ppm": [
+     4.62,
+     0.07
+    ],
+    "K_pct": [
+     0.63,
+     0.01
+    ],
+    "water_pct": [
+     15,
+     5
+    ],
+    "table1_layer": "BR11a"
+   },
+   "gamma_uGy_a": null,
+   "cosmic_uGy_a": null,
+   "depth_m": null,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "tl_dosimeter_uGy_a_as_printed": "Dos 9: 601",
+   "published": {
+    "dose_rates_uGy_a": {
+     "internal": [
+      201,
+      52
+     ],
+     "beta_dentine": [
+      379,
+      97
+     ],
+     "beta_gamma_sediment_plus_cosmic": [
+      744,
+      50
+     ],
+     "total": [
+      1324,
+      121
+     ]
+    },
+    "p_enamel": [
+     -0.43,
+     0.12
+    ],
+    "p_dentine": [
+     -0.89,
+     0.08
+    ],
+    "p_cementum": null,
+    "ages_ka": {
+     "US": [
+      99,
+      9,
+      9
+     ]
+    }
+   },
+   "age_model": "US (DATA)",
+   "provenance": "Table 2 (p. 867: U-series, thicknesses), Table 3 (p. 868: De, dose rates, p/n, ages), Table 1 (p. 866: sediment U/Th/K, TL dosimeters), Falguères et al. 2025 JQS 40(5)",
+   "notes": ""
+  },
+  {
+   "sample": "FU0009",
+   "layer": "BR11b",
+   "De_Gy": [
+    124.7,
+    6.2
+   ],
+   "geometry": "SED/EN/DE",
+   "enamel": {
+    "U_ppm": [
+     0.56,
+     0.06
+    ],
+    "u234_u238": [
+     1.031,
+     0.035
+    ],
+    "th230_u234": [
+     0.705,
+     0.037
+    ],
+    "thickness_um": [
+     888,
+     89
+    ],
+    "removed_outer_um": [
+     100,
+     null
+    ],
+    "removed_inner_um": [
+     76,
+     null
+    ],
+    "density": null
+   },
+   "dentine": {
+    "U_ppm": [
+     18.57,
+     0.19
+    ],
+    "u234_u238": [
+     1.122,
+     0.029
+    ],
+    "th230_u234": [
+     0.83,
+     0.031
+    ],
+    "water_pct": [
+     7,
+     3
+    ],
+    "radon_loss_pct": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     2.77,
+     0.09
+    ],
+    "Th_ppm": [
+     4.62,
+     0.07
+    ],
+    "K_pct": [
+     0.63,
+     0.01
+    ],
+    "water_pct": [
+     15,
+     5
+    ],
+    "table1_layer": "BR11a"
+   },
+   "gamma_uGy_a": null,
+   "cosmic_uGy_a": null,
+   "depth_m": null,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "tl_dosimeter_uGy_a_as_printed": "Dos 9: 601",
+   "published": {
+    "dose_rates_uGy_a": {
+     "internal": [
+      153,
+      100
+     ],
+     "beta_dentine": [
+      302,
+      200
+     ],
+     "beta_gamma_sediment_plus_cosmic": [
+      744,
+      50
+     ],
+     "total": [
+      1199,
+      476
+     ]
+    },
+    "p_enamel": [
+     -0.0121,
+     0.0144
+    ],
+    "p_dentine": [
+     -0.0058,
+     0.0091
+    ],
+    "p_cementum": null,
+    "ages_ka": {
+     "AU": [
+      104,
+      41
+     ]
+    }
+   },
+   "age_model": "AU-ESR (n values)",
+   "provenance": "Table 2 (p. 867: U-series, thicknesses), Table 3 (p. 868: De, dose rates, p/n, ages), Table 1 (p. 866: sediment U/Th/K, TL dosimeters), Falguères et al. 2025 JQS 40(5)",
+   "notes": "Parameters are AU-model n values."
+  },
+  {
+   "sample": "FU0010",
+   "layer": "BR11",
+   "De_Gy": [
+    133.5,
+    6.0
+   ],
+   "geometry": "SED/EN/DE",
+   "enamel": {
+    "U_ppm": [
+     1.45,
+     0.14
+    ],
+    "u234_u238": [
+     1.12,
+     0.054
+    ],
+    "th230_u234": [
+     0.458,
+     0.032
+    ],
+    "thickness_um": [
+     1064,
+     106
+    ],
+    "removed_outer_um": [
+     92,
+     null
+    ],
+    "removed_inner_um": [
+     124,
+     null
+    ],
+    "density": null
+   },
+   "dentine": {
+    "U_ppm": [
+     43.99,
+     0.44
+    ],
+    "u234_u238": [
+     1.066,
+     0.015
+    ],
+    "th230_u234": [
+     0.527,
+     0.017
+    ],
+    "water_pct": [
+     7,
+     3
+    ],
+    "radon_loss_pct": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     2.77,
+     0.09
+    ],
+    "Th_ppm": [
+     4.62,
+     0.07
+    ],
+    "K_pct": [
+     0.63,
+     0.01
+    ],
+    "water_pct": [
+     15,
+     5
+    ],
+    "table1_layer": "BR11a"
+   },
+   "gamma_uGy_a": null,
+   "cosmic_uGy_a": null,
+   "depth_m": null,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "tl_dosimeter_uGy_a_as_printed": "Dos 9: 601",
+   "published": {
+    "dose_rates_uGy_a": {
+     "internal": [
+      234,
+      138
+     ],
+     "beta_dentine": [
+      255,
+      150
+     ],
+     "beta_gamma_sediment_plus_cosmic": [
+      736,
+      50
+     ],
+     "total": [
+      1225,
+      210
+     ]
+    },
+    "p_enamel": [
+     -0.47,
+     0.19
+    ],
+    "p_dentine": [
+     -0.73,
+     0.15
+    ],
+    "p_cementum": null,
+    "ages_ka": {
+     "US": [
+      109,
+      16,
+      16
+     ]
+    }
+   },
+   "age_model": "US (DATA)",
+   "provenance": "Table 2 (p. 867: U-series, thicknesses), Table 3 (p. 868: De, dose rates, p/n, ages), Table 1 (p. 866: sediment U/Th/K, TL dosimeters), Falguères et al. 2025 JQS 40(5)",
+   "notes": ""
+  },
+  {
+   "sample": "FU9620",
+   "layer": "BR12",
+   "De_Gy": [
+    103.6,
+    1.35
+   ],
+   "geometry": "SED/EN/DE",
+   "enamel": {
+    "U_ppm": [
+     0.48,
+     0.05
+    ],
+    "u234_u238": [
+     1.164,
+     0.067
+    ],
+    "th230_u234": [
+     0.734,
+     0.047
+    ],
+    "thickness_um": [
+     1440,
+     144
+    ],
+    "removed_outer_um": [
+     100,
+     null
+    ],
+    "removed_inner_um": [
+     100,
+     null
+    ],
+    "density": null
+   },
+   "dentine": {
+    "U_ppm": [
+     19.5,
+     0.2
+    ],
+    "u234_u238": [
+     1.099,
+     0.022
+    ],
+    "th230_u234": [
+     0.734,
+     0.019
+    ],
+    "water_pct": [
+     7,
+     3
+    ],
+    "radon_loss_pct": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     1.91,
+     0.06
+    ],
+    "Th_ppm": [
+     2.58,
+     0.04
+    ],
+    "K_pct": [
+     0.37,
+     0.01
+    ],
+    "water_pct": [
+     15,
+     5
+    ],
+    "table1_layer": "BR12a"
+   },
+   "gamma_uGy_a": null,
+   "cosmic_uGy_a": null,
+   "depth_m": null,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "tl_dosimeter_uGy_a_as_printed": "Dos 3: 264",
+   "published": {
+    "dose_rates_uGy_a": {
+     "internal": [
+      132,
+      41
+     ],
+     "beta_dentine": [
+      106,
+      33
+     ],
+     "beta_gamma_sediment_plus_cosmic": [
+      331,
+      25
+     ],
+     "total": [
+      569,
+      63
+     ]
+    },
+    "p_enamel": [
+     -0.79,
+     0.08
+    ],
+    "p_dentine": [
+     -0.81,
+     0.08
+    ],
+    "p_cementum": null,
+    "ages_ka": {
+     "US": [
+      182,
+      18,
+      18
+     ]
+    }
+   },
+   "age_model": "US (DATA)",
+   "provenance": "Table 2 (p. 867: U-series, thicknesses), Table 3 (p. 868: De, dose rates, p/n, ages), Table 1 (p. 866: sediment U/Th/K, TL dosimeters), Falguères et al. 2025 JQS 40(5)",
+   "notes": "Text gives '182 ± 17 ka' for FU9620 while Table 3 prints 182 ± 18. Removed 100/100 arbitrary."
+  },
+  {
+   "sample": "FU0008",
+   "layer": "S3",
+   "De_Gy": [
+    119.46,
+    4.11
+   ],
+   "geometry": "SED/EN/DE",
+   "enamel": {
+    "U_ppm": [
+     0.55,
+     0.06
+    ],
+    "u234_u238": [
+     1.092,
+     0.069
+    ],
+    "th230_u234": [
+     0.718,
+     0.057
+    ],
+    "thickness_um": [
+     916,
+     92
+    ],
+    "removed_outer_um": [
+     64,
+     null
+    ],
+    "removed_inner_um": [
+     127,
+     null
+    ],
+    "density": null
+   },
+   "dentine": {
+    "U_ppm": [
+     22.16,
+     0.22
+    ],
+    "u234_u238": [
+     1.066,
+     0.028
+    ],
+    "th230_u234": [
+     0.64,
+     0.025
+    ],
+    "water_pct": [
+     7,
+     3
+    ],
+    "radon_loss_pct": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     1.48,
+     0.08
+    ],
+    "Th_ppm": [
+     2.78,
+     0.06
+    ],
+    "K_pct": [
+     0.47,
+     0.01
+    ],
+    "water_pct": [
+     15,
+     5
+    ],
+    "table1_layer": "S3b"
+   },
+   "gamma_uGy_a": null,
+   "cosmic_uGy_a": null,
+   "depth_m": null,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "tl_dosimeter_uGy_a_as_printed": "Dos 8: 204",
+   "published": {
+    "dose_rates_uGy_a": {
+     "internal": [
+      124,
+      42
+     ],
+     "beta_dentine": [
+      117,
+      39
+     ],
+     "beta_gamma_sediment_plus_cosmic": [
+      307,
+      25
+     ],
+     "total": [
+      548,
+      63
+     ]
+    },
+    "p_enamel": [
+     -0.61,
+     0.1
+    ],
+    "p_dentine": [
+     -0.34,
+     0.14
+    ],
+    "p_cementum": null,
+    "ages_ka": {
+     "US": [
+      218,
+      24,
+      24
+     ]
+    }
+   },
+   "age_model": "US (DATA)",
+   "provenance": "Table 2 (p. 867: U-series, thicknesses), Table 3 (p. 868: De, dose rates, p/n, ages), Table 1 (p. 866: sediment U/Th/K, TL dosimeters), Falguères et al. 2025 JQS 40(5)",
+   "notes": "Table 1 footnote b: for S3 the sediment values of S6 were used."
+  },
+  {
+   "sample": "FU9621",
+   "layer": "S6",
+   "De_Gy": [
+    102.95,
+    1.72
+   ],
+   "geometry": "SED/EN/DE",
+   "enamel": {
+    "U_ppm": [
+     1.19,
+     0.12
+    ],
+    "u234_u238": [
+     1.187,
+     0.031
+    ],
+    "th230_u234": [
+     0.483,
+     0.021
+    ],
+    "thickness_um": [
+     1440,
+     144
+    ],
+    "removed_outer_um": [
+     100,
+     null
+    ],
+    "removed_inner_um": [
+     100,
+     null
+    ],
+    "density": null
+   },
+   "dentine": {
+    "U_ppm": [
+     47.0,
+     4.7
+    ],
+    "u234_u238": [
+     1.048,
+     0.021
+    ],
+    "th230_u234": [
+     0.491,
+     0.016
+    ],
+    "water_pct": [
+     7,
+     3
+    ],
+    "radon_loss_pct": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     1.48,
+     0.08
+    ],
+    "Th_ppm": [
+     2.78,
+     0.06
+    ],
+    "K_pct": [
+     0.47,
+     0.01
+    ],
+    "water_pct": [
+     15,
+     5
+    ],
+    "table1_layer": "S6"
+   },
+   "gamma_uGy_a": null,
+   "cosmic_uGy_a": null,
+   "depth_m": null,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "tl_dosimeter_uGy_a_as_printed": "Dos 7: 351",
+   "published": {
+    "dose_rates_uGy_a": {
+     "internal": [
+      194,
+      67
+     ],
+     "beta_dentine": [
+      172,
+      59
+     ],
+     "beta_gamma_sediment_plus_cosmic": [
+      420,
+      30
+     ],
+     "total": [
+      786,
+      94
+     ]
+    },
+    "p_enamel": [
+     -0.33,
+     0.16
+    ],
+    "p_dentine": [
+     -0.38,
+     0.15
+    ],
+    "p_cementum": null,
+    "ages_ka": {
+     "US": [
+      131,
+      15,
+      15
+     ]
+    }
+   },
+   "age_model": "US (DATA)",
+   "provenance": "Table 2 (p. 867: U-series, thicknesses), Table 3 (p. 868: De, dose rates, p/n, ages), Table 1 (p. 866: sediment U/Th/K, TL dosimeters), Falguères et al. 2025 JQS 40(5)",
+   "notes": "Removed 100/100 arbitrary."
+  },
+  {
+   "sample": "FU9623",
+   "layer": "S9",
+   "De_Gy": [
+    104.85,
+    1.71
+   ],
+   "geometry": "SED/EN/DE",
+   "enamel": {
+    "U_ppm": [
+     0.46,
+     0.05
+    ],
+    "u234_u238": [
+     1.23,
+     0.048
+    ],
+    "th230_u234": [
+     1.106,
+     0.108
+    ],
+    "thickness_um": [
+     1340,
+     134
+    ],
+    "removed_outer_um": [
+     100,
+     null
+    ],
+    "removed_inner_um": [
+     100,
+     null
+    ],
+    "density": null
+   },
+   "dentine": {
+    "U_ppm": [
+     16.86,
+     1.69
+    ],
+    "u234_u238": [
+     1.386,
+     0.037
+    ],
+    "th230_u234": [
+     0.72,
+     0.024
+    ],
+    "water_pct": [
+     7,
+     3
+    ],
+    "radon_loss_pct": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     1.41,
+     0.09
+    ],
+    "Th_ppm": [
+     3.06,
+     0.07
+    ],
+    "K_pct": [
+     0.45,
+     0.01
+    ],
+    "water_pct": [
+     15,
+     5
+    ],
+    "table1_layer": "S9a"
+   },
+   "gamma_uGy_a": null,
+   "cosmic_uGy_a": null,
+   "depth_m": null,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "tl_dosimeter_uGy_a_as_printed": "Dos 4/Dos 5: 235",
+   "published": {
+    "dose_rates_uGy_a": {
+     "internal": [
+      169,
+      43
+     ],
+     "beta_dentine": [
+      89,
+      23
+     ],
+     "beta_gamma_sediment_plus_cosmic": [
+      306,
+      25
+     ],
+     "total": [
+      564,
+      55
+     ]
+    },
+    "p_enamel": [
+     -0.0082,
+     0.0009
+    ],
+    "p_dentine": [
+     -0.0061,
+     0.001
+    ],
+    "p_cementum": null,
+    "ages_ka": {
+     "AU": [
+      186,
+      17
+     ]
+    }
+   },
+   "age_model": "AU-ESR (n values)",
+   "provenance": "Table 2 (p. 867: U-series, thicknesses), Table 3 (p. 868: De, dose rates, p/n, ages), Table 1 (p. 866: sediment U/Th/K, TL dosimeters), Falguères et al. 2025 JQS 40(5)",
+   "notes": "Enamel 230Th/234U > 1 (1.106). Removed 100/100 arbitrary."
+  },
+  {
+   "sample": "FU9624",
+   "layer": "S9",
+   "De_Gy": [
+    118.06,
+    2.6
+   ],
+   "geometry": "SED/EN/DE",
+   "enamel": {
+    "U_ppm": [
+     0.69,
+     0.07
+    ],
+    "u234_u238": [
+     1.167,
+     0.036
+    ],
+    "th230_u234": [
+     0.976,
+     0.062
+    ],
+    "thickness_um": [
+     1340,
+     134
+    ],
+    "removed_outer_um": [
+     100,
+     null
+    ],
+    "removed_inner_um": [
+     100,
+     null
+    ],
+    "density": null
+   },
+   "dentine": {
+    "U_ppm": [
+     17.16,
+     1.72
+    ],
+    "u234_u238": [
+     1.083,
+     0.023
+    ],
+    "th230_u234": [
+     0.783,
+     0.022
+    ],
+    "water_pct": [
+     7,
+     3
+    ],
+    "radon_loss_pct": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     1.41,
+     0.09
+    ],
+    "Th_ppm": [
+     3.06,
+     0.07
+    ],
+    "K_pct": [
+     0.45,
+     0.01
+    ],
+    "water_pct": [
+     15,
+     5
+    ],
+    "table1_layer": "S9a"
+   },
+   "gamma_uGy_a": null,
+   "cosmic_uGy_a": null,
+   "depth_m": null,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "tl_dosimeter_uGy_a_as_printed": "Dos 4/Dos 5: 235",
+   "published": {
+    "dose_rates_uGy_a": {
+     "internal": [
+      217,
+      64
+     ],
+     "beta_dentine": [
+      108,
+      32
+     ],
+     "beta_gamma_sediment_plus_cosmic": [
+      451,
+      25
+     ],
+     "total": [
+      776,
+      76
+     ]
+    },
+    "p_enamel": [
+     -0.0094,
+     0.0007
+    ],
+    "p_dentine": [
+     -0.0094,
+     0.0008
+    ],
+    "p_cementum": null,
+    "ages_ka": {
+     "AU": [
+      152,
+      14
+     ]
+    }
+   },
+   "age_model": "AU-ESR (n values)",
+   "provenance": "Table 2 (p. 867: U-series, thicknesses), Table 3 (p. 868: De, dose rates, p/n, ages), Table 1 (p. 866: sediment U/Th/K, TL dosimeters), Falguères et al. 2025 JQS 40(5)",
+   "notes": "Removed 100/100 arbitrary."
+  }
+ ],
+ "completeness": "partial: external dose given only as combined (beta+gamma sediment + cosmic); gamma and cosmic not printed per sample; depth not given; thickness errors for removed layers not given; several samples are AU-ESR or NC (not DATA-reproducible); for single-age rows the age column (this study vs recalculated Peresani et al. 2008) could not be resolved from the extracted text",
+ "extraction_notes": "Tables 2 and 3 each read twice via WebFetch (raw text + per-sample CSV); numbers agreed. Removed thickness printed 'dentine/sediment' (footnote: 'Thickness subtracted on dentine and sediment or cement side'), mapped to removed_inner/removed_outer. Sediment U/Th/K assigned per sample by matching the layer label to Table 1 rows (my mapping; Table 1 footnote a: averages of several sediments; b: S3 uses S6 values). Best DATA validation candidates: FU0002, FU9607, FU0007, FU0010, FU9620, FU0008, FU9621 (US model, p in range); but gamma/cosmic split not available, so only internal + beta-dentine + total checks are possible unless external is taken as given.",
+ "benchmark": true
+}

@@ -1,0 +1,358 @@
+{
+ "study_id": "kinoshita2011_alta_floresta",
+ "reference": "Kinoshita, A., Jose, F.A., Sundaram, D., Paixão, J.S., Soares, I.R.M., Figueiredo, A.M., Baffa, O. (2011) Electron spin resonance dating of teeth from Western Brazilian megafauna - preliminary results. Radiation Measurements 46, 842-846. https://doi.org/10.1016/j.radmeas.2011.05.004",
+ "url": "https://repositorio.ipen.br/bitstreams/bcb6aa36-839a-447b-a216-c61d68caed12/download",
+ "software": "ROSY",
+ "software_detail": "ROSY for all published ages; DATA (Grün 2009) also run and said to give the same results (no DATA ages printed)",
+ "conventions": {
+  "conversion_factors": null,
+  "k_alpha": [
+   0.13,
+   0.02
+  ],
+  "beta_attenuation": "ROSY one-group",
+  "water_basis": null,
+  "u234_u238_meaning": "initial, assumed 1.2+-0.2",
+  "radon_loss": null,
+  "cosmic": "114 uGy/a (printed 'mGy/y'), Prescott & Hutton (1994) from latitude, longitude and altitude",
+  "gamma_source": "computed from mean of three soil samples (NAA)"
+ },
+ "samples": [
+  {
+   "sample": "354",
+   "De_Gy": [
+    1300,
+    200
+   ],
+   "geometry": null,
+   "enamel": {
+    "U_ppm": [
+     8.7,
+     0.3
+    ],
+    "Th_ppm": null,
+    "Th_ppm_upper_limit": 0.01,
+    "K_ppm_upper_limit": 750,
+    "u234_u238": null,
+    "th230_u234": null,
+    "thickness_um": null,
+    "removed_outer_um": null,
+    "removed_inner_um": null,
+    "removed_um_side_unspecified": [
+     500,
+     null
+    ],
+    "density": null
+   },
+   "dentine": {
+    "U_ppm": [
+     13.9,
+     0.5
+    ],
+    "Th_ppm": null,
+    "Th_ppm_upper_limit": 0.01,
+    "K_ppm_upper_limit": 750,
+    "u234_u238": null,
+    "th230_u234": null,
+    "water_pct": null,
+    "radon_loss_pct": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": null,
+    "Th_ppm": null,
+    "K_pct": null,
+    "water_pct": null,
+    "note": "average and standard deviation of the three soil samples (study-level 'soil_samples') were used, per Table 1 footnote; average not printed"
+   },
+   "gamma_uGy_a": null,
+   "cosmic_uGy_a": [
+    114,
+    null
+   ],
+   "depth_m": null,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "published": {
+    "dose_rates_uGy_a": {
+     "EU": {
+      "external_sediment": 1127.37,
+      "external_dentine": 14.51,
+      "internal_enamel": 3594.02
+     },
+     "LU": {
+      "external_sediment": 1127.37,
+      "external_dentine": 7.22,
+      "internal_enamel": 1772.37
+     },
+     "CU": {
+      "external_sediment": 1127.37,
+      "external_dentine": 15.14,
+      "internal_enamel": 1771.32
+     }
+    },
+    "p_enamel": null,
+    "p_dentine": null,
+    "ages_ka": {
+     "EU": [
+      270,
+      70
+     ],
+     "LU": [
+      430,
+      70
+     ],
+     "CU": [
+      430,
+      70
+     ]
+    }
+   },
+   "provenance": "Table 1 (p. 844, NAA), Table 2 (p. 844, ROSY dose rates), Table 3 (p. 843, De and ages), sample 354",
+   "notes": "Dose rates printed 'mGy/a' but are uGy/a. External sediment dose rate (1127.37) excludes cosmic: 354 CU (1127.37+15.14+1771.32+114) = 3028 uGy/a -> 1300/3.028 = 429 ka (published 430). CU = EU dentine + LU enamel. Haplomastodon (Notiomastodon) teeth."
+  },
+  {
+   "sample": "MUS99",
+   "De_Gy": [
+    800,
+    100
+   ],
+   "geometry": null,
+   "enamel": {
+    "U_ppm": [
+     10.6,
+     0.4
+    ],
+    "Th_ppm": null,
+    "Th_ppm_upper_limit": 0.01,
+    "K_ppm_upper_limit": 750,
+    "u234_u238": null,
+    "th230_u234": null,
+    "thickness_um": null,
+    "removed_outer_um": null,
+    "removed_inner_um": null,
+    "removed_um_side_unspecified": [
+     500,
+     null
+    ],
+    "density": null
+   },
+   "dentine": {
+    "U_ppm": [
+     12.3,
+     0.4
+    ],
+    "Th_ppm": null,
+    "Th_ppm_upper_limit": 0.01,
+    "K_ppm": [
+     1311,
+     478
+    ],
+    "u234_u238": null,
+    "th230_u234": null,
+    "water_pct": null,
+    "radon_loss_pct": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": null,
+    "Th_ppm": null,
+    "K_pct": null,
+    "water_pct": null,
+    "note": "average and standard deviation of the three soil samples (study-level 'soil_samples') were used, per Table 1 footnote; average not printed"
+   },
+   "gamma_uGy_a": null,
+   "cosmic_uGy_a": [
+    114,
+    null
+   ],
+   "depth_m": null,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "published": {
+    "dose_rates_uGy_a": {
+     "EU": {
+      "external_sediment": 1127.37,
+      "external_dentine": 15.76,
+      "internal_enamel": 3701.67
+     },
+     "LU": {
+      "external_sediment": 1127.37,
+      "external_dentine": 8.2,
+      "internal_enamel": 1846.28
+     },
+     "CU": {
+      "external_sediment": 1127.37,
+      "external_dentine": 16.63,
+      "internal_enamel": 1844.86
+     }
+    },
+    "p_enamel": null,
+    "p_dentine": null,
+    "ages_ka": {
+     "EU": [
+      160,
+      20
+     ],
+     "LU": [
+      260,
+      30
+     ],
+     "CU": [
+      260,
+      30
+     ]
+    }
+   },
+   "provenance": "Table 1 (p. 844, NAA), Table 2 (p. 844, ROSY dose rates), Table 3 (p. 843, De and ages), sample MUS99",
+   "notes": "Dose rates printed 'mGy/a' but are uGy/a. External sediment dose rate (1127.37) excludes cosmic: 354 CU (1127.37+15.14+1771.32+114) = 3028 uGy/a -> 1300/3.028 = 429 ka (published 430). CU = EU dentine + LU enamel. Haplomastodon (Notiomastodon) teeth."
+  },
+  {
+   "sample": "MAR",
+   "De_Gy": [
+    140,
+    20
+   ],
+   "geometry": null,
+   "enamel": {
+    "U_ppm": [
+     3.2,
+     0.1
+    ],
+    "Th_ppm": null,
+    "Th_ppm_upper_limit": 0.01,
+    "K_ppm_upper_limit": 750,
+    "u234_u238": null,
+    "th230_u234": null,
+    "thickness_um": null,
+    "removed_outer_um": null,
+    "removed_inner_um": null,
+    "removed_um_side_unspecified": [
+     500,
+     null
+    ],
+    "density": null
+   },
+   "dentine": {
+    "U_ppm": [
+     13.3,
+     0.4
+    ],
+    "Th_ppm": null,
+    "Th_ppm_upper_limit": 0.01,
+    "K_ppm_upper_limit": 750,
+    "u234_u238": null,
+    "th230_u234": null,
+    "water_pct": null,
+    "radon_loss_pct": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": null,
+    "Th_ppm": null,
+    "K_pct": null,
+    "water_pct": null,
+    "note": "average and standard deviation of the three soil samples (study-level 'soil_samples') were used, per Table 1 footnote; average not printed"
+   },
+   "gamma_uGy_a": null,
+   "cosmic_uGy_a": [
+    114,
+    null
+   ],
+   "depth_m": null,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "published": {
+    "dose_rates_uGy_a": {
+     "EU": {
+      "external_sediment": 1127.37,
+      "external_dentine": 11.82,
+      "internal_enamel": 798.96
+     },
+     "LU": {
+      "external_sediment": 1127.37,
+      "external_dentine": 5.8,
+      "internal_enamel": 371.06
+     },
+     "CU": {
+      "external_sediment": 1127.37,
+      "external_dentine": 12.12,
+      "internal_enamel": 370.58
+     }
+    },
+    "p_enamel": null,
+    "p_dentine": null,
+    "ages_ka": {
+     "EU": [
+      70,
+      10
+     ],
+     "LU": [
+      90,
+      10
+     ],
+     "CU": [
+      90,
+      10
+     ]
+    }
+   },
+   "provenance": "Table 1 (p. 844, NAA), Table 2 (p. 844, ROSY dose rates), Table 3 (p. 843, De and ages), sample MAR",
+   "notes": "Dose rates printed 'mGy/a' but are uGy/a. External sediment dose rate (1127.37) excludes cosmic: 354 CU (1127.37+15.14+1771.32+114) = 3028 uGy/a -> 1300/3.028 = 429 ka (published 430). CU = EU dentine + LU enamel. Haplomastodon (Notiomastodon) teeth."
+  }
+ ],
+ "soil_samples": [
+  {
+   "sample": "Soil 1",
+   "U_ppm": [
+    4.0,
+    0.1
+   ],
+   "Th_ppm": [
+    12.6,
+    0.1
+   ],
+   "K_ppm": [
+    29535,
+    3812
+   ]
+  },
+  {
+   "sample": "Soil 2",
+   "U_ppm": [
+    4.0,
+    0.1
+   ],
+   "Th_ppm": [
+    12.3,
+    0.1
+   ],
+   "K_ppm": [
+    30458,
+    3968
+   ]
+  },
+  {
+   "sample": "Soil 3",
+   "U_ppm": [
+    4.0,
+    0.1
+   ],
+   "Th_ppm": [
+    12.0,
+    0.1
+   ],
+   "K_ppm": [
+    28580,
+    3705
+   ]
+  }
+ ],
+ "completeness": "partial: no enamel/dentine thicknesses (only ~500 um etched off), no water content, no measured 234U/238U; ROSY dose-rate components per model are published",
+ "extraction_notes": "Site 35 km north of Alta Floresta, Mato Grosso, Brazil. Tables read twice (separate prompts) with identical numbers. Note table numbering: Table 3 holds De and ages, Table 2 dose rates. K given in ppm in the paper.",
+ "benchmark": false,
+ "benchmark_reason": "no enamel thickness or water"
+}

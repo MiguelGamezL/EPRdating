@@ -1,0 +1,1490 @@
+{
+ "study_id": "yu2024_bolts_farm",
+ "reference": "Yu W, Herries AIR, Edwards TR, Armstrong BJ, Joannes-Boyau R et al. (2024) Combined uranium-series and electron spin resonance dating from the Pliocene fossil sites of Aves and Milo's palaeocaves, Bolt's Farm, Cradle of Humankind, South Africa. PeerJ 12:e17478. https://doi.org/10.7717/peerj.17478",
+ "url": "local PDF /mnt/user-data/uploads/peerj-12-17478.pdf (Tables 1 and 2, pp. 10-11; Methods pp. 12-14)",
+ "software": "USESR",
+ "conventions": {
+  "conversion_factors": null,
+  "k_alpha": [
+   0.13,
+   0.02
+  ],
+  "beta_attenuation": null,
+  "water_basis": null,
+  "u234_u238_meaning": "measured present-day",
+  "radon_loss": "Rn and Ra loss could not be measured; secular equilibrium assumed (no Rn loss)",
+  "cosmic": "'estimated by the site variation over the burial time'; 100 +/- 80 uGy/a used for all samples (80% error because of complicated deposition history)",
+  "gamma_source": "Sediment U/Th/K from attached sediment measured at Environmental Analysis Laboratory (EAL); text also says an Inspector 1000 gamma spectrometer was used to measure the in situ deposits surrounding the teeth. Table gives gamma dose rate per sample."
+ },
+ "samples": [
+  {
+   "sample": "AV-ESR-01 [fragment]",
+   "De_Gy": [
+    2103,
+    294
+   ],
+   "geometry": null,
+   "enamel": {
+    "U_ppm": [
+     0.23,
+     0.02
+    ],
+    "u234_u238": [
+     1.2987,
+     0.046
+    ],
+    "th230_u234": [
+     0.951,
+     0.0917
+    ],
+    "thickness_um": [
+     1000,
+     20
+    ],
+    "removed_outer_um": null,
+    "removed_inner_um": null,
+    "density": null,
+    "water_pct": [
+     3,
+     1
+    ]
+   },
+   "dentine": {
+    "U_ppm": [
+     2.0447,
+     0.0963
+    ],
+    "u234_u238": [
+     1.381,
+     0.0177
+    ],
+    "th230_u234": [
+     0.8754,
+     0.0272
+    ],
+    "water_pct": [
+     5,
+     3
+    ],
+    "radon_loss_pct": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     0.44,
+     0.04
+    ],
+    "Th_ppm": [
+     1.0,
+     0.1
+    ],
+    "K_pct": [
+     0.04,
+     0.0
+    ],
+    "water_pct": [
+     15,
+     10
+    ]
+   },
+   "gamma_uGy_a": [
+    532,
+    41
+   ],
+   "cosmic_uGy_a": [
+    100,
+    80
+   ],
+   "depth_m": null,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "published": {
+    "dose_rates_uGy_a": {
+     "internal": [
+      47,
+      19
+     ],
+     "beta_dentine": [
+      5,
+      4
+     ],
+     "beta_sediment": [
+      14,
+      6
+     ],
+     "gamma": [
+      532,
+      41
+     ],
+     "cosmic": [
+      100,
+      80
+     ],
+     "total": [
+      698,
+      65
+     ]
+    },
+    "p_enamel": [
+     0.85,
+     0.32
+    ],
+    "p_dentine": [
+     3.67,
+     0.76
+    ],
+    "ages_ka": {
+     "US": [
+      3264,
+      642,
+      642
+     ],
+     "LU": [
+      3534,
+      615
+     ],
+     "EU": [
+      3152,
+      530
+     ]
+    }
+   },
+   "provenance": "Table 1A (Aves Cave) column AV-ESR-01, Dose (Fragment) row; ages Table 1A 'Age (ka) fragment' and Table 1B; p. 10",
+   "notes": "Enamel thickness printed in mm (1.00 +/- 0.02) converted to um. Dose-rate block is headed 'Combine US-ESR age (fragment)'. Published US age error printed as symmetric +/-.",
+   "exclude": "internally inconsistent in the source: De / printed total dose rate does not give the printed age (e.g. AV-ESR-01 fragment 2103 Gy / 698 µGy/a = 3013 ka vs 3264 ka printed); methods and tables give different water contents"
+  },
+  {
+   "sample": "AV-ESR-01 [powder]",
+   "De_Gy": [
+    1892,
+    57
+   ],
+   "geometry": null,
+   "enamel": {
+    "U_ppm": [
+     0.23,
+     0.02
+    ],
+    "u234_u238": [
+     1.2987,
+     0.046
+    ],
+    "th230_u234": [
+     0.951,
+     0.0917
+    ],
+    "thickness_um": [
+     1000,
+     20
+    ],
+    "removed_outer_um": null,
+    "removed_inner_um": null,
+    "density": null,
+    "water_pct": [
+     3,
+     1
+    ]
+   },
+   "dentine": {
+    "U_ppm": [
+     2.0447,
+     0.0963
+    ],
+    "u234_u238": [
+     1.381,
+     0.0177
+    ],
+    "th230_u234": [
+     0.8754,
+     0.0272
+    ],
+    "water_pct": [
+     5,
+     3
+    ],
+    "radon_loss_pct": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     0.44,
+     0.04
+    ],
+    "Th_ppm": [
+     1.0,
+     0.1
+    ],
+    "K_pct": [
+     0.04,
+     0.0
+    ],
+    "water_pct": [
+     15,
+     10
+    ]
+   },
+   "gamma_uGy_a": [
+    532,
+    41
+   ],
+   "cosmic_uGy_a": [
+    100,
+    80
+   ],
+   "depth_m": null,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "published": {
+    "dose_rates_uGy_a": null,
+    "p_enamel": null,
+    "p_dentine": null,
+    "ages_ka": {
+     "US": [
+      2915,
+      402,
+      402
+     ],
+     "LU": [
+      3180,
+      344
+     ],
+     "EU": [
+      2837,
+      280
+     ]
+    }
+   },
+   "provenance": "Table 1A column AV-ESR-01, Dose (Powder) row; ages Table 1A 'Age (ka) powder' and Table 1B; p. 10",
+   "notes": "Same enamel/dentine/sediment inputs as fragment row; the paper prints dose rates and p-values only for the fragment calculation, so powder dose rates are not published.",
+   "exclude": "internally inconsistent in the source: De / printed total dose rate does not give the printed age (e.g. AV-ESR-01 fragment 2103 Gy / 698 µGy/a = 3013 ka vs 3264 ka printed); methods and tables give different water contents"
+  },
+  {
+   "sample": "AV-ESR-02 [fragment]",
+   "De_Gy": [
+    2447,
+    221
+   ],
+   "geometry": null,
+   "enamel": {
+    "U_ppm": [
+     0.1,
+     0.1
+    ],
+    "u234_u238": [
+     1.1,
+     0.1
+    ],
+    "th230_u234": [
+     0.95,
+     0.05
+    ],
+    "thickness_um": [
+     900,
+     100
+    ],
+    "removed_outer_um": null,
+    "removed_inner_um": null,
+    "density": null,
+    "water_pct": [
+     3,
+     1
+    ]
+   },
+   "dentine": {
+    "U_ppm": [
+     0.77,
+     0.23
+    ],
+    "u234_u238": [
+     1.1,
+     0.1
+    ],
+    "th230_u234": [
+     0.95,
+     0.05
+    ],
+    "water_pct": [
+     5,
+     3
+    ],
+    "radon_loss_pct": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     0.28,
+     0.03
+    ],
+    "Th_ppm": [
+     1.71,
+     0.17
+    ],
+    "K_pct": [
+     0.06,
+     0.0
+    ],
+    "water_pct": [
+     15,
+     10
+    ]
+   },
+   "gamma_uGy_a": [
+    485,
+    47
+   ],
+   "cosmic_uGy_a": [
+    100,
+    80
+   ],
+   "depth_m": null,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "published": {
+    "dose_rates_uGy_a": {
+     "internal": [
+      22,
+      22
+     ],
+     "beta_dentine": [
+      6,
+      2
+     ],
+     "beta_sediment": [
+      25,
+      25
+     ],
+     "gamma": [
+      485,
+      47
+     ],
+     "cosmic": [
+      100,
+      80
+     ],
+     "total": [
+      626,
+      98
+     ]
+    },
+    "p_enamel": [
+     0.94,
+     0.87
+    ],
+    "p_dentine": [
+     0.94,
+     0.87
+    ],
+    "ages_ka": {
+     "US": null,
+     "LU": null,
+     "EU": null
+    }
+   },
+   "provenance": "Table 1A column AV-ESR-02, Dose (Fragment) row; Table 1B (fragment age ND); p. 10",
+   "notes": "Fragment age 'ND' (not datable). Bold (approximated) values in table: enamel and dentine 234U/238U = 1.1 +/- 0.1 and 230Th/234U = 0.95 +/- 0.05, stated to be approximations because the original figures could not be modelled. Comment: 'Localized diagenesis, uranium leaching'. Text: fragment age excluded (Table S1, unreachable).",
+   "exclude": "internally inconsistent in the source: De / printed total dose rate does not give the printed age (e.g. AV-ESR-01 fragment 2103 Gy / 698 µGy/a = 3013 ka vs 3264 ka printed); methods and tables give different water contents"
+  },
+  {
+   "sample": "AV-ESR-02 [powder]",
+   "De_Gy": [
+    1434,
+    67
+   ],
+   "geometry": null,
+   "enamel": {
+    "U_ppm": [
+     0.1,
+     0.1
+    ],
+    "u234_u238": [
+     1.1,
+     0.1
+    ],
+    "th230_u234": [
+     0.95,
+     0.05
+    ],
+    "thickness_um": [
+     900,
+     100
+    ],
+    "removed_outer_um": null,
+    "removed_inner_um": null,
+    "density": null,
+    "water_pct": [
+     3,
+     1
+    ]
+   },
+   "dentine": {
+    "U_ppm": [
+     0.77,
+     0.23
+    ],
+    "u234_u238": [
+     1.1,
+     0.1
+    ],
+    "th230_u234": [
+     0.95,
+     0.05
+    ],
+    "water_pct": [
+     5,
+     3
+    ],
+    "radon_loss_pct": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     0.28,
+     0.03
+    ],
+    "Th_ppm": [
+     1.71,
+     0.17
+    ],
+    "K_pct": [
+     0.06,
+     0.0
+    ],
+    "water_pct": [
+     15,
+     10
+    ]
+   },
+   "gamma_uGy_a": [
+    485,
+    47
+   ],
+   "cosmic_uGy_a": [
+    100,
+    80
+   ],
+   "depth_m": null,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "published": {
+    "dose_rates_uGy_a": null,
+    "p_enamel": null,
+    "p_dentine": null,
+    "ages_ka": {
+     "US": [
+      2322,
+      357,
+      357
+     ],
+     "LU": [
+      2565,
+      307
+     ],
+     "EU": [
+      2402,
+      272
+     ]
+    }
+   },
+   "provenance": "Table 1A column AV-ESR-02, Dose (Powder) row; Table 1A/1B ages; p. 10",
+   "notes": "Bold approximated isotope ratios (see fragment entry). Comment: 'Localized diagenesis, uranium leaching'.",
+   "exclude": "internally inconsistent in the source: De / printed total dose rate does not give the printed age (e.g. AV-ESR-01 fragment 2103 Gy / 698 µGy/a = 3013 ka vs 3264 ka printed); methods and tables give different water contents"
+  },
+  {
+   "sample": "AV-ESR-03 [fragment]",
+   "De_Gy": [
+    2920,
+    60
+   ],
+   "geometry": null,
+   "enamel": {
+    "U_ppm": [
+     0.11,
+     0.02
+    ],
+    "u234_u238": [
+     1.3387,
+     0.0587
+    ],
+    "th230_u234": [
+     1.0009,
+     0.0943
+    ],
+    "thickness_um": [
+     1050,
+     50
+    ],
+    "removed_outer_um": null,
+    "removed_inner_um": null,
+    "density": null,
+    "water_pct": [
+     3,
+     1
+    ]
+   },
+   "dentine": {
+    "U_ppm": [
+     2.35,
+     0.18
+    ],
+    "u234_u238": [
+     1.3703,
+     0.014
+    ],
+    "th230_u234": [
+     0.9813,
+     0.0195
+    ],
+    "water_pct": [
+     5,
+     3
+    ],
+    "radon_loss_pct": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     0.62,
+     0.06
+    ],
+    "Th_ppm": [
+     2.04,
+     0.2
+    ],
+    "K_pct": [
+     0.13,
+     0.01
+    ],
+    "water_pct": [
+     15,
+     10
+    ]
+   },
+   "gamma_uGy_a": [
+    485,
+    47
+   ],
+   "cosmic_uGy_a": [
+    100,
+    80
+   ],
+   "depth_m": null,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "published": {
+    "dose_rates_uGy_a": {
+     "internal": [
+      5,
+      5
+     ],
+     "beta_dentine": [
+      16,
+      24
+     ],
+     "beta_sediment": [
+      41,
+      33
+     ],
+     "gamma": [
+      485,
+      47
+     ],
+     "cosmic": [
+      100,
+      80
+     ],
+     "total": [
+      631,
+      195
+     ]
+    },
+    "p_enamel": [
+     3.5,
+     3.74
+    ],
+    "p_dentine": [
+     2.48,
+     2.71
+    ],
+    "ages_ka": {
+     "US": null,
+     "LU": null,
+     "EU": null
+    }
+   },
+   "provenance": "Table 1A column AV-ESR-03, Dose (Fragment) row; Table 1B (fragment age ND); p. 10",
+   "notes": "Fragment age 'ND'; comment 'Localized diagenesis'. Enamel 230Th/234U > 1.",
+   "exclude": "internally inconsistent in the source: De / printed total dose rate does not give the printed age (e.g. AV-ESR-01 fragment 2103 Gy / 698 µGy/a = 3013 ka vs 3264 ka printed); methods and tables give different water contents"
+  },
+  {
+   "sample": "AV-ESR-03 [powder]",
+   "De_Gy": [
+    1811,
+    117
+   ],
+   "geometry": null,
+   "enamel": {
+    "U_ppm": [
+     0.11,
+     0.02
+    ],
+    "u234_u238": [
+     1.3387,
+     0.0587
+    ],
+    "th230_u234": [
+     1.0009,
+     0.0943
+    ],
+    "thickness_um": [
+     1050,
+     50
+    ],
+    "removed_outer_um": null,
+    "removed_inner_um": null,
+    "density": null,
+    "water_pct": [
+     3,
+     1
+    ]
+   },
+   "dentine": {
+    "U_ppm": [
+     2.35,
+     0.18
+    ],
+    "u234_u238": [
+     1.3703,
+     0.014
+    ],
+    "th230_u234": [
+     0.9813,
+     0.0195
+    ],
+    "water_pct": [
+     5,
+     3
+    ],
+    "radon_loss_pct": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     0.62,
+     0.06
+    ],
+    "Th_ppm": [
+     2.04,
+     0.2
+    ],
+    "K_pct": [
+     0.13,
+     0.01
+    ],
+    "water_pct": [
+     15,
+     10
+    ]
+   },
+   "gamma_uGy_a": [
+    485,
+    47
+   ],
+   "cosmic_uGy_a": [
+    100,
+    80
+   ],
+   "depth_m": null,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "published": {
+    "dose_rates_uGy_a": null,
+    "p_enamel": null,
+    "p_dentine": null,
+    "ages_ka": {
+     "US": [
+      2759,
+      498,
+      498
+     ],
+     "LU": [
+      3079,
+      380
+     ],
+     "EU": [
+      2777,
+      318
+     ]
+    }
+   },
+   "provenance": "Table 1A column AV-ESR-03, Dose (Powder) row; Table 1A/1B ages; p. 10",
+   "notes": "Comment: 'Localized diagenesis'.",
+   "exclude": "internally inconsistent in the source: De / printed total dose rate does not give the printed age (e.g. AV-ESR-01 fragment 2103 Gy / 698 µGy/a = 3013 ka vs 3264 ka printed); methods and tables give different water contents"
+  },
+  {
+   "sample": "MA-ESR-02 [fragment]",
+   "De_Gy": [
+    1689,
+    65
+   ],
+   "geometry": null,
+   "enamel": {
+    "U_ppm": [
+     0.0432,
+     0.0067
+    ],
+    "u234_u238": [
+     1.1367,
+     0.1567
+    ],
+    "th230_u234": [
+     0.9451,
+     0.4433
+    ],
+    "thickness_um": [
+     600,
+     50
+    ],
+    "removed_outer_um": null,
+    "removed_inner_um": null,
+    "density": null,
+    "water_pct": [
+     3,
+     1
+    ]
+   },
+   "dentine": {
+    "U_ppm": [
+     0.8297,
+     0.0727
+    ],
+    "u234_u238": [
+     1.2197,
+     0.026
+    ],
+    "th230_u234": [
+     0.9943,
+     0.039
+    ],
+    "water_pct": [
+     5,
+     3
+    ],
+    "radon_loss_pct": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     0.94,
+     0.09
+    ],
+    "Th_ppm": [
+     2.3,
+     0.23
+    ],
+    "K_pct": [
+     0.07,
+     0.01
+    ],
+    "water_pct": [
+     15,
+     10
+    ]
+   },
+   "gamma_uGy_a": [
+    532,
+    41
+   ],
+   "cosmic_uGy_a": [
+    100,
+    80
+   ],
+   "depth_m": null,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "published": {
+    "dose_rates_uGy_a": {
+     "internal": [
+      2,
+      2
+     ],
+     "beta_dentine": [
+      11,
+      1
+     ],
+     "beta_sediment": [
+      34,
+      3
+     ],
+     "gamma": [
+      532,
+      41
+     ],
+     "cosmic": [
+      100,
+      80
+     ],
+     "total": [
+      574,
+      42
+     ]
+    },
+    "p_enamel": [
+     0.66,
+     0.17
+    ],
+    "p_dentine": [
+     -0.58,
+     0.09
+    ],
+    "ages_ka": {
+     "US": [
+      2954,
+      240,
+      240
+     ],
+     "LU": [
+      3064,
+      255
+     ],
+     "EU": [
+      2951,
+      239
+     ]
+    }
+   },
+   "provenance": "Table 2A (Milo's Cave) column MA-ESR-02, Dose (Fragments) row; ages Table 2A and 2B; p. 11",
+   "notes": "Thickness 0.60 +/- 0.05 mm converted to um.",
+   "exclude": "internally inconsistent in the source: De / printed total dose rate does not give the printed age (e.g. AV-ESR-01 fragment 2103 Gy / 698 µGy/a = 3013 ka vs 3264 ka printed); methods and tables give different water contents"
+  },
+  {
+   "sample": "MA-ESR-02 [powder]",
+   "De_Gy": [
+    1310,
+    61
+   ],
+   "geometry": null,
+   "enamel": {
+    "U_ppm": [
+     0.0432,
+     0.0067
+    ],
+    "u234_u238": [
+     1.1367,
+     0.1567
+    ],
+    "th230_u234": [
+     0.9451,
+     0.4433
+    ],
+    "thickness_um": [
+     600,
+     50
+    ],
+    "removed_outer_um": null,
+    "removed_inner_um": null,
+    "density": null,
+    "water_pct": [
+     3,
+     1
+    ]
+   },
+   "dentine": {
+    "U_ppm": [
+     0.8297,
+     0.0727
+    ],
+    "u234_u238": [
+     1.2197,
+     0.026
+    ],
+    "th230_u234": [
+     0.9943,
+     0.039
+    ],
+    "water_pct": [
+     5,
+     3
+    ],
+    "radon_loss_pct": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     0.94,
+     0.09
+    ],
+    "Th_ppm": [
+     2.3,
+     0.23
+    ],
+    "K_pct": [
+     0.07,
+     0.01
+    ],
+    "water_pct": [
+     15,
+     10
+    ]
+   },
+   "gamma_uGy_a": [
+    532,
+    41
+   ],
+   "cosmic_uGy_a": [
+    100,
+    80
+   ],
+   "depth_m": null,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "published": {
+    "dose_rates_uGy_a": null,
+    "p_enamel": null,
+    "p_dentine": null,
+    "ages_ka": {
+     "US": [
+      2285,
+      195,
+      195
+     ],
+     "LU": [
+      2399,
+      289
+     ],
+     "EU": [
+      2310,
+      273
+     ]
+    }
+   },
+   "provenance": "Table 2A column MA-ESR-02, Dose (Powder) row; ages Table 2A and 2B; p. 11",
+   "notes": null,
+   "exclude": "internally inconsistent in the source: De / printed total dose rate does not give the printed age (e.g. AV-ESR-01 fragment 2103 Gy / 698 µGy/a = 3013 ka vs 3264 ka printed); methods and tables give different water contents"
+  },
+  {
+   "sample": "MA-ESR-03 [fragment]",
+   "De_Gy": [
+    2578,
+    121
+   ],
+   "geometry": null,
+   "enamel": {
+    "U_ppm": [
+     14.05,
+     0.71
+    ],
+    "u234_u238": [
+     1.1477,
+     0.043
+    ],
+    "th230_u234": [
+     1.0276,
+     0.0503
+    ],
+    "thickness_um": [
+     850,
+     70
+    ],
+    "removed_outer_um": null,
+    "removed_inner_um": null,
+    "density": null,
+    "water_pct": [
+     3,
+     1
+    ]
+   },
+   "dentine": {
+    "U_ppm": [
+     10.65,
+     0.39
+    ],
+    "u234_u238": [
+     1.1207,
+     0.021
+    ],
+    "th230_u234": [
+     1.0494,
+     0.0333
+    ],
+    "water_pct": [
+     5,
+     3
+    ],
+    "radon_loss_pct": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     1.34,
+     0.13
+    ],
+    "Th_ppm": [
+     2.8,
+     0.28
+    ],
+    "K_pct": [
+     0.0784,
+     0.01
+    ],
+    "water_pct": [
+     15,
+     10
+    ]
+   },
+   "gamma_uGy_a": [
+    569,
+    48
+   ],
+   "cosmic_uGy_a": [
+    100,
+    80
+   ],
+   "depth_m": null,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "published": {
+    "dose_rates_uGy_a": {
+     "internal": [
+      6045,
+      603
+     ],
+     "beta_dentine": [
+      114,
+      8
+     ],
+     "beta_sediment": [
+      138,
+      12
+     ],
+     "gamma": [
+      569,
+      48
+     ],
+     "cosmic": [
+      100,
+      80
+     ],
+     "total": [
+      6620,
+      611
+     ]
+    },
+    "p_enamel": [
+     -0.96,
+     0.02
+    ],
+    "p_dentine": [
+     -0.97,
+     0.02
+    ],
+    "ages_ka": {
+     "US": null,
+     "LU": [
+      2599,
+      455
+     ],
+     "EU": [
+      1808,
+      426
+     ]
+    }
+   },
+   "provenance": "Table 2A column MA-ESR-03; Table 2B (continued) p. 11-12",
+   "notes": "US-ESR age ND, comment 'High uranium concentration'; LU and EU fragment ages printed. No powder De (NP = not enough enamel powder). Excluded by the authors.",
+   "exclude": "internally inconsistent in the source: De / printed total dose rate does not give the printed age (e.g. AV-ESR-01 fragment 2103 Gy / 698 µGy/a = 3013 ka vs 3264 ka printed); methods and tables give different water contents"
+  },
+  {
+   "sample": "MA-ESR-04 [fragment]",
+   "De_Gy": [
+    1507,
+    97
+   ],
+   "geometry": null,
+   "enamel": {
+    "U_ppm": [
+     0.153,
+     0.0133
+    ],
+    "u234_u238": [
+     1.27,
+     0.0583
+    ],
+    "th230_u234": [
+     1.0119,
+     0.0958
+    ],
+    "thickness_um": [
+     600,
+     50
+    ],
+    "removed_outer_um": null,
+    "removed_inner_um": null,
+    "density": null,
+    "water_pct": [
+     3,
+     1
+    ]
+   },
+   "dentine": {
+    "U_ppm": [
+     0.4567,
+     0.0493
+    ],
+    "u234_u238": [
+     1.0893,
+     0.03
+    ],
+    "th230_u234": [
+     1.06,
+     0.0477
+    ],
+    "water_pct": [
+     5,
+     3
+    ],
+    "radon_loss_pct": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     0.36,
+     0.04
+    ],
+    "Th_ppm": [
+     1.9,
+     0.19
+    ],
+    "K_pct": [
+     0.06,
+     0.01
+    ],
+    "water_pct": [
+     15,
+     10
+    ]
+   },
+   "gamma_uGy_a": [
+    486,
+    46
+   ],
+   "cosmic_uGy_a": [
+    100,
+    80
+   ],
+   "depth_m": null,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "published": {
+    "dose_rates_uGy_a": {
+     "internal": [
+      89,
+      11
+     ],
+     "beta_dentine": [
+      5,
+      1
+     ],
+     "beta_sediment": [
+      15,
+      3
+     ],
+     "gamma": [
+      486,
+      46
+     ],
+     "cosmic": [
+      100,
+      80
+     ],
+     "total": [
+      638,
+      43
+     ]
+    },
+    "p_enamel": [
+     2.31,
+     1.32
+    ],
+    "p_dentine": [
+     1.36,
+     0.96
+    ],
+    "ages_ka": {
+     "US": [
+      2736,
+      248,
+      248
+     ],
+     "LU": [
+      3035,
+      316
+     ],
+     "EU": [
+      2836,
+      335
+     ]
+    }
+   },
+   "provenance": "Table 2A column MA-ESR-04, Dose (Fragments) row; Table 2A/2B; p. 11-12",
+   "notes": null,
+   "exclude": "internally inconsistent in the source: De / printed total dose rate does not give the printed age (e.g. AV-ESR-01 fragment 2103 Gy / 698 µGy/a = 3013 ka vs 3264 ka printed); methods and tables give different water contents"
+  },
+  {
+   "sample": "MA-ESR-04 [powder]",
+   "De_Gy": [
+    1769,
+    48
+   ],
+   "geometry": null,
+   "enamel": {
+    "U_ppm": [
+     0.153,
+     0.0133
+    ],
+    "u234_u238": [
+     1.27,
+     0.0583
+    ],
+    "th230_u234": [
+     1.0119,
+     0.0958
+    ],
+    "thickness_um": [
+     600,
+     50
+    ],
+    "removed_outer_um": null,
+    "removed_inner_um": null,
+    "density": null,
+    "water_pct": [
+     3,
+     1
+    ]
+   },
+   "dentine": {
+    "U_ppm": [
+     0.4567,
+     0.0493
+    ],
+    "u234_u238": [
+     1.0893,
+     0.03
+    ],
+    "th230_u234": [
+     1.06,
+     0.0477
+    ],
+    "water_pct": [
+     5,
+     3
+    ],
+    "radon_loss_pct": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     0.36,
+     0.04
+    ],
+    "Th_ppm": [
+     1.9,
+     0.19
+    ],
+    "K_pct": [
+     0.06,
+     0.01
+    ],
+    "water_pct": [
+     15,
+     10
+    ]
+   },
+   "gamma_uGy_a": [
+    486,
+    46
+   ],
+   "cosmic_uGy_a": [
+    100,
+    80
+   ],
+   "depth_m": null,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "published": {
+    "dose_rates_uGy_a": null,
+    "p_enamel": null,
+    "p_dentine": null,
+    "ages_ka": {
+     "US": [
+      2792,
+      202,
+      202
+     ],
+     "LU": [
+      3142,
+      355
+     ],
+     "EU": [
+      2933,
+      311
+     ]
+    }
+   },
+   "provenance": "Table 2A column MA-ESR-04, Dose (Powder) row; Table 2A/2B; p. 11-12",
+   "notes": null,
+   "exclude": "internally inconsistent in the source: De / printed total dose rate does not give the printed age (e.g. AV-ESR-01 fragment 2103 Gy / 698 µGy/a = 3013 ka vs 3264 ka printed); methods and tables give different water contents"
+  },
+  {
+   "sample": "MA-ESR-05 [fragment]",
+   "De_Gy": [
+    2210,
+    211
+   ],
+   "geometry": null,
+   "enamel": {
+    "U_ppm": [
+     0.5525,
+     0.025
+    ],
+    "u234_u238": [
+     1.3225,
+     0.0825
+    ],
+    "th230_u234": [
+     1.1827,
+     0.0525
+    ],
+    "thickness_um": [
+     610,
+     30
+    ],
+    "removed_outer_um": null,
+    "removed_inner_um": null,
+    "density": null,
+    "water_pct": [
+     3,
+     1
+    ]
+   },
+   "dentine": {
+    "U_ppm": [
+     10.365,
+     1.035
+    ],
+    "u234_u238": [
+     1.068,
+     0.015
+    ],
+    "th230_u234": [
+     1.0253,
+     0.0263
+    ],
+    "water_pct": [
+     5,
+     3
+    ],
+    "radon_loss_pct": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     0.76,
+     0.08
+    ],
+    "Th_ppm": [
+     1.47,
+     0.14
+    ],
+    "K_pct": [
+     0.07,
+     0.01
+    ],
+    "water_pct": [
+     15,
+     10
+    ]
+   },
+   "gamma_uGy_a": [
+    532,
+    41
+   ],
+   "cosmic_uGy_a": [
+    100,
+    80
+   ],
+   "depth_m": null,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "published": {
+    "dose_rates_uGy_a": {
+     "internal": [
+      312,
+      37
+     ],
+     "beta_dentine": [
+      161,
+      71
+     ],
+     "beta_sediment": [
+      191,
+      76
+     ],
+     "gamma": [
+      532,
+      41
+     ],
+     "cosmic": [
+      100,
+      80
+     ],
+     "total": [
+      1036,
+      97
+     ]
+    },
+    "p_enamel": [
+     0.4,
+     0.76
+    ],
+    "p_dentine": [
+     -0.05,
+     0.57
+    ],
+    "ages_ka": {
+     "US": [
+      2102,
+      267,
+      267
+     ],
+     "LU": [
+      2790,
+      322
+     ],
+     "EU": [
+      2086,
+      246
+     ]
+    }
+   },
+   "provenance": "Table 2A column MA-ESR-05; Table 2B (continued); p. 11-12",
+   "notes": "No powder De (NP). Enamel 230Th/234U = 1.1827 > 1.",
+   "exclude": "internally inconsistent in the source: De / printed total dose rate does not give the printed age (e.g. AV-ESR-01 fragment 2103 Gy / 698 µGy/a = 3013 ka vs 3264 ka printed); methods and tables give different water contents"
+  }
+ ],
+ "completeness": "partial: enamel removal thicknesses, sample geometry, conversion factors, beta-attenuation method and water basis not stated; dose rates/p-values published only for fragment calculations (not for powder ages); Table S1 (supplement) not read",
+ "extraction_notes": "Extracted with pdftotext -layout and verified against rendered page images (pp. 10-11). Each tooth has a fragment De (X-ray, McDose 2, SSE fit) and a powder De (gamma); entries are split into '[fragment]' and '[powder]' (the bracket suffix is ours; the paper labels columns AV-ESR-0x / MA-ESR-0x). Enamel/dentine/sediment inputs are identical for both. Table unit header reads 'uGy a-1' for dose rates. Ages printed in ka (e.g. 3,264 ka). Enamel water 3 +/- 1 % is listed in the table (stored as enamel.water_pct, an extra key). INCONSISTENCIES in the source: Methods text says dentine water 5 +/- 2 wt% and sediment water 'fixed value of 10% +/- 5 wt%', but Tables 1-2 list dentine 5 +/- 3 % and sediment 15 +/- 10 %; table values transcribed. De/total-dose-rate quotients do not reproduce the printed US ages exactly (e.g. AV-ESR-01 fragment 2103/0.698 = 3013 ka vs printed 3264 ka), so the printed 'Total dose rate' may not be the time-averaged rate used for the age. Text says 'USER program (Shao et al., 2012)' (USESR); EU and LU ages computed with DATA (Grun 2009). Bold values in Table 1 (AV-ESR-02 isotope ratios) are approximations per the caption. Units of 'mGy a-1' in the text extraction are the micro sign mis-rendered.",
+ "benchmark": false,
+ "benchmark_reason": "internally inconsistent in the source (De / printed dose rate does not give the printed ages)"
+}

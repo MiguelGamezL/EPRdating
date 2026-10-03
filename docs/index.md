@@ -22,7 +22,8 @@ its uncertainty.
 | **Figures** | Spectra, dose-response, dose-rate budget, age distribution, gamma spectra and per-line contents. |
 
 The physics is validated against ROSY 2.0 (ages within −0.5 to +0.7 %),
-DATA (−2.6 to +1.6 % with DATA's beta convention), published US-ESR ages,
+DATA (−2.6 to +1.6 % with DATA's beta convention), 58 published ages from
+nine studies (all within 10 %, 56 within the published 1σ),
 and third-party EPR and gamma files — see
 [Validation](validation.md).
 

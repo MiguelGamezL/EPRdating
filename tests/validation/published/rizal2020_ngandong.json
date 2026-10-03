@@ -1,0 +1,423 @@
+{
+ "study_id": "rizal2020_ngandong",
+ "reference": "Rizal Y, Westaway KE, Zaim Y, van den Bergh GD, et al. (2020) Last appearance of Homo erectus at Ngandong, Java, 117,000-108,000 years ago. Nature 577:381-385. https://doi.org/10.1038/s41586-019-1863-2 (Supplementary Information, Supplementary Table 9)",
+ "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41586-019-1863-2/MediaObjects/41586_2019_1863_MOESM1_ESM.pdf ; https://www.nature.com/articles/s41586-019-1863-2 (reference list)",
+ "software": "USESR",
+ "conventions": {
+  "conversion_factors": "Guerin, Mercier & Adamiec 2011 (ref. 73)",
+  "k_alpha": null,
+  "beta_attenuation": null,
+  "water_basis": null,
+  "u234_u238_meaning": "measured present-day",
+  "radon_loss": null,
+  "cosmic": "169 +/- 32 uGy/a for all three samples (method not read)",
+  "gamma_source": "NDG-1038 and NDG-1163: in situ gamma dose rate 430 +/- 50 uGy/a; NDG-2569: dose rate and sediment content from high-resolution gamma spectrometry on two sediment samples collected near the tooth (385 +/- 38 uGy/a)"
+ },
+ "samples": [
+  {
+   "sample": "NDG-1038",
+   "De_Gy": [
+    153.1,
+    7.3
+   ],
+   "geometry": null,
+   "enamel": {
+    "U_ppm": [
+     3.02,
+     0.23
+    ],
+    "u234_u238": [
+     1.0793,
+     0.0053
+    ],
+    "th230_u234": [
+     0.3659,
+     0.0033
+    ],
+    "thickness_um": [
+     1424,
+     238
+    ],
+    "removed_outer_um": [
+     100,
+     10
+    ],
+    "removed_inner_um": [
+     100,
+     10
+    ],
+    "density": null,
+    "water_pct": [
+     3,
+     1
+    ]
+   },
+   "dentine": {
+    "U_ppm": [
+     58.9,
+     3.5
+    ],
+    "u234_u238": [
+     1.0776,
+     0.0044
+    ],
+    "th230_u234": [
+     0.4805,
+     0.0027
+    ],
+    "water_pct": [
+     8,
+     3
+    ],
+    "radon_loss_pct": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     2.3,
+     0.1
+    ],
+    "Th_ppm": [
+     6.7,
+     0.1
+    ],
+    "K_pct": [
+     1.4,
+     0.1
+    ],
+    "water_pct": [
+     10,
+     2
+    ]
+   },
+   "gamma_uGy_a": [
+    430,
+    50
+   ],
+   "cosmic_uGy_a": [
+    169,
+    32
+   ],
+   "depth_m": null,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "published": {
+    "dose_rates_uGy_a": {
+     "internal": [
+      295,
+      127
+     ],
+     "beta_dentine": [
+      253,
+      109
+     ],
+     "beta_sediment": [
+      118,
+      17
+     ],
+     "gamma": [
+      430,
+      50
+     ],
+     "cosmic": [
+      169,
+      32
+     ],
+     "total": [
+      1265,
+      78
+     ]
+    },
+    "p_enamel": [
+     0.2,
+     0.3
+    ],
+    "p_dentine": [
+     -0.4,
+     0.2
+    ],
+    "ages_ka": {
+     "US": [
+      121,
+      16,
+      16
+     ]
+    }
+   },
+   "provenance": "Supplementary Information, Supplementary Table 9 'Summary of the US-ESR parameters and results', column NDG-1038",
+   "notes": "De from X-ray irradiated enamel fragment fitted with McDose 2.0 (footnote a); U-series by LA-MC-ICPMS, dentine values averaged over the entire tooth (footnote b). Removed thickness from SI text: 'each fragment was stripped of the outer ~100 microns +/-10% on each side' (stored as 100 +/- 10 um each side)."
+  },
+  {
+   "sample": "NDG-1163",
+   "De_Gy": [
+    124.8,
+    6.6
+   ],
+   "geometry": null,
+   "enamel": {
+    "U_ppm": [
+     2.25,
+     0.61
+    ],
+    "u234_u238": [
+     1.0826,
+     0.0058
+    ],
+    "th230_u234": [
+     0.2713,
+     0.008
+    ],
+    "thickness_um": [
+     1516,
+     322
+    ],
+    "removed_outer_um": [
+     100,
+     10
+    ],
+    "removed_inner_um": [
+     100,
+     10
+    ],
+    "density": null,
+    "water_pct": [
+     3,
+     1
+    ]
+   },
+   "dentine": {
+    "U_ppm": [
+     31.4,
+     2.9
+    ],
+    "u234_u238": [
+     1.0655,
+     0.0037
+    ],
+    "th230_u234": [
+     0.4169,
+     0.0054
+    ],
+    "water_pct": [
+     8,
+     3
+    ],
+    "radon_loss_pct": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     2.3,
+     0.1
+    ],
+    "Th_ppm": [
+     6.7,
+     0.1
+    ],
+    "K_pct": [
+     1.4,
+     0.1
+    ],
+    "water_pct": [
+     10,
+     2
+    ]
+   },
+   "gamma_uGy_a": [
+    430,
+    50
+   ],
+   "cosmic_uGy_a": [
+    169,
+    32
+   ],
+   "depth_m": null,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "published": {
+    "dose_rates_uGy_a": {
+     "internal": [
+      122,
+      93
+     ],
+     "beta_dentine": [
+      97,
+      73
+     ],
+     "beta_sediment": [
+      113,
+      21
+     ],
+     "gamma": [
+      430,
+      50
+     ],
+     "cosmic": [
+      169,
+      32
+     ],
+     "total": [
+      931,
+      34
+     ]
+    },
+    "p_enamel": [
+     1.5,
+     0.5
+    ],
+    "p_dentine": [
+     0.1,
+     0.3
+    ],
+    "ages_ka": {
+     "US": [
+      134,
+      18,
+      18
+     ]
+    }
+   },
+   "provenance": "Supplementary Table 9, column NDG-1163",
+   "notes": "Same sediment U/Th/K and in situ gamma as NDG-1038."
+  },
+  {
+   "sample": "NDG-2569",
+   "De_Gy": [
+    109.8,
+    5.8
+   ],
+   "geometry": null,
+   "enamel": {
+    "U_ppm": [
+     1.8,
+     0.41
+    ],
+    "u234_u238": [
+     1.107,
+     0.0072
+    ],
+    "th230_u234": [
+     0.1932,
+     0.0102
+    ],
+    "thickness_um": [
+     1567,
+     338
+    ],
+    "removed_outer_um": [
+     100,
+     10
+    ],
+    "removed_inner_um": [
+     100,
+     10
+    ],
+    "density": null,
+    "water_pct": [
+     3,
+     1
+    ]
+   },
+   "dentine": {
+    "U_ppm": [
+     65.2,
+     4.5
+    ],
+    "u234_u238": [
+     1.0888,
+     0.0054
+    ],
+    "th230_u234": [
+     0.465,
+     0.003
+    ],
+    "water_pct": [
+     8,
+     3
+    ],
+    "radon_loss_pct": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     1.0,
+     0.3
+    ],
+    "Th_ppm": [
+     2.6,
+     0.3
+    ],
+    "K_pct": [
+     0.74,
+     0.09
+    ],
+    "water_pct": [
+     10,
+     2
+    ]
+   },
+   "gamma_uGy_a": [
+    385,
+    38
+   ],
+   "cosmic_uGy_a": [
+    169,
+    32
+   ],
+   "depth_m": null,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "published": {
+    "dose_rates_uGy_a": {
+     "internal": [
+      70,
+      37
+     ],
+     "beta_dentine": [
+      262,
+      139
+     ],
+     "beta_sediment": [
+      53,
+      12
+     ],
+     "gamma": [
+      385,
+      38
+     ],
+     "cosmic": [
+      169,
+      32
+     ],
+     "total": [
+      939,
+      153
+     ]
+    },
+    "p_enamel": [
+     2.7,
+     0.7
+    ],
+    "p_dentine": [
+     -0.4,
+     0.2
+    ],
+    "ages_ka": {
+     "US": [
+      117,
+      18,
+      18
+     ]
+    }
+   },
+   "provenance": "Supplementary Table 9, column NDG-2569",
+   "notes": "Sediment U/Th/K and gamma from high-resolution gamma spectrometry of two sediment samples collected near the tooth (not in situ)."
+  }
+ ],
+ "completeness": "partial: alpha efficiency, beta-attenuation method, water basis, Rn assumption and sample geometry not found in the parts of the SI that could be read; all per-sample inputs and published outputs present",
+ "extraction_notes": "Supplementary Table 9 read twice through WebFetch (sample-wise and parameter-wise); both reads agreed on every value. Dose rate units print as 'mGy a-1' in the PDF text layer, which is the micro sign mis-rendered: values are uGy/a (check: 153.1 Gy / 1.265 Gy/ka = 121 ka, matching the printed age). Enamel thickness header prints '(m)', likewise um. Ages: 121 +/- 16, 134 +/- 18, 117 +/- 18 ka printed symmetric; error level (1 or 2 sigma) not confirmed. Program: 'US-ESR ages were modeled using the program by [72] (Shao et al. 2014, Quat. Geochronol. 22:99-106), and updated dose rate conversion factors of [73] (Guerin et al. 2011)'. ESR intensities from T1-B2 peak-to-peak amplitudes on merged signal; X-ray irradiated fragments (Freiberg chamber, 200 um Al foil). The SI PDF text available to WebFetch was truncated near the end (bone U-series section), so later methodological detail could not be checked.",
+ "benchmark": true
+}

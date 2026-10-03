@@ -1,0 +1,212 @@
+{
+ "study_id": "oliveira2010_alagoas_stegomastodon",
+ "reference": "Oliveira, L.C., Kinoshita, A., Barreto, A.M.F., Figueiredo, A.M., Silva, J.L.L., Baffa, O. (2010) ESR dating of teeth from Brazilian megafauna. Journal of Physics: Conference Series 249, 012062. https://doi.org/10.1088/1742-6596/249/1/012062",
+ "url": "https://repositorio.ipen.br/bitstreams/20ba39cc-9ef4-49e7-ae9b-9bd95050f320/download",
+ "software": "ROSY",
+ "conventions": {
+  "conversion_factors": null,
+  "k_alpha": null,
+  "beta_attenuation": "ROSY one-group",
+  "water_basis": null,
+  "u234_u238_meaning": null,
+  "radon_loss": null,
+  "cosmic": "250 uGy/a (Table 2 caption)",
+  "gamma_source": "computed from one soil sample (NAA)"
+ },
+ "samples": [
+  {
+   "sample": "AL1",
+   "De_Gy": [
+    24.5,
+    0.5
+   ],
+   "geometry": null,
+   "enamel": {
+    "U_ppm": null,
+    "U_ppm_upper_limit": 0.05,
+    "Th_ppm_upper_limit": 0.01,
+    "K_ppm_upper_limit": 750,
+    "u234_u238": null,
+    "th230_u234": null,
+    "thickness_um": null,
+    "removed_outer_um": null,
+    "removed_inner_um": null,
+    "removed_um_side_unspecified": [
+     500,
+     null
+    ],
+    "density": null
+   },
+   "dentine": {
+    "U_ppm": [
+     10.9,
+     0.5
+    ],
+    "Th_ppm_upper_limit": 0.01,
+    "K_ppm_upper_limit": 750,
+    "u234_u238": null,
+    "th230_u234": null,
+    "water_pct": null,
+    "radon_loss_pct": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     4.1,
+     0.8
+    ],
+    "Th_ppm": [
+     22.7,
+     0.2
+    ],
+    "K_ppm": [
+     17837,
+     444
+    ],
+    "K_pct": [
+     1.7837,
+     0.0444
+    ],
+    "water_pct": null
+   },
+   "gamma_uGy_a": null,
+   "cosmic_uGy_a": [
+    250,
+    null
+   ],
+   "depth_m": null,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "published": {
+    "dose_rates_uGy_a": {
+     "EU": {
+      "total": [
+       2355,
+       null
+      ]
+     },
+     "LU": {
+      "total": [
+       2340,
+       null
+      ]
+     }
+    },
+    "p_enamel": null,
+    "p_dentine": null,
+    "ages_ka": {
+     "EU": [
+      10,
+      0.5
+     ],
+     "LU": [
+      10,
+      0.5
+     ]
+    }
+   },
+   "provenance": "Table 1 and Table 2 (p. 4), sample AL1",
+   "notes": "Total dose rate Dt printed in mGy/a (2.355 etc.), converted to uGy/a here (x1000); includes cosmic 250 uGy/a per Table 2 caption. Stegomastodon teeth. Note AL1: 24.5/2.355 = 10.4 ka (published 10 +- 0.5); AL2: 87.8/2.220 = 39.5 ka."
+  },
+  {
+   "sample": "AL2",
+   "De_Gy": [
+    87.8,
+    0.5
+   ],
+   "geometry": null,
+   "enamel": {
+    "U_ppm": null,
+    "U_ppm_upper_limit": 0.05,
+    "Th_ppm_upper_limit": 0.01,
+    "K_ppm_upper_limit": 750,
+    "u234_u238": null,
+    "th230_u234": null,
+    "thickness_um": null,
+    "removed_outer_um": null,
+    "removed_inner_um": null,
+    "removed_um_side_unspecified": [
+     500,
+     null
+    ],
+    "density": null
+   },
+   "dentine": {
+    "U_ppm": [
+     2.9,
+     0.5
+    ],
+    "Th_ppm_upper_limit": 0.01,
+    "K_ppm_upper_limit": 750,
+    "u234_u238": null,
+    "th230_u234": null,
+    "water_pct": null,
+    "radon_loss_pct": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     4.1,
+     0.8
+    ],
+    "Th_ppm": [
+     22.7,
+     0.2
+    ],
+    "K_ppm": [
+     17837,
+     444
+    ],
+    "K_pct": [
+     1.7837,
+     0.0444
+    ],
+    "water_pct": null
+   },
+   "gamma_uGy_a": null,
+   "cosmic_uGy_a": [
+    250,
+    null
+   ],
+   "depth_m": null,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "published": {
+    "dose_rates_uGy_a": {
+     "EU": {
+      "total": [
+       2220,
+       null
+      ]
+     },
+     "LU": {
+      "total": [
+       2202,
+       null
+      ]
+     }
+    },
+    "p_enamel": null,
+    "p_dentine": null,
+    "ages_ka": {
+     "EU": [
+      39.5,
+      1
+     ],
+     "LU": [
+      39.8,
+      1
+     ]
+    }
+   },
+   "provenance": "Table 1 and Table 2 (p. 4), sample AL2",
+   "notes": "Total dose rate Dt printed in mGy/a (2.355 etc.), converted to uGy/a here (x1000); includes cosmic 250 uGy/a per Table 2 caption. Stegomastodon teeth. Note AL1: 24.5/2.355 = 10.4 ka (published 10 +- 0.5); AL2: 87.8/2.220 = 39.5 ka."
+  }
+ ],
+ "completeness": "partial: enamel U below detection, no thicknesses (only ~500 um etched), no water, no k, no 234U/238U; total dose rate per model published (no components)",
+ "extraction_notes": "Site UTM 913349/3714965, Alagoas, Brazil. Both tables read twice with identical values. Soil K printed in ppm (17837 +- 444), converted to % as an extra key.",
+ "benchmark": false,
+ "benchmark_reason": "enamel U below detection; no dose-rate components or thicknesses"
+}

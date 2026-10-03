@@ -144,3 +144,28 @@ def test_csus_age_and_u_dose(name):
 def test_radon_loss_is_ignored_by_data():
     assert RES["US_Rn50"]["usesr"] == RES["US_B0"]["usesr"]
     assert RES["US_Rn50"]["csus"] == RES["US_B0"]["csus"]
+
+
+@pytest.mark.parametrize("name", ["US_B0", "US_r20", "US_th80", "US_th95", "US_rmix"])
+def test_eu_in_the_useries_screen_back_corrects_with_the_closed_system_age(name):
+    # in the U-series screen DATA's EU/LU columns take the measured 234U/238U
+    # back to the initial ratio over each tissue's closed-system U-series age
+    import math
+    from dataclasses import replace
+
+    from eprdating.series import LAMBDA
+    from eprdating.usesr import closed_system_age
+
+    c = copy.deepcopy(CASES[name])
+    c["Rn"] = [0.0, 0.0]
+    u = c["useries"]
+
+    def r0(t):
+        (r, _), (th, _) = u[t]
+        return 1 + (r - 1) * math.exp(LAMBDA["U234"] * closed_system_age(th, r))
+
+    t = replace(tooth(c, "EU"), u234_u238_enamel=r0("enamel"), u234_u238_dentine=r0("de1"),
+                u234_u238_cementum=r0("de2"), u234_u238_is="initial")
+    T = RES[name]["age"]["EU"][0]
+    acc = {x.name: x.accumulated(T) / T * 1000 for x in t.components()}
+    assert acc["enamel alpha"] + acc["enamel beta"] == pytest.approx(RES[name]["internal"]["EU"][0], rel=0.02)

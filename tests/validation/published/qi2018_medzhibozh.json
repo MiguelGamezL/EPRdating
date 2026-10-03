@@ -1,0 +1,2601 @@
+{
+ "study_id": "qi2018_medzhibozh",
+ "reference": "Qi, J.K., Blackwell, B.A.B., Singh, I.K., Stepanchuk, V.N., Blickstein, J.I.B., Florentin, J.A., Skinner, A.R. (2018) Preliminary results of dating for the Lower Paleolithic sites of Ukraine (Medzhibozh 1 and Medzhibozh A, Khmelnitskii region) by electron spin resonance method. Geofizicheskiy Zhurnal 40(4) (in Russian). Article page: https://journals.uran.ua/geofizicheskiy/article/view/140614",
+ "url": "https://journals.uran.ua/geofizicheskiy/article/download/140614/138376",
+ "software": "ROSY",
+ "software_detail": "Rosy v. 1.4.2 (ages, dose rates, errors); sedimentary dose rates volumetrically and time averaged beforehand (Blackwell group approach)",
+ "conventions": {
+  "conversion_factors": null,
+  "k_alpha": [
+   0.15,
+   0.02
+  ],
+  "beta_attenuation": "ROSY one-group (Brennan et al. 1997)",
+  "water_basis": "wt% (sediment 10+-5 wt% dry periods, 40+-5 wt% wet periods; enamel 2+-2 wt%; dentine 5+-2 wt%) -- basis of wt% (wet or dry mass) not stated",
+  "u234_u238_meaning": "initial (234U/238U)0 = 1.20+-0.20",
+  "radon_loss": "Rn(tooth) = 0+-0 vol%",
+  "cosmic": "time-averaged D_cos(t) per subsample (Table 4); present-day Dcos(0) = 292.9 uGy/a stated in text",
+  "gamma_source": "sediment NAA (Table 3), volumetrically and time-averaged D_sed(t) per subsample (Table 4); densities rho_sed 2.66, rho_en 2.95, rho_den 2.85 g/cm3"
+ },
+ "samples": [
+  {
+   "sample": "AT29en1-5",
+   "De_Gy": [
+    752.3,
+    22.6
+   ],
+   "geometry": "outer side not specified (only one dentine U value)",
+   "enamel": {
+    "U_ppm": [
+     4.7,
+     0.02
+    ],
+    "u234_u238": null,
+    "th230_u234": null,
+    "thickness_um": null,
+    "removed_outer_um": null,
+    "removed_inner_um": null,
+    "density": 2.95,
+    "water_wt_pct": [
+     2,
+     2
+    ],
+    "removed_um_side_unspecified": [
+     20,
+     null
+    ]
+   },
+   "dentine": {
+    "U_ppm": [
+     12.2,
+     0.02
+    ],
+    "u234_u238": null,
+    "th230_u234": null,
+    "water_pct": [
+     5,
+     2
+    ],
+    "radon_loss_pct": [
+     0,
+     0
+    ],
+    "density": 2.85,
+    "side": "inner (internal) dentine"
+   },
+   "dentine2_or_cementum": null,
+   "sediment": null,
+   "gamma_uGy_a": null,
+   "cosmic_uGy_a": [
+    144.0,
+    4.0
+   ],
+   "external_sediment_uGy_a": [
+    289.0,
+    87.0
+   ],
+   "depth_m": null,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "published": {
+    "dose_rates_uGy_a": {
+     "sed_vol_time_avg": [
+      289.0,
+      87.0
+     ],
+     "cosmic_time_avg": [
+      144.0,
+      4.0
+     ]
+    },
+    "p_enamel": null,
+    "p_dentine": null,
+    "ages_ka": {
+     "EU": [
+      243.1,
+      22.1
+     ],
+     "LU": [
+      423.9,
+      39.6
+     ],
+     "RU2": [
+      615.9,
+      61.3
+     ],
+     "RU4": [
+      775.1,
+      85.5
+     ],
+     "RU6": [
+      919.1,
+      112.3
+     ],
+     "RU8": [
+      990.1,
+      126.0
+     ],
+     "RU10": [
+      1062.2,
+      143.1
+     ],
+     "XU": [
+      1325.8,
+      213.8
+     ]
+    }
+   },
+   "provenance": "Table 4 row AT29en1-5 (A_S, D_sed(t), D_cos(t), ages); Table 2 row AT29en1-5 (U); site Medzhibozh A, layer 1",
+   "notes": "inner dentine value is mixed internal+external dentine (fn 1). U errors: Table 2 states a standard analytical error of +-0.02 ppm for all measurements. RU_x = recent uptake with p=x; XU = p=20; EU p=-1, LU p=0 (Blackwell parametrisation)."
+  },
+  {
+   "sample": "AT29en6-8",
+   "De_Gy": [
+    530.0,
+    30.5
+   ],
+   "geometry": "outer side not specified (only one dentine U value)",
+   "enamel": {
+    "U_ppm": [
+     4.68,
+     0.02
+    ],
+    "u234_u238": null,
+    "th230_u234": null,
+    "thickness_um": null,
+    "removed_outer_um": null,
+    "removed_inner_um": null,
+    "density": 2.95,
+    "water_wt_pct": [
+     2,
+     2
+    ],
+    "removed_um_side_unspecified": [
+     20,
+     null
+    ]
+   },
+   "dentine": {
+    "U_ppm": [
+     14.5,
+     0.02
+    ],
+    "u234_u238": null,
+    "th230_u234": null,
+    "water_pct": [
+     5,
+     2
+    ],
+    "radon_loss_pct": [
+     0,
+     0
+    ],
+    "density": 2.85,
+    "side": "inner (internal) dentine"
+   },
+   "dentine2_or_cementum": null,
+   "sediment": null,
+   "gamma_uGy_a": null,
+   "cosmic_uGy_a": [
+    137.0,
+    2.0
+   ],
+   "external_sediment_uGy_a": [
+    300.0,
+    91.0
+   ],
+   "depth_m": null,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "published": {
+    "dose_rates_uGy_a": {
+     "sed_vol_time_avg": [
+      300.0,
+      91.0
+     ],
+     "cosmic_time_avg": [
+      137.0,
+      2.0
+     ]
+    },
+    "p_enamel": null,
+    "p_dentine": null,
+    "ages_ka": {
+     "EU": [
+      186.9,
+      19.2
+     ],
+     "LU": [
+      320.1,
+      34.3
+     ],
+     "RU2": [
+      450.6,
+      51.8
+     ],
+     "RU4": [
+      562.4,
+      68.9
+     ],
+     "RU6": [
+      668.0,
+      90.3
+     ],
+     "RU8": [
+      802.1,
+      123.2
+     ],
+     "RU10": [
+      759.5,
+      111.1
+     ],
+     "XU": [
+      945.2,
+      161.1
+     ]
+    }
+   },
+   "provenance": "Table 4 row AT29en6-8 (A_S, D_sed(t), D_cos(t), ages); Table 2 row AT29en6-8 (U); site Medzhibozh A, layer 1",
+   "notes": "inner dentine value is mixed internal+external dentine (fn 1). U errors: Table 2 states a standard analytical error of +-0.02 ppm for all measurements. RU_x = recent uptake with p=x; XU = p=20; EU p=-1, LU p=0 (Blackwell parametrisation)."
+  },
+  {
+   "sample": "AT41en1+3",
+   "De_Gy": [
+    607.5,
+    34.0
+   ],
+   "geometry": "DE/EN/DE (inner and outer dentine)",
+   "enamel": {
+    "U_ppm": [
+     1.47,
+     0.02
+    ],
+    "u234_u238": null,
+    "th230_u234": null,
+    "thickness_um": null,
+    "removed_outer_um": null,
+    "removed_inner_um": null,
+    "density": 2.95,
+    "water_wt_pct": [
+     2,
+     2
+    ],
+    "removed_um_side_unspecified": [
+     20,
+     null
+    ]
+   },
+   "dentine": {
+    "U_ppm": [
+     129.8,
+     0.02
+    ],
+    "u234_u238": null,
+    "th230_u234": null,
+    "water_pct": [
+     5,
+     2
+    ],
+    "radon_loss_pct": [
+     0,
+     0
+    ],
+    "density": 2.85,
+    "side": "inner (internal) dentine"
+   },
+   "dentine2_or_cementum": {
+    "U_ppm": [
+     102.77,
+     0.02
+    ],
+    "u234_u238": null,
+    "th230_u234": null,
+    "water_pct": [
+     5,
+     2
+    ],
+    "radon_loss_pct": [
+     0,
+     0
+    ],
+    "density": 2.85,
+    "side": "outer (external) dentine"
+   },
+   "sediment": null,
+   "gamma_uGy_a": null,
+   "cosmic_uGy_a": [
+    135.0,
+    5.0
+   ],
+   "external_sediment_uGy_a": [
+    371.0,
+    26.0
+   ],
+   "depth_m": null,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "published": {
+    "dose_rates_uGy_a": {
+     "sed_vol_time_avg": [
+      371.0,
+      26.0
+     ],
+     "cosmic_time_avg": [
+      135.0,
+      5.0
+     ]
+    },
+    "p_enamel": null,
+    "p_dentine": null,
+    "ages_ka": {
+     "EU": [
+      108.2,
+      7.4
+     ],
+     "LU": [
+      193.3,
+      13.1
+     ],
+     "RU2": [
+      288.7,
+      19.9
+     ],
+     "RU4": [
+      375.4,
+      25.7
+     ],
+     "RU6": [
+      470.0,
+      32.4
+     ],
+     "RU8": [
+      509.5,
+      35.4
+     ],
+     "RU10": [
+      562.4,
+      39.6
+     ],
+     "XU": [
+      774.6,
+      57.3
+     ]
+    }
+   },
+   "provenance": "Table 4 row AT41en1+3 (A_S, D_sed(t), D_cos(t), ages); Table 2 row AT41en1+3 (U); site Medzhibozh 1, layer 16a",
+   "notes": "outer dentine: data unavailable, mean value assumed (fn 2). U errors: Table 2 states a standard analytical error of +-0.02 ppm for all measurements. RU_x = recent uptake with p=x; XU = p=20; EU p=-1, LU p=0 (Blackwell parametrisation)."
+  },
+  {
+   "sample": "AT41en2+4",
+   "De_Gy": [
+    804.4,
+    30.1
+   ],
+   "geometry": "DE/EN/DE (inner and outer dentine)",
+   "enamel": {
+    "U_ppm": [
+     6.11,
+     0.02
+    ],
+    "u234_u238": null,
+    "th230_u234": null,
+    "thickness_um": null,
+    "removed_outer_um": null,
+    "removed_inner_um": null,
+    "density": 2.95,
+    "water_wt_pct": [
+     2,
+     2
+    ],
+    "removed_um_side_unspecified": [
+     20,
+     null
+    ]
+   },
+   "dentine": {
+    "U_ppm": [
+     128.3,
+     0.02
+    ],
+    "u234_u238": null,
+    "th230_u234": null,
+    "water_pct": [
+     5,
+     2
+    ],
+    "radon_loss_pct": [
+     0,
+     0
+    ],
+    "density": 2.85,
+    "side": "inner (internal) dentine"
+   },
+   "dentine2_or_cementum": {
+    "U_ppm": [
+     102.77,
+     0.02
+    ],
+    "u234_u238": null,
+    "th230_u234": null,
+    "water_pct": [
+     5,
+     2
+    ],
+    "radon_loss_pct": [
+     0,
+     0
+    ],
+    "density": 2.85,
+    "side": "outer (external) dentine"
+   },
+   "sediment": null,
+   "gamma_uGy_a": null,
+   "cosmic_uGy_a": [
+    132.0,
+    4.0
+   ],
+   "external_sediment_uGy_a": [
+    376.0,
+    26.0
+   ],
+   "depth_m": null,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "published": {
+    "dose_rates_uGy_a": {
+     "sed_vol_time_avg": [
+      376.0,
+      26.0
+     ],
+     "cosmic_time_avg": [
+      132.0,
+      4.0
+     ]
+    },
+    "p_enamel": null,
+    "p_dentine": null,
+    "ages_ka": {
+     "EU": [
+      102.9,
+      6.1
+     ],
+     "LU": [
+      186.6,
+      11.0
+     ],
+     "RU2": [
+      280.7,
+      16.9
+     ],
+     "RU4": [
+      371.6,
+      21.8
+     ],
+     "RU6": [
+      477.3,
+      27.5
+     ],
+     "RU8": [
+      521.5,
+      30.2
+     ],
+     "RU10": [
+      584.3,
+      33.6
+     ],
+     "XU": [
+      868.2,
+      50.3
+     ]
+    }
+   },
+   "provenance": "Table 4 row AT41en2+4 (A_S, D_sed(t), D_cos(t), ages); Table 2 row AT41en2+4 (U); site Medzhibozh 1, layer 16a",
+   "notes": "outer dentine equals the assumed mean. U errors: Table 2 states a standard analytical error of +-0.02 ppm for all measurements. RU_x = recent uptake with p=x; XU = p=20; EU p=-1, LU p=0 (Blackwell parametrisation)."
+  },
+  {
+   "sample": "AT44en1",
+   "De_Gy": [
+    620.8,
+    26.7
+   ],
+   "geometry": "DE/EN/DE (inner and outer dentine)",
+   "enamel": {
+    "U_ppm": [
+     1.88,
+     0.02
+    ],
+    "u234_u238": null,
+    "th230_u234": null,
+    "thickness_um": null,
+    "removed_outer_um": null,
+    "removed_inner_um": null,
+    "density": 2.95,
+    "water_wt_pct": [
+     2,
+     2
+    ],
+    "removed_um_side_unspecified": [
+     20,
+     null
+    ]
+   },
+   "dentine": {
+    "U_ppm": [
+     129.61,
+     0.02
+    ],
+    "u234_u238": null,
+    "th230_u234": null,
+    "water_pct": [
+     5,
+     2
+    ],
+    "radon_loss_pct": [
+     0,
+     0
+    ],
+    "density": 2.85,
+    "side": "inner (internal) dentine"
+   },
+   "dentine2_or_cementum": {
+    "U_ppm": [
+     137.43,
+     0.02
+    ],
+    "u234_u238": null,
+    "th230_u234": null,
+    "water_pct": [
+     5,
+     2
+    ],
+    "radon_loss_pct": [
+     0,
+     0
+    ],
+    "density": 2.85,
+    "side": "outer (external) dentine"
+   },
+   "sediment": null,
+   "gamma_uGy_a": null,
+   "cosmic_uGy_a": [
+    141.0,
+    8.0
+   ],
+   "external_sediment_uGy_a": [
+    374.0,
+    27.0
+   ],
+   "depth_m": null,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "published": {
+    "dose_rates_uGy_a": {
+     "sed_vol_time_avg": [
+      374.0,
+      27.0
+     ],
+     "cosmic_time_avg": [
+      141.0,
+      8.0
+     ]
+    },
+    "p_enamel": null,
+    "p_dentine": null,
+    "ages_ka": {
+     "EU": [
+      102.8,
+      5.9
+     ],
+     "LU": [
+      184.4,
+      10.6
+     ],
+     "RU2": [
+      275.4,
+      16.2
+     ],
+     "RU4": [
+      359.1,
+      21.2
+     ],
+     "RU6": [
+      449.0,
+      26.3
+     ],
+     "RU8": [
+      486.6,
+      28.6
+     ],
+     "RU10": [
+      537.5,
+      31.8
+     ],
+     "XU": [
+      752.4,
+      48.1
+     ]
+    }
+   },
+   "provenance": "Table 4 row AT44en1 (A_S, D_sed(t), D_cos(t), ages); Table 2 row AT44en1 (U); site Medzhibozh 1, layer 16a",
+   "notes": "inner dentine: mean value assumed (fn 2). U errors: Table 2 states a standard analytical error of +-0.02 ppm for all measurements. RU_x = recent uptake with p=x; XU = p=20; EU p=-1, LU p=0 (Blackwell parametrisation)."
+  },
+  {
+   "sample": "AT44en2",
+   "De_Gy": [
+    1050.0,
+    39.0
+   ],
+   "geometry": "DE/EN/DE (inner and outer dentine)",
+   "enamel": {
+    "U_ppm": [
+     2.17,
+     0.02
+    ],
+    "u234_u238": null,
+    "th230_u234": null,
+    "thickness_um": null,
+    "removed_outer_um": null,
+    "removed_inner_um": null,
+    "density": 2.95,
+    "water_wt_pct": [
+     2,
+     2
+    ],
+    "removed_um_side_unspecified": [
+     20,
+     null
+    ]
+   },
+   "dentine": {
+    "U_ppm": [
+     121.43,
+     0.02
+    ],
+    "u234_u238": null,
+    "th230_u234": null,
+    "water_pct": [
+     5,
+     2
+    ],
+    "radon_loss_pct": [
+     0,
+     0
+    ],
+    "density": 2.85,
+    "side": "inner (internal) dentine"
+   },
+   "dentine2_or_cementum": {
+    "U_ppm": [
+     127.81,
+     0.02
+    ],
+    "u234_u238": null,
+    "th230_u234": null,
+    "water_pct": [
+     5,
+     2
+    ],
+    "radon_loss_pct": [
+     0,
+     0
+    ],
+    "density": 2.85,
+    "side": "outer (external) dentine"
+   },
+   "sediment": null,
+   "gamma_uGy_a": null,
+   "cosmic_uGy_a": [
+    144.0,
+    6.0
+   ],
+   "external_sediment_uGy_a": [
+    382.0,
+    28.0
+   ],
+   "depth_m": null,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "published": {
+    "dose_rates_uGy_a": {
+     "sed_vol_time_avg": [
+      382.0,
+      28.0
+     ],
+     "cosmic_time_avg": [
+      144.0,
+      6.0
+     ]
+    },
+    "p_enamel": null,
+    "p_dentine": null,
+    "ages_ka": {
+     "EU": [
+      158.2,
+      8.7
+     ],
+     "LU": [
+      286.5,
+      15.6
+     ],
+     "RU2": [
+      441.1,
+      24.3
+     ],
+     "RU4": [
+      584.4,
+      31.5
+     ],
+     "RU6": [
+      729.6,
+      39.6
+     ],
+     "RU8": [
+      805.4,
+      43.5
+     ],
+     "RU10": [
+      894.7,
+      48.3
+     ],
+     "XU": [
+      1245.4,
+      72.7
+     ]
+    }
+   },
+   "provenance": "Table 4 row AT44en2 (A_S, D_sed(t), D_cos(t), ages); Table 2 row AT44en2 (U); site Medzhibozh 1, layer 16a",
+   "notes": "outer dentine: mean value assumed (fn 2). U errors: Table 2 states a standard analytical error of +-0.02 ppm for all measurements. RU_x = recent uptake with p=x; XU = p=20; EU p=-1, LU p=0 (Blackwell parametrisation)."
+  },
+  {
+   "sample": "AT44en3",
+   "De_Gy": [
+    597.6,
+    19.2
+   ],
+   "geometry": "DE/EN/DE (inner and outer dentine)",
+   "enamel": {
+    "U_ppm": [
+     3.29,
+     0.02
+    ],
+    "u234_u238": null,
+    "th230_u234": null,
+    "thickness_um": null,
+    "removed_outer_um": null,
+    "removed_inner_um": null,
+    "density": 2.95,
+    "water_wt_pct": [
+     2,
+     2
+    ],
+    "Th_ppm": [
+     0.41,
+     0.28
+    ],
+    "K_pct": [
+     0.02,
+     0.01
+    ],
+    "removed_um_side_unspecified": [
+     20,
+     null
+    ]
+   },
+   "dentine": {
+    "U_ppm": [
+     133.92,
+     0.02
+    ],
+    "u234_u238": null,
+    "th230_u234": null,
+    "water_pct": [
+     5,
+     2
+    ],
+    "radon_loss_pct": [
+     0,
+     0
+    ],
+    "density": 2.85,
+    "side": "inner (internal) dentine"
+   },
+   "dentine2_or_cementum": {
+    "U_ppm": [
+     118.18,
+     0.02
+    ],
+    "u234_u238": null,
+    "th230_u234": null,
+    "water_pct": [
+     5,
+     2
+    ],
+    "radon_loss_pct": [
+     0,
+     0
+    ],
+    "density": 2.85,
+    "side": "outer (external) dentine"
+   },
+   "sediment": null,
+   "gamma_uGy_a": null,
+   "cosmic_uGy_a": [
+    130.0,
+    5.0
+   ],
+   "external_sediment_uGy_a": [
+    394.0,
+    28.0
+   ],
+   "depth_m": null,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "published": {
+    "dose_rates_uGy_a": {
+     "sed_vol_time_avg": [
+      394.0,
+      28.0
+     ],
+     "cosmic_time_avg": [
+      130.0,
+      5.0
+     ]
+    },
+    "p_enamel": null,
+    "p_dentine": null,
+    "ages_ka": {
+     "EU": [
+      88.3,
+      4.5
+     ],
+     "LU": [
+      158.8,
+      8.1
+     ],
+     "RU2": [
+      236.8,
+      12.4
+     ],
+     "RU4": [
+      322.2,
+      16.8
+     ],
+     "RU6": [
+      392.5,
+      20.2
+     ],
+     "RU8": [
+      425.2,
+      22.3
+     ],
+     "RU10": [
+      471.3,
+      24.9
+     ],
+     "XU": [
+      674.3,
+      37.4
+     ]
+    }
+   },
+   "provenance": "Table 4 row AT44en3 (A_S, D_sed(t), D_cos(t), ages); Table 2 row AT44en3 (U); site Medzhibozh 1, layer 16a",
+   "notes": "enamel Th 0.41+-0.28 ppm, K 0.02+-0.01 wt% (Table 3 row AT44en3). U errors: Table 2 states a standard analytical error of +-0.02 ppm for all measurements. RU_x = recent uptake with p=x; XU = p=20; EU p=-1, LU p=0 (Blackwell parametrisation)."
+  },
+  {
+   "sample": "AT44en4",
+   "De_Gy": [
+    151.2,
+    25.7
+   ],
+   "geometry": "DE/EN/DE (inner and outer dentine)",
+   "enamel": {
+    "U_ppm": null,
+    "u234_u238": null,
+    "th230_u234": null,
+    "thickness_um": null,
+    "removed_outer_um": null,
+    "removed_inner_um": null,
+    "density": 2.95,
+    "water_wt_pct": [
+     2,
+     2
+    ],
+    "removed_um_side_unspecified": [
+     20,
+     null
+    ]
+   },
+   "dentine": {
+    "U_ppm": [
+     129.61,
+     0.02
+    ],
+    "u234_u238": null,
+    "th230_u234": null,
+    "water_pct": [
+     5,
+     2
+    ],
+    "radon_loss_pct": [
+     0,
+     0
+    ],
+    "density": 2.85,
+    "side": "inner (internal) dentine"
+   },
+   "dentine2_or_cementum": {
+    "U_ppm": [
+     118.18,
+     0.02
+    ],
+    "u234_u238": null,
+    "th230_u234": null,
+    "water_pct": [
+     5,
+     2
+    ],
+    "radon_loss_pct": [
+     0,
+     0
+    ],
+    "density": 2.85,
+    "side": "outer (external) dentine"
+   },
+   "sediment": null,
+   "gamma_uGy_a": null,
+   "cosmic_uGy_a": [
+    163.0,
+    19.0
+   ],
+   "external_sediment_uGy_a": [
+    288.0,
+    20.0
+   ],
+   "depth_m": null,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "published": {
+    "dose_rates_uGy_a": {
+     "sed_vol_time_avg": [
+      288.0,
+      20.0
+     ],
+     "cosmic_time_avg": [
+      163.0,
+      19.0
+     ]
+    },
+    "p_enamel": null,
+    "p_dentine": null,
+    "ages_ka": {
+     "EU": [
+      30.4,
+      5.3
+     ],
+     "LU": [
+      54.8,
+      9.5
+     ],
+     "RU2": [
+      81.2,
+      14.1
+     ],
+     "RU4": [
+      103.4,
+      18.0
+     ],
+     "RU6": [
+      127.6,
+      22.3
+     ],
+     "RU8": [
+      135.3,
+      23.6
+     ],
+     "RU10": [
+      147.4,
+      25.6
+     ],
+     "XU": [
+      199.0,
+      35.0
+     ]
+    }
+   },
+   "provenance": "Table 4 row AT44en4 (A_S, D_sed(t), D_cos(t), ages); Table 2 row AT44en4 (U); site Medzhibozh 1, layer 16a",
+   "notes": "enamel U not given ('—'); inner dentine mean value assumed (fn 2). U errors: Table 2 states a standard analytical error of +-0.02 ppm for all measurements. RU_x = recent uptake with p=x; XU = p=20; EU p=-1, LU p=0 (Blackwell parametrisation)."
+  },
+  {
+   "sample": "AT44en5+7",
+   "De_Gy": [
+    970.5,
+    45.6
+   ],
+   "geometry": "DE/EN/DE (inner and outer dentine)",
+   "enamel": {
+    "U_ppm": [
+     4.34,
+     0.02
+    ],
+    "u234_u238": null,
+    "th230_u234": null,
+    "thickness_um": null,
+    "removed_outer_um": null,
+    "removed_inner_um": null,
+    "density": 2.95,
+    "water_wt_pct": [
+     2,
+     2
+    ],
+    "removed_um_side_unspecified": [
+     20,
+     null
+    ]
+   },
+   "dentine": {
+    "U_ppm": [
+     121.28,
+     0.02
+    ],
+    "u234_u238": null,
+    "th230_u234": null,
+    "water_pct": [
+     5,
+     2
+    ],
+    "radon_loss_pct": [
+     0,
+     0
+    ],
+    "density": 2.85,
+    "side": "inner (internal) dentine"
+   },
+   "dentine2_or_cementum": {
+    "U_ppm": [
+     127.81,
+     0.02
+    ],
+    "u234_u238": null,
+    "th230_u234": null,
+    "water_pct": [
+     5,
+     2
+    ],
+    "radon_loss_pct": [
+     0,
+     0
+    ],
+    "density": 2.85,
+    "side": "outer (external) dentine"
+   },
+   "sediment": null,
+   "gamma_uGy_a": null,
+   "cosmic_uGy_a": [
+    141.0,
+    6.0
+   ],
+   "external_sediment_uGy_a": [
+    384.0,
+    27.0
+   ],
+   "depth_m": null,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "published": {
+    "dose_rates_uGy_a": {
+     "sed_vol_time_avg": [
+      384.0,
+      27.0
+     ],
+     "cosmic_time_avg": [
+      141.0,
+      6.0
+     ]
+    },
+    "p_enamel": null,
+    "p_dentine": null,
+    "ages_ka": {
+     "EU": [
+      130.0,
+      8.3
+     ],
+     "LU": [
+      235.7,
+      14.9
+     ],
+     "RU2": [
+      358.9,
+      22.9
+     ],
+     "RU4": [
+      476.2,
+      29.9
+     ],
+     "RU6": [
+      605.4,
+      37.8
+     ],
+     "RU8": [
+      665.1,
+      45.0
+     ],
+     "RU10": [
+      743.7,
+      46.2
+     ],
+     "XU": [
+      1068.1,
+      68.9
+     ]
+    }
+   },
+   "provenance": "Table 4 row AT44en5+7 (A_S, D_sed(t), D_cos(t), ages); Table 2 row AT44en5+7 (U); site Medzhibozh 1, layer 16a",
+   "notes": "outer dentine: mean value assumed (fn 2). U errors: Table 2 states a standard analytical error of +-0.02 ppm for all measurements. RU_x = recent uptake with p=x; XU = p=20; EU p=-1, LU p=0 (Blackwell parametrisation)."
+  },
+  {
+   "sample": "AT44en6",
+   "De_Gy": [
+    623.9,
+    43.6
+   ],
+   "geometry": "DE/EN/DE (inner and outer dentine)",
+   "enamel": {
+    "U_ppm": [
+     1.44,
+     0.02
+    ],
+    "u234_u238": null,
+    "th230_u234": null,
+    "thickness_um": null,
+    "removed_outer_um": null,
+    "removed_inner_um": null,
+    "density": 2.95,
+    "water_wt_pct": [
+     2,
+     2
+    ],
+    "removed_um_side_unspecified": [
+     20,
+     null
+    ]
+   },
+   "dentine": {
+    "U_ppm": [
+     128.22,
+     0.02
+    ],
+    "u234_u238": null,
+    "th230_u234": null,
+    "water_pct": [
+     5,
+     2
+    ],
+    "radon_loss_pct": [
+     0,
+     0
+    ],
+    "density": 2.85,
+    "side": "inner (internal) dentine"
+   },
+   "dentine2_or_cementum": {
+    "U_ppm": [
+     127.81,
+     0.02
+    ],
+    "u234_u238": null,
+    "th230_u234": null,
+    "water_pct": [
+     5,
+     2
+    ],
+    "radon_loss_pct": [
+     0,
+     0
+    ],
+    "density": 2.85,
+    "side": "outer (external) dentine"
+   },
+   "sediment": null,
+   "gamma_uGy_a": null,
+   "cosmic_uGy_a": [
+    138.0,
+    6.0
+   ],
+   "external_sediment_uGy_a": [
+    386.0,
+    27.0
+   ],
+   "depth_m": null,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "published": {
+    "dose_rates_uGy_a": {
+     "sed_vol_time_avg": [
+      386.0,
+      27.0
+     ],
+     "cosmic_time_avg": [
+      138.0,
+      6.0
+     ]
+    },
+    "p_enamel": null,
+    "p_dentine": null,
+    "ages_ka": {
+     "EU": [
+      114.5,
+      9.1
+     ],
+     "LU": [
+      203.9,
+      16.1
+     ],
+     "RU2": [
+      304.2,
+      24.4
+     ],
+     "RU4": [
+      370.4,
+      29.8
+     ],
+     "RU6": [
+      488.6,
+      39.2
+     ],
+     "RU8": [
+      531.0,
+      42.8
+     ],
+     "RU10": [
+      582.7,
+      47.3
+     ],
+     "XU": [
+      789.7,
+      66.5
+     ]
+    }
+   },
+   "provenance": "Table 4 row AT44en6 (A_S, D_sed(t), D_cos(t), ages); Table 2 row AT44en6 (U); site Medzhibozh 1, layer 16a",
+   "notes": "outer dentine: mean value assumed (fn 2). U errors: Table 2 states a standard analytical error of +-0.02 ppm for all measurements. RU_x = recent uptake with p=x; XU = p=20; EU p=-1, LU p=0 (Blackwell parametrisation)."
+  },
+  {
+   "sample": "AT44en8",
+   "De_Gy": [
+    998.9,
+    67.5
+   ],
+   "geometry": "DE/EN/DE (inner and outer dentine)",
+   "enamel": {
+    "U_ppm": [
+     3.86,
+     0.02
+    ],
+    "u234_u238": null,
+    "th230_u234": null,
+    "thickness_um": null,
+    "removed_outer_um": null,
+    "removed_inner_um": null,
+    "density": 2.95,
+    "water_wt_pct": [
+     2,
+     2
+    ],
+    "removed_um_side_unspecified": [
+     20,
+     null
+    ]
+   },
+   "dentine": {
+    "U_ppm": [
+     143.2,
+     0.02
+    ],
+    "u234_u238": null,
+    "th230_u234": null,
+    "water_pct": [
+     5,
+     2
+    ],
+    "radon_loss_pct": [
+     0,
+     0
+    ],
+    "density": 2.85,
+    "side": "inner (internal) dentine"
+   },
+   "dentine2_or_cementum": {
+    "U_ppm": [
+     127.81,
+     0.02
+    ],
+    "u234_u238": null,
+    "th230_u234": null,
+    "water_pct": [
+     5,
+     2
+    ],
+    "radon_loss_pct": [
+     0,
+     0
+    ],
+    "density": 2.85,
+    "side": "outer (external) dentine"
+   },
+   "sediment": null,
+   "gamma_uGy_a": null,
+   "cosmic_uGy_a": [
+    144.0,
+    7.0
+   ],
+   "external_sediment_uGy_a": [
+    379.0,
+    27.0
+   ],
+   "depth_m": null,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "published": {
+    "dose_rates_uGy_a": {
+     "sed_vol_time_avg": [
+      379.0,
+      27.0
+     ],
+     "cosmic_time_avg": [
+      144.0,
+      7.0
+     ]
+    },
+    "p_enamel": null,
+    "p_dentine": null,
+    "ages_ka": {
+     "EU": [
+      150.3,
+      12.0
+     ],
+     "LU": [
+      271.9,
+      21.5
+     ],
+     "RU2": [
+      414.6,
+      32.9
+     ],
+     "RU4": [
+      549.2,
+      43.0
+     ],
+     "RU6": [
+      686.4,
+      53.6
+     ],
+     "RU8": [
+      759.6,
+      59.5
+     ],
+     "RU10": [
+      838.6,
+      66.0
+     ],
+     "XU": [
+      1174.7,
+      96.0
+     ]
+    }
+   },
+   "provenance": "Table 4 row AT44en8 (A_S, D_sed(t), D_cos(t), ages); Table 2 row AT44en8 (U); site Medzhibozh 1, layer 16a",
+   "notes": "outer dentine: mean value assumed (fn 2). U errors: Table 2 states a standard analytical error of +-0.02 ppm for all measurements. RU_x = recent uptake with p=x; XU = p=20; EU p=-1, LU p=0 (Blackwell parametrisation)."
+  },
+  {
+   "sample": "AT45en1+2",
+   "De_Gy": [
+    563.5,
+    30.1
+   ],
+   "geometry": "outer side not specified (only one dentine U value)",
+   "enamel": {
+    "U_ppm": [
+     11.79,
+     0.02
+    ],
+    "u234_u238": null,
+    "th230_u234": null,
+    "thickness_um": null,
+    "removed_outer_um": null,
+    "removed_inner_um": null,
+    "density": 2.95,
+    "water_wt_pct": [
+     2,
+     2
+    ],
+    "removed_um_side_unspecified": [
+     20,
+     null
+    ]
+   },
+   "dentine": {
+    "U_ppm": [
+     129.18,
+     0.02
+    ],
+    "u234_u238": null,
+    "th230_u234": null,
+    "water_pct": [
+     5,
+     2
+    ],
+    "radon_loss_pct": [
+     0,
+     0
+    ],
+    "density": 2.85,
+    "side": "inner (internal) dentine"
+   },
+   "dentine2_or_cementum": null,
+   "sediment": null,
+   "gamma_uGy_a": null,
+   "cosmic_uGy_a": [
+    119.0,
+    5.0
+   ],
+   "external_sediment_uGy_a": [
+    390.0,
+    26.0
+   ],
+   "depth_m": null,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "published": {
+    "dose_rates_uGy_a": {
+     "sed_vol_time_avg": [
+      390.0,
+      26.0
+     ],
+     "cosmic_time_avg": [
+      119.0,
+      5.0
+     ]
+    },
+    "p_enamel": null,
+    "p_dentine": null,
+    "ages_ka": {
+     "EU": [
+      64.9,
+      4.8
+     ],
+     "LU": [
+      117.9,
+      8.6
+     ],
+     "RU2": [
+      174.6,
+      13.0
+     ],
+     "RU4": [
+      229.2,
+      17.0
+     ],
+     "RU6": [
+      298.0,
+      21.4
+     ],
+     "RU8": [
+      318.2,
+      23.0
+     ],
+     "RU10": [
+      357.0,
+      25.7
+     ],
+     "XU": [
+      546.5,
+      38.7
+     ]
+    }
+   },
+   "provenance": "Table 4 row AT45en1+2 (A_S, D_sed(t), D_cos(t), ages); Table 2 row AT45en1+2 (U); site Medzhibozh 1, layer 16a",
+   "notes": "enamel U: mean assumed and presumed contaminated with dentine (fn 2,3); dentine U for en1 134.37 and en2 123.98 measured separately, 129.18 = assumed mean. U errors: Table 2 states a standard analytical error of +-0.02 ppm for all measurements. RU_x = recent uptake with p=x; XU = p=20; EU p=-1, LU p=0 (Blackwell parametrisation)."
+  },
+  {
+   "sample": "AT45en3",
+   "De_Gy": [
+    715.3,
+    38.0
+   ],
+   "geometry": "outer side not specified (only one dentine U value)",
+   "enamel": {
+    "U_ppm": [
+     11.79,
+     0.02
+    ],
+    "u234_u238": null,
+    "th230_u234": null,
+    "thickness_um": null,
+    "removed_outer_um": null,
+    "removed_inner_um": null,
+    "density": 2.95,
+    "water_wt_pct": [
+     2,
+     2
+    ],
+    "removed_um_side_unspecified": [
+     20,
+     null
+    ]
+   },
+   "dentine": {
+    "U_ppm": [
+     129.18,
+     0.02
+    ],
+    "u234_u238": null,
+    "th230_u234": null,
+    "water_pct": [
+     5,
+     2
+    ],
+    "radon_loss_pct": [
+     0,
+     0
+    ],
+    "density": 2.85,
+    "side": "inner (internal) dentine"
+   },
+   "dentine2_or_cementum": null,
+   "sediment": null,
+   "gamma_uGy_a": null,
+   "cosmic_uGy_a": [
+    129.0,
+    6.0
+   ],
+   "external_sediment_uGy_a": [
+    378.0,
+    25.0
+   ],
+   "depth_m": null,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "published": {
+    "dose_rates_uGy_a": {
+     "sed_vol_time_avg": [
+      378.0,
+      25.0
+     ],
+     "cosmic_time_avg": [
+      129.0,
+      6.0
+     ]
+    },
+    "p_enamel": null,
+    "p_dentine": null,
+    "ages_ka": {
+     "EU": [
+      79.4,
+      5.9
+     ],
+     "LU": [
+      144.5,
+      10.6
+     ],
+     "RU2": [
+      214.1,
+      16.1
+     ],
+     "RU4": [
+      283.7,
+      21.1
+     ],
+     "RU6": [
+      368.4,
+      26.6
+     ],
+     "RU8": [
+      397.6,
+      28.8
+     ],
+     "RU10": [
+      446.3,
+      31.8
+     ],
+     "XU": [
+      685.0,
+      48.0
+     ]
+    }
+   },
+   "provenance": "Table 4 row AT45en3 (A_S, D_sed(t), D_cos(t), ages); Table 2 row AT45en3 (U); site Medzhibozh 1, layer 16a",
+   "notes": "inner dentine: mean value assumed (fn 2). U errors: Table 2 states a standard analytical error of +-0.02 ppm for all measurements. RU_x = recent uptake with p=x; XU = p=20; EU p=-1, LU p=0 (Blackwell parametrisation)."
+  },
+  {
+   "sample": "AT45en4",
+   "De_Gy": [
+    637.0,
+    23.6
+   ],
+   "geometry": "outer side not specified (only one dentine U value)",
+   "enamel": {
+    "U_ppm": [
+     11.79,
+     0.02
+    ],
+    "u234_u238": null,
+    "th230_u234": null,
+    "thickness_um": null,
+    "removed_outer_um": null,
+    "removed_inner_um": null,
+    "density": 2.95,
+    "water_wt_pct": [
+     2,
+     2
+    ],
+    "removed_um_side_unspecified": [
+     20,
+     null
+    ]
+   },
+   "dentine": {
+    "U_ppm": [
+     129.18,
+     0.02
+    ],
+    "u234_u238": null,
+    "th230_u234": null,
+    "water_pct": [
+     5,
+     2
+    ],
+    "radon_loss_pct": [
+     0,
+     0
+    ],
+    "density": 2.85,
+    "side": "inner (internal) dentine"
+   },
+   "dentine2_or_cementum": null,
+   "sediment": null,
+   "gamma_uGy_a": null,
+   "cosmic_uGy_a": [
+    125.0,
+    6.0
+   ],
+   "external_sediment_uGy_a": [
+    380.0,
+    26.0
+   ],
+   "depth_m": null,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "published": {
+    "dose_rates_uGy_a": {
+     "sed_vol_time_avg": [
+      380.0,
+      26.0
+     ],
+     "cosmic_time_avg": [
+      125.0,
+      6.0
+     ]
+    },
+    "p_enamel": null,
+    "p_dentine": null,
+    "ages_ka": {
+     "EU": [
+      71.4,
+      6.0
+     ],
+     "LU": [
+      129.9,
+      10.6
+     ],
+     "RU2": [
+      192.1,
+      15.4
+     ],
+     "RU4": [
+      253.4,
+      19.9
+     ],
+     "RU6": [
+      330.1,
+      24.5
+     ],
+     "RU8": [
+      354.8,
+      26.4
+     ],
+     "RU10": [
+      396.8,
+      29.0
+     ],
+     "XU": [
+      611.8,
+      40.9
+     ]
+    }
+   },
+   "provenance": "Table 4 row AT45en4 (A_S, D_sed(t), D_cos(t), ages); Table 2 row AT45en4 (U); site Medzhibozh 1, layer 16a",
+   "notes": "enamel U: mean assumed and presumed contaminated (fn 2,3); inner dentine mean assumed. U errors: Table 2 states a standard analytical error of +-0.02 ppm for all measurements. RU_x = recent uptake with p=x; XU = p=20; EU p=-1, LU p=0 (Blackwell parametrisation)."
+  },
+  {
+   "sample": "AT45en1+2 ([Uen]=4.00 ppm recalculation)",
+   "De_Gy": [
+    563.5,
+    30.1
+   ],
+   "geometry": "outer side not specified (only one dentine U value)",
+   "enamel": {
+    "U_ppm": [
+     4.0,
+     0.02
+    ],
+    "u234_u238": null,
+    "th230_u234": null,
+    "thickness_um": null,
+    "removed_outer_um": null,
+    "removed_inner_um": null,
+    "density": 2.95,
+    "water_wt_pct": [
+     2,
+     2
+    ],
+    "removed_um_side_unspecified": [
+     20,
+     null
+    ]
+   },
+   "dentine": {
+    "U_ppm": [
+     129.18,
+     0.02
+    ],
+    "u234_u238": null,
+    "th230_u234": null,
+    "water_pct": [
+     5,
+     2
+    ],
+    "radon_loss_pct": [
+     0,
+     0
+    ],
+    "density": 2.85,
+    "side": "inner (internal) dentine"
+   },
+   "dentine2_or_cementum": null,
+   "sediment": null,
+   "gamma_uGy_a": null,
+   "cosmic_uGy_a": [
+    127.0,
+    5.0
+   ],
+   "external_sediment_uGy_a": [
+    382.0,
+    26.0
+   ],
+   "depth_m": null,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "published": {
+    "dose_rates_uGy_a": {
+     "sed_vol_time_avg": [
+      382.0,
+      26.0
+     ],
+     "cosmic_time_avg": [
+      127.0,
+      5.0
+     ]
+    },
+    "p_enamel": null,
+    "p_dentine": null,
+    "ages_ka": {
+     "EU": [
+      78.4,
+      5.3
+     ],
+     "LU": [
+      141.8,
+      9.5
+     ],
+     "RU2": [
+      211.5,
+      14.4
+     ],
+     "RU4": [
+      277.3,
+      18.9
+     ],
+     "RU6": [
+      354.9,
+      23.7
+     ],
+     "RU8": [
+      381.2,
+      25.6
+     ],
+     "RU10": [
+      424.6,
+      28.5
+     ],
+     "XU": [
+      622.6,
+      42.7
+     ]
+    }
+   },
+   "provenance": "Table 4e row AT45en1+2 (A_S, D_sed(t), D_cos(t), ages); Table 2 row AT45en1+2 (U); site Medzhibozh 1, layer 16a",
+   "notes": "enamel U: mean assumed and presumed contaminated with dentine (fn 2,3); dentine U for en1 134.37 and en2 123.98 measured separately, 129.18 = assumed mean; recalculated with [Uen]=4.00+-0.02 ppm instead of 11.79 (Table 4 footnote 4). U errors: Table 2 states a standard analytical error of +-0.02 ppm for all measurements. RU_x = recent uptake with p=x; XU = p=20; EU p=-1, LU p=0 (Blackwell parametrisation)."
+  },
+  {
+   "sample": "AT45en3 ([Uen]=4.00 ppm recalculation)",
+   "De_Gy": [
+    715.3,
+    38.0
+   ],
+   "geometry": "outer side not specified (only one dentine U value)",
+   "enamel": {
+    "U_ppm": [
+     4.0,
+     0.02
+    ],
+    "u234_u238": null,
+    "th230_u234": null,
+    "thickness_um": null,
+    "removed_outer_um": null,
+    "removed_inner_um": null,
+    "density": 2.95,
+    "water_wt_pct": [
+     2,
+     2
+    ],
+    "removed_um_side_unspecified": [
+     20,
+     null
+    ]
+   },
+   "dentine": {
+    "U_ppm": [
+     129.18,
+     0.02
+    ],
+    "u234_u238": null,
+    "th230_u234": null,
+    "water_pct": [
+     5,
+     2
+    ],
+    "radon_loss_pct": [
+     0,
+     0
+    ],
+    "density": 2.85,
+    "side": "inner (internal) dentine"
+   },
+   "dentine2_or_cementum": null,
+   "sediment": null,
+   "gamma_uGy_a": null,
+   "cosmic_uGy_a": [
+    137.0,
+    7.0
+   ],
+   "external_sediment_uGy_a": [
+    370.0,
+    25.0
+   ],
+   "depth_m": null,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "published": {
+    "dose_rates_uGy_a": {
+     "sed_vol_time_avg": [
+      370.0,
+      25.0
+     ],
+     "cosmic_time_avg": [
+      137.0,
+      7.0
+     ]
+    },
+    "p_enamel": null,
+    "p_dentine": null,
+    "ages_ka": {
+     "EU": [
+      96.9,
+      6.5
+     ],
+     "LU": [
+      175.6,
+      11.7
+     ],
+     "RU2": [
+      263.3,
+      17.9
+     ],
+     "RU4": [
+      347.8,
+      23.5
+     ],
+     "RU6": [
+      443.4,
+      29.4
+     ],
+     "RU8": [
+      482.1,
+      32.2
+     ],
+     "RU10": [
+      538.2,
+      36.0
+     ],
+     "XU": [
+      785.4,
+      54.1
+     ]
+    }
+   },
+   "provenance": "Table 4e row AT45en3 (A_S, D_sed(t), D_cos(t), ages); Table 2 row AT45en3 (U); site Medzhibozh 1, layer 16a",
+   "notes": "inner dentine: mean value assumed (fn 2); recalculated with [Uen]=4.00+-0.02 ppm instead of 11.79 (Table 4 footnote 4). U errors: Table 2 states a standard analytical error of +-0.02 ppm for all measurements. RU_x = recent uptake with p=x; XU = p=20; EU p=-1, LU p=0 (Blackwell parametrisation)."
+  },
+  {
+   "sample": "AT45en4 ([Uen]=4.00 ppm recalculation)",
+   "De_Gy": [
+    637.0,
+    23.6
+   ],
+   "geometry": "outer side not specified (only one dentine U value)",
+   "enamel": {
+    "U_ppm": [
+     4.0,
+     0.02
+    ],
+    "u234_u238": null,
+    "th230_u234": null,
+    "thickness_um": null,
+    "removed_outer_um": null,
+    "removed_inner_um": null,
+    "density": 2.95,
+    "water_wt_pct": [
+     2,
+     2
+    ],
+    "removed_um_side_unspecified": [
+     20,
+     null
+    ]
+   },
+   "dentine": {
+    "U_ppm": [
+     129.18,
+     0.02
+    ],
+    "u234_u238": null,
+    "th230_u234": null,
+    "water_pct": [
+     5,
+     2
+    ],
+    "radon_loss_pct": [
+     0,
+     0
+    ],
+    "density": 2.85,
+    "side": "inner (internal) dentine"
+   },
+   "dentine2_or_cementum": null,
+   "sediment": null,
+   "gamma_uGy_a": null,
+   "cosmic_uGy_a": [
+    128.0,
+    5.0
+   ],
+   "external_sediment_uGy_a": [
+    387.0,
+    26.0
+   ],
+   "depth_m": null,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "published": {
+    "dose_rates_uGy_a": {
+     "sed_vol_time_avg": [
+      387.0,
+      26.0
+     ],
+     "cosmic_time_avg": [
+      128.0,
+      5.0
+     ]
+    },
+    "p_enamel": null,
+    "p_dentine": null,
+    "ages_ka": {
+     "EU": [
+      86.4,
+      7.4
+     ],
+     "LU": [
+      156.2,
+      12.9
+     ],
+     "RU2": [
+      233.8,
+      19.0
+     ],
+     "RU4": [
+      277.3,
+      18.9
+     ],
+     "RU6": [
+      393.2,
+      19.1
+     ],
+     "RU8": [
+      426.2,
+      31.2
+     ],
+     "RU10": [
+      474.0,
+      34.7
+     ],
+     "XU": [
+      695.7,
+      46.5
+     ]
+    }
+   },
+   "provenance": "Table 4e row AT45en4 (A_S, D_sed(t), D_cos(t), ages); Table 2 row AT45en4 (U); site Medzhibozh 1, layer 16a",
+   "notes": "enamel U: mean assumed and presumed contaminated (fn 2,3); inner dentine mean assumed; recalculated with [Uen]=4.00+-0.02 ppm instead of 11.79 (Table 4 footnote 4). U errors: Table 2 states a standard analytical error of +-0.02 ppm for all measurements. RU_x = recent uptake with p=x; XU = p=20; EU p=-1, LU p=0 (Blackwell parametrisation)."
+  }
+ ],
+ "published_means": [
+  {
+   "label": "Mean AT29 (n=2)",
+   "A_S_Gy": [
+    704.7,
+    18.8
+   ],
+   "D_sed_t": [
+    295.0,
+    8.0
+   ],
+   "D_cos_t": [
+    141.0,
+    5.0
+   ],
+   "ages_ka": {
+    "EU": [
+     218.4,
+     14.9
+    ],
+    "LU": [
+     379.1,
+     26.7
+    ],
+    "RU2": [
+     545.1,
+     41.0
+    ],
+    "RU4": [
+     679.9,
+     55.7
+    ],
+    "RU6": [
+     806.2,
+     73.1
+    ],
+    "RU8": [
+     913.6,
+     89.5
+    ],
+    "RU10": [
+     923.3,
+     91.5
+    ],
+    "XU": [
+     1146.0,
+     134.2
+    ]
+   }
+  },
+  {
+   "label": "Mean AT41 (n=2)",
+   "A_S_Gy": [
+    743.6,
+    23.1
+   ],
+   "D_sed_t": [
+    374.0,
+    3.0
+   ],
+   "D_cos_t": [
+    134.0,
+    2.0
+   ],
+   "ages_ka": {
+    "EU": [
+     105.2,
+     4.7
+    ],
+    "LU": [
+     189.5,
+     8.4
+    ],
+    "RU2": [
+     284.2,
+     12.9
+    ],
+    "RU4": [
+     373.2,
+     16.6
+    ],
+    "RU6": [
+     474.3,
+     21.0
+    ],
+    "RU8": [
+     516.6,
+     23.0
+    ],
+    "RU10": [
+     575.5,
+     25.6
+    ],
+    "XU": [
+     832.6,
+     38.0
+    ]
+   }
+  },
+  {
+   "label": "Mean AT44 (n=7)",
+   "A_S_Gy": [
+    784.3,
+    14.0
+   ],
+   "D_sed_t": [
+    370.0,
+    36.0
+   ],
+   "D_cos_t": [
+    143.0,
+    10.0
+   ],
+   "ages_ka": {
+    "EU": [
+     119.1,
+     3.0
+    ],
+    "LU": [
+     215.3,
+     5.3
+    ],
+    "RU2": [
+     326.9,
+     8.2
+    ],
+    "RU4": [
+     432.7,
+     10.8
+    ],
+    "RU6": [
+     540.9,
+     13.5
+    ],
+    "RU8": [
+     592.6,
+     15.0
+    ],
+    "RU10": [
+     659.8,
+     16.5
+    ],
+    "XU": [
+     924.7,
+     24.5
+    ]
+   }
+  },
+  {
+   "label": "Mean AT44 (-en4, -en2)",
+   "A_S_Gy": [
+    712.7,
+    14.6
+   ],
+   "D_sed_t": [
+    383.0,
+    7.0
+   ],
+   "D_cos_t": [
+    140.0,
+    5.0
+   ],
+   "ages_ka": {
+    "EU": [
+     110.7,
+     2.7
+    ],
+    "LU": [
+     199.6,
+     4.8
+    ],
+    "RU2": [
+     301.1,
+     7.9
+    ],
+    "RU4": [
+     399.0,
+     11.4
+    ],
+    "RU6": [
+     500.3,
+     14.2
+    ],
+    "RU8": [
+     543.8,
+     17.8
+    ],
+    "RU10": [
+     607.5,
+     17.8
+    ],
+    "XU": [
+     854.7,
+     21.8
+    ]
+   }
+  },
+  {
+   "label": "Mean AT45 (n=3)",
+   "A_S_Gy": [
+    638.4,
+    16.9
+   ],
+   "D_sed_t": [
+    383.0,
+    6.0
+   ],
+   "D_cos_t": [
+    124.0,
+    5.0
+   ],
+   "ages_ka": {
+    "EU": [
+     71.9,
+     3.2
+    ],
+    "LU": [
+     130.8,
+     5.7
+    ],
+    "RU2": [
+     193.5,
+     8.6
+    ],
+    "RU4": [
+     246.7,
+     11.8
+    ],
+    "RU6": [
+     332.1,
+     13.9
+    ],
+    "RU8": [
+     356.9,
+     15.0
+    ],
+    "RU10": [
+     400.4,
+     16.7
+    ],
+    "XU": [
+     614.8,
+     24.6
+    ]
+   }
+  },
+  {
+   "label": "Mean AT45 (n=3), [Uen]=4.00",
+   "A_S_Gy": [
+    638.4,
+    16.9
+   ],
+   "D_sed_t": [
+    380.0,
+    9.0
+   ],
+   "D_cos_t": [
+    131.0,
+    6.0
+   ],
+   "ages_ka": {
+    "EU": [
+     87.4,
+     3.6
+    ],
+    "LU": [
+     158.2,
+     6.5
+    ],
+    "RU2": [
+     236.5,
+     9.8
+    ],
+    "RU4": [
+     301.1,
+     11.2
+    ],
+    "RU6": [
+     396.4,
+     13.4
+    ],
+    "RU8": [
+     430.2,
+     17.1
+    ],
+    "RU10": [
+     479.4,
+     19.1
+    ],
+    "XU": [
+     700.9,
+     20.8
+    ]
+   }
+  }
+ ],
+ "site_sediment_table3": [
+  {
+   "sample": "2016UKR01",
+   "site": "Medzhibozh A",
+   "layer": "1",
+   "U_ppm": [
+    0.54,
+    0.02
+   ],
+   "Th_ppm": [
+    2.4,
+    0.09
+   ],
+   "K_pct": [
+    0.51,
+    0.02
+   ],
+   "Dbeta_a": [
+    145,
+    23
+   ],
+   "Dgamma_a": [
+    275,
+    18
+   ],
+   "Dbeta_b": [
+    90,
+    15
+   ],
+   "Dgamma_b": [
+    176,
+    17
+   ]
+  },
+  {
+   "sample": "2016UKR02",
+   "site": "Medzhibozh A",
+   "layer": "2",
+   "U_ppm": [
+    0.84,
+    0.02
+   ],
+   "Th_ppm": [
+    3.96,
+    0.1
+   ],
+   "K_pct": [
+    0.74,
+    0.02
+   ],
+   "Dbeta_a": [
+    216,
+    34
+   ],
+   "Dgamma_a": [
+    427,
+    27
+   ],
+   "Dbeta_b": [
+    134,
+    23
+   ],
+   "Dgamma_b": [
+    273,
+    24
+   ]
+  },
+  {
+   "sample": "2016UKR03",
+   "site": "Medzhibozh 1",
+   "layer": "15c1",
+   "U_ppm": [
+    0.93,
+    0.02
+   ],
+   "Th_ppm": [
+    1.87,
+    0.08
+   ],
+   "K_pct": [
+    0.62,
+    0.02
+   ],
+   "Dbeta_a": [
+    115,
+    11
+   ],
+   "Dgamma_a": [
+    314,
+    21
+   ],
+   "Dbeta_b": [
+    71,
+    8
+   ],
+   "Dgamma_b": [
+    201,
+    18
+   ]
+  },
+  {
+   "sample": "2016UKR04",
+   "site": "Medzhibozh 1",
+   "layer": "15c2",
+   "U_ppm": [
+    0.97,
+    0.02
+   ],
+   "Th_ppm": [
+    1.3,
+    0.07
+   ],
+   "K_pct": [
+    0.47,
+    0.02
+   ],
+   "Dbeta_a": [
+    94,
+    10
+   ],
+   "Dgamma_a": [
+    259,
+    17
+   ],
+   "Dbeta_b": [
+    58,
+    6
+   ],
+   "Dgamma_b": [
+    166,
+    15
+   ]
+  },
+  {
+   "sample": "2016UKR05",
+   "site": "Medzhibozh 1",
+   "layer": "16a",
+   "U_ppm": [
+    0.76,
+    0.02
+   ],
+   "Th_ppm": [
+    1.83,
+    0.08
+   ],
+   "K_pct": [
+    0.54,
+    0.02
+   ],
+   "Dbeta_a": [
+    100,
+    10
+   ],
+   "Dgamma_a": [
+    278,
+    19
+   ],
+   "Dbeta_b": [
+    62,
+    7
+   ],
+   "Dgamma_b": [
+    178,
+    16
+   ]
+  },
+  {
+   "sample": "2016UKR06",
+   "site": "Medzhibozh 1",
+   "layer": "16b",
+   "U_ppm": [
+    1.13,
+    0.02
+   ],
+   "Th_ppm": [
+    4.27,
+    0.14
+   ],
+   "K_pct": [
+    0.85,
+    0.02
+   ],
+   "Dbeta_a": [
+    161,
+    17
+   ],
+   "Dgamma_a": [
+    494,
+    31
+   ],
+   "Dbeta_b": [
+    100,
+    11
+   ],
+   "Dgamma_b": [
+    316,
+    29
+   ]
+  },
+  {
+   "sample": "AT29sed6",
+   "site": "Medzhibozh A",
+   "layer": "sediment attached to AT29",
+   "U_ppm": [
+    11.72,
+    0.02
+   ],
+   "Th_ppm": [
+    1.18,
+    0.19
+   ],
+   "K_pct": [
+    0.13,
+    0.01
+   ],
+   "Dbeta_a": [
+    491,
+    65
+   ],
+   "Dgamma_a": [
+    1268,
+    79
+   ],
+   "Dbeta_b": [
+    305,
+    46
+   ],
+   "Dgamma_b": [
+    812,
+    73
+   ]
+  }
+ ],
+ "site_sediment_note": "Dose-rate columns a/b are the two Table 3 dose-rate column pairs (footnote superscripts 2,3 / 3,4 vs 2,5 / 4,5); the footnotes relate them to the water scenarios (10+-5 wt% dry periods vs 40+-5 wt% wet periods), exact mapping not confirmed in extraction. Units uGy/a.",
+ "completeness": "partial: enamel and dentine thicknesses not reported (measured at 10-30 points but not tabulated), no burial depths, U errors only as a generic +-0.02 ppm; ROSY inputs D_sed(t) and D_cos(t) are given per subsample, so internal+dentine beta can be tested only with assumed thicknesses",
+ "extraction_notes": "Paper in Russian; tables read via WebFetch three times (Table 4 twice with identical numbers, Table 2 twice: per-row values once, ranges and means confirmed in the second read). Values in Table 2 with superscript 2 are assumed means, not measurements. Text: ~20 um of alpha-irradiated enamel removed (sides not specified; stored as removed_um_side_unspecified). Coordinates were extracted as Medzhibozh 1: 49°35'40\"N 27°42'23\"E, 270 m; Medzhibozh A: 49°25'48\"N 27°23'08\"E -- not entered as lat/lon because the two sites appear too far apart for neighbouring localities; verify before use. Table 1 X/Y/Z are excavation-grid coordinates in cm, not burial depths.",
+ "benchmark": false,
+ "benchmark_reason": "no enamel thickness"
+}

@@ -1,0 +1,151 @@
+{
+ "study_id": "carvajal2011_aguazuque",
+ "reference": "Carvajal, E., Montes, L., Almanza, O.A. (2011) Quaternary dating by electron spin resonance (ESR) applied to human tooth enamel. Earth Sciences Research Journal 15(2), 115-120.",
+ "url": "https://revistas.unal.edu.co/index.php/esrj/article/download/27715/27954 (article page https://revistas.unal.edu.co/index.php/esrj/article/view/27715)",
+ "software": "ROSY",
+ "conventions": {
+  "conversion_factors": null,
+  "k_alpha": null,
+  "beta_attenuation": "ROSY one-group (adjacent-layer contributions)",
+  "water_basis": null,
+  "u234_u238_meaning": null,
+  "radon_loss": null,
+  "cosmic": "251 +- 15 uGy/a",
+  "gamma_source": "computed by ROSY from soil U/Th/K (Table 1); soil density 2.00, enamel 3.00, dentine 2.82 g/cm3"
+ },
+ "samples": [
+  {
+   "sample": "AG-I",
+   "De_Gy": [
+    2.1,
+    0.14
+   ],
+   "geometry": null,
+   "enamel": {
+    "U_ppm": null,
+    "u234_u238": null,
+    "th230_u234": null,
+    "thickness_um": [
+     1400,
+     null
+    ],
+    "removed_outer_um": [
+     50,
+     5
+    ],
+    "removed_inner_um": [
+     50,
+     5
+    ],
+    "density": 3.0
+   },
+   "dentine": {
+    "U_ppm": null,
+    "u234_u238": null,
+    "th230_u234": null,
+    "water_pct": null,
+    "radon_loss_pct": null,
+    "thickness_um": [
+     5000,
+     null
+    ],
+    "density": 2.82
+   },
+   "dentine2_or_cementum": null,
+   "sediment": {
+    "U_ppm": [
+     1.86,
+     0.19
+    ],
+    "Th_ppm": [
+     3.72,
+     0.37
+    ],
+    "K_as_printed_ppm": [
+     1.66,
+     0.09
+    ],
+    "K_pct": [
+     0.0,
+     null
+    ],
+    "water_pct": [
+     12.1,
+     null
+    ],
+    "density": 2.0
+   },
+   "gamma_uGy_a": null,
+   "cosmic_uGy_a": [
+    251,
+    15
+   ],
+   "depth_m": null,
+   "lat_deg": null,
+   "lon_deg": null,
+   "altitude_m": null,
+   "published": {
+    "dose_rates_uGy_a": {
+     "beta_sediment": [
+      46.55,
+      null
+     ],
+     "beta_sediment_U": [
+      34.54,
+      null
+     ],
+     "beta_sediment_Th": [
+      12.01,
+      null
+     ],
+     "gamma_sediment": [
+      347.31,
+      null
+     ],
+     "gamma_U": [
+      188.5,
+      null
+     ],
+     "gamma_Th": [
+      158.81,
+      null
+     ],
+     "cosmic": [
+      251.0,
+      null
+     ],
+     "gamma_cosmic": [
+      598.31,
+      null
+     ],
+     "total": [
+      644.86,
+      null
+     ]
+    },
+    "p_enamel": null,
+    "p_dentine": null,
+    "ages_ka": {
+     "EU": [
+      3.256,
+      0.19
+     ],
+     "LU": [
+      3.256,
+      0.19
+     ],
+     "CU": [
+      3.256,
+      0.19
+     ]
+    }
+   },
+   "provenance": "Table 1 (soil gamma spectrometry, p. 118), Table 2 (ROSY dose-rate components, p. 118); De, thicknesses, densities, water and cosmic from text pp. 117-118",
+   "notes": "Human tooth from a collective burial, Aguazuque archaeological site (Cundinamarca, Colombia; savannah near Bogota). Age printed as 3,256 +- 190 y BP, converted to ka; text says EU, LU and CU gave the same age. U, Th, K in enamel and dentine were NOT measured (assumed negligible) -> internal and dentine dose = 0. Table 1 prints soil 40K as '1.66 +- 0.09 ppm'; Table 2 contains no K contribution (sum of U and Th terms + cosmic = total exactly), so K appears not to have contributed in the published calculation -- treat with care. Dose components are self-consistent: 34.54+12.01 = 46.55; 188.50+158.81 = 347.31; 46.55+347.31+251 = 644.86; 2.10 Gy / 644.86 uGy/a = 3.256 ka. The 'Sediment (alpha+beta)' label in Table 2 corresponds to the U+Th beta sum. | Curation: gamma_uGy_a set to null because the paper computes gamma with ROSY from the same soil analysis; EPRdating recomputes it (the published value stays under published.dose_rates_uGy_a.gamma_sediment). | Curation: K_pct = 0 reproduces the published calculation (no K contribution); see K_as_printed_ppm. | Verified: Table 1 column '40K' under 'Concentration (ppm)', 1.66 ± 0.09; 1.66 ppm of 40K is ~1.42 % K. Table 2 has an explicit 'Potassium' row of 0.00. Removed layer printed 'about 50±5 mm' (acid etching), evidently µm."
+  }
+ ],
+ "completeness": "partial: tooth U/Th/K not measured (assumed zero); no k or 234U/238U (irrelevant with zero U); otherwise complete with thicknesses, removed layers, water, densities and full dose-rate breakdown",
+ "extraction_notes": "Read twice via WebFetch with consistent numbers. Page range 115-120 confirmed. Site coordinates printed as \"40° 37' North and 74°17' West\" (latitude evidently a typo, Bogota savannah is ~4.6°N) -- not entered as lat/lon. A useful ROSY external-dose test case (thick enamel 1.4 mm, dentine 5 mm, 50 um stripped each side).",
+ "benchmark": true,
+ "benchmark_reason": "external dose only: tooth U/Th/K not measured (zero in the paper)"
+}

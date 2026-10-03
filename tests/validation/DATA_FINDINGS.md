@@ -174,6 +174,14 @@ These are in addition to those of the EU/LU part:
   same as the base case.
 - **CS-US uptake ages:** each tissue took up all its U at its closed-system
   age, computed from its own ratios.
+- **EU and LU in the U-series screen:** the EU/LU columns change with the
+  entered 230Th/234U. DATA takes each tissue's measured 234U/238U back to
+  the initial ratio over that tissue's closed-system U-series age:
+  1 + (r − 1)·exp(λ234·t_cs). This reproduces DATA's EU internal dose within
+  2 % for every case. Two alternatives fail: reading the ratio as initial
+  gives up to −8 %, and back-correcting over the ESR age gives up to +74 %.
+  Published DATA EU ages computed in this screen (e.g. Lovedale, see
+  `PUBLISHED_FINDINGS.md`) follow this convention.
 - **No dentine U:** with sediment on both sides, DATA's US-ESR crashes with
   "Illegal function call in line 114 of module DATA-EL". CS-US is printed
   before the crash: 83 ka, against 82.0 ka in EPRdating.

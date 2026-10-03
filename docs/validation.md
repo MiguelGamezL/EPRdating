@@ -62,6 +62,32 @@ teeth this gives up to 40 % more dentine beta dose than DATA's single chain
 factor; at 2 Ma the two agree. The campaign also exposed a bug, now fixed:
 with sediment on both sides of the enamel, only one side was counted.
 
+## Published ages from nine studies
+
+Following DRAC's validation, 58 published tooth ages from nine studies were
+recomputed from their published inputs. The studies used DATA, USESR or ROSY
+and cover sites in South Africa, Thailand, Indonesia, France, Italy and
+Colombia, with ages from 3 ka to 720 ka. Details:
+[`tests/validation/PUBLISHED_FINDINGS.md`](../tests/validation/PUBLISHED_FINDINGS.md).
+
+![EPRdating vs published ages](img/published_ages.png)
+
+| | |
+|---|---|
+| EPRdating − published | −9.5 to +3.4 %, mean −3.2 % |
+| Within 5 % | 44 of 58 |
+| Within the published 1σ | 56 of 58 |
+
+- The small systematic offset comes from the beta doses: EPRdating's are a
+  few % higher than DATA's and USESR's. Internal and gamma doses agree.
+- In Khok Sung (Duval et al. 2019) the published dentine p values do not
+  reproduce the measured ratios when the dentine is much later than the
+  enamel. This is DATA's convergence failure, and it makes those US-ESR ages
+  5–13 % too young.
+- Two sources were set aside: one prints a dentine U that its own dose rate
+  contradicts, and one does not reproduce its own ages. Seven ROSY studies
+  give too little information to recompute their ages.
+
 ## US-ESR: published ages
 
 Shao et al. (2015) and De Nadale et al. (2026). Details:
@@ -117,4 +143,4 @@ pytest -m validation -rs
 | `EPRDATING_BQ_SAMPLES` | `tests/samples` of [becquerel](https://github.com/lbl-anp/becquerel) |
 | `EPRDATING_EASYSPIN_FILES` | `tests/eprfiles` of [EasySpin](https://github.com/StollLab/EasySpin) |
 
-The ROSY, DATA and US-ESR reference data are in the repository.
+The ROSY, DATA, US-ESR and published-study reference data are in the repository.

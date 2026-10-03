@@ -1,0 +1,354 @@
+{
+ "study_id": "kerber2011_touro_passo",
+ "reference": "Kerber, L., Kinoshita, A., José, F.A., Figueiredo, A.M.G., Oliveira, É.V., Baffa, O. (2011) Electron Spin Resonance dating of the southern Brazilian Pleistocene mammals from Touro Passo Formation, and remarks on the geochronology, fauna and palaeoenvironments. Quaternary International 245, 201-208. https://doi.org/10.1016/j.quaint.2010.10.010",
+ "url": "https://repositorio.ipen.br/bitstreams/6fb549d4-6d53-4d31-8d2a-d964c4fa6878/download",
+ "software": "ROSY",
+ "software_detail": "ROSY (Brennan et al. 1999) for published EU/LU/CU ages; DATA (Grün 2009) also run, 'results similar to ROSY for EU and LU' (no DATA ages printed)",
+ "conventions": {
+  "conversion_factors": null,
+  "k_alpha": null,
+  "beta_attenuation": "ROSY one-group",
+  "water_basis": null,
+  "u234_u238_meaning": "initial, assumed 1.2+-0.2",
+  "radon_loss": null,
+  "cosmic": "190 uGy/a (printed 'mGy/y'), Prescott & Hutton (1994) for latitude, longitude and depth",
+  "gamma_source": "computed from soil U/Th (NAA) and K (AAS); alpha from soil neglected (~500 um outer layer removed)"
+ },
+ "samples": [
+  {
+   "sample": "Artiodactyla",
+   "De_Gy": [
+    300,
+    60
+   ],
+   "geometry": null,
+   "enamel": {
+    "U_ppm": [
+     87,
+     7
+    ],
+    "Th_ppm": null,
+    "Th_ppm_upper_limit": 0.01,
+    "K_pct": null,
+    "u234_u238": null,
+    "th230_u234": null,
+    "thickness_um": null,
+    "removed_outer_um": null,
+    "removed_inner_um": null,
+    "removed_um_side_unspecified": [
+     500,
+     null
+    ],
+    "density": null
+   },
+   "dentine": {
+    "U_ppm": [
+     160,
+     40
+    ],
+    "Th_ppm": [
+     1.19,
+     0.02
+    ],
+    "K_pct": null,
+    "u234_u238": null,
+    "th230_u234": null,
+    "water_pct": null,
+    "radon_loss_pct": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": null,
+   "gamma_uGy_a": null,
+   "cosmic_uGy_a": [
+    190,
+    null
+   ],
+   "depth_m": null,
+   "lat_deg": -29.665555555555553,
+   "lon_deg": -56.870555555555555,
+   "altitude_m": null,
+   "published": {
+    "dose_rates_uGy_a": null,
+    "p_enamel": null,
+    "p_dentine": null,
+    "ages_ka": {
+     "EU": [
+      20,
+      3
+     ],
+     "LU": [
+      36,
+      6
+     ],
+     "CU": [
+      34,
+      6
+     ]
+    }
+   },
+   "provenance": "Table 4 (De, ages) and Table 5 (U, Th; NAA) row Artiodactyla; p. 205",
+   "notes": "K in enamel and dentine 'ND' (not determined). Th '<0.01' marked with asterisk = below detection limit. CU = LU enamel + EU dentine (stated). Which sediment values (individual or mean of the three soil samples) entered ROSY is not stated."
+  },
+  {
+   "sample": "Toxodon sp.",
+   "De_Gy": [
+    19,
+    3
+   ],
+   "geometry": null,
+   "enamel": {
+    "U_ppm": [
+     1.3,
+     0.3
+    ],
+    "Th_ppm": null,
+    "Th_ppm_upper_limit": 0.01,
+    "K_pct": null,
+    "u234_u238": null,
+    "th230_u234": null,
+    "thickness_um": null,
+    "removed_outer_um": null,
+    "removed_inner_um": null,
+    "removed_um_side_unspecified": [
+     500,
+     null
+    ],
+    "density": null
+   },
+   "dentine": {
+    "U_ppm": [
+     20,
+     2
+    ],
+    "Th_ppm": null,
+    "Th_ppm_upper_limit": 0.01,
+    "K_pct": null,
+    "u234_u238": null,
+    "th230_u234": null,
+    "water_pct": null,
+    "radon_loss_pct": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": null,
+   "gamma_uGy_a": null,
+   "cosmic_uGy_a": [
+    190,
+    null
+   ],
+   "depth_m": null,
+   "lat_deg": -29.665555555555553,
+   "lon_deg": -56.870555555555555,
+   "altitude_m": null,
+   "published": {
+    "dose_rates_uGy_a": null,
+    "p_enamel": null,
+    "p_dentine": null,
+    "ages_ka": {
+     "EU": [
+      18,
+      3
+     ],
+     "LU": [
+      21,
+      4
+     ],
+     "CU": [
+      19,
+      3
+     ]
+    }
+   },
+   "provenance": "Table 4 (De, ages) and Table 5 (U, Th; NAA) row Toxodon sp.; p. 205",
+   "notes": "K in enamel and dentine 'ND' (not determined). Th '<0.01' marked with asterisk = below detection limit. CU = LU enamel + EU dentine (stated). Which sediment values (individual or mean of the three soil samples) entered ROSY is not stated."
+  },
+  {
+   "sample": "Gomphotheriidae 1",
+   "De_Gy": [
+    150,
+    40
+   ],
+   "geometry": null,
+   "enamel": {
+    "U_ppm": [
+     73,
+     6
+    ],
+    "Th_ppm": null,
+    "Th_ppm_upper_limit": 0.01,
+    "K_pct": null,
+    "u234_u238": null,
+    "th230_u234": null,
+    "thickness_um": null,
+    "removed_outer_um": null,
+    "removed_inner_um": null,
+    "removed_um_side_unspecified": [
+     500,
+     null
+    ],
+    "density": null
+   },
+   "dentine": {
+    "U_ppm": [
+     290,
+     70
+    ],
+    "Th_ppm": null,
+    "Th_ppm_upper_limit": 0.01,
+    "K_pct": null,
+    "u234_u238": null,
+    "th230_u234": null,
+    "water_pct": null,
+    "radon_loss_pct": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": null,
+   "gamma_uGy_a": null,
+   "cosmic_uGy_a": [
+    190,
+    null
+   ],
+   "depth_m": null,
+   "lat_deg": -29.665555555555553,
+   "lon_deg": -56.870555555555555,
+   "altitude_m": null,
+   "published": {
+    "dose_rates_uGy_a": null,
+    "p_enamel": null,
+    "p_dentine": null,
+    "ages_ka": {
+     "EU": [
+      12,
+      3
+     ],
+     "LU": [
+      23,
+      5
+     ],
+     "CU": [
+      23,
+      5
+     ]
+    }
+   },
+   "provenance": "Table 4 (De, ages) and Table 5 (U, Th; NAA) row Gomphotheriidae 1; p. 205",
+   "notes": "K in enamel and dentine 'ND' (not determined). Th '<0.01' marked with asterisk = below detection limit. CU = LU enamel + EU dentine (stated). Which sediment values (individual or mean of the three soil samples) entered ROSY is not stated."
+  },
+  {
+   "sample": "Gomphotheriidae 2",
+   "De_Gy": [
+    89,
+    7
+   ],
+   "geometry": null,
+   "enamel": {
+    "U_ppm": [
+     7.7,
+     2.0
+    ],
+    "Th_ppm": null,
+    "Th_ppm_upper_limit": 0.01,
+    "K_pct": null,
+    "u234_u238": null,
+    "th230_u234": null,
+    "thickness_um": null,
+    "removed_outer_um": null,
+    "removed_inner_um": null,
+    "removed_um_side_unspecified": [
+     500,
+     null
+    ],
+    "density": null
+   },
+   "dentine": {
+    "U_ppm": [
+     209,
+     16
+    ],
+    "Th_ppm": null,
+    "Th_ppm_upper_limit": 0.01,
+    "K_pct": null,
+    "u234_u238": null,
+    "th230_u234": null,
+    "water_pct": null,
+    "radon_loss_pct": null
+   },
+   "dentine2_or_cementum": null,
+   "sediment": null,
+   "gamma_uGy_a": null,
+   "cosmic_uGy_a": [
+    190,
+    null
+   ],
+   "depth_m": null,
+   "lat_deg": -29.665555555555553,
+   "lon_deg": -56.870555555555555,
+   "altitude_m": null,
+   "published": {
+    "dose_rates_uGy_a": null,
+    "p_enamel": null,
+    "p_dentine": null,
+    "ages_ka": {
+     "EU": [
+      23,
+      3
+     ],
+     "LU": [
+      39,
+      4
+     ],
+     "CU": [
+      28,
+      3
+     ]
+    }
+   },
+   "provenance": "Table 4 (De, ages) and Table 5 (U, Th; NAA) row Gomphotheriidae 2; p. 205",
+   "notes": "K in enamel and dentine 'ND' (not determined). Th '<0.01' marked with asterisk = below detection limit. CU = LU enamel + EU dentine (stated). Which sediment values (individual or mean of the three soil samples) entered ROSY is not stated."
+  }
+ ],
+ "soil_samples": [
+  {
+   "sample": "Sample 1",
+   "U_ppm": [
+    1.6,
+    0.4
+   ],
+   "Th_ppm": [
+    5.8,
+    0.1
+   ],
+   "K_pct": [
+    0.17,
+    null
+   ]
+  },
+  {
+   "sample": "Sample 2",
+   "U_ppm": [
+    1.7,
+    0.1
+   ],
+   "Th_ppm": [
+    4.9,
+    0.3
+   ],
+   "K_pct": null
+  },
+  {
+   "sample": "Sample 3",
+   "U_ppm": [
+    1.4,
+    0.3
+   ],
+   "Th_ppm": [
+    4.78,
+    0.09
+   ],
+   "K_pct": null
+  }
+ ],
+ "completeness": "partial: no dose rates, no thicknesses, no water, no k, K of teeth not determined, soil K only for one sample, sediment-to-sample assignment not stated",
+ "extraction_notes": "Locality Ponte Velha I, Uruguaiana, Rio Grande do Sul (29°39'56\"S 56°52'14\"W). Tables 4 and 5 read twice with identical values. Author list verified from the first page. Weak test case; included because ROSY and both U values are given.",
+ "benchmark": false,
+ "benchmark_reason": "no dose rates; sediment not assigned to samples"
+}
