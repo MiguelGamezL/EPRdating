@@ -179,7 +179,7 @@ These are in addition to those of the EU/LU part:
   the initial ratio over that tissue's closed-system U-series age:
   1 + (r − 1)·exp(λ234·t_cs). This reproduces DATA's EU internal dose within
   2 % for every case. Two alternatives fail: reading the ratio as initial
-  gives up to −8 %, and back-correcting over the ESR age gives up to +74 %.
+  gives up to −8.5 %, and back-correcting over the ESR age gives up to +74 %.
   Published DATA EU ages computed in this screen (e.g. Lovedale, see
   `PUBLISHED_FINDINGS.md`) follow this convention.
 - **No dentine U:** with sediment on both sides, DATA's US-ESR crashes with
