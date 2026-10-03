@@ -62,7 +62,8 @@ Geometric inputs accept a number, a `(value, sigma)` tuple or a
 - `at(self, **values) -> ToothLayers` — Copy with the given fields set (floats), e.g. one Monte Carlo draw.
 - `chain_fraction(self, source: str, chain: str) -> float` — Energy-weighted fraction for a whole decay chain or segment.
 - `fraction(self, source: str, E: float) -> float` — Mean dose in the dated enamel per unit infinite-matrix dose of
-`source` ('enamel', 'dentine', 'cementum', 'sediment') for energy E.
+`source` ('enamel', 'dentine', 'cementum', 'sediment' — both sides —,
+'sediment_outer', 'sediment_inner') for energy E.
 - `nominal_values(self) -> dict`
 
 ### `bethe_stopping`

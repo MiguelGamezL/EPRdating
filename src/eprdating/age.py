@@ -197,6 +197,12 @@ class ToothSample:
     sample_geometry : with a :class:`~eprdating.onegroup.ToothLayers`
         geometry, recompute the one-group factors for every Monte Carlo draw
         (default). With ``False`` they are kept at their nominal values.
+    beta_by_segment : with a :class:`~eprdating.onegroup.ToothLayers`
+        geometry, attenuate the beta dose of each U-series segment with its
+        own factor (default, as ROSY). ``False`` applies one factor for the
+        whole chain to the dose with ingrowth, as the DATA program (Grün
+        2009) does; for young teeth this lowers the dentine beta dose by up
+        to ~40 % because the hard 234mPa betas dominate before 226Ra grows in.
     """
 
     De: ValueLike
@@ -227,6 +233,7 @@ class ToothSample:
     alpha_efficiency: str = "constant"
     u234_u238_is: str = "present"
     alpha_eref: float = 5.3
+    beta_by_segment: bool = True
 
     _SCALARS = (
         "De", "enamel_U", "dentine_U", "cosmic", "k_alpha", "dentine_water",
@@ -369,8 +376,8 @@ class ToothSample:
             # dose, i.e. the dry dose rate diluted by (1 + water)
             # rates are the attenuated equilibrium values; the per-segment factors
             # enter G relative to the whole-chain factor
-            w_e = {s: f / og["enamel_U"] for s, f in og["enamel"].items()}
-            w_d = {s: f / og["dentine_U"] for s, f in og["dentine"].items()}
+            w_e = {s: f / og["enamel_U"] for s, f in og["enamel"].items()} if self.beta_by_segment else None
+            w_d = {s: f / og["dentine_U"] for s, f in og["dentine"].items()} if self.beta_by_segment else None
             Gb_e = use.G("beta", w_e) if use else None
             Gb_d = usd.G("beta", w_d) if usd else None
             en_beta = v["enamel_U"] * cU["beta"] * og["enamel_U"]
@@ -395,7 +402,8 @@ class ToothSample:
             if v["cementum_U"] > 0:
                 if og["cementum"] is None:
                     raise ValueError("cementum U needs a ToothLayers geometry with cementum_um > 0")
-                w_c = {s: f / og["cementum_U"] for s, f in og["cementum"].items()}
+                w_c = ({s: f / og["cementum_U"] for s, f in og["cementum"].items()}
+                       if self.beta_by_segment else None)
                 Gb_c = usc.G("beta", w_c) if usc else None
                 cem_beta = v["cementum_U"] * cU["beta"] / (1.0 + v["cementum_water"]) * og["cementum_U"]
             else:

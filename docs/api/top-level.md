@@ -130,12 +130,13 @@ Geometric inputs accept a number, a `(value, sigma)` tuple or a
 - `at(self, **values) -> ToothLayers` — Copy with the given fields set (floats), e.g. one Monte Carlo draw.
 - `chain_fraction(self, source: str, chain: str) -> float` — Energy-weighted fraction for a whole decay chain or segment.
 - `fraction(self, source: str, E: float) -> float` — Mean dose in the dated enamel per unit infinite-matrix dose of
-`source` ('enamel', 'dentine', 'cementum', 'sediment') for energy E.
+`source` ('enamel', 'dentine', 'cementum', 'sediment' — both sides —,
+'sediment_outer', 'sediment_inner') for energy E.
 - `nominal_values(self) -> dict`
 
 ### `ToothSample`
 
-*dataclass* `ToothSample(De: ValueLike, enamel_U: ValueLike, dentine_U: ValueLike, sediment: Sediment, beta: BetaGeometry | ToothLayers, cosmic: ValueLike, gamma: ValueLike | None = None, k_alpha: ValueLike = 0.13 ± 0.02, dentine_water: ValueLike = 0.0, uptake_enamel: USModel = <factory>, uptake_dentine: USModel = <factory>, u234_u238_enamel: ValueLike = 1.0, u234_u238_dentine: ValueLike = 1.0, radon_loss_enamel: ValueLike = 0.0, radon_loss_dentine: ValueLike = 0.0, enamel_water: ValueLike = 0.0, cementum_U: ValueLike = 0.0, cementum_water: ValueLike = 0.0, uptake_cementum: USModel = <factory>, u234_u238_cementum: ValueLike = 1.0, radon_loss_cementum: ValueLike = 0.0, ingrowth: bool = True, partition: dict | None = None, factors: str = 'guerin_2011', sample_geometry: bool = True, alpha_efficiency: str = 'constant', u234_u238_is: str = 'present', alpha_eref: float = 5.3)`
+*dataclass* `ToothSample(De: ValueLike, enamel_U: ValueLike, dentine_U: ValueLike, sediment: Sediment, beta: BetaGeometry | ToothLayers, cosmic: ValueLike, gamma: ValueLike | None = None, k_alpha: ValueLike = 0.13 ± 0.02, dentine_water: ValueLike = 0.0, uptake_enamel: USModel = <factory>, uptake_dentine: USModel = <factory>, u234_u238_enamel: ValueLike = 1.0, u234_u238_dentine: ValueLike = 1.0, radon_loss_enamel: ValueLike = 0.0, radon_loss_dentine: ValueLike = 0.0, enamel_water: ValueLike = 0.0, cementum_U: ValueLike = 0.0, cementum_water: ValueLike = 0.0, uptake_cementum: USModel = <factory>, u234_u238_cementum: ValueLike = 1.0, radon_loss_cementum: ValueLike = 0.0, ingrowth: bool = True, partition: dict | None = None, factors: str = 'guerin_2011', sample_geometry: bool = True, alpha_efficiency: str = 'constant', u234_u238_is: str = 'present', alpha_eref: float = 5.3, beta_by_segment: bool = True)`
 
 ESR dating of tooth enamel with the classical component model.
 
@@ -163,6 +164,7 @@ cementum_U, cementum_water, uptake_cementum, u234_u238_cementum,
 - `partition`: optional custom U-series segment table (see `series`).
 - `factors`: name of the conversion-factor set.
 - `sample_geometry`: with a `ToothLayers` geometry, recompute the one-group factors for every Monte Carlo draw (default). With `False` they are kept at their nominal values.
+- `beta_by_segment`: with a `ToothLayers` geometry, attenuate the beta dose of each U-series segment with its own factor (default, as ROSY). `False` applies one factor for the whole chain to the dose with ingrowth, as the DATA program (Grün 2009) does; for young teeth this lowers the dentine beta dose by up to ~40 % because the hard 234mPa betas dominate before 226Ra grows in.
 
 **Members**
 

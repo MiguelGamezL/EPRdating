@@ -18,6 +18,29 @@ reference cases. Details: [`tests/validation/ROSY_FINDINGS.md`](../tests/validat
 | Full ages, EU/LU/CU, 35 ka – 2 Ma, six real teeth of Brennan et al. (1997) | **−0.5 to +0.7 %** |
 | Monte Carlo uncertainties vs ROSY's errors | within 25 % (geometry sampled) |
 
+## Dose rates and ages: DATA
+
+The original DATA program (Grün 2009) was run as a black box in DOSBox-X on
+41 cases (82 EU/LU runs, 4 ka – 2.4 Ma). Details:
+[`tests/validation/DATA_FINDINGS.md`](../tests/validation/DATA_FINDINGS.md).
+
+| Piece | Agreement |
+|---|---|
+| Gamma + cosmic | −0.3 to +0.1 % |
+| Internal dose rate | within ±2.7 % |
+| Dentine beta factors | DATA's printed factors to the third decimal (±3 % at the extremes) |
+| Dentine beta dose, one factor for the chain as in DATA | −1.4 to +5.7 % |
+| Sediment beta dose | +7 to +13 % (mostly 40K; DATA's factors are below the one-group ones) |
+| Ages with DATA's convention (`beta_by_segment=False`) | **−2.6 to +1.6 %**, mean −0.1 % |
+| Ages with EPRdating's default (beta attenuated per U-series segment) | −7.5 to +1.1 %, mean −1.3 % |
+
+DATA's input conventions: water as % of the wet mass, 234U/238U of the
+incoming U, radon loss in the dentine only. By default EPRdating attenuates
+the beta dose of each U-series segment separately, as ROSY does. For young
+teeth this gives up to 40 % more dentine beta dose than DATA's single chain
+factor; at 2 Ma the two agree. The campaign also exposed a bug, now fixed:
+with sediment on both sides of the enamel, only one side was counted.
+
 ## US-ESR: published ages
 
 Shao et al. (2015) and De Nadale et al. (2026). Details:
@@ -73,4 +96,4 @@ pytest -m validation -rs
 | `EPRDATING_BQ_SAMPLES` | `tests/samples` of [becquerel](https://github.com/lbl-anp/becquerel) |
 | `EPRDATING_EASYSPIN_FILES` | `tests/eprfiles` of [EasySpin](https://github.com/StollLab/EasySpin) |
 
-The ROSY and US-ESR reference data are in the repository.
+The ROSY, DATA and US-ESR reference data are in the repository.

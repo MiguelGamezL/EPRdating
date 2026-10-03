@@ -9,3 +9,7 @@ dist/
 .coverage
 .ipynb_checkpoints/
 site/
+# third-party programs run as black boxes are never committed
+*.EXE
+*.exe
+tools/data_harness/data_work/

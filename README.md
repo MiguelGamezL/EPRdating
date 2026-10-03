@@ -16,7 +16,9 @@ an independent, open implementation from the published equations.
 > one-group beta attenuation and energy-dependent alpha efficiency, EPRdating
 > reproduces ROSY's EU, LU and CU ages within −0.5 to +0.7 %, and its age
 > errors, for synthetic cases and the six teeth of Brennan et al. (1997)
-> (see `tests/validation/ROSY_FINDINGS.md`). Still pre-release; see
+> (see `tests/validation/ROSY_FINDINGS.md`). Against DATA (Grün 2009),
+> ages agree within −2.6 to +1.6 % with DATA's single beta factor for the U
+> chain (`tests/validation/DATA_FINDINGS.md`). Still pre-release; see
 > *Known limitations*.
 
 ## Install
@@ -121,6 +123,7 @@ reference materials to U, Th, K and the infinite-matrix dose rates.
 - **v0.5** real spectra: `.dat`/`.par` reader, template fits with honest errors, EPRAYA templates with instrumental broadening — first real series (M18) processed.
 - **v0.6** sediment U/Th/K from HPGe spectra (comparative method) — reproduces an independent analysis of the corte 0 sediment within 1 %.
 - **v0.7** general use: Bruker and common gamma file formats, automatic gamma calibration, user guide; readers checked on EasySpin and becquerel test files.
+- **v0.8** CSUS-ESR; validation against DATA (82 runs) — `beta_by_segment` option, sediment-on-both-sides fix.
 - **later** JEOL readers, alpha escape at surfaces, JOSS paper.
 
 ## Validation against ROSY
@@ -131,6 +134,17 @@ own copy). Reference inputs and outputs live in
 locks in the agreement for gamma, cosmic, U-series ingrowth and end-to-end
 ages, and `ROSY_FINDINGS.md` summarises the campaign, including the beta
 geometry factors that the one-group solver has to reproduce.
+
+## Validation against DATA
+
+`tools/data_harness` batch-runs the original DATA (DOS) in DOSBox-X (bring
+your own copy). Reference inputs, parsed outputs and raw printouts live in
+`tests/validation/data_reference/`; `test_data_reference.py` checks gamma,
+cosmic, internal and beta dose rates, DATA's printed beta factors and all 82
+EU/LU ages. `DATA_FINDINGS.md` documents DATA's input conventions and the
+one real difference: DATA attenuates the beta dose with ingrowth by one
+chain factor, whereas EPRdating by default uses one factor per U-series
+segment (`ToothSample(beta_by_segment=False)` reproduces DATA).
 
 ## Testing
 

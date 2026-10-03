@@ -186,3 +186,20 @@ def test_alpha_efficiency_option():
     assert young_energy > young_const
     with pytest.raises(ValueError):
         _tooth(alpha_efficiency="whatever").age()
+
+
+def test_beta_by_segment_option():
+    from eprdating import LinearUptake, ToothLayers
+
+    geo = ToothLayers(enamel_um=1000, strip_outer_um=50, strip_inner_um=50)
+    # young tooth with U-rich dentine: before 226Ra grows in, the hard 234mPa
+    # betas dominate, and they reach the enamel better than the chain average
+    kw = dict(beta=geo, De=(10.0, 1.0), dentine_U=(50.0, 1.0), uptake_dentine=LinearUptake())  # noqa: C408
+    seg = _tooth(**kw).age()
+    chain = _tooth(beta_by_segment=False, **kw).age()
+    assert seg.accumulated["dentine beta"] > 1.15 * chain.accumulated["dentine beta"]
+    assert seg.age < chain.age
+    # in equilibrium (old tooth, EU) the two are the same
+    kw.update(De=(3000.0, 100.0), uptake_dentine=None)
+    a, b = _tooth(**kw).age(), _tooth(beta_by_segment=False, **kw).age()
+    assert a.age == pytest.approx(b.age, rel=0.01)

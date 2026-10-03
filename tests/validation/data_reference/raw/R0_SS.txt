@@ -1,0 +1,57 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ FILE NAME  R0_SS           03-10-2026     ┌─ß-CORRECTION┬ SED  DE-1  DE-2─┐    
+ LOCATION   SITE                           │URANIUM      │.288             │    
+ De              [Gy]   100.00±    10.00   │THORIUM      │.263             │    
+ U  CONTENT     [ppm]     1.00±     0.10   │K-40 DECAY   │.265             │    
+ U-234/U-238              1.20±     0.02   └─────────────┴─────────────────┘    
+ ALPHA EFFICIENCY         0.13±     0.02                                        
+ U  DENTINE 1   [ppm]     0.00±     0.00╔═════╤══════════RESULTS═══════════════╗
+ U  DENTINE 2   [ppm]     0.00±     0.00║     │EARLY U-UPTAKE   LINEAR U-UPTAKE║
+ WATER DENTINE [wgt%]     5.00±     2.00║τ-SED│    854±45           854±45     ║
+ Rn-LOSS          [%]     0.00±     0.00║ß-SED│    293±31           293±31     ║
+ TOTAL THICKNESS [µm]  1000.00±   100.00╟─────┼────────────────────────────────╢
+ REMOVED SIDE 1  [µm]     0.00±    10.00║int. │    236±33           104±15     ║
+ REMOVED SIDE 2  [µm]     0.00±    10.00║TOTAL│   1383±64          1251±57     ║
+ DENSITY     [g/cm^3]     2.95±     0.00║AGE  │     72±7             79±8      ║
+ U  SEDIMENT    [ppm]     2.00±     0.10╚═════╧════════════════════════════════╝
+ Th SEDIMENT    [ppm]     6.00±     0.30                                        
+ K  SEDIMENT      [%]     1.00±     0.05                                        
+ WATER SED     [WGT%]    10.00±     5.00                                        
+ FOR ß IRR. ONLY?             N                                                 
+ EXT. GAMMA   [µGy/a]     0.00±     0.00                                        
+ DEPTH FOR COSMIC [m]     1.00±     0.10                                        
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+
+

@@ -311,7 +311,9 @@ class ToothLayers:
     def _stack(self, source: str) -> tuple[list[Layer], int]:
         x = self._x
         sed = self.sediment.with_water(self.sediment_water)
-        layers = [Layer(sed, math.inf, 1.0 if source == "sediment" else 0.0)]
+        # "sediment" is the sediment on both sides (the inner one matters when
+        # there is little or no dentine); "sediment_outer"/"sediment_inner" split it
+        layers = [Layer(sed, math.inf, 1.0 if source in ("sediment", "sediment_outer") else 0.0)]
         if x("cementum_um") > 0:
             layers.append(Layer(self.cementum.with_water(self.cementum_water),
                                 x("cementum_um") * 1e-4 * x("cementum_density"),
@@ -322,12 +324,13 @@ class ToothLayers:
         layers.append(Layer(self.dentine.with_water(self.dentine_water),
                             x("dentine_um") * 1e-4 * x("dentine_density"),
                             1.0 if source == "dentine" else 0.0))
-        layers.append(Layer(sed, math.inf, 1.0 if source == "sediment_inner" else 0.0))
+        layers.append(Layer(sed, math.inf, 1.0 if source in ("sediment", "sediment_inner") else 0.0))
         return layers, target
 
     def fraction(self, source: str, E: float) -> float:
         """Mean dose in the dated enamel per unit infinite-matrix dose of
-        ``source`` ('enamel', 'dentine', 'cementum', 'sediment') for energy E."""
+        ``source`` ('enamel', 'dentine', 'cementum', 'sediment' — both sides —,
+        'sediment_outer', 'sediment_inner') for energy E."""
         key = (source, round(E, 6))
         if key not in self._cache:
             layers, t = self._stack(source)

@@ -162,7 +162,16 @@ plot.plot_age_distribution(mc, reference=(0.56, 2.44))   # e.g. a radiocarbon ra
 With U-series data of the dental tissues use `USESRSample` (combined
 U-series/ESR): `age()` solves the uptake parameter of each tissue with the
 age (US-ESR, Grün et al. 1988) and `age(model="CSUS")` takes the U as taken
-up at each tissue's closed-system U-series age (CSUS-ESR, Grün 2000). Every function and its options: [API reference](api/index.md).
+up at each tissue's closed-system U-series age (CSUS-ESR, Grün 2000).
+
+To compare with ages from DATA (Grün 2009), note its conventions: water as
+% of the wet mass (EPRdating uses the dry mass, `w_dry = w_wet / (1 − w_wet)`),
+the 234U/238U entered is the initial ratio (`u234_u238_is="initial"`), radon
+loss applies to the dentine only, and one beta attenuation factor covers the
+whole U chain (`beta_by_segment=False`). The default, one factor per U-series
+segment as in ROSY, gives up to ~40 % more dentine beta dose to young teeth.
+
+Every function and its options: [API reference](api/index.md).
 What has been validated: [Validation](validation.md).
 
 ---

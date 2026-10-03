@@ -80,3 +80,14 @@ def test_geometry_with_uncertainties_and_validation():
     assert geo.at(enamel_um=900.0).chain_fraction("enamel", "U") < geo.at(enamel_um=1100.0).chain_fraction("enamel", "U")
     with pytest.raises(ValueError):
         geo.at(enamel_um=60.0, strip_outer_um=40.0, strip_inner_um=30.0)
+
+
+def test_sediment_counts_both_sides():
+    # a bare enamel fragment: sediment on both sides, equal contributions
+    geo = ToothLayers(1000, dentine_um=0.0)
+    outer, inner = geo.chain_fraction("sediment_outer", "U"), geo.chain_fraction("sediment_inner", "U")
+    assert outer == pytest.approx(inner, rel=1e-6) and outer > 0
+    assert geo.chain_fraction("sediment", "U") == pytest.approx(outer + inner, rel=1e-9)
+    # thick dentine shields the inner side
+    thick = ToothLayers(1000, dentine_um=5000.0)
+    assert thick.chain_fraction("sediment_inner", "U") < 1e-4 * thick.chain_fraction("sediment_outer", "U")
