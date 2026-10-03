@@ -241,9 +241,8 @@ def plot_age_distribution(mc, *, ax=None, bins: int = 50, unit: str = "ka", refe
     ax.axvspan(lo, hi, color=CATEGORICAL[0], alpha=0.10, lw=0, label="68 % interval")
     med = float(np.median(ages))
     ax.axvline(med, color=INK, lw=1.0)
-    ax.annotate(f"{med:.3g} (+{hi - med:.2g} / −{med - lo:.2g}) {unit}", (med, 1.0),
-                xycoords=("data", "axes fraction"), xytext=(4, -12), textcoords="offset points",
-                fontsize=9, color=INK)
+    ax.text(0.02, 0.97, f"median {med:.3g} (+{hi - med:.2g} / −{med - lo:.2g}) {unit}", transform=ax.transAxes,
+            ha="left", va="top", fontsize=9, color=INK)
     _grid(ax, "y")
     ax.set_xlabel(f"Age ({unit})")
     ax.set_ylabel("Draws")

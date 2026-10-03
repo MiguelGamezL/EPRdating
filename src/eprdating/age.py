@@ -83,6 +83,8 @@ class AgeResult:
     def summary(self) -> str:
         lines = [f"Age = {self.age:.4g} ka   (De = {self.De:.4g} Gy, <Ḋ> = {self.mean_dose_rate:.4g} Gy/ka)"]
         for k, r in self.components.items():
+            if r == 0 and self.accumulated[k] == 0:
+                continue
             share = 100 * self.accumulated[k] / self.De
             lines.append(f"  {k:16s} Ḋ_now = {r:8.4f} Gy/ka   contributes {share:5.1f} % of De")
         return "\n".join(lines)

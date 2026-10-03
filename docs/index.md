@@ -36,6 +36,17 @@ pip install "eprdating[gamma-formats]"   # + becquerel: Canberra .cnf, ORTEC .sp
 
 Until the first release, install from the repository: `pip install -e .`
 
+Python 3.10–3.13. Works in scripts, Jupyter and Google Colab (figures show
+inline); [`examples/quickstart.ipynb`](https://github.com/MiguelGamezL/EPRdating/blob/main/examples/quickstart.ipynb)
+runs the whole chain on simulated data. In Colab, install with
+
+```python
+%pip install "eprdating[plot] @ git+https://github.com/MiguelGamezL/EPRdating"
+```
+
+and read your files after uploading them or mounting Google Drive
+(`from google.colab import drive; drive.mount("/content/drive")`).
+
 ## Where to go next
 
 - **[User guide](guide.md)** — the three steps with working code.
