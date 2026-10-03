@@ -1,0 +1,53 @@
+site_name: EPRdating
+site_description: ESR/EPR dating of tooth enamel in Python, from spectra to ages
+repo_url: https://github.com/MiguelGamezL/EPRdating
+docs_dir: docs
+theme:
+  name: material
+  features:
+    - navigation.sections
+    - content.code.copy
+  palette:
+    - scheme: default
+      toggle: {icon: material/weather-night, name: Dark mode}
+    - scheme: slate
+      toggle: {icon: material/weather-sunny, name: Light mode}
+markdown_extensions:
+  - tables
+  - admonition
+  - toc: {permalink: true}
+  - pymdownx.highlight
+  - pymdownx.superfences
+validation:
+  links:
+    not_found: info
+    unrecognized_links: info
+exclude_docs: |
+  make_figures.py
+nav:
+  - Home: index.md
+  - User guide: guide.md
+  - Figures: plotting.md
+  - Validation: validation.md
+  - API reference:
+      - api/index.md
+      - Top level: api/top-level.md
+      - Dose-response: api/doseresponse.md
+      - Ages: api/age.md
+      - US-ESR: api/usesr.md
+      - Dose rates: api/dose_rate.md
+      - Uranium uptake: api/uptake.md
+      - U-series: api/series.md
+      - One-group beta: api/onegroup.md
+      - Fixed beta factors: api/beta.md
+      - Alpha efficiency: api/alpha.md
+      - "Spectra: reading": api/spectra.io.md
+      - "Spectra: Bruker": api/spectra.bruker.md
+      - "Spectra: pre-processing": api/spectra.preprocess.md
+      - "Spectra: intensities": api/spectra.intensity.md
+      - "Spectra: fits": api/spectra.deconvolution.md
+      - "Spectra: EPRAYA": api/spectra.epraya_backend.md
+      - "Gamma: readers": api/gamma.readers.md
+      - "Gamma: calibration": api/gamma.spectrum.md
+      - "Gamma: comparative method": api/gamma.comparative.md
+      - Plotting: api/plot.md

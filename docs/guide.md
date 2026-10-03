@@ -6,6 +6,7 @@ with its Monte Carlo uncertainty. Each step can be used on its own.
 
 ```bash
 pip install eprdating                # core (numpy, scipy)
+pip install "eprdating[plot]"        # + matplotlib, for the figures
 pip install "eprdating[spectra]"     # + EPRAYA, for simulated line shapes
 pip install "eprdating[gamma-formats]"  # + Canberra .cnf, ORTEC .spc, IEC 61455 gamma files
 ```
@@ -75,7 +76,14 @@ Models `"LIN"`, `"SSE"`, `"EXPLIN"`, `"DSE"`. With `sigma`, errors are
 inflated by the Birge ratio when `chi2_red > 1` (scatter between aliquots).
 `De_min=-np.inf` shows where the data really extrapolate.
 
-`examples/dose_series_dat.py` runs a complete series.
+```python
+from eprdating import plot
+plot.plot_spectra(spectra, ["0 Gy", "20 Gy", ...], window=(333, 341), fits=fit_results)
+plot.plot_dose_response(drc, excluded=[(100, 7.3, 8.4)])
+```
+
+`examples/dose_series_dat.py` runs a complete series. All figures:
+[Figures](plotting.md).
 
 ---
 
@@ -122,6 +130,10 @@ sediment = r.sediment(water=0.10)   # -> ToothSample(sediment=...)
 
 Your own reference materials: `Reference("my-standard", {"U": (12.3, 0.4)}, mass_g=450)`.
 
+```python
+plot.plot_gamma_lines(r)          # content from every line, per group
+```
+
 `examples/norm_gamma.py` prints contents and infinite-matrix dose rates.
 
 ---
@@ -140,12 +152,16 @@ sample = ToothSample(
     uptake_enamel=LinearUptake(), uptake_dentine=LinearUptake(),
 )
 print(sample.age().summary())
-print(sample.age_mc(n=2000, seed=1).summary())
+mc = sample.age_mc(n=2000, seed=1)
+print(mc.summary())
+
+plot.plot_dose_rate(sample.age())
+plot.plot_age_distribution(mc, reference=(0.56, 2.44))   # e.g. a radiocarbon range
 ```
 
 With U-series data of the dental tissues use `USESRSample` (combined
-U-series/ESR). See the README for the physics and its validation against
-ROSY 2.0 and published US-ESR ages.
+U-series/ESR). Every function and its options: [API reference](api/index.md).
+What has been validated: [Validation](validation.md).
 
 ---
 

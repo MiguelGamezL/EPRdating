@@ -238,7 +238,6 @@ def auto_calibrate(spec: GammaSpectrum, lines_keV: Sequence[float] = NATURAL_LIN
         raise RuntimeError(f"{spec.name}: no peaks found")
     E = np.sort(np.asarray(lines_keV, float))
     strong = np.argsort(sig)[::-1][:15]
-    w = np.log1p(sig)
     best = None
     for i in strong:
         for j in strong:
@@ -255,12 +254,18 @@ def auto_calibrate(spec: GammaSpectrum, lines_keV: Sequence[float] = NATURAL_LIN
                     pred = (E - a0) / a1
                     d = np.abs(pred[:, None] - ch[None, :]) * a1
                     tol = tolerance_keV + 0.002 * E
+                    near = d.argmin(axis=1)
                     hit = d.min(axis=1) <= tol
-                    score = float(np.sum(w[d.argmin(axis=1)][hit]))
                     nhit = int(hit.sum())
-                    key = (nhit, score)
+                    if nhit < 2 or (best is not None and nhit < best[0][0]):
+                        continue
+                    # refit the matched peaks; among equal hit counts the smallest rms wins
+                    cc, ee = ch[near[hit]], E[hit]
+                    b1, b0 = np.polyfit(cc, ee, 1)
+                    rms = float(np.sqrt(np.mean((ee - (b0 + b1 * cc)) ** 2)))
+                    key = (nhit, -rms)
                     if best is None or key > best[0]:
-                        best = (key, a0, a1)
+                        best = (key, b0, b1)
     if best is None or best[0][0] < 3:
         raise RuntimeError(f"{spec.name}: could not match at least three known lines")
     _, a0, a1 = best

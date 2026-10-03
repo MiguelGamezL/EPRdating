@@ -54,7 +54,12 @@ print(sample.age_mc(n=2000, seed=42).summary())
 Every input accepts a number, a `(value, sigma)` tuple or a `Value`.
 Units: Gy, Gy/ka, ka, ppm (U, Th), % (K), mT, GHz.
 
-See **[docs/guide.md](docs/guide.md)** for a step-by-step guide, and
+**Documentation:** [overview](docs/index.md) · [user guide](docs/guide.md) ·
+[figures](docs/plotting.md) · [API reference](docs/api/index.md) ·
+[validation](docs/validation.md). Build the site locally with
+`pip install -e '.[docs]' && mkdocs serve`.
+
+See also
 `examples/quickstart.py` and `examples/deconvolution_epraya.py`.
 
 `examples/dose_series_dat.py` runs a real additive-dose series from raw
@@ -80,6 +85,7 @@ reference materials to U, Th, K and the infinite-matrix dose rates.
 | `alpha` | energy-dependent alpha efficiency, k ∝ R(E)/E (ROSY's "varies with energy" option) |
 | `usesr` | combined U-series/ESR (US-ESR): solves the age and the uptake parameter *p* of each tissue from its 230Th/234U and 234U/238U (Grün et al. 1988) |
 | `gamma` | HPGe gamma spectrometry of sediments: ORTEC `.Spe`/`.Chn`, N42, ASCII and column files (`.cnf`/`.spc`/IEC through becquerel); automatic energy/resolution calibration per spectrum (no first guess, absorbs gain drift), peak areas, comparative method against IAEA RGU-1/RGTh-1/RGK-1, 226Ra/238U equilibrium check, output as `Sediment` |
+| `plot` | figures: stacked spectra with fits, dose-response with De, dose-rate budget, age distribution, gamma spectra and per-line contents |
 | `age` | generic solver `∫₀ᵀ Ḋ(t) dt = De` and the `ToothSample` model with Monte Carlo |
 | `spectra` | reading Bruker BES3T (`.DSC`/`.DTA`) and ESP/WinEPR (`.par`/`.spc`), `.dat`/`.par` and column files (`read_epr`); baseline, power/gain/mass normalisation, field alignment, pseudo-modulation and time-constant broadening of simulated shapes; peak-to-peak, T1–B2, double integral; template/component fits with field shift and noise-injection errors; EPRAYA backend |
 
