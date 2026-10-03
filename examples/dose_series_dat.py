@@ -39,7 +39,7 @@ from eprdating.spectra import (
     aligned_average,
     normalise,
     pseudo_modulation,
-    read_dat,
+    read_epr,
     subtract_baseline,
     time_constant_filter,
 )
@@ -56,7 +56,7 @@ MAX_SHIFT = 0.6  # mT
 
 
 def prepared(path: Path):
-    s = read_dat(path)
+    s = read_epr(path)
     if s.B.size > 1000:  # wide sweep: keep the region of the narrow sweeps
         s = s.window(305.0, 370.0)
     y = normalise(s.y, power_mW=s.power_mW, ref_power_mW=REF_POWER) * 1e8

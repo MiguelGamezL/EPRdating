@@ -1,6 +1,8 @@
 """Gamma-ray spectrometry of sediments: U, Th and K by the comparative method.
 
-* :mod:`.spectrum`     reading ASCII spectra, energy and resolution calibration.
+* :mod:`.readers`      reading ORTEC .Spe/.Chn, N42, ASCII and column files
+                       (CNF, SPC, IEC through the optional package becquerel).
+* :mod:`.spectrum`     energy/resolution calibration, automatic calibration.
 * :mod:`.comparative`  peak areas, comparison with reference materials,
                        226Ra/238U equilibrium check, output as a
                        :class:`~eprdating.Sediment`.
@@ -16,11 +18,21 @@ from .comparative import (
     Line,
     Reference,
     analyse,
+    analyse_files,
     calibrate_natural,
     line_area,
     water_content,
 )
-from .spectrum import CALIBRATION_LINES, NATURAL_LINES, Calibration, GammaSpectrum, read_spectrum_txt
+from .readers import read_chn, read_columns, read_gamma, read_n42, read_spe
+from .spectrum import (
+    CALIBRATION_LINES,
+    NATURAL_LINES,
+    Calibration,
+    GammaSpectrum,
+    auto_calibrate,
+    find_peaks_channels,
+    read_spectrum_txt,
+)
 
 __all__ = [
     "BQ_PER_KG",
@@ -36,8 +48,16 @@ __all__ = [
     "Line",
     "Reference",
     "analyse",
+    "analyse_files",
+    "auto_calibrate",
     "calibrate_natural",
+    "find_peaks_channels",
     "line_area",
+    "read_chn",
+    "read_columns",
+    "read_gamma",
+    "read_n42",
+    "read_spe",
     "read_spectrum_txt",
     "water_content",
 ]

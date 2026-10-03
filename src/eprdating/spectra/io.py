@@ -1,7 +1,12 @@
 """Reading cw-EPR spectra from disk.
 
-Supported format
-----------------
+:func:`read_epr` reads any supported file: Bruker BES3T and ESP/WinEPR
+(:mod:`eprdating.spectra.bruker`), the ``.dat``/``.par`` pairs described
+below, and plain field/signal columns. All return a :class:`Spectrum` with
+the field in mT.
+
+``.dat``/``.par`` format
+------------------------
 ``.dat`` + ``.par`` ASCII pairs (one spectrum, possibly several scans). The
 ``.par`` file holds ``KEY : value`` lines::
 
@@ -32,7 +37,7 @@ from __future__ import annotations
 
 import re
 from collections.abc import Iterable
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from itertools import pairwise
 from pathlib import Path
 
@@ -48,17 +53,24 @@ class Spectrum:
     B       : field grid in mT (increasing).
     scans   : array (n_scans, n_points) of raw signal.
     params  : acquisition parameters as read from the file (raw units).
-    freq_GHz, power_mW : microwave frequency and power (power usually comes
-              from the file name, e.g. ``M18_3_19mW_4SCAN.dat``).
+    freq_GHz, power_mW : microwave frequency and power (for the .dat/.par
+              format the power comes from the file name, e.g.
+              ``M18_3_19mW_4SCAN.dat``).
+    gain    : receiver gain as a linear factor (None if unknown).
+    mod_amp_mT, time_constant_ms : field modulation (peak to peak) and
+              lock-in time constant, when the file gives them in known units.
     """
 
     B: np.ndarray
     scans: np.ndarray
     name: str = ""
-    params: dict[str, float] = field(default_factory=dict)
+    params: dict[str, object] = field(default_factory=dict)
     freq_GHz: float | None = None
     power_mW: float | None = None
     dropped_points: int = 0
+    gain: float | None = None
+    mod_amp_mT: float | None = None
+    time_constant_ms: float | None = None
 
     @property
     def n_scans(self) -> int:
@@ -69,15 +81,10 @@ class Spectrum:
         """Average of the scans."""
         return self.scans.mean(axis=0)
 
-    @property
-    def gain(self) -> float | None:
-        return self.params.get("RG")
-
     def window(self, lo_mT: float, hi_mT: float) -> Spectrum:
         """Copy restricted to ``lo_mT <= B <= hi_mT``."""
         m = (self.B >= lo_mT) & (self.B <= hi_mT)
-        return Spectrum(self.B[m], self.scans[:, m], self.name, dict(self.params), self.freq_GHz,
-                        self.power_mW, self.dropped_points)
+        return replace(self, B=self.B[m], scans=self.scans[:, m], params=dict(self.params))
 
     def __repr__(self) -> str:
         return (f"Spectrum({self.name!r}, {self.B.size} points {self.B[0]:.2f}–{self.B[-1]:.2f} mT, "
@@ -141,12 +148,60 @@ def read_dat(path: str | Path, par: str | Path | None = None, power_mW: float | 
         freq_GHz=params.get("Freq"),
         power_mW=power_mW,
         dropped_points=dropped,
+        gain=params.get("RG"),
     )
 
 
+def read_columns(path: str | Path, field_unit: str = "G", freq_GHz: float | None = None,
+                  power_mW: float | None = None, field_column: int = 0, signal_columns=None,
+                  delimiter: str | None = None) -> Spectrum:
+    """Plain text/CSV spectrum: a field column and one or more signal
+    columns (each taken as a scan). Lines starting with ``#`` are skipped."""
+    path = Path(path)
+    if delimiter is None and path.suffix.lower() == ".csv":
+        delimiter = ","
+    a = np.genfromtxt(path, delimiter=delimiter, comments="#", invalid_raise=False)
+    a = a[np.isfinite(a).all(axis=1)]
+    cols = [c for c in range(a.shape[1]) if c != field_column] if signal_columns is None else list(signal_columns)
+    B = a[:, field_column] * {"G": 0.1, "mT": 1.0, "T": 1000.0}[field_unit]
+    order = np.argsort(B)
+    return Spectrum(B[order], a[:, cols].T[:, order], path.stem, {}, freq_GHz, power_mW)
+
+
+def read_epr(path: str | Path, **kw) -> Spectrum:
+    """Read a cw-EPR spectrum, choosing the reader from the file.
+
+    ======================  =============================================
+    ``.DSC`` / ``.DTA``     Bruker BES3T (Xepr)
+    ``.par`` + ``.spc``     Bruker ESP / WinEPR
+    ``.dat`` + ``.par``     ``KEY : value`` + five-column ASCII (see above)
+    ``.txt`` / ``.csv``     field and signal columns
+    ======================  =============================================
+    """
+    from .bruker import read_bes3t, read_esp
+
+    path = Path(path)
+    ext = path.suffix.lower()
+    if ext in (".dsc", ".dta"):
+        return read_bes3t(path, **kw)
+    if ext == ".spc" or (ext == ".par" and _sibling(path, ".spc") is not None):
+        return read_esp(path, **kw)
+    if ext == ".dat" or (ext == ".par" and _sibling(path, ".dat") is not None):
+        return read_dat(path.with_suffix(".dat") if ext == ".par" else path, **kw)
+    return read_columns(path, **kw)
+
+
+def _sibling(path: Path, ext: str) -> Path | None:
+    for e in (ext, ext.upper()):
+        p = path.with_suffix(e)
+        if p.exists():
+            return p
+    return None
+
+
 def read_series(paths: Iterable[str | Path], **kw) -> list[Spectrum]:
-    """Read several spectra (e.g. a dose series)."""
-    return [read_dat(p, **kw) for p in paths]
+    """Read several spectra (e.g. a dose series), any supported format."""
+    return [read_epr(p, **kw) for p in paths]
 
 
-__all__ = ["Spectrum", "read_dat", "read_par", "read_series"]
+__all__ = ["Spectrum", "read_columns", "read_dat", "read_epr", "read_par", "read_series"]

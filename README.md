@@ -54,7 +54,8 @@ print(sample.age_mc(n=2000, seed=42).summary())
 Every input accepts a number, a `(value, sigma)` tuple or a `Value`.
 Units: Gy, Gy/ka, ka, ppm (U, Th), % (K), mT, GHz.
 
-See `examples/quickstart.py` and `examples/deconvolution_epraya.py`.
+See **[docs/guide.md](docs/guide.md)** for a step-by-step guide, and
+`examples/quickstart.py` and `examples/deconvolution_epraya.py`.
 
 `examples/dose_series_dat.py` runs a real additive-dose series from raw
 spectra to De: it reads `.dat`/`.par` files, builds the CO2- template (the
@@ -78,9 +79,9 @@ reference materials to U, Th, K and the infinite-matrix dose rates.
 | `beta` | fixed beta geometry factors, as an alternative to `onegroup` |
 | `alpha` | energy-dependent alpha efficiency, k ∝ R(E)/E (ROSY's "varies with energy" option) |
 | `usesr` | combined U-series/ESR (US-ESR): solves the age and the uptake parameter *p* of each tissue from its 230Th/234U and 234U/238U (Grün et al. 1988) |
-| `gamma` | HPGe gamma spectrometry of sediments: ASCII spectra, energy/resolution calibration per spectrum (absorbs gain drift), peak areas, comparative method against IAEA RGU-1/RGTh-1/RGK-1, 226Ra/238U equilibrium check, output as `Sediment` |
+| `gamma` | HPGe gamma spectrometry of sediments: ORTEC `.Spe`/`.Chn`, N42, ASCII and column files (`.cnf`/`.spc`/IEC through becquerel); automatic energy/resolution calibration per spectrum (no first guess, absorbs gain drift), peak areas, comparative method against IAEA RGU-1/RGTh-1/RGK-1, 226Ra/238U equilibrium check, output as `Sediment` |
 | `age` | generic solver `∫₀ᵀ Ḋ(t) dt = De` and the `ToothSample` model with Monte Carlo |
-| `spectra` | reading `.dat`/`.par` spectra; baseline, power/gain/mass normalisation, field alignment, pseudo-modulation and time-constant broadening of simulated shapes; peak-to-peak, T1–B2, double integral; template/component fits with field shift and noise-injection errors; EPRAYA backend |
+| `spectra` | reading Bruker BES3T (`.DSC`/`.DTA`) and ESP/WinEPR (`.par`/`.spc`), `.dat`/`.par` and column files (`read_epr`); baseline, power/gain/mass normalisation, field alignment, pseudo-modulation and time-constant broadening of simulated shapes; peak-to-peak, T1–B2, double integral; template/component fits with field shift and noise-injection errors; EPRAYA backend |
 
 ## Known limitations (v0.1)
 
@@ -113,7 +114,8 @@ reference materials to U, Th, K and the infinite-matrix dose rates.
 - **v0.4** US-ESR, with cementum layers — done, validated against Shao et al. (2015) and De Nadale et al. (2026, J. Hum. Evol.).
 - **v0.5** real spectra: `.dat`/`.par` reader, template fits with honest errors, EPRAYA templates with instrumental broadening — first real series (M18) processed.
 - **v0.6** sediment U/Th/K from HPGe spectra (comparative method) — reproduces an independent analysis of the corte 0 sediment within 1 %.
-- **later** Bruker/JEOL readers, alpha escape at surfaces, JOSS paper.
+- **v0.7** general use: Bruker and common gamma file formats, automatic gamma calibration, user guide; readers checked on EasySpin and becquerel test files.
+- **later** JEOL readers, alpha escape at surfaces, JOSS paper.
 
 ## Validation against ROSY
 

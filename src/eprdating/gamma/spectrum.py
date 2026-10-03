@@ -55,6 +55,7 @@ class Calibration:
     coef: tuple[float, ...]
     resolution: tuple[float, float] = (0.25, 0.0005)
     residuals_keV: np.ndarray | None = None
+    chi2_red: float | None = None  # of the energy fit, from the centroid uncertainties
 
     def energy(self, channel):
         return np.polynomial.polynomial.polyval(np.asarray(channel, float), self.coef)
@@ -149,6 +150,10 @@ class GammaSpectrum:
         else:
             cal.resolution = (float(sig_keV[0] ** 2), 0.0)
         cal.residuals_keV = E - cal.energy(ch)
+        dof = E.size - (order + 1)
+        if dof > 0:
+            sE = np.maximum(sch * cal.gain(ch), 0.02)  # keV; floor for very strong peaks
+            cal.chi2_red = float(np.sum((cal.residuals_keV / sE) ** 2) / dof)
         self.calibration = cal
         return cal
 
@@ -183,6 +188,135 @@ def fit_single_peak(spec: GammaSpectrum, cal: Calibration, energy_keV: float, wi
     area_sigma = float(np.sqrt(J @ C[:3, :3] @ J))
     return {"centroid": float(mu), "centroid_sigma": float(np.sqrt(C[1, 1])), "sigma_ch": float(s),
             "area": float(area), "area_sigma": area_sigma}
+
+
+def find_peaks_channels(spec: GammaSpectrum, min_significance: float = 5.0, max_peaks: int = 40):
+    """Candidate peaks: ``(channel, significance)`` sorted by significance.
+
+    The counts are smoothed with a 1.5-channel Gaussian, a baseline is taken
+    as a running 20th percentile, and local maxima exceeding the baseline by
+    ``min_significance`` Poisson standard deviations are kept.
+    """
+    from scipy.ndimage import gaussian_filter1d, percentile_filter
+    from scipy.signal import find_peaks
+
+    y = spec.counts
+    sm = gaussian_filter1d(y, 1.5)
+    width = max(15, y.size // 200)
+    base = percentile_filter(sm, 20, size=4 * width + 1)
+    sig = (sm - base) / np.sqrt(np.maximum(base, 1.0) / 3.0)  # smoothing ≈ averages ~3 channels
+    idx, _ = find_peaks(sig, height=min_significance, distance=3)
+    order = np.argsort(sig[idx])[::-1][:max_peaks]
+    idx = idx[order]
+    # parabolic refinement of the maximum
+    c = []
+    for i in idx:
+        if 0 < i < y.size - 1:
+            a, b, d = sm[i - 1], sm[i], sm[i + 1]
+            den = a - 2 * b + d
+            c.append(i + (0.5 * (a - d) / den if den != 0 else 0.0))
+        else:
+            c.append(float(i))
+    return np.interp(c, np.arange(y.size), spec.channels), sig[idx]
+
+
+def auto_calibrate(spec: GammaSpectrum, lines_keV: Sequence[float] = NATURAL_LINES,
+                   gain_range: tuple[float, float] = (0.01, 10.0), max_offset_keV: float = 30.0,
+                   tolerance_keV: float = 1.5, refine: bool = True) -> Calibration:
+    """Energy calibration without a first guess.
+
+    Peaks are searched (:func:`find_peaks_channels`) and every pair of
+    strong peaks is tried as every pair of known lines; the linear map that
+    places the most lines on peaks (within ``tolerance_keV`` plus 0.2 %) wins.
+    It is then refined with :meth:`GammaSpectrum.calibrate`. Works for
+    HPGe spectra with at least three of the given lines (for environmental
+    samples the default natural lines: 238.6, 351.9, 583.2, 609.3, 911.2,
+    1460.8, 1764.5, 2614.5 keV).
+    """
+    ch, sig = find_peaks_channels(spec)
+    if ch.size < 2:
+        raise RuntimeError(f"{spec.name}: no peaks found")
+    E = np.sort(np.asarray(lines_keV, float))
+    strong = np.argsort(sig)[::-1][:15]
+    w = np.log1p(sig)
+    best = None
+    for i in strong:
+        for j in strong:
+            if ch[j] <= ch[i]:
+                continue
+            for k in range(E.size):
+                for m in range(k + 1, E.size):
+                    a1 = (E[m] - E[k]) / (ch[j] - ch[i])
+                    if not gain_range[0] <= a1 <= gain_range[1]:
+                        continue
+                    a0 = E[k] - a1 * ch[i]
+                    if abs(a0) > max_offset_keV:
+                        continue
+                    pred = (E - a0) / a1
+                    d = np.abs(pred[:, None] - ch[None, :]) * a1
+                    tol = tolerance_keV + 0.002 * E
+                    hit = d.min(axis=1) <= tol
+                    score = float(np.sum(w[d.argmin(axis=1)][hit]))
+                    nhit = int(hit.sum())
+                    key = (nhit, score)
+                    if best is None or key > best[0]:
+                        best = (key, a0, a1)
+    if best is None or best[0][0] < 3:
+        raise RuntimeError(f"{spec.name}: could not match at least three known lines")
+    _, a0, a1 = best
+    # resolution from the half-maximum width of the strongest matched peak
+    pred = (E - a0) / a1
+    near = np.abs(pred[:, None] - ch[None, :]).argmin(axis=1)
+    jj = max(near, key=lambda q: sig[q])
+    e_ref = a0 + a1 * ch[jj]
+    sigma_keV = _half_max_sigma(spec, ch[jj]) * a1
+    first = Calibration((a0, a1), resolution=(0.0, sigma_keV**2 / e_ref))
+    if not refine:
+        spec.calibration = first
+        return first
+    kw = {"min_significance": 5.0, "window_keV": max(6.0, 6 * sigma_keV),
+          "max_residual_keV": max(0.4, 0.3 * sigma_keV)}
+    cal = spec.calibrate(lines_keV, guess=first, **kw)
+    if cal.residuals_keV.size >= 4:  # non-linear ADCs: keep a quadratic term if it is needed
+        try:
+            quad = spec.calibrate(lines_keV, guess=cal, order=2, **kw)
+            quad = spec.calibrate(lines_keV, guess=quad, order=2, **kw)  # lines found with the better guess
+        except RuntimeError:
+            quad = None
+        if (quad is not None and quad.chi2_red is not None and cal.chi2_red is not None
+                and quad.residuals_keV.size >= cal.residuals_keV.size and quad.chi2_red < 0.5 * cal.chi2_red):
+            cal = quad
+        spec.calibration = cal
+    fwhm = 2.3548 * float(cal.sigma_keV(662.0))
+    if abs(cal.coef[0]) > 2 * max_offset_keV or not gain_range[0] <= cal.coef[1] <= gain_range[1] or fwhm > HPGE_MAX_FWHM:
+        spec.calibration = None
+        raise RuntimeError(
+            f"{spec.name}: no consistent calibration (offset {cal.coef[0]:.1f} keV, FWHM at 662 keV "
+            f"{fwhm:.1f} keV). The line-by-line method needs HPGe resolution; scintillator spectra "
+            f"(NaI, CsI, LaBr3) are not supported.")
+    return cal
+
+
+#: FWHM at 662 keV above which a spectrum is not treated as HPGe (keV)
+HPGE_MAX_FWHM = 6.0
+
+
+def _half_max_sigma(spec: GammaSpectrum, channel: float) -> float:
+    """Gaussian sigma (channels) from the full width at half maximum."""
+    from scipy.ndimage import gaussian_filter1d
+
+    i = int(np.argmin(np.abs(spec.channels - channel)))
+    y = gaussian_filter1d(spec.counts, 1.0)
+    lo, hi = max(i - 400, 0), min(i + 400, y.size)
+    base = np.percentile(y[lo:hi], 20)
+    half = base + 0.5 * (y[i] - base)
+    left = i
+    while left > lo and y[left] > half:
+        left -= 1
+    right = i
+    while right < hi - 1 and y[right] > half:
+        right += 1
+    return max((right - left) / 2.3548, 0.8)
 
 
 _NUM = re.compile(r"[-+]?\d*\.?\d+(?:[eE][-+]?\d+)?")
@@ -225,6 +359,8 @@ __all__ = [
     "NATURAL_LINES",
     "Calibration",
     "GammaSpectrum",
+    "auto_calibrate",
+    "find_peaks_channels",
     "fit_single_peak",
     "read_spectrum_txt",
 ]

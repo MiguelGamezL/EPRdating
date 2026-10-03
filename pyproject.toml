@@ -22,6 +22,8 @@ dependencies = ["numpy>=1.24", "scipy>=1.10"]
 # EPRAYA brings JAX, numba, ipywidgets, tkinter... keep it opt-in.
 spectra = ["epraya>=0.1.41"]
 plot = ["matplotlib>=3.7"]
+# Canberra .cnf, ORTEC .spc and IEC 61455 gamma spectra
+gamma-formats = ["becquerel>=0.7"]
 dev = ["pytest>=7", "pytest-cov", "ruff"]
 
 [project.urls]

@@ -38,6 +38,7 @@ from __future__ import annotations
 
 from collections.abc import Mapping, Sequence
 from dataclasses import dataclass, field
+from pathlib import Path
 
 import numpy as np
 
@@ -52,7 +53,7 @@ class Line:
     emitter: str
     group: str
     neighbours: tuple[float, ...] = ()  # other peaks fitted in the same window
-    window: float = 8.0  # half width, keV
+    window: float | None = None  # half width (keV); default 8σ beyond the outermost peak
 
 
 LINES: tuple[Line, ...] = (
@@ -61,15 +62,15 @@ LINES: tuple[Line, ...] = (
     Line(351.932, "214Pb", "Ra226"),
     Line(609.312, "214Bi", "Ra226"),
     Line(1120.287, "214Bi", "Ra226"),
-    Line(1764.494, "214Bi", "Ra226", window=10.0),
-    Line(63.29, "234Th", "U238", window=5.0),
+    Line(1764.494, "214Bi", "Ra226"),
+    Line(63.29, "234Th", "U238"),
     Line(1001.03, "234mPa", "U238"),
     Line(238.632, "212Pb", "Th232", (241.997,)),
     Line(338.320, "228Ac", "Th232"),
     Line(583.187, "208Tl", "Th232"),
     Line(911.204, "228Ac", "Th232"),
     Line(968.971, "228Ac", "Th232", (964.766,)),
-    Line(2614.511, "208Tl", "Th232", window=12.0),
+    Line(2614.511, "208Tl", "Th232"),
 )
 
 #: which element each group measures
@@ -105,7 +106,11 @@ def line_area(spec: GammaSpectrum, line: Line, cal: Calibration | None = None) -
     if cal is None:
         raise ValueError(f"{spec.name}: spectrum not calibrated")
     E = cal.energy(spec.channels)
-    m = np.abs(E - line.energy) <= line.window
+    half = line.window
+    if half is None:
+        span = max((abs(n - line.energy) for n in line.neighbours), default=0.0)
+        half = span + 8.0 * float(cal.sigma_keV(line.energy))
+    m = np.abs(E - line.energy) <= half
     x, y = E[m], spec.counts[m]
     peaks = (line.energy, *line.neighbours)
     cols = [_gauss(x, e, cal.sigma_keV(e)) for e in peaks]
@@ -250,6 +255,40 @@ def analyse(
     return GammaResult(sample.name, mass_g, out, ar)
 
 
+def analyse_files(
+    sample: str | Path,
+    mass_g: float,
+    references: Mapping[str, tuple[str | Path, Reference]],
+    background: str | Path | None = None,
+    lines: Sequence[Line] = LINES,
+    calibration_lines: Sequence[float] = NATURAL_LINES,
+    **read_kw,
+) -> GammaResult:
+    """One call from files to contents.
+
+    Every file is read with :func:`~eprdating.gamma.read_gamma` (any
+    supported format) and calibrated on its own natural lines with
+    :func:`~eprdating.gamma.auto_calibrate` (no first guess needed), then
+    :func:`analyse` is applied. Example::
+
+        r = analyse_files("soil.Spe", 600.0,
+                          {"U": ("RGU1.Spe", IAEA_RGU_1), "Th": ("RGTh1.Spe", IAEA_RGTH_1),
+                           "K": ("RGK1.Spe", IAEA_RGK_1)},
+                          background="empty.Spe")
+    """
+    from .readers import read_gamma
+    from .spectrum import auto_calibrate
+
+    def load(p):
+        sp = read_gamma(p, **read_kw)
+        auto_calibrate(sp, calibration_lines)
+        return sp
+
+    refs = {el: (load(p), ref) for el, (p, ref) in references.items()}
+    bg = load(background) if background is not None else None
+    return analyse(load(sample), mass_g, refs, background=bg, lines=lines)
+
+
 def calibrate_natural(spec: GammaSpectrum, guess: Calibration, lines: Sequence[float] = NATURAL_LINES,
                       min_significance: float = 8.0) -> Calibration:
     """Calibrate an environmental spectrum on its own natural lines (absorbs
@@ -283,6 +322,7 @@ __all__ = [
     "LineResult",
     "Reference",
     "analyse",
+    "analyse_files",
     "calibrate_natural",
     "line_area",
     "net_rate",
