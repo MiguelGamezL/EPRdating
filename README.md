@@ -122,7 +122,7 @@ reference materials to U, Th, K and the infinite-matrix dose rates.
 - **v0.1** core: De, dose rate, EU/LU/US, age, Monte Carlo; validation against published ROSY/DATA ages.
 - **v0.2** spectra: EPRAYA-based deconvolution → De; comparison of intensity methods.
 - **v0.3** one-group beta attenuation in planar layers (Brennan et al. 1997) — done, with the geometry sampled in the Monte Carlo.
-- **v0.4** US-ESR, with cementum layers — done, validated against Shao et al. (2015) and De Nadale et al. (2026, J. Hum. Evol.).
+- **v0.4** US-ESR, with cementum layers — done, validated against Shao et al. (2015) and Yu et al. (2026, J. Hum. Evol., De Nadale cave).
 - **v0.5** real spectra: `.dat`/`.par` reader, template fits with honest errors, EPRAYA templates with instrumental broadening — first real series (M18) processed.
 - **v0.6** sediment U/Th/K from HPGe spectra (comparative method) — reproduces an independent analysis of the corte 0 sediment within 1 %.
 - **v0.7** general use: Bruker and common gamma file formats, automatic gamma calibration, user guide; readers checked on EasySpin and becquerel test files.

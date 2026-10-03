@@ -90,7 +90,7 @@ Colombia, with ages from 3 ka to 720 ka. Details:
 
 ## US-ESR: published ages
 
-Shao et al. (2015) and De Nadale et al. (2026). Details:
+Shao et al. (2015) and Yu et al. (2026, De Nadale cave). Details:
 [`tests/validation/USESR_FINDINGS.md`](../tests/validation/USESR_FINDINGS.md).
 
 - The uptake parameter *p* at the published age is reproduced within 0.015

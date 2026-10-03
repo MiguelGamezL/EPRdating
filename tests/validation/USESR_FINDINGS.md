@@ -72,7 +72,7 @@ Tests: `test_usesr_published.py`.
 `USESRSample.age(model="CSUS")` takes all the U of each tissue as taken up
 at once at its closed-system U-series age, the alternative model DATA prints
 next to US-ESR. Comparing both shows how much an age depends on the uptake
-model. For the De Nadale et al. (2026) teeth:
+model. For the De Nadale cave teeth (Yu et al. 2026, J. Hum. Evol. 215–216, 103842):
 
 | Sample | US-ESR | CSUS-ESR | Uptake ages (enamel / dentine) | Published (US) |
 |---|---|---|---|---|
