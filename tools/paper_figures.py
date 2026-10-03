@@ -9,8 +9,6 @@ only the reference data under tests/validation.
 from __future__ import annotations
 
 import argparse
-import copy
-import json
 import sys
 import warnings
 from pathlib import Path
@@ -69,7 +67,7 @@ def fig_m18(folder: Path, out: Path):
     res = {f: ds.amplitude(*data[f], template) for f in data}
     k = res[ds.BRIDGE[0]][0] / res[ds.BRIDGE[1]][0]
     sk = k * np.hypot(res[ds.BRIDGE[0]][1] / res[ds.BRIDGE[0]][0], res[ds.BRIDGE[1]][1] / res[ds.BRIDGE[1]][0])
-    step = lambda f: float(np.median(np.diff(data[f][0])))  # noqa: E731
+    step = lambda f: float(np.median(np.diff(data[f][0])))
     rows = []
     for f, d in ds.SERIES.items():
         A, s, _ = res[f]
