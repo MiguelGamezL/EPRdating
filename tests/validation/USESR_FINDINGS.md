@@ -83,3 +83,9 @@ model. For the De Nadale et al. (2026) teeth:
 CSUS-ESR ages are 3–4 % older here: uptake as a late step delivers less
 internal dose than the gradual uptake US-ESR finds. The model is checked by
 a round trip in `tests/test_usesr.py`.
+
+## Against DATA
+
+Both models were also run against DATA's U-series/ESR part (Grün 2009) on 40
+cases. US-ESR ages agree within −1.4 to +0.7 %, p within 0.05, and CS-US
+ages within DATA's rounding; see the second half of `DATA_FINDINGS.md`.

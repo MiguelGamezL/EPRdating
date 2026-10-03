@@ -31,4 +31,22 @@ DATA_DIR=data_work DISPLAY=:99 python run_data.py \
   ka) and DATA's beta-correction table. The raw printouts of the reference
   run are in `tests/validation/data_reference/raw/`.
 
+## U-series/ESR (US-ESR, CS-US)
+
+```bash
+DATA_DIR=data_work DISPLAY=:99 python run_useries.py \
+    ../../tests/validation/data_reference/useries_cases.json useries_results.json
+```
+
+- <F6> loads the `.EPR` file into the U-series screen. The ratios are typed
+  in, because they cannot be stored in the file. A field is edited with
+  <Enter> value <Enter> <Enter> error <Enter>; `run_useries.TISSUE_ROWS`
+  lists the screen rows.
+- US-ESR is iterative (a counter runs on the screen), so the harness waits
+  until the screen stops changing before printing (~50 s per case).
+- The echoed inputs on the printout are compared with the case. A mismatch
+  is retried.
+- Avoid inputs that crash DATA: a 100 % error on De (overflow, line 116) or
+  no U in the dentine (line 114).
+
 Findings: `tests/validation/DATA_FINDINGS.md`.

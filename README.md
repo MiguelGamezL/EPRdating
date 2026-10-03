@@ -18,7 +18,8 @@ an independent, open implementation from the published equations.
 > errors, for synthetic cases and the six teeth of Brennan et al. (1997)
 > (see `tests/validation/ROSY_FINDINGS.md`). Against DATA (Grün 2009),
 > ages agree within −2.6 to +1.6 % with DATA's single beta factor for the U
-> chain (`tests/validation/DATA_FINDINGS.md`). Still pre-release; see
+> chain, and its US-ESR and CS-US ages within −1.4 to +0.7 % and 1 %
+> (`tests/validation/DATA_FINDINGS.md`). Still pre-release; see
 > *Known limitations*.
 
 ## Install
@@ -123,7 +124,7 @@ reference materials to U, Th, K and the infinite-matrix dose rates.
 - **v0.5** real spectra: `.dat`/`.par` reader, template fits with honest errors, EPRAYA templates with instrumental broadening — first real series (M18) processed.
 - **v0.6** sediment U/Th/K from HPGe spectra (comparative method) — reproduces an independent analysis of the corte 0 sediment within 1 %.
 - **v0.7** general use: Bruker and common gamma file formats, automatic gamma calibration, user guide; readers checked on EasySpin and becquerel test files.
-- **v0.8** CSUS-ESR; validation against DATA (82 runs) — `beta_by_segment` option, sediment-on-both-sides fix.
+- **v0.8** CSUS-ESR; validation against DATA: EU/LU (82 runs), US-ESR and CS-US (40 cases) — `beta_by_segment` option, sediment-on-both-sides fix.
 - **later** JEOL readers, alpha escape at surfaces, JOSS paper.
 
 ## Validation against ROSY
@@ -145,6 +146,10 @@ EU/LU ages. `DATA_FINDINGS.md` documents DATA's input conventions and the
 one real difference: DATA attenuates the beta dose with ingrowth by one
 chain factor, whereas EPRdating by default uses one factor per U-series
 segment (`ToothSample(beta_by_segment=False)` reproduces DATA).
+`run_useries.py` drives DATA's U-series/ESR screen (<F6>);
+`test_data_useries.py` checks US-ESR ages and p values, CS-US ages and three
+DATA limitations: the dentine p does not always converge, there is no result
+near the closed-system bound, and CS-US ages can be younger than the uptake.
 
 ## Testing
 

@@ -170,6 +170,11 @@ the 234U/238U entered is the initial ratio (`u234_u238_is="initial"`), radon
 loss applies to the dentine only, and one beta attenuation factor covers the
 whole U chain (`beta_by_segment=False`). The default, one factor per U-series
 segment as in ROSY, gives up to ~40 % more dentine beta dose to young teeth.
+DATA's US-ESR and CS-US ignore radon loss. EPRdating's `USESRSample`
+reproduces them (`age()` and `age(model="CSUS")`) with these conventions.
+Where DATA's dentine p does not converge, or where DATA reports no result
+near the closed-system bound, EPRdating gives the solution that fits the
+measured ratios; see the validation notes.
 
 Every function and its options: [API reference](api/index.md).
 What has been validated: [Validation](validation.md).

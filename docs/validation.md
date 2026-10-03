@@ -34,6 +34,27 @@ The original DATA program (Grün 2009) was run as a black box in DOSBox-X on
 | Ages with DATA's convention (`beta_by_segment=False`) | **−2.6 to +1.6 %**, mean −0.1 % |
 | Ages with EPRdating's default (beta attenuated per U-series segment) | −7.5 to +1.1 %, mean −1.3 % |
 
+DATA's U-series/ESR part was run on 40 more cases (230Th/234U 0.05–0.95,
+ages 9 ka – 1.5 Ma):
+
+| Piece | Agreement |
+|---|---|
+| US-ESR ages (29 regular cases) | −1.4 to +0.7 %, mean 0.0 % |
+| Uptake parameter p, enamel and dentine | within 0.05 (2 % above p = 2), p from −0.8 to 16.7 |
+| CS-US ages (Grün 2000) | within DATA's rounding to 1 ka plus 1 % |
+| Monte Carlo uncertainties | within 5 % of DATA's errors |
+
+DATA's own (age, p) reproduce the measured ratios in EPRdating's U-series
+equations, so both programs use the same model. Three DATA limitations
+appear:
+
+- When the dentine took up its U much later than the enamel, DATA's dentine
+  p does not converge. Its US-ESR ages are then up to 8 % too young.
+- DATA gives no result for solutions with p below about −0.85.
+- DATA prints CS-US ages younger than the uptake it assumes.
+
+DATA ignores radon loss in this part.
+
 DATA's input conventions: water as % of the wet mass, 234U/238U of the
 incoming U, radon loss in the dentine only. By default EPRdating attenuates
 the beta dose of each U-series segment separately, as ROSY does. For young

@@ -1,5 +1,8 @@
 # Validation against DATA (Grün 2009)
 
+Two campaigns: EU/LU dose rates and ages (below), and the U-series/ESR
+part (US-ESR and CS-US, [second half](#u-seriesesr-us-esr-and-cs-us)).
+
 DATA is the DOS program most ESR tooth ages of the last 15 years were
 calculated with. The original `DATA.EXE` was run unchanged as a black box in
 DOSBox-X (`tools/data_harness`) on 41 cases built around a base tooth. Each
@@ -138,3 +141,126 @@ both sides; `"sediment_outer"` and `"sediment_inner"` give each side alone.
 
 The inputs are in `data_reference/cases.json`, the parsed outputs in
 `results.json`, and DATA's raw printouts in `raw/`.
+
+# U-series/ESR: US-ESR and CS-US
+
+DATA's <F6> ("read enamel into U-series") loads an `.EPR` file into a screen
+that adds 234U/238U and 230Th/234U for the enamel and for each dentine side.
+It prints the following:
+
+- EU and LU results.
+- **US-ESR**: age, the uptake parameter p of each tissue, and dose rates.
+- **CS-US**: the closed-system U-series model (Grün 2000). DATA prints an age
+  and, in a second column, the dose delivered by the tooth's own U since its
+  uptake (Gy).
+
+The U-series data cannot be stored in the file. `tools/data_harness/run_useries.py`
+types them in and checks them against the echo on the printout.
+
+There are 40 cases around the base tooth, with 230Th/234U from 0.05 to
+0.95. They vary:
+
+- 234U/238U (1.0–2.0, and different in each tissue);
+- the D_E (30–1500 Gy);
+- U contents, thickness and geometry;
+- late uptake into the enamel, the dentine or both;
+- the distance to the closed-system bound (p of the dentine −0.95 to −0.7).
+
+## DATA's conventions
+
+These are in addition to those of the EU/LU part:
+
+- **Radon loss is ignored.** The case with 50 % Rn loss prints exactly the
+  same as the base case.
+- **CS-US uptake ages:** each tissue took up all its U at its closed-system
+  age, computed from its own ratios.
+- **No dentine U:** with sediment on both sides, DATA's US-ESR crashes with
+  "Illegal function call in line 114 of module DATA-EL". CS-US is printed
+  before the crash: 83 ka, against 82.0 ka in EPRdating.
+
+## Results
+
+These use EPRdating with `beta_by_segment=False` and no radon loss.
+
+| | Agreement |
+|---|---|
+| US-ESR age (29 cases) | −1.4 to +0.7 %, mean 0.0 % |
+| p of each tissue | within 0.05 (2 % for p > 2), from p = −0.8 to p = 16.7 |
+| CS-US age (37 cases) | within the rounding to 1 ka plus 1 % |
+| Dose from the tooth's U in CS-US | DATA 1–5 % lower (the dentine beta difference of the EU/LU part) |
+| Uncertainties (4 cases, Monte Carlo n = 300) | standard deviation within 5 % of DATA's errors: for example 99 +12 −12 vs ± 12.2 ka, and 471 +62 −59 vs ± 58.8 ka |
+
+**Same U-series model.** In the 29 regular cases, DATA's own age and p
+values, put into EPRdating's U-series equations, give back the 230Th/234U
+that was entered, within ±0.004. This holds from p = −0.8 to p = 16.7 and for
+ages from 30 ka to 1 Ma.
+
+With EPRdating's default (`beta_by_segment=True`), US-ESR ages are −2.1
+to +1.0 % from DATA's (mean −1.7 %). For the U-rich dentine case (50 ppm)
+they are 13 % younger. This is the same per-segment beta effect described above.
+
+## Findings
+
+### DATA's dentine p does not always converge
+
+When the dentine took up its U much later than the enamel, DATA's dentine
+p does not reproduce the measured dentine ratio:
+
+| Case (enamel / dentine 230Th/234U) | DATA p dentine → predicted ratio | EPRdating p dentine | Age DATA / EPRdating |
+|---|---|---|---|
+| 0.30 / 0.10 | 1.25 → 0.229 | 6.69 | 99 / 104.1 ka |
+| 0.25 / 0.05 | 0.00 → 0.348 | 16.9 | 100 / 108.0 ka |
+| 0.25 / 0.15 | 2.46 → 0.182 | 3.60 | 104 / 105.1 ka |
+| 0.25 / 0.15 and 0.35 | 2.49 → 0.175 | 3.37 | 100 / 100.7 ka |
+
+DATA converges normally in the other configurations:
+
+- dentine 0.20 against enamel 0.25 (p = 1.98);
+- late enamel (p up to 16.7);
+- both tissues late (p = 7.4 in each);
+- large p in both tissues at a large D_E (p = 10.7 and 7.9).
+
+The failure therefore depends on the dentine being much later than the
+enamel, not on the size of p. In these cases DATA's US-ESR ages are up to
+8 % too young, because its dentine dose is too high for the measured
+230Th/234U. The CS-US ages of the same cases agree, which confirms that only
+the p solution fails.
+
+### No result near the closed-system bound
+
+DATA prints "U-SERIES TOO HIGH: NO RESULT" whenever the solution needs a p
+below a cutoff between −0.9 and −0.8.
+
+- **DATA solves:** cases with dentine p = −0.8 and −0.7, in agreement with
+  EPRdating.
+- **DATA refuses:** cases with dentine p = −0.9, −0.95, −0.97 and −0.99.
+  Solutions exist for all four: 42.7, 40.6, 76.6 and 9.2 ka.
+
+EPRdating solves down to p = −1. With uncertain inputs, `age_mc` reports the
+fraction of draws that solve and flags the result as marginal (see
+`USESR_FINDINGS.md`).
+
+### CS-US ages younger than the uptake
+
+When the external dose alone accounts for the D_E before the U arrives, the
+CS-US model has no solution. DATA prints an age anyway. With D_E = 30 Gy, for
+example, it gives 20 ka, younger than the uptake ages it assumes itself
+(31 and 38 ka). EPRdating returns `no_solution` and gives the uptake age.
+
+## Tests
+
+`test_data_useries.py` checks the following:
+
+| Check | Tolerance |
+|---|---|
+| US-ESR ages | 1.5 % or 0.5 ka |
+| p | 0.05 or 2 % |
+| DATA's (T, p) reproduce the measured ratios | ±0.004 |
+| Unconverged dentine p in DATA | identified, with EPRdating reproducing the measured ratio |
+| No result near the bound | DATA has none; EPRdating solves with p < −0.85 |
+| CS-US ages | 0.5 ka plus 1.5 % |
+| Dose from the tooth's U | DATA/EPRdating ratio between 0.94 and 1.00 |
+| Radon loss | ignored by DATA |
+
+The inputs are in `data_reference/useries_cases.json`, the parsed outputs in
+`useries_results.json`, and the raw printouts in `raw_useries/`.
