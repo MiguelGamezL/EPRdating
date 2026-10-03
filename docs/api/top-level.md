@@ -4,7 +4,7 @@
 
 Everything most scripts need, importable as `from eprdating import ...`.
 
-**Contents:** [`AgeMC`](#agemc), [`AgeResult`](#ageresult), [`BetaGeometry`](#betageometry), [`DoseRateComponent`](#doseratecomponent), [`DoseResponseResult`](#doseresponseresult), [`EarlyUptake`](#earlyuptake), [`LinearUptake`](#linearuptake), [`Sediment`](#sediment), [`ToothLayers`](#toothlayers), [`ToothSample`](#toothsample), [`USESRSample`](#usesrsample), [`USModel`](#usmodel), [`USeries`](#useries), [`UseriesData`](#useriesdata), [`Value`](#value), [`available_factor_sets`](#available_factor_sets), [`bootstrap_De`](#bootstrap_de), [`conversion_factors`](#conversion_factors), [`cosmic_dose_rate`](#cosmic_dose_rate), [`fit_dose_response`](#fit_dose_response), [`matrix_dose_rates`](#matrix_dose_rates), [`solve_age`](#solve_age), [`water_correction`](#water_correction)
+**Contents:** [`AgeMC`](#agemc), [`AgeResult`](#ageresult), [`BetaGeometry`](#betageometry), [`DelayedUptake`](#delayeduptake), [`DoseRateComponent`](#doseratecomponent), [`DoseResponseResult`](#doseresponseresult), [`EarlyUptake`](#earlyuptake), [`LinearUptake`](#linearuptake), [`Sediment`](#sediment), [`ToothLayers`](#toothlayers), [`ToothSample`](#toothsample), [`USESRSample`](#usesrsample), [`USModel`](#usmodel), [`USeries`](#useries), [`UseriesData`](#useriesdata), [`Value`](#value), [`available_factor_sets`](#available_factor_sets), [`bootstrap_De`](#bootstrap_de), [`conversion_factors`](#conversion_factors), [`cosmic_dose_rate`](#cosmic_dose_rate), [`fit_dose_response`](#fit_dose_response), [`matrix_dose_rates`](#matrix_dose_rates), [`solve_age`](#solve_age), [`water_correction`](#water_correction)
 
 ### `AgeMC`
 
@@ -43,6 +43,21 @@ Fractions of infinite-matrix beta dose rate reaching the dated enamel.
 **Members**
 
 - `values(self) -> dict`
+
+### `DelayedUptake`
+
+*dataclass* `DelayedUptake(t_uptake: float)`
+
+All U taken up at once `t_uptake` ka before present (none before).
+
+Used by the CSUS-ESR model (Grün 2000), where `t_uptake` is the
+closed-system U-series age of the tissue. For a sample older than
+`t_uptake` the tissue delivers dose only during its last `t_uptake`.
+
+**Members**
+
+- `accumulated(self, T: float, G = None) -> float`
+- `fraction(self, t, T: float)` — U(t)/U_m at time `t` after burial for a sample of age `T`.
 
 ### `DoseRateComponent`
 
@@ -166,8 +181,12 @@ and 234U/238U fields are ignored for tissues with U-series data).
 
 **Members**
 
-- `age(self) -> USESRResult` — Nominal US-ESR age and uptake parameters.
-- `age_mc(self, n: int = 1000, seed: int | None = None, marginal_below: float = 0.8) -> USESRMC` — Monte Carlo over all inputs, U-series ratios included.
+- `age(self, model: str = 'US') -> USESRResult` — Nominal age. `model="US"`: US-ESR (uptake parameter p of each
+tissue solved with the age, Grün et al. 1988). `model="CSUS"`:
+CSUS-ESR (Grün 2000), U taken up at once at each tissue's
+closed-system U-series age; comparing both shows how much the age
+depends on the uptake model.
+- `age_mc(self, n: int = 1000, seed: int | None = None, marginal_below: float = 0.8, model: str = 'US') -> USESRMC` — Monte Carlo over all inputs, U-series ratios included.
 
 ### `USModel`
 

@@ -69,3 +69,27 @@ def EarlyUptake() -> USModel:
 
 def LinearUptake() -> USModel:
     return USModel(0.0)
+
+
+@dataclass(frozen=True)
+class DelayedUptake:
+    """All U taken up at once ``t_uptake`` ka before present (none before).
+
+    Used by the CSUS-ESR model (Grün 2000), where ``t_uptake`` is the
+    closed-system U-series age of the tissue. For a sample older than
+    ``t_uptake`` the tissue delivers dose only during its last ``t_uptake``.
+    """
+
+    t_uptake: float
+
+    def __post_init__(self) -> None:
+        if self.t_uptake < 0:
+            raise ValueError("t_uptake must be >= 0")
+
+    def fraction(self, t, T: float):
+        """U(t)/U_m at time ``t`` after burial for a sample of age ``T``."""
+        return (np.asarray(t, float) >= T - self.t_uptake).astype(float)
+
+    def accumulated(self, T: float, G=None) -> float:
+        tau = min(self.t_uptake, T)
+        return float(tau if G is None else G(tau))

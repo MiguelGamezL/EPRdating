@@ -39,7 +39,7 @@ from scipy.optimize import brentq
 from ._types import ValueLike, as_value
 from .age import AgeResult, ToothSample, solve_age
 from .series import LAMBDA, activity_ratio_Th230_U238
-from .uptake import USModel
+from .uptake import DelayedUptake, USModel
 
 P_MAX = 1000.0
 
@@ -115,8 +115,17 @@ class USESRResult:
     status: str  # "ok" or "no_solution"
     detail: AgeResult | None = None
     p_cementum: float | None = None
+    model: str = "US"
+    uptake_ka: dict[str, float] | None = None  # CSUS: closed-system U-series age of each tissue
 
     def summary(self) -> str:
+        if self.status != "ok" and self.model == "CSUS":
+            return (f"No CSUS-ESR solution: the ESR dose is reached before the closed-system "
+                    f"U-series age ({self.min_age:.4g} ka); the ESR age would be younger than the "
+                    f"U uptake.")
+        if self.model == "CSUS" and self.status == "ok":
+            tis = ", ".join(f"{k} {v:.4g} ka" for k, v in (self.uptake_ka or {}).items())
+            return f"CSUS-ESR age = {self.age:.4g} ka   (U taken up at the closed-system U-series ages: {tis})"
         if self.status != "ok":
             return (f"No US-ESR solution: the ESR dose is reached before the closed-system "
                     f"U-series age ({self.min_age:.4g} ka); uranium leaching is likely, or the "
@@ -267,7 +276,45 @@ class USESRSample:
         finally:
             tooth.u234_u238_is = saved
 
-    def _solve(self, v: dict) -> USESRResult:
+    def _solve_csus(self, v: dict) -> USESRResult:
+        """CSUS-ESR (Grün 2000): each tissue took up all its U at once, at its
+        closed-system U-series age."""
+        t_cs, ups, vv = {}, {}, dict(v)
+        for t in self._tissues:
+            if self._has(t, v):
+                tc = closed_system_age(v[f"us_{t}_th"], v[f"us_{t}_r"])
+                if not math.isfinite(tc):
+                    return USESRResult(None, None, None, None, None, tc, "no_solution", model="CSUS")
+                t_cs[t] = tc
+                ups[t] = DelayedUptake(tc)
+                vv[f"u234_u238_{t}"] = incoming_ratio(tc, -1.0, v[f"us_{t}_r"])
+            else:
+                ups[t] = getattr(self.tooth, f"uptake_{t}")
+        t_min = max(max(t_cs.values(), default=0.0), 1e-6)
+        comps = self._components(vv, ups)
+        dose = lambda T: sum(c.accumulated(T) for c in comps)
+        De = v["De"]
+        d_min = dose(t_min)
+        if d_min > De * (1 + 1e-6):
+            return USESRResult(None, None, None, None, None, t_min, "no_solution", model="CSUS", uptake_ka=t_cs)
+        if d_min >= De:
+            T = t_min
+        else:
+            hi = max(2 * t_min, 1.0)
+            while dose(hi) < De:
+                hi *= 2
+                if hi > 1e5:
+                    raise RuntimeError("no age below 100 Ma reproduces De")
+            T = brentq(lambda x: dose(x) - De, t_min, hi, xtol=1e-8, rtol=1e-10)
+        rin = {t: vv.get(f"u234_u238_{t}") if t in t_cs else None for t in self._tissues}
+        return USESRResult(T, None, None, rin["enamel"], rin["dentine"], t_min, "ok", solve_age(De, comps),
+                           None, model="CSUS", uptake_ka=t_cs)
+
+    def _solve(self, v: dict, model: str = "US") -> USESRResult:
+        if model.upper() == "CSUS":
+            return self._solve_csus(v)
+        if model.upper() != "US":
+            raise ValueError("model must be 'US' or 'CSUS'")
         bounds = [closed_system_age(v[f"us_{t}_th"], v[f"us_{t}_r"]) for t in self._tissues if self._has(t, v)]
         t_min = max(bounds) if bounds else 1e-6
         if not math.isfinite(t_min):
@@ -297,11 +344,16 @@ class USESRSample:
         pc = ups["cementum"].p if self._has("cementum", v) else None
         return USESRResult(T, pe, pd, rins["enamel"], rins["dentine"], t_min, "ok", detail, pc)
 
-    def age(self) -> USESRResult:
-        """Nominal US-ESR age and uptake parameters."""
-        return self._solve(self._nominal())
+    def age(self, model: str = "US") -> USESRResult:
+        """Nominal age. ``model="US"``: US-ESR (uptake parameter p of each
+        tissue solved with the age, Grün et al. 1988). ``model="CSUS"``:
+        CSUS-ESR (Grün 2000), U taken up at once at each tissue's
+        closed-system U-series age; comparing both shows how much the age
+        depends on the uptake model."""
+        return self._solve(self._nominal(), model)
 
-    def age_mc(self, n: int = 1000, seed: int | None = None, marginal_below: float = 0.8) -> USESRMC:
+    def age_mc(self, n: int = 1000, seed: int | None = None, marginal_below: float = 0.8,
+               model: str = "US") -> USESRMC:
         """Monte Carlo over all inputs, U-series ratios included.
 
         Always runs, even when the nominal inputs have no solution; the result
@@ -310,7 +362,7 @@ class USESRSample:
         """
         with warnings.catch_warnings():
             warnings.simplefilter("ignore")
-            nominal = self.age()
+            nominal = self.age(model)
         rng = np.random.default_rng(seed)
         s = self._sample(rng, n)
         ages, pe, pd, pc = [], [], [], []
@@ -318,7 +370,7 @@ class USESRSample:
         for i in range(n):
             v = {k: float(a[i]) for k, a in s.items()}
             try:
-                r = self._solve(v) if v["De"] > 0 else None
+                r = self._solve(v, model) if v["De"] > 0 else None
             except (RuntimeError, ValueError):
                 r = None
             if r is None or r.status != "ok":

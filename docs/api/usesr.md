@@ -56,9 +56,9 @@ the closed-system U-series bound, or affected by uranium leaching).
 
 ### `USESRResult`
 
-*dataclass* `USESRResult(age: float | None, p_enamel: float | None, p_dentine: float | None, r_in_enamel: float | None, r_in_dentine: float | None, min_age: float, status: str, detail: AgeResult | None = None, p_cementum: float | None = None)`
+*dataclass* `USESRResult(age: float | None, p_enamel: float | None, p_dentine: float | None, r_in_enamel: float | None, r_in_dentine: float | None, min_age: float, status: str, detail: AgeResult | None = None, p_cementum: float | None = None, model: str = 'US', uptake_ka: dict[str, float] | None = None)`
 
-USESRResult(age: 'float | None', p_enamel: 'float | None', p_dentine: 'float | None', r_in_enamel: 'float | None', r_in_dentine: 'float | None', min_age: 'float', status: 'str', detail: 'AgeResult | None' = None, p_cementum: 'float | None' = None)
+USESRResult(age: 'float | None', p_enamel: 'float | None', p_dentine: 'float | None', r_in_enamel: 'float | None', r_in_dentine: 'float | None', min_age: 'float', status: 'str', detail: 'AgeResult | None' = None, p_cementum: 'float | None' = None, model: 'str' = 'US', uptake_ka: 'dict[str, float] | None' = None)
 
 **Members**
 
@@ -75,8 +75,12 @@ and 234U/238U fields are ignored for tissues with U-series data).
 
 **Members**
 
-- `age(self) -> USESRResult` — Nominal US-ESR age and uptake parameters.
-- `age_mc(self, n: int = 1000, seed: int | None = None, marginal_below: float = 0.8) -> USESRMC` — Monte Carlo over all inputs, U-series ratios included.
+- `age(self, model: str = 'US') -> USESRResult` — Nominal age. `model="US"`: US-ESR (uptake parameter p of each
+tissue solved with the age, Grün et al. 1988). `model="CSUS"`:
+CSUS-ESR (Grün 2000), U taken up at once at each tissue's
+closed-system U-series age; comparing both shows how much the age
+depends on the uptake model.
+- `age_mc(self, n: int = 1000, seed: int | None = None, marginal_below: float = 0.8, model: str = 'US') -> USESRMC` — Monte Carlo over all inputs, U-series ratios included.
 
 ### `UseriesData`
 

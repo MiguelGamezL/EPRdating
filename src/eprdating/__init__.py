@@ -17,7 +17,7 @@ from .dose_rate import (
 from .doseresponse import DoseResponseResult, bootstrap_De, fit_dose_response
 from .onegroup import ToothLayers
 from .series import USeries
-from .uptake import EarlyUptake, LinearUptake, USModel
+from .uptake import DelayedUptake, EarlyUptake, LinearUptake, USModel
 from .usesr import UseriesData, USESRSample
 
 __version__ = "0.1.0.dev0"
@@ -26,6 +26,7 @@ __all__ = [
     "AgeMC",
     "AgeResult",
     "BetaGeometry",
+    "DelayedUptake",
     "DoseRateComponent",
     "DoseResponseResult",
     "EarlyUptake",

@@ -19,7 +19,22 @@ Uptake only affects the *U-derived* dose-rate contributions of the tissue
 (alpha and beta of enamel, beta of dentine); sediment gamma and cosmic
 contributions are taken as constant.
 
-**Contents:** [`EarlyUptake`](#earlyuptake), [`LinearUptake`](#linearuptake), [`USModel`](#usmodel)
+**Contents:** [`DelayedUptake`](#delayeduptake), [`EarlyUptake`](#earlyuptake), [`LinearUptake`](#linearuptake), [`USModel`](#usmodel)
+
+### `DelayedUptake`
+
+*dataclass* `DelayedUptake(t_uptake: float)`
+
+All U taken up at once `t_uptake` ka before present (none before).
+
+Used by the CSUS-ESR model (Grün 2000), where `t_uptake` is the
+closed-system U-series age of the tissue. For a sample older than
+`t_uptake` the tissue delivers dose only during its last `t_uptake`.
+
+**Members**
+
+- `accumulated(self, T: float, G = None) -> float`
+- `fraction(self, t, T: float)` — U(t)/U_m at time `t` after burial for a sample of age `T`.
 
 ### `EarlyUptake`
 

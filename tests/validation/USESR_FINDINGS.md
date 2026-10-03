@@ -66,3 +66,20 @@ at or above secular equilibrium, which leaves p essentially unconstrained;
 they are not used.
 
 Tests: `test_usesr_published.py`.
+
+## CSUS-ESR (Grün 2000)
+
+`USESRSample.age(model="CSUS")` takes all the U of each tissue as taken up
+at once at its closed-system U-series age, the alternative model DATA prints
+next to US-ESR. Comparing both shows how much an age depends on the uptake
+model. For the De Nadale et al. (2026) teeth:
+
+| Sample | US-ESR | CSUS-ESR | Uptake ages (enamel / dentine) | Published (US) |
+|---|---|---|---|---|
+| CN-857 | 77.1 ka | 80.5 ka | 49.6 / 22.3 ka | 79 ± 9 ka |
+| CN-1322 | 65.8 ka | 68.2 ka | 39.1 / 32.6 ka | 72 ± 11 ka |
+| CN-55 | no solution | no solution | 49.0 / 47.5 ka | 55 ± 11 ka |
+
+CSUS-ESR ages are 3–4 % older here: uptake as a late step delivers less
+internal dose than the gradual uptake US-ESR finds. The model is checked by
+a round trip in `tests/test_usesr.py`.

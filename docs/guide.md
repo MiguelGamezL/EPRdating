@@ -160,7 +160,9 @@ plot.plot_age_distribution(mc, reference=(0.56, 2.44))   # e.g. a radiocarbon ra
 ```
 
 With U-series data of the dental tissues use `USESRSample` (combined
-U-series/ESR). Every function and its options: [API reference](api/index.md).
+U-series/ESR): `age()` solves the uptake parameter of each tissue with the
+age (US-ESR, Grün et al. 1988) and `age(model="CSUS")` takes the U as taken
+up at each tissue's closed-system U-series age (CSUS-ESR, Grün 2000). Every function and its options: [API reference](api/index.md).
 What has been validated: [Validation](validation.md).
 
 ---

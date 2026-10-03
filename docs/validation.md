@@ -30,6 +30,8 @@ Shao et al. (2015) and De Nadale et al. (2026). Details:
   one-group method.
 - A sample at the closed-system U-series bound (CN-55) is flagged as
   marginal by the Monte Carlo instead of being given a spurious age.
+- The alternative CSUS-ESR model (Grün 2000) passes a synthetic round trip
+  and gives ages 3–4 % older than US-ESR for the De Nadale teeth.
 
 ## Gamma spectrometry
 

@@ -101,3 +101,40 @@ def test_monte_carlo_without_any_solution():
     assert mc.solved_fraction == 0.0 and mc.marginal
     assert math.isnan(mc.mean)
     assert "no draw has a solution" in mc.summary()
+
+
+# --- CSUS-ESR (Grün 2000) -------------------------------------------------
+def _csus_synthetic(T, tu_e, tu_d, rin_e, rin_d):
+    from eprdating.uptake import DelayedUptake
+
+    r48e, th_e = predicted_ratios(tu_e, -1.0, rin_e)  # closed system since uptake
+    r48d, th_d = predicted_ratios(tu_d, -1.0, rin_d)
+    fwd = ToothSample(De=1.0, uptake_enamel=DelayedUptake(tu_e), uptake_dentine=DelayedUptake(tu_d),
+                      u234_u238_enamel=rin_e, u234_u238_dentine=rin_d, u234_u238_is="initial", **BASE)
+    De = sum(c.accumulated(T) for c in fwd.components())
+    return De, (th_e, r48e), (th_d, r48d)
+
+
+@pytest.mark.parametrize("T,tu_e,tu_d", [(300.0, 120.0, 200.0), (80.0, 80.0, 30.0)])
+def test_csus_round_trip(T, tu_e, tu_d):
+    De, enamel, dentine = _csus_synthetic(T, tu_e, tu_d, 1.2, 1.3)
+    us = USESRSample(ToothSample(De=De, **BASE), enamel=UseriesData(*enamel), dentine=UseriesData(*dentine))
+    r = us.age(model="CSUS")
+    assert r.status == "ok" and r.model == "CSUS"
+    assert r.age == pytest.approx(T, rel=1e-6)
+    assert r.uptake_ka["enamel"] == pytest.approx(tu_e, rel=1e-6)
+    assert r.uptake_ka["dentine"] == pytest.approx(tu_d, rel=1e-6)
+    assert "CSUS-ESR age" in r.summary()
+
+
+def test_csus_no_solution_and_mc():
+    De, enamel, dentine = _csus_synthetic(300.0, 250.0, 280.0, 1.2, 1.2)
+    young = USESRSample(ToothSample(De=0.2 * De, **BASE), enamel=UseriesData(*enamel), dentine=UseriesData(*dentine))
+    assert young.age(model="CSUS").status == "no_solution"
+    us = USESRSample(ToothSample(De=(De, 0.05 * De), **BASE),
+                     enamel=UseriesData((enamel[0], 0.01), (enamel[1], 0.005)),
+                     dentine=UseriesData((dentine[0], 0.01), (dentine[1], 0.005)))
+    mc = us.age_mc(n=40, seed=2, model="CSUS")
+    assert mc.ages.size > 20 and 250 < mc.mean < 350
+    with pytest.raises(ValueError):
+        us.age(model="XX")
