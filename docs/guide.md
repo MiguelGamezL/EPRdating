@@ -38,31 +38,98 @@ s.freq_GHz, s.power_mW, s.gain, s.mod_amp_mT, s.time_constant_ms
 Bruker readers follow EasySpin's `eprload` and are checked on its test files.
 Anything else can be loaded by hand: `Spectrum(B=..., scans=y[None, :])`.
 
+### Intensity window
+
+Every intensity is computed inside an `IntensityWindow`. The default is
+**100 G (10 mT) centred on g = 2.0023**; the centre field is computed from each
+spectrum's own microwave frequency (336.49 mT at 9.43 GHz), so the same window
+works at any frequency. Width, unit and centre can be changed:
+
+```python
+from eprdating.spectra import IntensityWindow, DEFAULT_WINDOW
+
+DEFAULT_WINDOW                                  # 100 G around g = 2.0023
+IntensityWindow(60)                             # 60 G around g = 2.0023
+IntensityWindow(8, unit="mT", center_g=2.0006)  # 8 mT around another g
+IntensityWindow(80, center_mT=337.1)            # fixed centre field
+DEFAULT_WINDOW.describe(9.43)                   # '100 G around g = 2.0023 (331.49-341.49 mT)'
+```
+
+The window should hold the whole dating signal plus a margin for the
+baseline. The sweep **outside** the window is taken as signal-free: after a
+polynomial baseline it gives the noise used for the errors, so it must be at
+least as long as the window on one side (the UNAL 50 mT sweeps leave about
+20 mT on each side). A wider window may take in other radicals (native
+signal, CO3⁻, SO2⁻, methyl) that the intensity method does not describe; a
+narrower one leaves few points for the baseline. `peak_to_peak` and
+`double_integral` accept the same window (`window=DEFAULT_WINDOW, freq_GHz=...`).
+
 ### Intensities
 
 Weak dating signals are best measured by fitting a line-shape template rather
 than by peak-to-peak heights or double integrals of noisy spectra.
 
 ```python
-from eprdating.spectra import ComponentBasis, normalise, subtract_baseline, aligned_average
+from eprdating.spectra import intensity
 
-y = normalise(s.y, power_mW=s.power_mW, ref_power_mW=19.0)      # also gain=, mass_mg=
-win = (s.B > 333.1) & (s.B < 341.1)
-basis = ComponentBasis(s.B[win], {"CO2-": template}, baseline_order=1)
-noise = subtract_baseline(s.B, y, exclude=(331.4, 342.9))[s.B < 331.4]   # signal-free stretch
-r = basis.fit(y[win], nonnegative=False, max_shift=0.6, noise=noise)
-r.amplitudes["CO2-"], r.errors["CO2-"], r.shift
+r = intensity(s, template=(B_t, y_t), ref_power_mW=19.0)   # window=DEFAULT_WINDOW
+r.value, r.sigma, r.window_mT, r.shift_mT
+intensity(s, "peak_to_peak"), intensity(s, "t1_b2"), intensity(s, "double_integral")
 ```
 
 * `template`: an empirical average of the strongest spectra
-  (`aligned_average`) or a simulation (`eprdating.spectra.epraya_backend`,
-  broadened with `pseudo_modulation` and `time_constant_filter`).
-* `max_shift` lets each spectrum find its own field position (tuning or
-  frequency drift between measurements).
-* `noise=` gives errors by noise injection, which account for the noise
-  correlation of the time constant and for the shift search.
-* `nonnegative=False` for dose-response work: the constraint biases weak
-  amplitudes upwards.
+  (`aligned_average`), a simulation (`eprdating.spectra.epraya_backend`,
+  broadened with `pseudo_modulation` and `time_constant_filter`), as a
+  `(B, shape)` pair or a function of the field.
+* `ref_power_mW` normalises to that microwave power (square-root law) and to
+  unit receiver gain; `mass_mg=` divides by the aliquot mass.
+* The template fit has a linear baseline (`baseline_order`) and searches a
+  common field shift within `max_shift` (0.6 mT): tuning or frequency drift
+  between measurements.
+* Errors come from noise injection: blocks of the signal-free noise of the
+  same spectrum are added to the fitted (or measured) spectrum and the
+  intensity is recomputed. This accounts for the noise correlation of the
+  time constant and for the shift search, for every method.
+
+The lower-level `ComponentBasis` fits several components at once
+(e.g. axial and orthorhombic CO2⁻, native signal) on any field grid.
+
+### Repeated spectra of an aliquot
+
+When an aliquot is measured more than once (several files, several scans
+each), average the spectra and measure the average: weak signals gain
+√N in signal-to-noise, and the template fit needs a visible signal.
+
+```python
+from eprdating.spectra import combined_intensity, combine_spectra
+
+r = combined_intensity([read_epr("M18_9_19mW.dat"), read_epr("M18_9_19mW_4SCAN.dat")],
+                       template=(B_t, y_t), ref_power_mW=19.0)
+r.value, r.sigma, r.n_repeats, r.chi2_red, r.repeats
+combine_spectra([...]).summary()    # weights, noise and rejected scans
+```
+
+* **Mean, not sum.** A sum would raise the intensity of aliquots measured
+  more often and distort the dose-response curve.
+* Every scan is normalised to the same power and gain, put on a common
+  g-scale when the frequencies differ, and weighted by `1/σ²` with σ its noise
+  outside the window.
+* `reject_chi2=2` rejects scans that deviate from the others by more than
+  their noise allows (spikes, jumps), worst first.
+* `align=True` aligns each file to the others by cross-correlation. It is off
+  by default: on weak signals the cross-correlation follows the noise and the
+  average loses amplitude; use it for clear signals shifted by a sizeable
+  fraction of the line width.
+* **Repeatability.** Each file is also measured on its own; if the files
+  scatter more than their errors (repositioning of the tube in the cavity,
+  which matters for anisotropic enamel, or drift), the error of the combined
+  intensity is multiplied by `√chi2_red`.
+* No smoothing: it distorts the line shape and amplitude and correlates the
+  noise; the template fit already acts as the matched filter.
+* Only spectra with the same sweep are averaged (points, field step,
+  modulation, time constant). Repeats with different sweeps (e.g. a wide
+  survey sweep) are measured separately and combined with
+  `combine_intensities`, a weighted mean with the same repeatability check.
 
 ### Dose-response and De
 

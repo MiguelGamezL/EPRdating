@@ -61,32 +61,16 @@ def _save(fig, out):
 def fig_m18(folder: Path, out: Path):
     import dose_series_dat as ds
 
-    data = {f: ds.prepared(folder / f) for f in [*ds.SERIES, ds.BRIDGE[1]]}
-    strong = [data[f] for f, d in ds.SERIES.items() if d >= 60 and f not in ds.EXCLUDED]
-    template = ds.empirical_template(strong)
-    res = {f: ds.amplitude(*data[f], template) for f in data}
-    k = res[ds.BRIDGE[0]][0] / res[ds.BRIDGE[1]][0]
-    sk = k * np.hypot(res[ds.BRIDGE[0]][1] / res[ds.BRIDGE[0]][0], res[ds.BRIDGE[1]][1] / res[ds.BRIDGE[1]][0])
-    step = lambda f: float(np.median(np.diff(data[f][0])))
-    rows = []
-    for f, d in ds.SERIES.items():
-        A, s, _ = res[f]
-        if step(f) > 1.1 * step(ds.BRIDGE[0]):
-            A, s = A * k, np.hypot(s * k, A * sk)
-        rows.append((f, d, A, s))
+    rows, shown = ds.measure_series(folder)  # default window: 100 G around g = 2.0023
     used = [r for r in rows if r[0] not in ds.EXCLUDED]
     drc = fit_dose_response([r[1] for r in used], [r[2] for r in used], "LIN", sigma=[r[3] for r in used],
                             De_min=-np.inf)
 
     fig, (a1, a2) = plt.subplots(1, 2, figsize=(7.2, 3.6), facecolor=SURFACE, gridspec_kw={"width_ratios": [1, 1.15]})
-    shown = [f for f in ds.SERIES if f not in ds.EXCLUDED]
-    spectra, fits = [], []
-    for f in shown:
-        B, y, _ = data[f]
-        m = np.abs(B - ds.CENTER) <= ds.HALF
-        spectra.append((B[m], y[m]))
-        fits.append((B[m], res[f][2].fitted))
-    plot.plot_spectra(spectra, [f"{ds.SERIES[f]:.0f} Gy" for f in shown], fits=fits, ax=a1)
+    keep = [f for f in ds.SERIES if f not in ds.EXCLUDED]
+    spectra = [(shown[f][0], shown[f][1]) for f in keep]
+    fits = [(shown[f][0], shown[f][2]) for f in keep]
+    plot.plot_spectra(spectra, [f"{ds.SERIES[f]:.0f} Gy" for f in keep], fits=fits, ax=a1)
     a1.set_title("a  Spectra and template fits", loc="left", fontsize=9, color=INK)
     ex = [(r[1], r[2], r[3]) for r in rows if r[0] in ds.EXCLUDED]
     plot.plot_dose_response(drc, excluded=ex, ax=a2, intensity_label="CO$_2^-$ amplitude (a.u.)")

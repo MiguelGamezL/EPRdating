@@ -156,7 +156,8 @@ class ComponentBasis:
             raise ValueError("spectrum must be sampled on the basis field grid")
         if max_shift > 0:
             step = shift_step or float(np.median(np.diff(self.B)))
-            shifts = np.arange(-max_shift, max_shift + step / 2, step)
+            n = int(np.floor(max_shift / step + 1e-9))
+            shifts = step * np.arange(-n, n + 1)  # symmetric, and includes zero
         else:
             shifts = np.array([0.0])
         shift, A, x = self._best(y, shifts, nonnegative)

@@ -16,7 +16,9 @@ Generated from the docstrings by `tools/gen_api_docs.py`.
 - [EPR spectra: reading](spectra.io.md) — `eprdating.spectra.io`
 - [EPR spectra: Bruker files](spectra.bruker.md) — `eprdating.spectra.bruker`
 - [EPR spectra: pre-processing](spectra.preprocess.md) — `eprdating.spectra.preprocess`
-- [EPR spectra: scalar intensities](spectra.intensity.md) — `eprdating.spectra.intensity`
+- [EPR spectra: intensity window and scalar intensities](spectra.intensity.md) — `eprdating.spectra.intensity`
+- [EPR spectra: intensity of a spectrum](spectra.measure.md) — `eprdating.spectra.measure`
+- [EPR spectra: repeated spectra](spectra.combine.md) — `eprdating.spectra.combine`
 - [EPR spectra: template and component fits](spectra.deconvolution.md) — `eprdating.spectra.deconvolution`
 - [EPR spectra: EPRAYA simulations](spectra.epraya_backend.md) — `eprdating.spectra.epraya_backend`
 - [Gamma: reading spectra](gamma.readers.md) — `eprdating.gamma.readers`

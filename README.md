@@ -99,9 +99,11 @@ See also
 `examples/dose_series_dat.py` runs a real additive-dose series from raw
 spectra to De: it reads `.dat`/`.par` files, builds the CO2- template (the
 field-aligned average of the strong spectra, or the orthorhombic CO2- radical
-simulated with EPRAYA and broadened by the time constant), fits each
-spectrum's amplitude with a field-shift search and noise-injection errors, and
-fits the dose-response line.
+simulated with EPRAYA and broadened by the time constant), averages the
+repeated spectra of each aliquot, fits the amplitude inside the intensity
+window (100 G around g = 2.0023 by default, `--window-G`, `--center-g`) with a
+field-shift search and noise-injection errors, and fits the dose-response
+line.
 
 `examples/norm_gamma.py` goes from HPGe spectra of a sediment and the IAEA
 reference materials to U, Th, K and the infinite-matrix dose rates.
@@ -121,7 +123,7 @@ reference materials to U, Th, K and the infinite-matrix dose rates.
 | `gamma` | HPGe gamma spectrometry of sediments: ORTEC `.Spe`/`.Chn`, N42, ASCII and column files (`.cnf`/`.spc`/IEC through becquerel); automatic energy/resolution calibration per spectrum (no first guess, absorbs gain drift), peak areas, comparative method against IAEA RGU-1/RGTh-1/RGK-1, 226Ra/238U equilibrium check, output as `Sediment` |
 | `plot` | figures: stacked spectra with fits, dose-response with De, dose-rate budget, age distribution, gamma spectra and per-line contents |
 | `age` | generic solver `∫₀ᵀ Ḋ(t) dt = De` and the `ToothSample` model with Monte Carlo; `beta_by_segment=False` applies one beta factor to the whole U chain, as DATA and USESR do |
-| `spectra` | reading Bruker BES3T (`.DSC`/`.DTA`) and ESP/WinEPR (`.par`/`.spc`), `.dat`/`.par` and column files (`read_epr`); baseline, power/gain/mass normalisation, field alignment, pseudo-modulation and time-constant broadening of simulated shapes; peak-to-peak, T1–B2, double integral; template/component fits with field shift and noise-injection errors; EPRAYA backend |
+| `spectra` | reading Bruker BES3T (`.DSC`/`.DTA`) and ESP/WinEPR (`.par`/`.spc`), `.dat`/`.par` and column files (`read_epr`); baseline, power/gain/mass normalisation, field alignment, pseudo-modulation and time-constant broadening of simulated shapes; intensity window (default 100 G around g = 2.0023, configurable); intensities by template fit, peak-to-peak, T1–B2 or double integral, all with noise-injection errors; weighted average of repeated spectra of an aliquot with a repeatability check; template/component fits with field shift; EPRAYA backend |
 
 ## Known limitations
 

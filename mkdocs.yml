@@ -52,7 +52,9 @@ nav:
       - "Spectra: reading": api/spectra.io.md
       - "Spectra: Bruker": api/spectra.bruker.md
       - "Spectra: pre-processing": api/spectra.preprocess.md
-      - "Spectra: intensities": api/spectra.intensity.md
+      - "Spectra: intensity window": api/spectra.intensity.md
+      - "Spectra: measuring": api/spectra.measure.md
+      - "Spectra: repeated spectra": api/spectra.combine.md
       - "Spectra: fits": api/spectra.deconvolution.md
       - "Spectra: EPRAYA": api/spectra.epraya_backend.md
       - "Gamma: readers": api/gamma.readers.md
