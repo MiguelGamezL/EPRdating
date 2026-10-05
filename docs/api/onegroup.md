@@ -20,7 +20,7 @@ homogeneous medium D = E Y. Every layer is homogeneous, so the solution in a
 layer is a constant plus a rising and a decaying exponential, with
 attenuation ν = 2 sqrt(μa (μa + μs)). Fluences are continuous at interfaces.
 
-**Contents:** [`Emitter`](#emitter), [`Layer`](#layer), [`Material`](#material), [`ToothLayers`](#toothlayers), [`bethe_stopping`](#bethe_stopping), [`lewis_mus`](#lewis_mus), [`mean_dose`](#mean_dose), [`mixture`](#mixture), [`solve_fluence`](#solve_fluence), [`weighted_fraction`](#weighted_fraction)
+**Contents:** [`Emitter`](#emitter), [`Layer`](#layer), [`Material`](#material), [`ToothLayers`](#toothlayers), [`bethe_stopping`](#bethe_stopping), [`compound`](#compound), [`dentine_material`](#dentine_material), [`lewis_mus`](#lewis_mus), [`mean_dose`](#mean_dose), [`mixture`](#mixture), [`sediment_material`](#sediment_material), [`solve_fluence`](#solve_fluence), [`weighted_fraction`](#weighted_fraction)
 
 ### `Emitter`
 
@@ -43,6 +43,8 @@ Mass fractions of elements (normalised on construction).
 **Members**
 
 - `coefficients(self, E: float, scatter_factor: float = 1.0) -> tuple[float, float]` — (μa, μs) in cm²/g at energy E (MeV).
+- `key` *(property)* — Identity by composition (two materials with the same name but
+different compositions never share cached coefficients).
 - `with_water(self, water: float) -> Material` — Add `water` grams of water per gram of dry material.
 
 ### `ToothLayers`
@@ -72,6 +74,20 @@ Geometric inputs accept a number, a `(value, sigma)` tuple or a
 
 Collision stopping power for electrons, MeV cm²/g (no density effect).
 
+### `compound`
+
+`compound(name: str, formula: dict) -> Material`
+
+A material from its chemical formula, e.g. `compound("calcite", {"Ca": 1, "C": 1, "O": 3})`.
+
+Elements available: `ELEMENTS` (H, C, N, O, Na, Mg, Al, Si, P, K, Ca, Fe).
+
+### `dentine_material`
+
+`dentine_material(mineral: float = 0.7, collagen: float = 0.2, water: float = 0.1, name: str = 'dentine') -> Material`
+
+Dentine (or cementum) as hydroxyapatite + collagen + water by mass.
+
 ### `lewis_mus`
 
 `lewis_mus(Z, A, E)`
@@ -88,7 +104,16 @@ Mean dose (E × decays/g units) over local depths [z0, z1] of layer i.
 
 `mixture(name: str, parts: list[tuple[Material, float]]) -> Material`
 
-Mix materials by mass fraction: `[(material, mass_fraction), ...]`.
+Mix materials by mass fraction: `[(material, mass_fraction), ...]`
+(fractions are normalised).
+
+### `sediment_material`
+
+`sediment_material(quartz: float = 1.0, calcite: float = 0.0, dolomite: float = 0.0, kaolinite: float = 0.0, illite: float = 0.0, feldspar: float = 0.0, iron_oxide: float = 0.0, name: str = 'sediment') -> Material`
+
+Dry sediment from its mineral mass fractions (normalised), e.g.
+`sediment_material(quartz=0.6, calcite=0.3, kaolinite=0.1)`; water is
+added separately (`ToothLayers.sediment_water`).
 
 ### `solve_fluence`
 

@@ -11,7 +11,7 @@ Environmental dose-rate building blocks.
 
 All dose rates are in Gy/ka.
 
-**Contents:** [`ConversionFactors`](#conversionfactors), [`Sediment`](#sediment), [`available_factor_sets`](#available_factor_sets), [`conversion_factors`](#conversion_factors), [`cosmic_dose_rate`](#cosmic_dose_rate), [`cosmic_dose_rate_sea_level`](#cosmic_dose_rate_sea_level), [`geomagnetic_latitude`](#geomagnetic_latitude), [`matrix_dose_rates`](#matrix_dose_rates), [`samples_from`](#samples_from), [`u_disequilibrium_factor`](#u_disequilibrium_factor), [`u_series_split`](#u_series_split), [`water_correction`](#water_correction)
+**Contents:** [`ConversionFactors`](#conversionfactors), [`Sediment`](#sediment), [`available_factor_sets`](#available_factor_sets), [`conversion_factors`](#conversion_factors), [`cosmic_dose_rate`](#cosmic_dose_rate), [`cosmic_dose_rate_sea_level`](#cosmic_dose_rate_sea_level), [`cosmic_history`](#cosmic_history), [`geomagnetic_latitude`](#geomagnetic_latitude), [`matrix_dose_rates`](#matrix_dose_rates), [`samples_from`](#samples_from), [`u_disequilibrium_factor`](#u_disequilibrium_factor), [`u_series_split`](#u_series_split), [`water_correction`](#water_correction)
 
 ### `ConversionFactors`
 
@@ -25,18 +25,21 @@ Dose-rate conversion factors in Gy/ka per ppm (U, Th) or per % (K).
 
 ### `Sediment`
 
-*dataclass* `Sediment(U: ValueLike = 0.0, Th: ValueLike = 0.0, K: ValueLike = 0.0, water: ValueLike = 0.0, U_ra226: ValueLike | None = None)`
+*dataclass* `Sediment(U: ValueLike = 0.0, Th: ValueLike = 0.0, K: ValueLike = 0.0, water: ValueLike | History = 0.0, U_ra226: ValueLike | None = None)`
 
 Radionuclide content of a sediment or soil (U, Th in ppm, K in %).
 
 `U_ra226`: 226Ra and its daughters as ppm of U in equilibrium, when it
 differs from the 238U content `U` (e.g. from gamma spectrometry, 214Pb
 and 214Bi lines vs 234Th and 234mPa). `None` means equilibrium.
+`water` (mass of water / dry mass) may be a
+`History` when it changed during burial; its
+first value is the present-day one.
 
 **Members**
 
-- `dose_rate(self, radiation: str, factors: ConversionFactors | None = None, values = None) -> float` — Wet dose rate for one radiation type. `values` overrides the inputs
-(used by the Monte Carlo engine).
+- `dose_rate(self, radiation: str, factors: ConversionFactors | None = None, values = None) -> float` — Wet dose rate for one radiation type, with the present-day water.
+`values` overrides the inputs (used by the Monte Carlo engine).
 
 ### `available_factor_sets`
 
@@ -67,6 +70,17 @@ Cosmic dose rate at 55°N geomagnetic latitude and sea level (Gy/ka).
 
 `depth_m` is the overburden thickness (m) and `density` its mean
 density (g/cm³); their product is the shielding in hg/cm².
+
+### `cosmic_history`
+
+`cosmic_history(depth_m: History, density: float, lat_deg: float, lon_deg: float, altitude_m: float, rel_sigma: float = 0.1) -> History`
+
+Cosmic dose-rate history from a burial-depth history (m, ka before present).
+
+Each segment gets `cosmic_dose_rate` at its depth, with the
+`rel_sigma` uncertainty combined in quadrature with that of the depth
+(propagated through the local slope of the depth curve). A gradual
+burial is approximated by several short segments.
 
 ### `geomagnetic_latitude`
 

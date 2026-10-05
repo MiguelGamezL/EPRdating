@@ -103,6 +103,21 @@ Shao et al. (2015) and Yu et al. (2026, De Nadale cave). Details:
 - The alternative CSUS-ESR model (Grün 2000) passes a synthetic round trip
   and gives ages 3–4 % older than US-ESR for the De Nadale teeth.
 
+## Reference data
+
+Checked in `tests/test_reference_data.py`:
+
+- **Conversion factors.** Adamiec & Aitken (1998), Guérin et al. (2011) and
+  Liritzis et al. (2013) match the papers and the independent transcription
+  of the R package Luminescence. Guérin et al. give no uncertainties; the
+  relative ones of Adamiec & Aitken are carried, as in DRAC.
+- **Cosmic dose rate** against `calc_CosmicDoseRate` of Luminescence, an
+  implementation of Prescott & Hutton (1994) independent of DRAC. Under more
+  than 1.7 hg/cm² of cover the two agree to 10⁻⁴; under thinner cover their
+  fits of the soft component differ by up to 7 %. The geomagnetic latitude
+  is identical, the F, J, H factors agree within 5 % (two readings of the
+  same graph) and the dose rate at the site within 2.5 %.
+
 ## Gamma spectrometry
 
 - **Independent analysis of the same spectra** (UNAL, HPGe 40 %, sediment

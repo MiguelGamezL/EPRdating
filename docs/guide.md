@@ -176,6 +176,52 @@ Where DATA's dentine p does not converge, or where DATA reports no result
 near the closed-system bound, EPRdating gives the solution that fits the
 measured ratios; see the validation notes.
 
+### Materials
+
+Enamel is hydroxyapatite, the sediment silica and the dentine 70 % mineral,
+20 % collagen and 10 % water unless other compositions are given. They change
+the one-group beta factors by a few per cent at most (a calcite sediment
+lowers the sediment factor by 2 %):
+
+```python
+from eprdating import compound, dentine_material, sediment_material
+
+geo = ToothLayers(
+    enamel_um=1100,
+    sediment=sediment_material(quartz=0.5, calcite=0.4, kaolinite=0.1),
+    dentine=dentine_material(mineral=0.65, collagen=0.25, water=0.10),
+)
+gibbsite = compound("gibbsite", {"Al": 1, "O": 3, "H": 3})   # any formula
+```
+
+Compositions are fixed inputs; the Monte Carlo samples the thicknesses,
+densities and water contents.
+
+### Burial history
+
+The sediment water, the burial depth and the gamma dose rate can change in
+time. A `History` gives the values from today backwards, in ka before
+present; the last value holds back to any age:
+
+```python
+from eprdating import History, Sediment, cosmic_history
+
+# 12 % water today and back to 15 ka, 30 % in the wetter period before
+sediment = Sediment(U=(1.6, 0.1), Th=(5.2, 0.3), K=(0.9, 0.05),
+                    water=History([(0.12, 0.03), (0.30, 0.08)], breaks=[15]))
+# 1.5 m of sediment today, 0.4 m before an aggradation 8 ka ago
+cosmic = cosmic_history(History([(1.5, 0.2), (0.4, 0.2)], breaks=[8]),
+                        density=1.9, lat_deg=10.25, lon_deg=-73.4, altitude_m=150)
+sample = ToothSample(..., sediment=sediment, cosmic=cosmic)
+```
+
+The sediment beta and gamma dose rates follow the water history (a measured
+gamma dose rate is taken as today's and rescaled to the water of each
+period), and the cosmic dose rate follows the depth. Each segment value is
+sampled in the Monte Carlo; the break times are fixed. The tooth's own
+components keep the present-day dentine, enamel and cementum water. A
+gradual change is approximated with several short segments.
+
 Every function and its options: [API reference](api/index.md).
 What has been validated: [Validation](validation.md).
 

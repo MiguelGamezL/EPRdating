@@ -11,11 +11,13 @@ from .dose_rate import (
     available_factor_sets,
     conversion_factors,
     cosmic_dose_rate,
+    cosmic_history,
     matrix_dose_rates,
     water_correction,
 )
 from .doseresponse import DoseResponseResult, bootstrap_De, fit_dose_response
-from .onegroup import ToothLayers
+from .history import History
+from .onegroup import Material, ToothLayers, compound, dentine_material, mixture, sediment_material
 from .series import USeries
 from .uptake import DelayedUptake, EarlyUptake, LinearUptake, USModel
 from .usesr import UseriesData, USESRSample
@@ -30,7 +32,9 @@ __all__ = [
     "DoseRateComponent",
     "DoseResponseResult",
     "EarlyUptake",
+    "History",
     "LinearUptake",
+    "Material",
     "Sediment",
     "ToothLayers",
     "ToothSample",
@@ -41,10 +45,15 @@ __all__ = [
     "Value",
     "available_factor_sets",
     "bootstrap_De",
+    "compound",
     "conversion_factors",
     "cosmic_dose_rate",
+    "cosmic_history",
+    "dentine_material",
     "fit_dose_response",
     "matrix_dose_rates",
+    "mixture",
+    "sediment_material",
     "solve_age",
     "water_correction",
 ]

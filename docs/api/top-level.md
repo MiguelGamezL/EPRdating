@@ -4,7 +4,7 @@
 
 Everything most scripts need, importable as `from eprdating import ...`.
 
-**Contents:** [`AgeMC`](#agemc), [`AgeResult`](#ageresult), [`BetaGeometry`](#betageometry), [`DelayedUptake`](#delayeduptake), [`DoseRateComponent`](#doseratecomponent), [`DoseResponseResult`](#doseresponseresult), [`EarlyUptake`](#earlyuptake), [`LinearUptake`](#linearuptake), [`Sediment`](#sediment), [`ToothLayers`](#toothlayers), [`ToothSample`](#toothsample), [`USESRSample`](#usesrsample), [`USModel`](#usmodel), [`USeries`](#useries), [`UseriesData`](#useriesdata), [`Value`](#value), [`available_factor_sets`](#available_factor_sets), [`bootstrap_De`](#bootstrap_de), [`conversion_factors`](#conversion_factors), [`cosmic_dose_rate`](#cosmic_dose_rate), [`fit_dose_response`](#fit_dose_response), [`matrix_dose_rates`](#matrix_dose_rates), [`solve_age`](#solve_age), [`water_correction`](#water_correction)
+**Contents:** [`AgeMC`](#agemc), [`AgeResult`](#ageresult), [`BetaGeometry`](#betageometry), [`DelayedUptake`](#delayeduptake), [`DoseRateComponent`](#doseratecomponent), [`DoseResponseResult`](#doseresponseresult), [`EarlyUptake`](#earlyuptake), [`History`](#history), [`LinearUptake`](#linearuptake), [`Material`](#material), [`Sediment`](#sediment), [`ToothLayers`](#toothlayers), [`ToothSample`](#toothsample), [`USESRSample`](#usesrsample), [`USModel`](#usmodel), [`USeries`](#useries), [`UseriesData`](#useriesdata), [`Value`](#value), [`available_factor_sets`](#available_factor_sets), [`bootstrap_De`](#bootstrap_de), [`compound`](#compound), [`conversion_factors`](#conversion_factors), [`cosmic_dose_rate`](#cosmic_dose_rate), [`cosmic_history`](#cosmic_history), [`dentine_material`](#dentine_material), [`fit_dose_response`](#fit_dose_response), [`matrix_dose_rates`](#matrix_dose_rates), [`mixture`](#mixture), [`sediment_material`](#sediment_material), [`solve_age`](#solve_age), [`water_correction`](#water_correction)
 
 ### `AgeMC`
 
@@ -61,13 +61,14 @@ closed-system U-series age of the tissue. For a sample older than
 
 ### `DoseRateComponent`
 
-*dataclass* `DoseRateComponent(name: str, rate: float, uptake: USModel | None = None, G: Callable[[float], float] | None = None)`
+*dataclass* `DoseRateComponent(name: str, rate: float, uptake: USModel | None = None, G: Callable[[float], float] | None = None, profile: tuple[Sequence[float], Sequence[float]] | None = None)`
 
 One contribution to the total dose rate (Gy/ka).
 
 - `rate`: present-day dose rate the source would deliver in secular equilibrium with its present U content.
 - `uptake`: None for a constant source, else a `USModel`.
 - `G`: time-integrated activity ratio of incorporated U (`tau -> ∫ D/D_eq`); None means secular equilibrium.
+- `profile`: for a constant source whose rate changed in the past, `(breaks, rates)`: piecewise-constant rates in ka before present (see `History`); `rate` is then `rates[0]`.
 
 **Members**
 
@@ -93,25 +94,58 @@ Outcome of `fit_dose_response`.
 `EarlyUptake() -> USModel`
 
 
+### `History`
+
+*dataclass* `History(values: Sequence[ValueLike], breaks: Sequence[float] = ())`
+
+Piecewise-constant parameter history, in ka before present.
+
+`values[0]` holds from today back to `breaks[0]`, `values[i]`
+between `breaks[i-1]` and `breaks[i]`, and the last value before
+the last break.
+
+**Members**
+
+- `at(self, t: float) -> float` — Nominal value at `t` ka before present.
+- `mean(self, T: float) -> float` — Time-weighted nominal mean over the last `T` ka.
+- `nominal(self) -> list[float]`
+- `sample(self, rng: np.random.Generator, n: int) -> list[np.ndarray]` — `n` draws of every segment value, sampled independently.
+
 ### `LinearUptake`
 
 `LinearUptake() -> USModel`
 
 
+### `Material`
+
+*dataclass* `Material(name: str, fractions: dict)`
+
+Mass fractions of elements (normalised on construction).
+
+**Members**
+
+- `coefficients(self, E: float, scatter_factor: float = 1.0) -> tuple[float, float]` — (μa, μs) in cm²/g at energy E (MeV).
+- `key` *(property)* — Identity by composition (two materials with the same name but
+different compositions never share cached coefficients).
+- `with_water(self, water: float) -> Material` — Add `water` grams of water per gram of dry material.
+
 ### `Sediment`
 
-*dataclass* `Sediment(U: ValueLike = 0.0, Th: ValueLike = 0.0, K: ValueLike = 0.0, water: ValueLike = 0.0, U_ra226: ValueLike | None = None)`
+*dataclass* `Sediment(U: ValueLike = 0.0, Th: ValueLike = 0.0, K: ValueLike = 0.0, water: ValueLike | History = 0.0, U_ra226: ValueLike | None = None)`
 
 Radionuclide content of a sediment or soil (U, Th in ppm, K in %).
 
 `U_ra226`: 226Ra and its daughters as ppm of U in equilibrium, when it
 differs from the 238U content `U` (e.g. from gamma spectrometry, 214Pb
 and 214Bi lines vs 234Th and 234mPa). `None` means equilibrium.
+`water` (mass of water / dry mass) may be a
+`History` when it changed during burial; its
+first value is the present-day one.
 
 **Members**
 
-- `dose_rate(self, radiation: str, factors: ConversionFactors | None = None, values = None) -> float` — Wet dose rate for one radiation type. `values` overrides the inputs
-(used by the Monte Carlo engine).
+- `dose_rate(self, radiation: str, factors: ConversionFactors | None = None, values = None) -> float` — Wet dose rate for one radiation type, with the present-day water.
+`values` overrides the inputs (used by the Monte Carlo engine).
 
 ### `ToothLayers`
 
@@ -136,7 +170,7 @@ Geometric inputs accept a number, a `(value, sigma)` tuple or a
 
 ### `ToothSample`
 
-*dataclass* `ToothSample(De: ValueLike, enamel_U: ValueLike, dentine_U: ValueLike, sediment: Sediment, beta: BetaGeometry | ToothLayers, cosmic: ValueLike, gamma: ValueLike | None = None, k_alpha: ValueLike = 0.13 ± 0.02, dentine_water: ValueLike = 0.0, uptake_enamel: USModel = <factory>, uptake_dentine: USModel = <factory>, u234_u238_enamel: ValueLike = 1.0, u234_u238_dentine: ValueLike = 1.0, radon_loss_enamel: ValueLike = 0.0, radon_loss_dentine: ValueLike = 0.0, enamel_water: ValueLike = 0.0, cementum_U: ValueLike = 0.0, cementum_water: ValueLike = 0.0, uptake_cementum: USModel = <factory>, u234_u238_cementum: ValueLike = 1.0, radon_loss_cementum: ValueLike = 0.0, ingrowth: bool = True, partition: dict | None = None, factors: str = 'guerin_2011', sample_geometry: bool = True, alpha_efficiency: str = 'constant', u234_u238_is: str = 'present', alpha_eref: float = 5.3, beta_by_segment: bool = True)`
+*dataclass* `ToothSample(De: ValueLike, enamel_U: ValueLike, dentine_U: ValueLike, sediment: Sediment, beta: BetaGeometry | ToothLayers, cosmic: ValueLike | History, gamma: ValueLike | History | None = None, k_alpha: ValueLike = 0.13 ± 0.02, dentine_water: ValueLike = 0.0, uptake_enamel: USModel = <factory>, uptake_dentine: USModel = <factory>, u234_u238_enamel: ValueLike = 1.0, u234_u238_dentine: ValueLike = 1.0, radon_loss_enamel: ValueLike = 0.0, radon_loss_dentine: ValueLike = 0.0, enamel_water: ValueLike = 0.0, cementum_U: ValueLike = 0.0, cementum_water: ValueLike = 0.0, uptake_cementum: USModel = <factory>, u234_u238_cementum: ValueLike = 1.0, radon_loss_cementum: ValueLike = 0.0, ingrowth: bool = True, partition: dict | None = None, factors: str = 'guerin_2011', sample_geometry: bool = True, alpha_efficiency: str = 'constant', u234_u238_is: str = 'present', alpha_eref: float = 5.3, beta_by_segment: bool = True)`
 
 ESR dating of tooth enamel with the classical component model.
 
@@ -146,10 +180,10 @@ ESR dating of tooth enamel with the classical component model.
 
 - `De`: equivalent dose of the enamel.
 - `enamel_U`, `dentine_U`: present-day U in each tissue.
-- `sediment`: U, Th, K and water content of the surrounding sediment.
+- `sediment`: U, Th, K and water content of the surrounding sediment. The water may be a `History` (wetter or drier periods); the sediment beta and gamma dose rates then follow it, and the present-day value (its first segment) is used elsewhere.
 - `beta`: either fixed geometry factors (`BetaGeometry`) or a layered geometry (`ToothLayers`), in which case beta attenuation is computed with one-group theory for each emitter and U-series segment (as ROSY does). Uncertainties on the layer thicknesses, stripping and densities are sampled in `age_mc` together with the water contents.
-- `gamma`: external gamma dose rate. If None, computed from `sediment` as an infinite matrix (use in-situ measurements when available).
-- `cosmic`: cosmic dose rate (see `cosmic_dose_rate`).
+- `gamma`: external gamma dose rate. If None, computed from `sediment` as an infinite matrix (use in-situ measurements when available). A measured value is taken as today's; with a water history it is rescaled to the water of each period. A `History` is used as given.
+- `cosmic`: cosmic dose rate (see `cosmic_dose_rate`), or a `History` of it, e.g. from a burial depth history with `cosmic_history`.
 - `k_alpha`: alpha efficiency of enamel. With `alpha_efficiency="energy"` it is the value at `alpha_eref` MeV.
 - `alpha_efficiency`: `"constant"` (default, as in DATA) or `"energy"` (as in ROSY): k varies with alpha energy as R(E)/E, so each U-series segment gets its own efficiency (see `alpha`).
 - `alpha_eref`: reference alpha energy for `k_alpha` in MeV (ROSY: 5.3).
@@ -252,6 +286,14 @@ A measured quantity with a 1-sigma (Gaussian) uncertainty.
 
 Residual bootstrap of De. Returns the array of resampled De values.
 
+### `compound`
+
+`compound(name: str, formula: dict) -> Material`
+
+A material from its chemical formula, e.g. `compound("calcite", {"Ca": 1, "C": 1, "O": 3})`.
+
+Elements available: `ELEMENTS` (H, C, N, O, Na, Mg, Al, Si, P, K, Ca, Fe).
+
 ### `conversion_factors`
 
 `conversion_factors(key: str = 'guerin_2011') -> ConversionFactors`
@@ -267,6 +309,23 @@ Cosmic dose rate after Prescott & Hutton (1994), Gy/ka.
 Corrected for altitude and geomagnetic latitude with the F, J, H
 factors of Prescott & Stefan (1982). A 10 % relative uncertainty is
 assigned by default, as is common practice.
+
+### `cosmic_history`
+
+`cosmic_history(depth_m: History, density: float, lat_deg: float, lon_deg: float, altitude_m: float, rel_sigma: float = 0.1) -> History`
+
+Cosmic dose-rate history from a burial-depth history (m, ka before present).
+
+Each segment gets `cosmic_dose_rate` at its depth, with the
+`rel_sigma` uncertainty combined in quadrature with that of the depth
+(propagated through the local slope of the depth curve). A gradual
+burial is approximated by several short segments.
+
+### `dentine_material`
+
+`dentine_material(mineral: float = 0.7, collagen: float = 0.2, water: float = 0.1, name: str = 'dentine') -> Material`
+
+Dentine (or cementum) as hydroxyapatite + collagen + water by mass.
 
 ### `fit_dose_response`
 
@@ -295,6 +354,21 @@ Dry infinite-matrix alpha/beta/gamma dose rates (Gy/ka).
 equilibrium; so is the U chain unless `U_ra226` (226Ra and daughters
 expressed as ppm of U in equilibrium, as measured by gamma spectrometry
 through 214Pb/214Bi) differs from `U` (238U).
+
+### `mixture`
+
+`mixture(name: str, parts: list[tuple[Material, float]]) -> Material`
+
+Mix materials by mass fraction: `[(material, mass_fraction), ...]`
+(fractions are normalised).
+
+### `sediment_material`
+
+`sediment_material(quartz: float = 1.0, calcite: float = 0.0, dolomite: float = 0.0, kaolinite: float = 0.0, illite: float = 0.0, feldspar: float = 0.0, iron_oxide: float = 0.0, name: str = 'sediment') -> Material`
+
+Dry sediment from its mineral mass fractions (normalised), e.g.
+`sediment_material(quartz=0.6, calcite=0.3, kaolinite=0.1)`; water is
+added separately (`ToothLayers.sediment_water`).
 
 ### `solve_age`
 

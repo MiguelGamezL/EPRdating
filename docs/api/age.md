@@ -44,13 +44,14 @@ AgeResult(age: 'float', De: 'float', components: 'dict[str, float]', accumulated
 
 ### `DoseRateComponent`
 
-*dataclass* `DoseRateComponent(name: str, rate: float, uptake: USModel | None = None, G: Callable[[float], float] | None = None)`
+*dataclass* `DoseRateComponent(name: str, rate: float, uptake: USModel | None = None, G: Callable[[float], float] | None = None, profile: tuple[Sequence[float], Sequence[float]] | None = None)`
 
 One contribution to the total dose rate (Gy/ka).
 
 - `rate`: present-day dose rate the source would deliver in secular equilibrium with its present U content.
 - `uptake`: None for a constant source, else a `USModel`.
 - `G`: time-integrated activity ratio of incorporated U (`tau -> ∫ D/D_eq`); None means secular equilibrium.
+- `profile`: for a constant source whose rate changed in the past, `(breaks, rates)`: piecewise-constant rates in ka before present (see `History`); `rate` is then `rates[0]`.
 
 **Members**
 
@@ -58,7 +59,7 @@ One contribution to the total dose rate (Gy/ka).
 
 ### `ToothSample`
 
-*dataclass* `ToothSample(De: ValueLike, enamel_U: ValueLike, dentine_U: ValueLike, sediment: Sediment, beta: BetaGeometry | ToothLayers, cosmic: ValueLike, gamma: ValueLike | None = None, k_alpha: ValueLike = 0.13 ± 0.02, dentine_water: ValueLike = 0.0, uptake_enamel: USModel = <factory>, uptake_dentine: USModel = <factory>, u234_u238_enamel: ValueLike = 1.0, u234_u238_dentine: ValueLike = 1.0, radon_loss_enamel: ValueLike = 0.0, radon_loss_dentine: ValueLike = 0.0, enamel_water: ValueLike = 0.0, cementum_U: ValueLike = 0.0, cementum_water: ValueLike = 0.0, uptake_cementum: USModel = <factory>, u234_u238_cementum: ValueLike = 1.0, radon_loss_cementum: ValueLike = 0.0, ingrowth: bool = True, partition: dict | None = None, factors: str = 'guerin_2011', sample_geometry: bool = True, alpha_efficiency: str = 'constant', u234_u238_is: str = 'present', alpha_eref: float = 5.3, beta_by_segment: bool = True)`
+*dataclass* `ToothSample(De: ValueLike, enamel_U: ValueLike, dentine_U: ValueLike, sediment: Sediment, beta: BetaGeometry | ToothLayers, cosmic: ValueLike | History, gamma: ValueLike | History | None = None, k_alpha: ValueLike = 0.13 ± 0.02, dentine_water: ValueLike = 0.0, uptake_enamel: USModel = <factory>, uptake_dentine: USModel = <factory>, u234_u238_enamel: ValueLike = 1.0, u234_u238_dentine: ValueLike = 1.0, radon_loss_enamel: ValueLike = 0.0, radon_loss_dentine: ValueLike = 0.0, enamel_water: ValueLike = 0.0, cementum_U: ValueLike = 0.0, cementum_water: ValueLike = 0.0, uptake_cementum: USModel = <factory>, u234_u238_cementum: ValueLike = 1.0, radon_loss_cementum: ValueLike = 0.0, ingrowth: bool = True, partition: dict | None = None, factors: str = 'guerin_2011', sample_geometry: bool = True, alpha_efficiency: str = 'constant', u234_u238_is: str = 'present', alpha_eref: float = 5.3, beta_by_segment: bool = True)`
 
 ESR dating of tooth enamel with the classical component model.
 
@@ -68,10 +69,10 @@ ESR dating of tooth enamel with the classical component model.
 
 - `De`: equivalent dose of the enamel.
 - `enamel_U`, `dentine_U`: present-day U in each tissue.
-- `sediment`: U, Th, K and water content of the surrounding sediment.
+- `sediment`: U, Th, K and water content of the surrounding sediment. The water may be a `History` (wetter or drier periods); the sediment beta and gamma dose rates then follow it, and the present-day value (its first segment) is used elsewhere.
 - `beta`: either fixed geometry factors (`BetaGeometry`) or a layered geometry (`ToothLayers`), in which case beta attenuation is computed with one-group theory for each emitter and U-series segment (as ROSY does). Uncertainties on the layer thicknesses, stripping and densities are sampled in `age_mc` together with the water contents.
-- `gamma`: external gamma dose rate. If None, computed from `sediment` as an infinite matrix (use in-situ measurements when available).
-- `cosmic`: cosmic dose rate (see `cosmic_dose_rate`).
+- `gamma`: external gamma dose rate. If None, computed from `sediment` as an infinite matrix (use in-situ measurements when available). A measured value is taken as today's; with a water history it is rescaled to the water of each period. A `History` is used as given.
+- `cosmic`: cosmic dose rate (see `cosmic_dose_rate`), or a `History` of it, e.g. from a burial depth history with `cosmic_history`.
 - `k_alpha`: alpha efficiency of enamel. With `alpha_efficiency="energy"` it is the value at `alpha_eref` MeV.
 - `alpha_efficiency`: `"constant"` (default, as in DATA) or `"energy"` (as in ROSY): k varies with alpha energy as R(E)/E, so each U-series segment gets its own efficiency (see `alpha`).
 - `alpha_eref`: reference alpha energy for `k_alpha` in MeV (ROSY: 5.3).

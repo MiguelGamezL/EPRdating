@@ -89,6 +89,12 @@ class Material:
         tot = sum(self.fractions.values())
         object.__setattr__(self, "fractions", {k: v / tot for k, v in self.fractions.items()})
 
+    @property
+    def key(self) -> tuple:
+        """Identity by composition (two materials with the same name but
+        different compositions never share cached coefficients)."""
+        return tuple(sorted((el, round(w, 12)) for el, w in self.fractions.items()))
+
     def with_water(self, water: float) -> Material:
         """Add ``water`` grams of water per gram of dry material."""
         if water <= 0:
@@ -100,7 +106,7 @@ class Material:
 
     def coefficients(self, E: float, scatter_factor: float = 1.0) -> tuple[float, float]:
         """(μa, μs) in cm²/g at energy E (MeV)."""
-        key = (self.name, round(E, 9), scatter_factor)
+        key = (self.key, round(E, 9), scatter_factor)
         hit = _COEF_CACHE.get(key)
         if hit is not None:
             return hit
@@ -114,18 +120,37 @@ class Material:
         return _COEF_CACHE[key]
 
 
-def _compound(name, formula: dict) -> Material:
+def compound(name: str, formula: dict) -> Material:
+    """A material from its chemical formula, e.g. ``compound("calcite", {"Ca": 1, "C": 1, "O": 3})``.
+
+    Elements available: ``ELEMENTS`` (H, C, N, O, Na, Mg, Al, Si, P, K, Ca, Fe).
+    """
+    unknown = set(formula) - set(ELEMENTS)
+    if unknown:
+        raise ValueError(f"no data for element(s) {sorted(unknown)}; available: {sorted(ELEMENTS)}")
     return Material(name, {el: n * ELEMENTS[el][1] for el, n in formula.items()})
 
 
-HYDROXYAPATITE = _compound("hydroxyapatite", {"Ca": 10, "P": 6, "O": 26, "H": 2})
-SILICA = _compound("silica", {"Si": 1, "O": 2})
-WATER = _compound("water", {"H": 2, "O": 1})
+_compound = compound  # backwards compatibility
+
+HYDROXYAPATITE = compound("hydroxyapatite", {"Ca": 10, "P": 6, "O": 26, "H": 2})
+SILICA = compound("silica", {"Si": 1, "O": 2})
+WATER = compound("water", {"H": 2, "O": 1})
 COLLAGEN = Material("collagen", {"C": 0.50, "H": 0.07, "N": 0.17, "O": 0.26})
+#: Common sediment minerals (ideal formulas).
+CALCITE = compound("calcite", {"Ca": 1, "C": 1, "O": 3})
+DOLOMITE = compound("dolomite", {"Ca": 1, "Mg": 1, "C": 2, "O": 6})
+KAOLINITE = compound("kaolinite", {"Al": 2, "Si": 2, "O": 9, "H": 4})
+ILLITE = compound("illite", {"K": 0.65, "Al": 2.65, "Si": 3.35, "O": 12, "H": 2})
+ORTHOCLASE = compound("orthoclase", {"K": 1, "Al": 1, "Si": 3, "O": 8})
+HEMATITE = compound("hematite", {"Fe": 2, "O": 3})
 
 
 def mixture(name: str, parts: list[tuple[Material, float]]) -> Material:
-    """Mix materials by mass fraction: ``[(material, mass_fraction), ...]``."""
+    """Mix materials by mass fraction: ``[(material, mass_fraction), ...]``
+    (fractions are normalised)."""
+    if any(w < 0 for _, w in parts) or not sum(w for _, w in parts) > 0:
+        raise ValueError("mass fractions must be non-negative and not all zero")
     f: dict = {}
     for mat, w in parts:
         for el, x in mat.fractions.items():
@@ -133,8 +158,25 @@ def mixture(name: str, parts: list[tuple[Material, float]]) -> Material:
     return Material(name, f)
 
 
+def sediment_material(quartz: float = 1.0, calcite: float = 0.0, dolomite: float = 0.0, kaolinite: float = 0.0,
+                      illite: float = 0.0, feldspar: float = 0.0, iron_oxide: float = 0.0,
+                      name: str = "sediment") -> Material:
+    """Dry sediment from its mineral mass fractions (normalised), e.g.
+    ``sediment_material(quartz=0.6, calcite=0.3, kaolinite=0.1)``; water is
+    added separately (``ToothLayers.sediment_water``)."""
+    parts = [(SILICA, quartz), (CALCITE, calcite), (DOLOMITE, dolomite), (KAOLINITE, kaolinite), (ILLITE, illite),
+             (ORTHOCLASE, feldspar), (HEMATITE, iron_oxide)]
+    return mixture(name, [(m, w) for m, w in parts if w > 0])
+
+
+def dentine_material(mineral: float = 0.70, collagen: float = 0.20, water: float = 0.10,
+                     name: str = "dentine") -> Material:
+    """Dentine (or cementum) as hydroxyapatite + collagen + water by mass."""
+    return mixture(name, [(HYDROXYAPATITE, mineral), (COLLAGEN, collagen), (WATER, water)])
+
+
 #: Default dentine: 70 % mineral, 20 % collagen, 10 % water by mass (indicative).
-DENTINE = mixture("dentine", [(HYDROXYAPATITE, 0.70), (COLLAGEN, 0.20), (WATER, 0.10)])
+DENTINE = dentine_material()
 
 
 @dataclass

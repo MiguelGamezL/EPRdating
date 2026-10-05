@@ -36,6 +36,7 @@ from .dose_rate import (
     u_series_split,
     water_correction,
 )
+from .history import History, integrate
 from .onegroup import ToothLayers
 from .series import USeries, load_partition
 from .uptake import USModel
@@ -50,15 +51,30 @@ class DoseRateComponent:
     uptake : None for a constant source, else a :class:`USModel`.
     G      : time-integrated activity ratio of incorporated U
              (``tau -> ∫ D/D_eq``); None means secular equilibrium.
+    profile: for a constant source whose rate changed in the past,
+             ``(breaks, rates)``: piecewise-constant rates in ka before
+             present (see :class:`eprdating.history.History`); ``rate`` is
+             then ``rates[0]``.
     """
 
     name: str
     rate: float
     uptake: USModel | None = None
     G: Callable[[float], float] | None = None
+    profile: tuple[Sequence[float], Sequence[float]] | None = None
+
+    def __post_init__(self) -> None:
+        if self.profile is not None:
+            if self.uptake is not None or self.G is not None:
+                raise ValueError("a rate profile is only supported for a constant source")
+            breaks, rates = self.profile
+            if len(rates) != len(breaks) + 1:
+                raise ValueError("a profile needs one rate more than breaks")
 
     def accumulated(self, T: float) -> float:
         """Dose (Gy) delivered by this component over ``T`` ka."""
+        if self.profile is not None:
+            return integrate(*self.profile, T)
         if self.rate == 0:
             return 0.0
         if self.uptake is None:
@@ -160,7 +176,10 @@ class ToothSample:
     ----------
     De : equivalent dose of the enamel.
     enamel_U, dentine_U : present-day U in each tissue.
-    sediment : U, Th, K and water content of the surrounding sediment.
+    sediment : U, Th, K and water content of the surrounding sediment. The
+        water may be a :class:`~eprdating.history.History` (wetter or drier
+        periods); the sediment beta and gamma dose rates then follow it,
+        and the present-day value (its first segment) is used elsewhere.
     beta : either fixed geometry factors (:class:`eprdating.beta.BetaGeometry`)
         or a layered geometry (:class:`eprdating.onegroup.ToothLayers`), in
         which case beta attenuation is computed with one-group theory for each
@@ -169,7 +188,12 @@ class ToothSample:
         :meth:`age_mc` together with the water contents.
     gamma : external gamma dose rate. If None, computed from ``sediment``
         as an infinite matrix (use in-situ measurements when available).
-    cosmic : cosmic dose rate (see :func:`eprdating.dose_rate.cosmic_dose_rate`).
+        A measured value is taken as today's; with a water history it is
+        rescaled to the water of each period. A
+        :class:`~eprdating.history.History` is used as given.
+    cosmic : cosmic dose rate (see :func:`eprdating.dose_rate.cosmic_dose_rate`),
+        or a :class:`~eprdating.history.History` of it, e.g. from a burial
+        depth history with :func:`eprdating.dose_rate.cosmic_history`.
     k_alpha : alpha efficiency of enamel. With ``alpha_efficiency="energy"``
         it is the value at ``alpha_eref`` MeV.
     alpha_efficiency : ``"constant"`` (default, as in DATA) or ``"energy"``
@@ -210,8 +234,8 @@ class ToothSample:
     dentine_U: ValueLike
     sediment: Sediment
     beta: BetaGeometry | ToothLayers
-    cosmic: ValueLike
-    gamma: ValueLike | None = None
+    cosmic: ValueLike | History
+    gamma: ValueLike | History | None = None
     k_alpha: ValueLike = K_ENAMEL
     dentine_water: ValueLike = 0.0
     uptake_enamel: USModel = field(default_factory=lambda: USModel(-1.0))
@@ -236,17 +260,29 @@ class ToothSample:
     beta_by_segment: bool = True
 
     _SCALARS = (
-        "De", "enamel_U", "dentine_U", "cosmic", "k_alpha", "dentine_water",
+        "De", "enamel_U", "dentine_U", "k_alpha", "dentine_water",
         "u234_u238_enamel", "u234_u238_dentine", "radon_loss_enamel", "radon_loss_dentine",
         "enamel_water", "cementum_U", "cementum_water", "u234_u238_cementum", "radon_loss_cementum",
     )
 
     # ---- parameter handling -------------------------------------------
+    def _environment(self) -> dict:
+        """External inputs that may be histories. In the value dicts a history
+        ``h`` of key ``k`` gives ``k#i`` for each segment and ``k`` = today."""
+        return {"cosmic": self.cosmic, "gamma": self.gamma, "sed_water": self.sediment.water}
+
+    def _histories(self) -> dict[str, History]:
+        return {k: x for k, x in self._environment().items() if isinstance(x, History)}
+
     def _nominal(self) -> dict[str, float]:
         v = {k: as_value(getattr(self, k)).value for k in self._SCALARS}
-        if self.gamma is not None:
-            v["gamma"] = as_value(self.gamma).value
-        for k in ("U", "Th", "K", "water"):
+        for key, x in self._environment().items():
+            if isinstance(x, History):
+                v.update({f"{key}#{i}": val for i, val in enumerate(x.nominal())})
+                v[key] = v[f"{key}#0"]
+            elif x is not None:
+                v[key] = as_value(x).value
+        for k in ("U", "Th", "K"):
             v["sed_" + k] = as_value(getattr(self.sediment, k)).value
         if self.sediment.U_ra226 is not None:
             v["sed_U_ra226"] = as_value(self.sediment.U_ra226).value
@@ -260,9 +296,13 @@ class ToothSample:
 
     def _sample(self, rng: np.random.Generator, n: int) -> dict[str, np.ndarray]:
         s = {k: as_value(getattr(self, k)).sample(rng, n) for k in self._SCALARS}
-        if self.gamma is not None:
-            s["gamma"] = as_value(self.gamma).sample(rng, n)
-        for k in ("U", "Th", "K", "water"):
+        for key, x in self._environment().items():
+            if isinstance(x, History):
+                s.update({f"{key}#{i}": arr for i, arr in enumerate(x.sample(rng, n))})
+                s[key] = s[f"{key}#0"]
+            elif x is not None:
+                s[key] = as_value(x).sample(rng, n)
+        for k in ("U", "Th", "K"):
             s["sed_" + k] = as_value(getattr(self.sediment, k)).sample(rng, n)
         if self.sediment.U_ra226 is not None:
             s["sed_U_ra226"] = as_value(self.sediment.U_ra226).sample(rng, n)
@@ -295,15 +335,18 @@ class ToothSample:
         return self.partition
 
     # ---- one-group beta factors ------------------------------------------
-    def _onegroup(self, v: dict[str, float]) -> dict:
+    def _onegroup(self, v: dict[str, float], seg: int | None = None) -> dict:
         """Per-source, per-chain/segment one-group factors for the geometry and
-        water contents in ``v`` (nominal geometry if ``v`` has none)."""
+        water contents in ``v`` (nominal geometry if ``v`` has none);
+        ``seg`` selects a segment of a sediment-water history."""
+        wkey = "sed_water" if seg is None else f"sed_water#{seg}"
         geo_vals = {k: v.get("geo_" + k, as_value(getattr(self.beta, k)).value) for k in self.beta.GEOMETRY}
         if not self.sample_geometry:
             geo_vals = self.beta.nominal_values()
-            water = tuple(as_value(x).value for x in (self.sediment.water, self.dentine_water, self.cementum_water))
+            nom = self._nominal()
+            water = (nom[wkey], nom["dentine_water"], nom["cementum_water"])
         else:
-            water = (v["sed_water"], v["dentine_water"], v["cementum_water"])
+            water = (v[wkey], v["dentine_water"], v["cementum_water"])
         key = (tuple(geo_vals.values()), water)
         cache = self.__dict__.setdefault("_og_cache", {})
         if key not in cache:
@@ -345,13 +388,6 @@ class ToothSample:
         cf: ConversionFactors = conversion_factors(self.factors)
         cU = {r: cf.get("U", r).value for r in ("alpha", "beta", "gamma")}
         use, usd, usc = (self._useries(t, v) for t in ("enamel", "dentine", "cementum"))
-        sed = {"U": v["sed_U"], "Th": v["sed_Th"], "K": v["sed_K"], "water": v["sed_water"]}
-        ura = v.get("sed_U_ra226")
-        dry = matrix_dose_rates(sed["U"], sed["Th"], sed["K"], cf, U_ra226=ura)
-        if "gamma" in v:
-            gamma = v["gamma"]
-        else:
-            gamma = water_correction(dry["gamma"], sed["water"], "gamma")
         if self.alpha_efficiency == "constant":
             k_scale, Ga_e = 1.0, (use.G("alpha") if use else None)
         elif self.alpha_efficiency == "energy":
@@ -366,7 +402,6 @@ class ToothSample:
             Gb_d = usd.G("beta") if usd else None
             en_beta = v["beta_internal"] * v["enamel_U"] * cU["beta"]
             den_beta = v["beta_dentine"] * water_correction(v["dentine_U"] * cU["beta"], v["dentine_water"], "beta")
-            sed_beta = v["beta_external"] * water_correction(dry["beta"], sed["water"], "beta")  # diseq. via dry
             if v["cementum_U"] > 0:
                 raise ValueError("cementum U needs a ToothLayers geometry with a cementum layer")
             cem_beta, Gb_c = 0.0, None
@@ -382,23 +417,6 @@ class ToothSample:
             Gb_d = usd.G("beta", w_d) if usd else None
             en_beta = v["enamel_U"] * cU["beta"] * og["enamel_U"]
             den_beta = v["dentine_U"] * cU["beta"] / (1.0 + v["dentine_water"]) * og["dentine_U"]
-            u_beta = sed["U"] * og["sediment"]["U"]
-            if ura is not None and sed["U"] > 0:
-                # U chain out of equilibrium: rescale with the per-segment attenuation
-                pb = self._partition()["beta"]
-                sh = RA226_SHARE_OF_TH230["beta"]
-                seg = og["sediment_seg"]
-                mult = {s: 1.0 for s in seg}
-                mult["Rn222"] = ura / sed["U"]
-                mult["Th230"] = 1.0 + (ura / sed["U"] - 1.0) * sh
-                eq = sum(pb[s] * seg[s] for s in seg)
-                u_beta *= sum(pb[s] * seg[s] * mult[s] for s in seg) / eq
-            elif ura is not None:
-                u_beta = ura * og["sediment"]["U"] * u_series_split("beta")[1]
-            sed_beta = (
-                u_beta * cf.get("U", "beta").value
-                + sum(sed[nuc] * cf.get(nuc, "beta").value * og["sediment"][nuc] for nuc in ("Th", "K"))
-            ) / (1.0 + sed["water"])
             if v["cementum_U"] > 0:
                 if og["cementum"] is None:
                     raise ValueError("cementum U needs a ToothLayers geometry with cementum_um > 0")
@@ -415,10 +433,68 @@ class ToothSample:
             DoseRateComponent("enamel beta", en_beta, up_e, Gb_e),
             DoseRateComponent("dentine beta", den_beta, up_d, Gb_d),
             DoseRateComponent("cementum beta", cem_beta, up_c, Gb_c),
-            DoseRateComponent("sediment beta", sed_beta),
-            DoseRateComponent("gamma", gamma),
-            DoseRateComponent("cosmic", v["cosmic"]),
+            *self._external(v, cf),
         ]
+
+    def _external(self, v: dict[str, float], cf: ConversionFactors) -> list[DoseRateComponent]:
+        """Sediment beta, gamma and cosmic components, following any history."""
+        hist = self._histories()
+
+        def segments(key):
+            return [v[f"{key}#{i}"] for i in range(len(hist[key]))]
+
+        ura = v.get("sed_U_ra226")
+        dry = matrix_dose_rates(v["sed_U"], v["sed_Th"], v["sed_K"], cf, U_ra226=ura)
+        w_now = v["sed_water"]
+        if "sed_water" in hist:
+            waters, wbreaks = segments("sed_water"), hist["sed_water"].breaks
+        else:
+            waters, wbreaks = [w_now], ()
+        sed_beta = [self._sediment_beta(v, cf, dry, w, i if "sed_water" in hist else None)
+                    for i, w in enumerate(waters)]
+        if "gamma" in hist:
+            gamma, gbreaks = segments("gamma"), hist["gamma"].breaks
+        elif "gamma" in v:  # measured today: rescale to the water of each period
+            gamma = [v["gamma"] * water_correction(1.0, w, "gamma") / water_correction(1.0, w_now, "gamma")
+                     for w in waters]
+            gbreaks = wbreaks
+        else:
+            gamma, gbreaks = [water_correction(dry["gamma"], w, "gamma") for w in waters], wbreaks
+        if "cosmic" in hist:
+            cosmic, cbreaks = segments("cosmic"), hist["cosmic"].breaks
+        else:
+            cosmic, cbreaks = [v["cosmic"]], ()
+
+        def component(name, rates, breaks):
+            return DoseRateComponent(name, rates[0], profile=(breaks, rates) if breaks else None)
+
+        return [component("sediment beta", sed_beta, wbreaks), component("gamma", gamma, gbreaks),
+                component("cosmic", cosmic, cbreaks)]
+
+    def _sediment_beta(self, v: dict[str, float], cf: ConversionFactors, dry: dict, water: float,
+                       seg: int | None) -> float:
+        """Beta dose rate from the sediment into the enamel for one water content."""
+        if isinstance(self.beta, BetaGeometry):
+            return v["beta_external"] * water_correction(dry["beta"], water, "beta")  # diseq. via dry
+        og = self._onegroup(v, seg)
+        U, ura = v["sed_U"], v.get("sed_U_ra226")
+        u_beta = U * og["sediment"]["U"]
+        if ura is not None and U > 0:
+            # U chain out of equilibrium: rescale with the per-segment attenuation
+            pb = self._partition()["beta"]
+            sh = RA226_SHARE_OF_TH230["beta"]
+            segf = og["sediment_seg"]
+            mult = {s: 1.0 for s in segf}
+            mult["Rn222"] = ura / U
+            mult["Th230"] = 1.0 + (ura / U - 1.0) * sh
+            eq = sum(pb[s] * segf[s] for s in segf)
+            u_beta *= sum(pb[s] * segf[s] * mult[s] for s in segf) / eq
+        elif ura is not None:
+            u_beta = ura * og["sediment"]["U"] * u_series_split("beta")[1]
+        return (
+            u_beta * cf.get("U", "beta").value
+            + sum(v["sed_" + nuc] * cf.get(nuc, "beta").value * og["sediment"][nuc] for nuc in ("Th", "K"))
+        ) / (1.0 + water)
 
     def age(self) -> AgeResult:
         """Nominal age with the central value of every input."""

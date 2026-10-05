@@ -55,8 +55,8 @@ def stopping_power(E: float, material: Material = HYDROXYAPATITE) -> float:
 
 
 @cache
-def _range_cached(E: float, name: str, n: int = 2000) -> float:
-    material = _MATERIALS[name]
+def _range_cached(E: float, key: tuple, n: int = 2000) -> float:
+    material = _MATERIALS[key]
     e0 = 1.0
     r0 = e0 / (1.5 * stopping_power(e0, material))  # ∫0^e0 dE/S with S ∝ E^-1/2
     if E <= e0:
@@ -66,13 +66,13 @@ def _range_cached(E: float, name: str, n: int = 2000) -> float:
     return r + r0
 
 
-_MATERIALS = {HYDROXYAPATITE.name: HYDROXYAPATITE}
+_MATERIALS = {HYDROXYAPATITE.key: HYDROXYAPATITE}  # keyed by composition
 
 
 def alpha_range(E: float, material: Material = HYDROXYAPATITE) -> float:
     """CSDA range of an alpha particle of energy E (MeV), in g/cm²."""
-    _MATERIALS.setdefault(material.name, material)
-    return _range_cached(round(E, 6), material.name)
+    _MATERIALS.setdefault(material.key, material)
+    return _range_cached(round(E, 6), material.key)
 
 
 def k_ratio(E: float, e_ref: float = 5.3, material: Material = HYDROXYAPATITE) -> float:
@@ -81,8 +81,8 @@ def k_ratio(E: float, e_ref: float = 5.3, material: Material = HYDROXYAPATITE) -
 
 
 @cache
-def _segment_ratios(e_ref: float, name: str) -> tuple:
-    material = _MATERIALS[name]
+def _segment_ratios(e_ref: float, key: tuple) -> tuple:
+    material = _MATERIALS[key]
     out = {}
     for seg, emitters in ALPHA_EMITTERS.items():
         tot = sum(w for _, w in emitters)
@@ -92,8 +92,8 @@ def _segment_ratios(e_ref: float, name: str) -> tuple:
 
 def segment_k_ratios(e_ref: float = 5.3, material: Material = HYDROXYAPATITE) -> dict[str, float]:
     """Dose-weighted alpha-efficiency ratio k/k_ref for each U-series segment."""
-    _MATERIALS.setdefault(material.name, material)
-    return dict(_segment_ratios(e_ref, material.name))
+    _MATERIALS.setdefault(material.key, material)
+    return dict(_segment_ratios(e_ref, material.key))
 
 
 def natural_u_k_ratio(e_ref: float = 5.3, material: Material = HYDROXYAPATITE) -> float:

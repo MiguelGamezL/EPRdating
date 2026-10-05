@@ -43,6 +43,7 @@ nav:
       - Ages: api/age.md
       - US-ESR: api/usesr.md
       - Dose rates: api/dose_rate.md
+      - Environmental histories: api/history.md
       - Uranium uptake: api/uptake.md
       - U-series: api/series.md
       - One-group beta: api/onegroup.md

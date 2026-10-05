@@ -7,6 +7,7 @@ Generated from the docstrings by `tools/gen_api_docs.py`.
 - [Ages](age.md) — `eprdating.age`
 - [US-ESR](usesr.md) — `eprdating.usesr`
 - [Dose rates](dose_rate.md) — `eprdating.dose_rate`
+- [Environmental histories](history.md) — `eprdating.history`
 - [Uranium uptake](uptake.md) — `eprdating.uptake`
 - [U-series ingrowth](series.md) — `eprdating.series`
 - [One-group beta attenuation](onegroup.md) — `eprdating.onegroup`

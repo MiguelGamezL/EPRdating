@@ -24,6 +24,7 @@ PAGES = [
     ("eprdating.age", "Ages", None),
     ("eprdating.usesr", "US-ESR", None),
     ("eprdating.dose_rate", "Dose rates", None),
+    ("eprdating.history", "Environmental histories", None),
     ("eprdating.uptake", "Uranium uptake", None),
     ("eprdating.series", "U-series ingrowth", None),
     ("eprdating.onegroup", "One-group beta attenuation", None),

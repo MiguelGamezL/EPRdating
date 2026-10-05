@@ -44,7 +44,8 @@
           0.004669335
         ]
       }
-    }
+    },
+    "note": "Checked against the paper and the Luminescence R package (tests/test_reference_data.py)."
   },
   "guerin_2011": {
     "reference": "Guérin G., Mercier N. & Adamiec G. (2011) Dose-rate conversion factors: update. Ancient TL 29, 5-8.",
@@ -87,7 +88,8 @@
           0.004786549
         ]
       }
-    }
+    },
+    "note": "Central values from the paper (Th and K: Tables 1 and 3; natural U: Table 2 weighted by abundance). The paper gives no uncertainties; the relative uncertainties of Adamiec & Aitken (1998) are carried, as in DRAC. Checked against the paper and the Luminescence R package (tests/test_reference_data.py)."
   },
   "liritzis_2013": {
     "reference": "Liritzis I. et al. (2013) Dose-rate conversion factors: update and uncertainties. Mediterranean Archaeology and Archaeometry 13, 1-15.",
@@ -130,6 +132,7 @@
           0.0048
         ]
       }
-    }
+    },
+    "note": "Values and uncertainties checked against the Luminescence R package transcription (tests/test_reference_data.py)."
   }
 }

@@ -123,29 +123,51 @@ reference materials to U, Th, K and the infinite-matrix dose rates.
 | `age` | generic solver `∫₀ᵀ Ḋ(t) dt = De` and the `ToothSample` model with Monte Carlo; `beta_by_segment=False` applies one beta factor to the whole U chain, as DATA and USESR do |
 | `spectra` | reading Bruker BES3T (`.DSC`/`.DTA`) and ESP/WinEPR (`.par`/`.spc`), `.dat`/`.par` and column files (`read_epr`); baseline, power/gain/mass normalisation, field alignment, pseudo-modulation and time-constant broadening of simulated shapes; peak-to-peak, T1–B2, double integral; template/component fits with field shift and noise-injection errors; EPRAYA backend |
 
-## Known limitations (v0.1)
+## Known limitations
 
-1. **U-series.** Daughter ingrowth (234U, 230Th, 231Pa), radon loss and a
-   measured 234U/238U per tissue are modelled, with segment fractions from
-   Adamiec & Aitken (1998) (`tools/derive_u_series_partition.py`). The uptake
-   parameter *p* can be derived from U-series data with `USESRSample`
-   (US-ESR). The p–T relation reproduces published results exactly; ages
-   come out 1–7 % younger than those of the USESR program because its beta
-   doses are lower than the one-group (ROSY) ones (see `USESR_FINDINGS.md`
-   and `PUBLISHED_FINDINGS.md`). Samples
-   at the closed-system U-series bound may have no nominal solution; the
-   Monte Carlo then reports the fraction of draws that solve and flags the
-   age as *marginal* when it is below 80 %.
-2. **Material compositions are fixed.** Enamel is hydroxyapatite, sediment
-   silica and dentine an indicative mix (70 % mineral, 20 % collagen, 10 %
-   water); thicknesses, stripping, densities and water contents are sampled
-   in the Monte Carlo, compositions are not.
-3. **No time-varying** water content or burial depth.
-4. **Data provenance.** Conversion factors and the Prescott & Stefan F/J/H
-   table were transcribed from the DRAC lookup tables. The Adamiec & Aitken
-   (1998) set is checked against the paper; the others still need checking.
+1. **U-series conventions differ between programs.** Daughter ingrowth
+   (234U, 230Th, 231Pa), radon loss and a measured 234U/238U per tissue are
+   modelled, with segment fractions from Adamiec & Aitken (1998)
+   (`tools/derive_u_series_partition.py`); *p* comes from U-series data with
+   `USESRSample` (US-ESR, CSUS-ESR). The p–T relation reproduces DATA and
+   USESR. Ages differ from theirs only through the beta doses: EPRdating
+   attenuates each U-series segment with the one-group method (as ROSY), so
+   its ages come out 1–7 % younger than USESR's; DATA's single chain factor
+   is available with `beta_by_segment=False` (see `DATA_FINDINGS.md`,
+   `USESR_FINDINGS.md`, `PUBLISHED_FINDINGS.md`). Samples at the
+   closed-system U-series bound may have no nominal solution; the Monte
+   Carlo then reports the fraction of draws that solve and flags the age as
+   *marginal* below 80 %.
+2. **Material compositions are inputs, not uncertainties.** Enamel is
+   hydroxyapatite, sediment silica and dentine 70 % mineral, 20 % collagen,
+   10 % water by default; any composition can be given (`compound`,
+   `mixture`, `sediment_material`, `dentine_material`). Thicknesses,
+   stripping, densities and water contents are sampled in the Monte Carlo,
+   compositions are not; their effect on the beta factors is ≤ 2–3 %
+   (calcite instead of quartz: −2 % sediment factor; dentine mineral 60–80 %:
+   < 1 %).
+3. **Environmental histories are piecewise constant.** Sediment water,
+   cosmic dose rate (from a burial-depth history, `cosmic_history`) and
+   gamma can change during burial (`History`); each segment value is
+   sampled in the Monte Carlo, the break times are fixed. The internal
+   components (enamel, dentine, cementum water and the beta factors of the
+   tooth) keep their present-day values.
+4. **Reference data.** The three conversion-factor sets match the papers and
+   an independent transcription (R package Luminescence); Guérin et al.
+   (2011) give no uncertainties, so the relative ones of Adamiec & Aitken
+   (1998) are carried, as in DRAC. The cosmic dose rate (Prescott & Hutton
+   1994, DRAC's tables) agrees with Luminescence's within 2.5 %; under less
+   than ~1.5 hg/cm² (about 0.8 m of sediment) the two fits of the soft
+   component differ by up to 7 % (`tests/test_reference_data.py`).
 5. **Alpha escape at layer surfaces** is not modelled (ROSY's alpha dose is
    ~1 % lower for 300 µm enamel without stripping).
+6. **Radon loss from the sediment** is entered as a 226Ra deficit
+   (`Sediment(U_ra226=...)`) and lowers only the 226Ra-onward part of the U
+   chain (about 59 % of its beta dose). Published USESR values behave as if
+   the loss removed the whole U-chain beta (Rising Star, `PUBLISHED_FINDINGS.md`).
+7. **Dentine thickness.** When it is unknown the default is 2000 µm, within
+   ~1 % of an infinitely thick dentine for the beta dose to the enamel.
+8. **No JEOL readers** yet (Bruker BES3T, ESP/WinEPR and text files are read).
 
 ## Roadmap
 
@@ -158,6 +180,7 @@ reference materials to U, Th, K and the infinite-matrix dose rates.
 - **v0.7** general use: Bruker and common gamma file formats, automatic gamma calibration, user guide; readers checked on EasySpin and becquerel test files.
 - **v0.8** CSUS-ESR; validation against DATA: EU/LU (82 runs), US-ESR and CS-US (40 cases) — `beta_by_segment` option, sediment-on-both-sides fix.
 - **v0.9** published-age benchmark: 58 ages from nine studies (DATA, USESR, ROSY).
+- **v0.10** reference data checked against their sources; configurable material compositions; water, burial-depth and gamma histories.
 - **later** JEOL readers, alpha escape at surfaces; article for *Quaternary Geochronology* (in preparation).
 
 ## Validation against ROSY

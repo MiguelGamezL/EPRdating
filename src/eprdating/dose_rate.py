@@ -20,6 +20,7 @@ from importlib import resources
 import numpy as np
 
 from ._types import Value, ValueLike, as_value
+from .history import History
 
 #: Water-correction coefficients for alpha, beta and gamma radiation
 #: (Zimmerman 1971; Aitken 1985): D_wet = D_dry / (1 + c * W).
@@ -188,6 +189,34 @@ def cosmic_dose_rate(
     return Value(dc, dc * rel_sigma)
 
 
+def cosmic_history(
+    depth_m: History,
+    density: float,
+    lat_deg: float,
+    lon_deg: float,
+    altitude_m: float,
+    rel_sigma: float = 0.10,
+) -> History:
+    """Cosmic dose-rate history from a burial-depth history (m, ka before present).
+
+    Each segment gets :func:`cosmic_dose_rate` at its depth, with the
+    ``rel_sigma`` uncertainty combined in quadrature with that of the depth
+    (propagated through the local slope of the depth curve). A gradual
+    burial is approximated by several short segments.
+    """
+    out = []
+    for d in depth_m.values:
+        dc = cosmic_dose_rate(d.value, density, lat_deg, lon_deg, altitude_m, rel_sigma)
+        slope = 0.0
+        if d.sigma > 0:
+            h = max(1e-3, 0.01 * d.sigma)
+            lo, hi = max(d.value - h, 0.0), d.value + h
+            slope = (cosmic_dose_rate(hi, density, lat_deg, lon_deg, altitude_m).value
+                     - cosmic_dose_rate(lo, density, lat_deg, lon_deg, altitude_m).value) / (hi - lo)
+        out.append(Value(dc.value, math.hypot(dc.sigma, slope * d.sigma)))
+    return History(out, depth_m.breaks)
+
+
 # --------------------------------------------------------------------------
 # Convenience for a sediment/soil source
 # --------------------------------------------------------------------------
@@ -200,17 +229,23 @@ class Sediment:
     ``U_ra226``: 226Ra and its daughters as ppm of U in equilibrium, when it
     differs from the 238U content ``U`` (e.g. from gamma spectrometry, 214Pb
     and 214Bi lines vs 234Th and 234mPa). ``None`` means equilibrium.
+    ``water`` (mass of water / dry mass) may be a
+    :class:`~eprdating.history.History` when it changed during burial; its
+    first value is the present-day one.
     """
 
     U: ValueLike = 0.0
     Th: ValueLike = 0.0
     K: ValueLike = 0.0
-    water: ValueLike = 0.0  # mass water / dry mass
+    water: ValueLike | History = 0.0
     U_ra226: ValueLike | None = None
 
     def dose_rate(self, radiation: str, factors: ConversionFactors | None = None, values=None) -> float:
-        """Wet dose rate for one radiation type. ``values`` overrides the inputs
-        (used by the Monte Carlo engine)."""
+        """Wet dose rate for one radiation type, with the present-day water.
+        ``values`` overrides the inputs (used by the Monte Carlo engine)."""
+        if values is None and isinstance(self.water, History):
+            values = {k: as_value(getattr(self, k)).value for k in ("U", "Th", "K")}
+            values["water"] = self.water.nominal()[0]
         v = values or {k: as_value(getattr(self, k)).value for k in ("U", "Th", "K", "water")}
         ura = v.get("U_ra226", None if self.U_ra226 is None else as_value(self.U_ra226).value)
         dry = matrix_dose_rates(v["U"], v["Th"], v["K"], factors, U_ra226=ura)[radiation]
