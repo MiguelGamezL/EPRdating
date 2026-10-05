@@ -100,8 +100,18 @@ search, to 1000 noise realisations with the spectrum of the signal-free sweep
 at least the measured amplitude. `r.detected(0.01)` is False when the signal
 is not detected at that level; such an aliquot measures mostly the noise.
 In synthetic noise-only spectra, 5 % fall below `p_noise = 0.05`, as they
-should. Decide the level before looking at the dose response, and apply it
-to every aliquot (`examples/dose_series_dat.py --exclude-undetected 0.01`).
+should.
+
+Use `p_noise` as a flag, not as a rule to drop points from the dose
+response. In synthetic M18-like series (`tools/synthetic_dose_series.py`),
+leaving out the aliquots not detected at 1 % biased De upwards (+15 to +40 %
+for De = 20 Gy): the weak aliquots that survive are those whose noise
+happened to be positive. Keeping every aliquot, or leaving out only the
+natural, recovered De without bias, because a noisy weak point carries a
+large error and little weight. In those series the natural came out above
+the 20 Gy aliquot in about 40 % of the cases when it was measured with one
+scan (16-27 % with four), so that alone is not a sign of a failed
+measurement.
 
 The lower-level `ComponentBasis` fits several components at once
 (e.g. axial and orthorhombic CO2⁻, native signal) on any field grid.

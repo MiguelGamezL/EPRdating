@@ -51,3 +51,12 @@ def test_samples_and_bootstrap():
     assert np.std(s) == pytest.approx(r.De_sigma, rel=0.1)
     b = bootstrap_De(r, n=100, seed=0)
     assert b.size > 90 and abs(np.median(b) - r.De) < 3 * r.De_sigma
+
+
+def test_linear_fit_with_a_noisy_low_dose_end():
+    # the first four points alone fall with dose; the fit must still start inside its bounds
+    D = np.arange(0, 181, 20.0)
+    I = np.array([0.9, 0.3, 0.2, 0.5, 1.37, 1.2, 1.38, 2.25, 1.99, 1.80])
+    f = fit_dose_response(D, I, "LIN", De_min=-np.inf)
+    assert np.isfinite(f.De)
+    assert list(f.params.values())[1] > 0

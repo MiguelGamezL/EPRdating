@@ -25,8 +25,9 @@ Steps
    window (linear baseline, common field shift within ±0.6 mT), with errors
    by noise injection; the repeats are checked against each other; a
    detection test gives the probability that noise alone produces the
-   amplitude (``p_noise``), and ``--exclude-undetected 0.01`` leaves out the
-   aliquots above that level;
+   amplitude (``p_noise``). ``--exclude-undetected 0.01`` leaves out the
+   aliquots above that level, for comparison only: dropping undetected
+   aliquots biases De upwards (see ``tools/synthetic_dose_series.py``);
 4. the wide-sweep natural aliquot is put on the scale of the narrow sweeps
    with an aliquot measured both ways;
 5. linear dose-response fits (De allowed to be negative, errors inflated by
