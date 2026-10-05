@@ -1,7 +1,7 @@
 # EPRdating
 
-ESR (EPR) dating of tooth enamel in Python, from raw measurements to an age
-with its uncertainty:
+Open ESR (EPR) dating of tooth enamel in Python, from raw measurements to an
+age with its uncertainty:
 
 ```text
 EPR spectra ──► intensities ──► dose-response ──► De ─┐
@@ -18,10 +18,10 @@ its uncertainty.
 | **Dose-response** | Linear, single and double saturating exponential, exponential + linear; weighting, Dmax test, Birge scaling, bootstrap. |
 | **Sediment** | HPGe gamma spectra (ORTEC, Canberra, N42, ASCII…) analysed by the comparative method against IAEA reference materials, with automatic energy calibration and a 226Ra/238U equilibrium check. |
 | **Dose rate** | Conversion factors (Adamiec & Aitken 1998, Guérin et al. 2011, Liritzis et al. 2013), water, cosmic (Prescott & Hutton 1994), U uptake (EU, LU, US), U-series ingrowth with radon loss, one-group beta attenuation in enamel/dentine/cementum layers, energy-dependent alpha efficiency, sediment disequilibrium. |
-| **Age** | Closed-form uptake models or combined U-series/ESR (US-ESR); Monte Carlo over every input, geometry included. |
+| **Age** | Early, linear and US uptake, combined U-series/ESR (US-ESR) and CSUS-ESR; Monte Carlo over every input, geometry included. |
 | **Figures** | Spectra, dose-response, dose-rate budget, age distribution, gamma spectra and per-line contents. |
 
-The physics is validated against ROSY 2.0 (ages within −0.5 to +0.7 %),
+The physics is validated against ROSY 2.0 (ages within −0.6 to +0.7 %),
 DATA (−2.6 to +1.6 % with DATA's beta convention), 58 published ages from
 nine studies (all within 10 %, 56 within the published 1σ),
 and third-party EPR and gamma files — see

@@ -1,34 +1,56 @@
 # EPRdating
 
-ESR/EPR dating in Python, from spectra to ages:
+Open ESR (EPR) dating of tooth enamel in Python, from raw measurements to an
+age with its uncertainty:
 
 ```
-spectra ─► intensity ─► dose-response curve ─► De ─► dose rate ─► age
-          (p-p, T1–B2,      (SSE, EXP+LIN,          (U, Th, K,     (EU / LU / US,
-           deconvolution     DSE, LIN)               water, cosmic,  U-series ingrowth,
-           with EPRAYA)                              beta geometry)  Monte Carlo)
+EPR spectra ──► intensities ──► dose response ──► De ──────┐
+                                                           ├──► age: EU, LU, US, US-ESR, CSUS-ESR (Monte Carlo)
+HPGe spectra ─► sediment U, Th, K ─► dose rate ────────────┘
+                                         ▲
+tooth U-series data ─► uptake model ─────┘
 ```
+
+- **EPR spectra:** Bruker (BES3T, ESP/WinEPR) and text files; baseline,
+  power/gain/mass normalisation, template fits (empirical or simulated with
+  EPRAYA) with noise-injection errors; SSE, EXP+LIN, DSE and linear dose
+  response with bootstrap De.
+- **Sediment:** HPGe gamma spectra (ORTEC, Canberra, N42, text) by the
+  comparative method against IAEA RGU-1/RGTh-1/RGK-1, with automatic energy
+  calibration and a 226Ra/238U equilibrium check.
+- **Dose rate:** conversion factors (Adamiec & Aitken 1998, Guérin et al.
+  2011, Liritzis et al. 2013), water, cosmic, U-series ingrowth with radon
+  loss, one-group beta attenuation per U-series segment in
+  sediment/cementum/enamel/dentine layers, energy-dependent alpha efficiency.
+- **Age:** EU, LU and US uptake, combined U-series/ESR (US-ESR) and CSUS-ESR;
+  Monte Carlo over every input, geometry included.
+- **Reproducibility:** every validation case and every recomputed published
+  study is stored as JSON with the provenance of each value.
 
 Inspired by ROSY (Brennan et al. 1997, 1999) and DATA (Grün 2009), written as
-an independent, open implementation from the published equations.
+an independent, open implementation from the published equations, and
+validated against both programs run as black boxes.
 
-> **Status: 0.1.0.dev0 — pre-release.** Validated against ROSY 2.0: with
-> one-group beta attenuation and energy-dependent alpha efficiency, EPRdating
-> reproduces ROSY's EU, LU and CU ages within −0.5 to +0.7 %, and its age
-> errors, for synthetic cases and the six teeth of Brennan et al. (1997)
-> (see `tests/validation/ROSY_FINDINGS.md`). Against DATA (Grün 2009),
-> ages agree within −2.6 to +1.6 % with DATA's single beta factor for the U
-> chain, and its US-ESR and CS-US ages within −1.4 to +0.7 % and 1 %
-> (`tests/validation/DATA_FINDINGS.md`). 58 published ages from nine studies
-> are reproduced within −9.5 to +3.4 %, 56 within the published 1σ
-> (`tests/validation/PUBLISHED_FINDINGS.md`). Still pre-release; see
-> *Known limitations*.
+> **Status: 0.1.0.dev0 — pre-release.** Validation (details in
+> `tests/validation/`):
+>
+> | Against | Agreement |
+> |---|---|
+> | ROSY 2.0: EU, LU and CU ages, incl. the six teeth of Brennan et al. (1997) | −0.6 to +0.7 % (`ROSY_FINDINGS.md`) |
+> | DATA: EU and LU ages, one beta factor for the U chain as DATA | −2.6 to +1.6 % (`DATA_FINDINGS.md`) |
+> | DATA: US-ESR and CS-US ages | −1.4 to +0.7 %; CS-US within DATA's 1 ka rounding |
+> | 58 published ages from nine studies (DATA, USESR, ROSY) | −9.5 to +3.4 %, 56 within the published 1σ (`PUBLISHED_FINDINGS.md`) |
+>
+> An article describing the library is in preparation. See *Known
+> limitations*.
 
 ## Install
 
 ```bash
 pip install -e .                 # core: numpy + scipy only
+pip install -e '.[plot]'         # + matplotlib, for the figures
 pip install -e '.[spectra]'      # + EPRAYA backend for simulated component shapes
+pip install -e '.[gamma-formats]'  # + becquerel: Canberra .cnf, ORTEC .spc, IEC 61455
 pip install -e '.[dev]'          # + pytest, ruff
 ```
 
@@ -88,10 +110,10 @@ reference materials to U, Th, K and the infinite-matrix dose rates.
 | `onegroup` | one-group (double-P0) beta transport in planar layers (O'Brien et al. 1964; Brennan et al. 1997), per emitter and per U-series segment |
 | `beta` | fixed beta geometry factors, as an alternative to `onegroup` |
 | `alpha` | energy-dependent alpha efficiency, k ∝ R(E)/E (ROSY's "varies with energy" option) |
-| `usesr` | combined U-series/ESR (US-ESR): solves the age and the uptake parameter *p* of each tissue from its 230Th/234U and 234U/238U (Grün et al. 1988) |
+| `usesr` | combined U-series/ESR (US-ESR): solves the age and the uptake parameter *p* of each tissue from its 230Th/234U and 234U/238U (Grün et al. 1988; Shao et al. 2015); CSUS-ESR (Grün 2000) with `age(model="CSUS")`; Monte Carlo with the fraction of draws that solve |
 | `gamma` | HPGe gamma spectrometry of sediments: ORTEC `.Spe`/`.Chn`, N42, ASCII and column files (`.cnf`/`.spc`/IEC through becquerel); automatic energy/resolution calibration per spectrum (no first guess, absorbs gain drift), peak areas, comparative method against IAEA RGU-1/RGTh-1/RGK-1, 226Ra/238U equilibrium check, output as `Sediment` |
 | `plot` | figures: stacked spectra with fits, dose-response with De, dose-rate budget, age distribution, gamma spectra and per-line contents |
-| `age` | generic solver `∫₀ᵀ Ḋ(t) dt = De` and the `ToothSample` model with Monte Carlo |
+| `age` | generic solver `∫₀ᵀ Ḋ(t) dt = De` and the `ToothSample` model with Monte Carlo; `beta_by_segment=False` applies one beta factor to the whole U chain, as DATA and USESR do |
 | `spectra` | reading Bruker BES3T (`.DSC`/`.DTA`) and ESP/WinEPR (`.par`/`.spc`), `.dat`/`.par` and column files (`read_epr`); baseline, power/gain/mass normalisation, field alignment, pseudo-modulation and time-constant broadening of simulated shapes; peak-to-peak, T1–B2, double integral; template/component fits with field shift and noise-injection errors; EPRAYA backend |
 
 ## Known limitations (v0.1)
@@ -101,8 +123,9 @@ reference materials to U, Th, K and the infinite-matrix dose rates.
    Adamiec & Aitken (1998) (`tools/derive_u_series_partition.py`). The uptake
    parameter *p* can be derived from U-series data with `USESRSample`
    (US-ESR). The p–T relation reproduces published results exactly; ages
-   differ by 2–9 % from the USESR program because its beta attenuation
-   differs from the one-group (ROSY) one (see `USESR_FINDINGS.md`). Samples
+   come out 1–7 % younger than those of the USESR program because its beta
+   doses are lower than the one-group (ROSY) ones (see `USESR_FINDINGS.md`
+   and `PUBLISHED_FINDINGS.md`). Samples
    at the closed-system U-series bound may have no nominal solution; the
    Monte Carlo then reports the fraction of draws that solve and flags the
    age as *marginal* when it is below 80 %.
@@ -128,7 +151,7 @@ reference materials to U, Th, K and the infinite-matrix dose rates.
 - **v0.7** general use: Bruker and common gamma file formats, automatic gamma calibration, user guide; readers checked on EasySpin and becquerel test files.
 - **v0.8** CSUS-ESR; validation against DATA: EU/LU (82 runs), US-ESR and CS-US (40 cases) — `beta_by_segment` option, sediment-on-both-sides fix.
 - **v0.9** published-age benchmark: 58 ages from nine studies (DATA, USESR, ROSY).
-- **later** JEOL readers, alpha escape at surfaces, JOSS paper.
+- **later** JEOL readers, alpha escape at surfaces; article for *Quaternary Geochronology* (in preparation).
 
 ## Validation against ROSY
 
@@ -181,7 +204,12 @@ pytest -m epraya            # EPRAYA integration (needs the extra)
 - Durcan J.A., King G.E., Duller G.A.T. (2015) DRAC: Dose Rate and Age Calculator for trapped charge dating. *Quaternary Geochronology* 28, 54–61.
 - Prescott J.R., Hutton J.T. (1994) Cosmic ray contributions to dose rates for luminescence and ESR dating. *Radiation Measurements* 23, 497–500.
 - Adamiec G., Aitken M. (1998) Dose-rate conversion factors: update. *Ancient TL* 16, 37–50. doi:10.26034/la.atl.1998.292
-- Guérin G., Mercier N., Adamiec G. (2011) Dose-rate conversion factors: update. *Ancient TL* 29, 5–8.
+- Guérin G., Mercier N., Adamiec G. (2011) Dose-rate conversion factors: update. *Ancient TL* 29, 5–8. doi:10.26034/la.atl.2011.443
+- Brennan B.J., Rink W.J., Rule E.M., Schwarcz H.P., Prestwich W.V. (1999) The ROSY ESR dating program. *Ancient TL* 17, 45–53. doi:10.26034/la.atl.1999.307
+- Grün R. (2000) An alternative model for open system U-series/ESR age calculations: (closed system U-series)-ESR, CSUS-ESR. *Ancient TL* 18, 1–4. doi:10.26034/la.atl.2000.313
+- Shao Q., Bahain J.-J., Dolo J.-M., Falguères C. (2014) Monte Carlo approach to calculate US-ESR age and age uncertainty for tooth enamel. *Quaternary Geochronology* 22, 99–106.
+- Shao Q., Chadam J., Grün R., Falguères C., Dolo J.-M., Bahain J.-J. (2015) The mathematical basis for the US-ESR dating method. *Quaternary Geochronology* 30, 1–8.
+- Carvajal E., Montes L., Almanza O.A. (2011) Quaternary dating by electron spin resonance (ESR) applied to human tooth enamel. *Earth Sciences Research Journal* 15(2), 115–120. https://revistas.unal.edu.co/index.php/esrj/article/view/27715
 
 ## License
 

@@ -15,7 +15,7 @@ reference cases. Details: [`tests/validation/ROSY_FINDINGS.md`](../tests/validat
 | Cosmic dose rate | within 1 % |
 | U-series ingrowth, radon loss | effective alpha efficiency predicted within −0.2 to +2.6 % |
 | One-group beta attenuation (O'Brien et al. 1964, no fitted parameter) | dentine factors to three decimals; self-dose 1–2.5 %; sediment 2–5 % |
-| Full ages, EU/LU/CU, 35 ka – 2 Ma, six real teeth of Brennan et al. (1997) | **−0.5 to +0.7 %** |
+| Full ages, EU/LU/CU, 20–330 ka, incl. the six real teeth of Brennan et al. (1997) | **−0.6 to +0.7 %** |
 | Monte Carlo uncertainties vs ROSY's errors | within 25 % (geometry sampled) |
 
 ## Dose rates and ages: DATA

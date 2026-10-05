@@ -161,7 +161,7 @@ fitted to ROSY.
 The effective k of the enamel alpha dose in the reference cases is predicted
 within −0.2 to +2.6 % (largest for total radon loss and the youngest case),
 and full ages with one-group beta plus energy-dependent alpha agree with ROSY
-within **−0.5 to +0.7 %** (mean |deviation| 0.4 %, against 0.6 % with constant
+within **−0.6 to +0.7 %** (−0.58 to +0.67 %; mean |deviation| 0.4 %, against 0.6 % with constant
 k). A small residual remains for thin enamel (300 µm: ROSY's alpha dose is
 ~1 % lower), which suggests ROSY also accounts for alpha escape at the layer
 surfaces; EPRdating does not.
