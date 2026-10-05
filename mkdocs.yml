@@ -1,18 +1,25 @@
 site_name: EPRdating
-site_description: ESR/EPR dating of tooth enamel in Python, from spectra to ages
+site_description: Open ESR dating of tooth enamel in Python, from spectra to ages
 repo_url: https://github.com/MiguelGamezL/EPRdating
 docs_dir: docs
 theme:
   name: material
+  logo: img/logo/icon.svg
+  favicon: img/logo/icon.png
   features:
     - navigation.sections
     - content.code.copy
   palette:
     - scheme: default
+      primary: white
+      accent: light blue
       toggle: {icon: material/weather-night, name: Dark mode}
     - scheme: slate
+      primary: black
+      accent: light blue
       toggle: {icon: material/weather-sunny, name: Light mode}
 markdown_extensions:
+  - attr_list
   - tables
   - admonition
   - toc: {permalink: true}

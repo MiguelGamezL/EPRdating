@@ -1,5 +1,8 @@
 # EPRdating
 
+![EPRdating](img/logo/eprdating_logo.svg#only-light){ width="560" }
+![EPRdating](img/logo/eprdating_logo_dark.svg#only-dark){ width="560" }
+
 Open ESR (EPR) dating of tooth enamel in Python, from raw measurements to an
 age with its uncertainty:
 

@@ -1,3 +1,10 @@
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/img/logo/eprdating_logo_dark.svg">
+    <img src="docs/img/logo/eprdating_logo.svg" alt="EPRdating" width="560">
+  </picture>
+</p>
+
 # EPRdating
 
 Open ESR (EPR) dating of tooth enamel in Python, from raw measurements to an
@@ -210,6 +217,14 @@ pytest -m epraya            # EPRAYA integration (needs the extra)
 - Shao Q., Bahain J.-J., Dolo J.-M., Falguères C. (2014) Monte Carlo approach to calculate US-ESR age and age uncertainty for tooth enamel. *Quaternary Geochronology* 22, 99–106.
 - Shao Q., Chadam J., Grün R., Falguères C., Dolo J.-M., Bahain J.-J. (2015) The mathematical basis for the US-ESR dating method. *Quaternary Geochronology* 30, 1–8.
 - Carvajal E., Montes L., Almanza O.A. (2011) Quaternary dating by electron spin resonance (ESR) applied to human tooth enamel. *Earth Sciences Research Journal* 15(2), 115–120. https://revistas.unal.edu.co/index.php/esrj/article/view/27715
+
+## Logo
+
+The logo is the CO2- spectrum of tooth enamel, the largest of an
+additive-dose series, drawn without smoothing; its double minimum recalls a
+molar. The mark of the Grupo de Física Aplicada (Universidad Nacional de
+Colombia) sits in the corner. `tools/logo/make_logo.py` redraws it (Barlow
+font, SIL Open Font License, `tools/logo/OFL.txt`).
 
 ## License
 
