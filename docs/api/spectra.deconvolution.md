@@ -29,6 +29,7 @@ A set of normalised component shapes on a fixed field grid.
 **Members**
 
 - `fit(self, spectrum, nonnegative: bool = True, max_shift: float = 0.0, shift_step: float | None = None, noise = None, n_noise: int = 300, seed: int | None = 0) -> DeconvolutionResult` — Fit amplitudes (peak-to-peak units) and the polynomial baseline.
+- `null_amplitudes(self, noise, n_noise: int = 300, max_shift: float = 0.0, shift_step: float | None = None, nonnegative: bool = False, seed: int | None = 0) -> np.ndarray` — Amplitudes fitted to signal-free noise alone, `(n_noise, n_components)`.
 
 ### `DeconvolutionResult`
 

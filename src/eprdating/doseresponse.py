@@ -118,7 +118,10 @@ def _initial_guess(model: str, D: np.ndarray, I: np.ndarray) -> list:
     if model == "DSE":
         return [De0, Imax * 0.6, D0 * 0.3, Imax * 0.6, D0 * 3.0]
     if model == "LIN":
-        return [De0, slope]
+        s_all, c_all = np.polyfit(D, I, 1)  # all points: robust to a noisy low-dose end
+        if s_all > 0:
+            return [c_all / s_all, s_all]
+        return [De0, max(abs(slope), 1e-12)]
     raise ValueError(model)
 
 
@@ -188,6 +191,9 @@ def fit_dose_response(
     upper = [np.inf] * npar
     if model == "EXPLIN":
         lower[3] = -np.inf
+    # keep the starting point strictly inside the bounds
+    guess = [min(max(g, lo + 1e-9 * max(1.0, abs(lo)) if np.isfinite(lo) else g), hi)
+             for g, lo, hi in zip(guess, lower, upper, strict=True)]
     popt, pcov = curve_fit(
         f, D, I, p0=guess, sigma=s, absolute_sigma=abs_sigma,
         bounds=(lower, upper), maxfev=20000,
