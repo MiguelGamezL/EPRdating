@@ -113,3 +113,15 @@ def test_other_methods_and_options():
         warnings.simplefilter("ignore")
         r = intensity(narrow, "peak_to_peak")
     assert np.isnan(r.sigma)
+
+
+def test_detection_test_false_alarm_rate():
+    rng = np.random.default_rng(11)
+    p_noise = [intensity(spectrum(0.0, sigma=0.5, rng=rng), template=(B, SHAPE), n_noise=10, n_null=150,
+                         seed=k).p_noise for k in range(40)]
+    # with no signal, p_noise is roughly uniform: few "detections" at 5 %
+    # (100 such spectra gave 5 % below 0.05 and 2 % below 0.01)
+    assert np.mean(np.array(p_noise) < 0.05) < 0.15
+    strong = intensity(spectrum(5.0, sigma=0.5, rng=rng), template=(B, SHAPE), n_noise=10, n_null=200)
+    assert strong.p_noise < 0.01 and strong.detected() is True
+    assert intensity(spectrum(5.0, sigma=0.5, rng=rng), "peak_to_peak").detected() is None

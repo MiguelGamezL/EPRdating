@@ -15,7 +15,21 @@ of four methods, always inside an `IntensityWindow`
 
 The part of the sweep outside the window is taken as signal-free: after a
 polynomial baseline it gives the noise, which is injected into the measured
-(or fitted) spectrum to obtain the error of every method. For this the
+(or fitted) spectrum to obtain the error of every method.
+
+Detection. A template fit that searches the field position finds, in pure
+noise, the place where the noise looks most like the signal, and returns a
+positive amplitude. For weak signals this inflates the intensity. The
+template method therefore also fits the template, with the same shift
+search, to signal-free noise blocks of the same spectrum, and reports the
+false-alarm probability `p_noise`: how often noise alone gives at least
+the measured amplitude. The noise realisations are phase-randomised
+surrogates of the signal-free sweep: they keep its spectrum, i.e. the
+correlation from the time constant and the slow baseline wander, and give
+independent draws even when the signal-free stretch is short. An aliquot
+whose `p_noise` is not small (e.g.
+`Intensity.detected(0.01)` is False) has no detectable signal, and its
+intensity mostly measures the noise. For this the
 longer signal-free side must hold at least as many points as the window;
 otherwise the template error falls back to the residual autocovariance and
 the other methods get no error (`nan`).
@@ -33,7 +47,7 @@ METHODS = ('template', 'peak_to_peak', 't1_b2', 'double_integral')
 
 ### `Intensity`
 
-*dataclass* `Intensity(value: float, sigma: float, method: str, window_mT: tuple[float, float], shift_mT: float = 0.0, fit: DeconvolutionResult | None = None, n_repeats: int = 1, chi2_red: float | None = None, repeats: list[Intensity] = <factory>)`
+*dataclass* `Intensity(value: float, sigma: float, method: str, window_mT: tuple[float, float], shift_mT: float = 0.0, fit: DeconvolutionResult | None = None, n_repeats: int = 1, chi2_red: float | None = None, repeats: list[Intensity] = <factory>, p_noise: float | None = None)`
 
 An EPR intensity with its 1-sigma error and how it was obtained.
 
@@ -43,6 +57,12 @@ An EPR intensity with its 1-sigma error and how it was obtained.
 - `shift_mT`: field shift found by the template fit.
 - `fit`: the template fit (`method="template"`).
 - `n_repeats`, `chi2_red`, `repeats`: for an intensity combined from repeated measurements, their number, the reduced chi-square of their scatter, and the individual intensities.
+- `p_noise`: (`method="template"`) false-alarm probability: the fraction of signal-free noise blocks of the same spectrum that give at least this amplitude with the same fit and shift search. Small values mean the signal is detected; see `detected`.
+
+**Members**
+
+- `detected(self, alpha: float = 0.01) -> bool | None` — Whether the signal stands out of the noise at false-alarm level
+`alpha` (None when `p_noise` is not available).
 
 ### `combine_intensities`
 
@@ -58,7 +78,7 @@ signals.
 
 ### `intensity`
 
-`intensity(spectrum: Spectrum, method: str = 'template', template: np.ndarray | tuple[np.ndarray, np.ndarray] | Callable | None = None, window: IntensityWindow = IntensityWindow(width=100.0, unit='G', center_g=2.0023, center_mT=None), *, ref_power_mW: float | None = None, mass_mg: float | None = None, max_shift: float = 0.6, baseline_order: int = 1, n_noise: int = 300, seed: int | None = 0) -> Intensity`
+`intensity(spectrum: Spectrum, method: str = 'template', template: np.ndarray | tuple[np.ndarray, np.ndarray] | Callable | None = None, window: IntensityWindow = IntensityWindow(width=100.0, unit='G', center_g=2.0023, center_mT=None), *, ref_power_mW: float | None = None, mass_mg: float | None = None, max_shift: float = 0.6, baseline_order: int = 1, n_noise: int = 300, n_null: int = 1000, seed: int | None = 0) -> Intensity`
 
 Intensity of `spectrum` (its scan average) inside `window`.
 
@@ -69,3 +89,4 @@ Intensity of `spectrum` (its scan average) inside `window`.
 - `max_shift`: common field shift searched by the template fit (mT).
 - `baseline_order`: polynomial baseline fitted with the template.
 - `n_noise`, `seed`: noise-injection draws for the error.
+- `n_null`: noise realisations for the detection test (`p_noise`).

@@ -3,7 +3,8 @@
 Usage::
 
     python examples/dose_series_dat.py FOLDER [--window-G 100] [--center-g 2.0023]
-                                              [--no-repeats] [--epraya] [--plot out.png]
+                                              [--no-repeats] [--exclude-undetected ALPHA]
+                                              [--epraya] [--plot out.png]
 
 The series below is the M18 enamel sample (aliquots irradiated in 20 Gy
 steps, 4 scans at 19 mW; the natural aliquot measured on a wide sweep, 1 scan
@@ -22,7 +23,10 @@ Steps
 3. each aliquot: its repeated spectra are averaged (normalised to 19 mW,
    weighted by their noise) and the template amplitude is fitted inside the
    window (linear baseline, common field shift within ±0.6 mT), with errors
-   by noise injection; the repeats are checked against each other;
+   by noise injection; the repeats are checked against each other; a
+   detection test gives the probability that noise alone produces the
+   amplitude (``p_noise``), and ``--exclude-undetected 0.01`` leaves out the
+   aliquots above that level;
 4. the wide-sweep natural aliquot is put on the scale of the narrow sweeps
    with an aliquot measured both ways;
 5. linear dose-response fits (De allowed to be negative, errors inflated by
@@ -150,16 +154,21 @@ def measure_series(folder: Path, window: IntensityWindow = DEFAULT_WINDOW, repea
         rows.append((f, d, A, s, r))
         note = f"  excluded: {EXCLUDED[f]}" if f in EXCLUDED else ""
         rep = (f"  ({r.n_repeats} spectra, chi2_red = {r.chi2_red:.2f})" if r.n_repeats > 1 else "")
-        print(f"{f:26s} {d:5.0f} Gy  I = {A:6.2f} ± {s:5.2f}  shift {r.shift_mT:+.2f} mT{rep}{note}")
+        print(f"{f:26s} {d:5.0f} Gy  I = {A:6.2f} ± {s:5.2f}  shift {r.shift_mT:+.2f} mT  "
+              f"p_noise {r.p_noise:.3f}{rep}{note}")
     return rows, shown
 
 
-def fit_selections(rows):
+def fit_selections(rows, alpha: float | None = None):
+    """Linear fits for several selections. With ``alpha``, aliquots whose
+    signal is not detected at that false-alarm level are left out too."""
+    ok = [r for r in rows if r[0] not in EXCLUDED and (alpha is None or r[4].detected(alpha) is not False)]
     sel = {
-        "all (natural included)": [r for r in rows if r[0] not in EXCLUDED],
-        "irradiated only": [r for r in rows if r[0] not in EXCLUDED and r[1] > 0],
-        "natural + 20-80 Gy": [r for r in rows if r[0] not in EXCLUDED and r[1] <= 80],
+        "all aliquots": ok,
+        "irradiated only": [r for r in ok if r[1] > 0],
+        "up to 80 Gy": [r for r in ok if r[1] <= 80],
     }
+    sel = {k: v for k, v in sel.items() if len(v) >= 3}
     return {name: fit_dose_response([r[1] for r in rr], [r[2] for r in rr], "LIN", sigma=[r[3] for r in rr],
                                     De_min=-np.inf) for name, rr in sel.items()}
 
@@ -170,6 +179,8 @@ def main():
     ap.add_argument("--window-G", type=float, default=100.0, help="intensity window width (G)")
     ap.add_argument("--center-g", type=float, default=2.0023, help="g-value at the window centre")
     ap.add_argument("--no-repeats", action="store_true", help="use only the main spectrum of each aliquot")
+    ap.add_argument("--exclude-undetected", type=float, metavar="ALPHA",
+                    help="leave out aliquots whose signal is not detected at this false-alarm level")
     ap.add_argument("--epraya", action="store_true", help="simulated template (needs EPRAYA)")
     ap.add_argument("--plot", type=Path, help="save a figure")
     a = ap.parse_args()
@@ -177,7 +188,10 @@ def main():
     window = IntensityWindow(a.window_G, "G", center_g=a.center_g)
     rows, shown = measure_series(a.folder, window, repeats=not a.no_repeats, epraya=a.epraya)
     print()
-    fits = fit_selections(rows)
+    if a.exclude_undetected is not None:
+        out = [f"{r[1]:.0f} Gy" for r in rows if r[4].detected(a.exclude_undetected) is False]
+        print(f"not detected at {a.exclude_undetected:g}, left out: {', '.join(out) or 'none'}")
+    fits = fit_selections(rows, a.exclude_undetected)
     for name, f in fits.items():
         print(f"{name:24s} De = {f.De:6.1f} ± {f.De_sigma:5.1f} Gy   chi2_red = {f.chi2_red:.1f}")
 
@@ -196,7 +210,7 @@ def main():
         for f, d, A, s, _ in rows:
             ax2.errorbar(d, A, s, fmt="o", color="C3" if f in EXCLUDED else "k", ms=4)
         x = np.linspace(-60, 200, 10)
-        for (name, fit), c in zip(fits.items(), ("C0", "C1", "C2"), strict=True):
+        for (name, fit), c in zip(fits.items(), ("C0", "C1", "C2"), strict=False):
             ax2.plot(x, fit.predict(x), color=c, label=f"{name}: De = {fit.De:.0f} ± {fit.De_sigma:.0f} Gy")
         ax2.axhline(0, color="0.5", lw=0.5)
         ax2.set_xlabel("added dose (Gy)")

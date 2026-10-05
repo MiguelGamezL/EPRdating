@@ -126,6 +126,64 @@ class ComponentBasis:
                 best = (chi, float(sh), A, x)
         return best[1:]
 
+    def _best_many(self, Y: np.ndarray, shifts: np.ndarray, nonnegative: bool) -> np.ndarray:
+        """Coefficients of the best shift for each row of ``Y``. Unconstrained
+        fits are done for all rows at once, one pseudo-inverse per shift."""
+        if nonnegative:
+            return np.array([self._best(y, shifts, True)[2] for y in Y])
+        best_chi = np.full(len(Y), np.inf)
+        best_x = None
+        for sh in shifts:
+            M = self._matrix(float(sh))
+            A = M if self._poly is None else np.hstack([M, self._poly])
+            X = np.linalg.pinv(A) @ Y.T  # (n_params, n_rows)
+            chi = np.sum((Y.T - A @ X) ** 2, axis=0)
+            if best_x is None:
+                best_x = X.T.copy()
+                best_chi = chi
+            else:
+                better = chi < best_chi
+                best_x[better] = X.T[better]
+                best_chi = np.where(better, chi, best_chi)
+        return best_x
+
+    def _shift_grid(self, max_shift: float, shift_step: float | None) -> np.ndarray:
+        if max_shift <= 0:
+            return np.array([0.0])
+        step = shift_step or float(np.median(np.diff(self.B)))
+        n = int(np.floor(max_shift / step + 1e-9))
+        return step * np.arange(-n, n + 1)  # symmetric, and includes zero
+
+    def null_amplitudes(self, noise, n_noise: int = 300, max_shift: float = 0.0,
+                        shift_step: float | None = None, nonnegative: bool = False,
+                        seed: int | None = 0) -> np.ndarray:
+        """Amplitudes fitted to signal-free noise alone, ``(n_noise, n_components)``.
+
+        ``noise`` is either a signal-free stretch, from which ``n_noise``
+        blocks are drawn (as in :meth:`fit`), or a 2-D array of noise
+        realisations on this grid (one per row), each fitted with the same
+        shift search. Their distribution is what the fit returns when there is no
+        signal: with a shift search it is not centred on zero for one sign,
+        because the search finds the place where the noise looks most like
+        the component. Compare a measured amplitude with it to decide whether
+        a signal is detected.
+        """
+        noise = np.asarray(noise, float)
+        shifts = self._shift_grid(max_shift, shift_step)
+        nc = len(self.names)
+        if noise.ndim == 2:
+            if noise.shape[1] != self.B.size:
+                raise ValueError("noise realisations must be sampled on the basis grid")
+            blocks = noise
+        else:
+            if noise.size < self.B.size:
+                raise ValueError("noise stretch must be at least as long as the spectrum")
+            rng = np.random.default_rng(seed)
+            starts = rng.integers(0, noise.size - self.B.size + 1, n_noise)
+            blocks = np.array([noise[i:i + self.B.size] for i in starts])
+        blocks = blocks - blocks.mean(axis=1, keepdims=True)
+        return self._best_many(blocks, shifts, nonnegative)[:, :nc]
+
     def fit(self, spectrum, nonnegative: bool = True, max_shift: float = 0.0,
             shift_step: float | None = None, noise=None, n_noise: int = 300,
             seed: int | None = 0) -> DeconvolutionResult:
@@ -138,7 +196,8 @@ class ComponentBasis:
             ``±max_shift`` mT is searched on a grid (step ``shift_step``,
             default one field step) and the best one kept.
         noise : optional signal-free stretch of the same spectrum (baseline
-            corrected, same field step), at least as long as the fit window.
+            corrected, same field step), at least as long as the fit window,
+            or a 2-D array of noise realisations on the basis grid.
             The errors are then obtained by noise injection: ``n_noise``
             blocks of it are added to the fitted model and the fit, shift
             search included, is repeated. This captures the correlation of
@@ -154,12 +213,7 @@ class ComponentBasis:
         y = np.asarray(spectrum, float)
         if y.shape != self.B.shape:
             raise ValueError("spectrum must be sampled on the basis field grid")
-        if max_shift > 0:
-            step = shift_step or float(np.median(np.diff(self.B)))
-            n = int(np.floor(max_shift / step + 1e-9))
-            shifts = step * np.arange(-n, n + 1)  # symmetric, and includes zero
-        else:
-            shifts = np.array([0.0])
+        shifts = self._shift_grid(max_shift, shift_step)
         shift, A, x = self._best(y, shifts, nonnegative)
         nc = len(self.names)
         fitted = A @ x
@@ -170,14 +224,18 @@ class ComponentBasis:
             err = np.sqrt(np.diag(_param_covariance(np.linalg.pinv(A), acov)))[:nc]
         else:
             noise = np.asarray(noise, float)
-            if noise.size < y.size:
-                raise ValueError("noise stretch must be at least as long as the spectrum")
-            rng = np.random.default_rng(seed)
-            draws = np.empty((n_noise, nc))
-            for k in range(n_noise):
-                i = rng.integers(0, noise.size - y.size + 1)
-                blk = noise[i:i + y.size]
-                draws[k] = self._best(fitted + (blk - blk.mean()), shifts, nonnegative)[2][:nc]
+            if noise.ndim == 2:  # ready-made noise realisations
+                if noise.shape[1] != y.size:
+                    raise ValueError("noise realisations must be sampled on the basis grid")
+                blocks = noise
+            else:
+                if noise.size < y.size:
+                    raise ValueError("noise stretch must be at least as long as the spectrum")
+                rng = np.random.default_rng(seed)
+                starts = rng.integers(0, noise.size - y.size + 1, n_noise)
+                blocks = np.array([noise[i:i + y.size] for i in starts])
+            blocks = blocks - blocks.mean(axis=1, keepdims=True)
+            draws = self._best_many(fitted + blocks, shifts, nonnegative)[:, :nc]
             err = draws.std(axis=0, ddof=1)
         return DeconvolutionResult(
             amplitudes=dict(zip(self.names, map(float, x[:nc]))),

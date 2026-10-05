@@ -91,6 +91,18 @@ intensity(s, "peak_to_peak"), intensity(s, "t1_b2"), intensity(s, "double_integr
   intensity is recomputed. This accounts for the noise correlation of the
   time constant and for the shift search, for every method.
 
+**Is there a signal at all?** A template fit that searches the field
+position finds, in pure noise, the place where the noise looks most like the
+signal, and returns a positive amplitude: for weak spectra the intensity is
+inflated. `intensity` therefore also fits the template, with the same shift
+search, to 1000 noise realisations with the spectrum of the signal-free sweep
+(`n_null`), and reports `r.p_noise`, the probability that noise alone gives
+at least the measured amplitude. `r.detected(0.01)` is False when the signal
+is not detected at that level; such an aliquot measures mostly the noise.
+In synthetic noise-only spectra, 5 % fall below `p_noise = 0.05`, as they
+should. Decide the level before looking at the dose response, and apply it
+to every aliquot (`examples/dose_series_dat.py --exclude-undetected 0.01`).
+
 The lower-level `ComponentBasis` fits several components at once
 (e.g. axial and orthorhombic CO2⁻, native signal) on any field grid.
 
