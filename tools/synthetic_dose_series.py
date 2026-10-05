@@ -17,6 +17,11 @@ all aliquots, leaving out the natural, or leaving out the aliquots whose
 signal is not detected at 1 %.
 
     python tools/synthetic_dose_series.py M18_FOLDER [N_SERIES]
+    python tools/synthetic_dose_series.py M18_FOLDER [N_SERIES] --strategies
+
+``--strategies`` compares measurement designs (more scans, less inter-aliquot
+scatter, more aliquots or naturals, a wider dose range, a single aliquot) by
+the spread of the De they give for a true De of 30 Gy.
 
 The M18 spectra (not in the repository) provide the line shape and the noise.
 """
@@ -117,7 +122,57 @@ def run(De, cv, natural_noise, n, seed):
     return rows, nat_gt_20 / n, nat_detected / n, np.median(nat_bias)
 
 
+def design(rng, De, doses, cv, noise, nat_noise):
+    """Series with any doses; ``noise`` scales the noise of the irradiated
+    aliquots (0.5 = 16 scans against 4), ``nat_noise`` that of the naturals."""
+    out = []
+    for D in doses:
+        A = GAIN * SLOPE * (D + De) * (1 + cv * rng.standard_normal())
+        shape = np.interp(B, B_t + rng.normal(0, SHIFT_SD), y_t)
+        y = 3.6e2 + A * shape + make_noise(rng, factor=nat_noise if D == 0 else noise)
+        out.append(Spectrum(B=B, scans=y[None, :] / SCALE, freq_GHz=F, power_mW=19.0))
+    return out
+
+
+def study(name, doses, cv, noise=1.0, nat_noise=2.5, De=30.0, n=150, seed=1):
+    rng = np.random.default_rng(seed)
+    doses = np.asarray(doses, float)
+    est, err = [], []
+    for _ in range(n):
+        res = [intensity(s, template=(B_t, y_t), max_shift=0.6, n_noise=100, n_null=5)
+               for s in design(rng, De, doses, cv, noise, nat_noise)]
+        v = np.array([r.value for r in res]) * SCALE / GAIN
+        e = np.array([r.sigma for r in res]) * SCALE / GAIN
+        f = fit_dose_response(doses, v, "LIN", sigma=e, De_min=-np.inf)
+        est.append(f.De)
+        err.append(f.De_sigma)
+    q16, q50, q84 = np.quantile(est, [0.16, 0.5, 0.84])
+    print(f"{name:52s} De {q50:5.1f}  spread ±{(q84 - q16) / 2:5.1f} Gy  "
+          f"typical error {np.median(err):5.1f} Gy", flush=True)
+
+
+def strategies(n):
+    d = np.arange(0, 181, 20.0)
+    print(f"true De = 30 Gy, {n} series per design; spread = half the 16-84 % range of the De\n")
+    study("as M18 (30 % scatter, natural 1 scan)", d, 0.30, n=n)
+    study("natural with 4 scans", d, 0.30, nat_noise=1.0, n=n)
+    study("3 naturals", np.r_[0, 0, 0, d[1:]], 0.30, n=n)
+    study("16 scans for every aliquot", d, 0.30, noise=0.5, nat_noise=0.5, n=n)
+    study("20 aliquots, 0-190 Gy", np.arange(0, 191, 10.0), 0.30, n=n)
+    study("doses to 360 Gy", np.arange(0, 361, 40.0), 0.30, n=n)
+    study("scatter 15 %", d, 0.15, n=n)
+    study("scatter 5 %", d, 0.05, n=n)
+    study("single aliquot (3 %), 4 scans", d, 0.03, nat_noise=1.0, n=n)
+    study("scatter 15 % + 16 scans + 3 naturals", np.r_[0, 0, 0, d[1:]], 0.15, noise=0.5, nat_noise=0.5, n=n)
+    study("scatter 5 % + 16 scans", d, 0.05, noise=0.5, nat_noise=0.5, n=n)
+    study("single aliquot (3 %) + 16 scans", d, 0.03, noise=0.5, nat_noise=0.5, n=n)
+
+
 if __name__ == "__main__":
+    if "--strategies" in sys.argv:
+        args = [a for a in sys.argv[1:] if a != "--strategies"]
+        strategies(int(args[1]) if len(args) > 1 else 150)
+        sys.exit()
     n = int(sys.argv[2]) if len(sys.argv) > 2 else 200
     print(f"{n} synthetic series per case; De estimates: median, 16-84 % range, "
           "coverage of the 1-sigma error, median chi2_red\n")

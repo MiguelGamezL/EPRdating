@@ -104,8 +104,8 @@ should.
 
 Use `p_noise` as a flag, not as a rule to drop points from the dose
 response. In synthetic M18-like series (`tools/synthetic_dose_series.py`),
-leaving out the aliquots not detected at 1 % biased De upwards (+15 to +40 %
-for De = 20 Gy): the weak aliquots that survive are those whose noise
+leaving out the aliquots not detected at 1 % biased De upwards (+15 to +60 %
+for De = 20 Gy, up to +8 % for 50 Gy): the weak aliquots that survive are those whose noise
 happened to be positive. Keeping every aliquot, or leaving out only the
 natural, recovered De without bias, because a noisy weak point carries a
 large error and little weight. In those series the natural came out above
