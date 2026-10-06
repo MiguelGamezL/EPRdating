@@ -19,9 +19,9 @@ FREQ = 9.43
 DE_TRUE = 40.0
 
 
-def write_dat(path, amp, rng, nscans=4, shift_mT=0.0):
-    """A .dat/.par pair in the UNAL format (field in G, 512 points, 50 mT)."""
-    BG = np.linspace(3105.0, 3605.0, 512)
+def write_dat(path, amp, rng, nscans=4, shift_mT=0.0, n=512, sweep_G=500.0):
+    """A .dat/.par pair in the UNAL format (field in G, by default 512 points over 50 mT)."""
+    BG = np.linspace(3355.0 - sweep_G / 2, 3355.0 + sweep_G / 2, n)
     B = BG / 10
     c = field_for_g(2.0006, FREQ) + shift_mT
     x = (B - c) / (0.5 * np.sqrt(3) / 2)
@@ -35,7 +35,7 @@ def write_dat(path, amp, rng, nscans=4, shift_mT=0.0):
             k += 1
     path.write_text("\n".join(lines))
     path.with_suffix(".par").write_text(
-        f"N : 512\nCF : 3355.0\nCF_ : 3355.0\nSW : 500.0\nNscans : {nscans}\nFreq : {FREQ}\nRG : 30\n")
+        f"N : {n}\nCF : 3355.0\nCF_ : 3355.0\nSW : {sweep_G}\nNscans : {nscans}\nFreq : {FREQ}\nRG : 30\n")
     return path
 
 
@@ -186,3 +186,19 @@ def test_upload_values_of_ipywidgets_7_and_8(series):
         de.pool.add_bytes(p.with_suffix(".par").name, p.with_suffix(".par").read_bytes())
     de.load(list(de.pool.paths.values()))
     assert len(de.spectra) == 7 and all(s.freq_GHz == 9.43 for s in de.spectra.values())
+
+
+def test_wide_sweep_natural_is_bridged(tmp_path):
+    rng = np.random.default_rng(8)
+    paths = [write_dat(tmp_path / f"S_{d}Gy.dat", 0.004 * (d + DE_TRUE), rng) for d in (50, 100, 150, 200, 250)]
+    wide = {"n": 4096, "sweep_G": 5000.0}
+    paths.append(write_dat(tmp_path / "S_0Gy_wide.dat", 0.004 * DE_TRUE * 1.3, rng, nscans=8, **wide))
+    paths.append(write_dat(tmp_path / "S_250Gy_wide.dat", 0.004 * (250 + DE_TRUE) * 1.3, rng, nscans=8, **wide))
+    de = app().de
+    de.load(paths)
+    de.group_by_dose()
+    res = {r["aliquot"]: r for r in de.compute()}
+    assert res["0 Gy"]["scale"].startswith("×")  # the wide-sweep natural is rescaled
+    assert "factor" in de.status.value
+    assert res["250 Gy"]["n_repeats"] == 1  # the bridge aliquot keeps its main-sweep measurement
+    assert abs(de.drc.De - DE_TRUE) < 3 * de.drc.De_sigma

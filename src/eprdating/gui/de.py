@@ -86,6 +86,8 @@ class DePanel:
                                      layout=w.Layout(width="290px"))
         self.max_shift = w.FloatText(value=0.6, description="Shift search (mT)", style=STYLE,
                                      layout=w.Layout(width="190px"))
+        self.keep_mT = w.FloatText(value=30.0, description="Sweep kept around the centre (± mT, 0 = all)",
+                                   style=STYLE, layout=w.Layout(width="340px"))
         self.freq = w.FloatText(value=0.0, description="Frequency for files without one (GHz)", style=STYLE,
                                 layout=w.Layout(width="320px"))
         self.compute_btn = button("Compute intensities", "play", primary=True, width="200px")
@@ -120,7 +122,7 @@ class DePanel:
             w.HBox([self.width, self.unit, self.center_g]),
             w.HBox([self.method, self.n_strong]),
             w.HBox([self.ref_power, self.max_shift]),
-            self.freq,
+            w.HBox([self.freq, self.keep_mT]),
             self.compute_btn, self.status, self.spectra_out,
             h("3. Dose response"),
             self.points_box,
@@ -238,6 +240,11 @@ class DePanel:
                     raise ValueError(f"{name} has no microwave frequency; give it in 'Frequency for files "
                                      "without one'")
                 s = dataclasses.replace(s, freq_GHz=float(self.freq.value))
+            half = float(self.keep_mT.value)
+            if half > 0:  # a wide survey sweep is cut to the region of the dating signal
+                c = self.window().center(s.freq_GHz)
+                if s.B.min() < c - half or s.B.max() > c + half:
+                    s = s.window(c - half, c + half)
             g["files"].append(name)
             g["spectra"].append(s)
             g["mass"] = g["mass"] or float(r["mass"].value)
@@ -245,32 +252,82 @@ class DePanel:
             raise ValueError("at least two aliquots are needed")
         return groups
 
+    @staticmethod
+    def _sweep(s) -> tuple[int, float]:
+        return s.B.size, round(float(np.median(np.diff(s.B))), 4)
+
     def compute(self) -> list[dict]:
-        """Intensity of every aliquot (repeats averaged), then a fit."""
+        """Intensity of every aliquot (repeats averaged), then a fit.
+
+        Spectra recorded with another sweep than most (e.g. a wide survey
+        sweep of the natural) are measured on their own. An aliquot measured
+        both ways bridges the two: the ratio of its intensities puts the
+        other-sweep aliquots on the scale of the main sweep.
+        """
         groups = self._groups()
         window = self.window()
         used = [s for g in groups.values() for s in g["spectra"]]
         ref = float(self.ref_power.value) or next((s.power_mW for s in used if s.power_mW), None)
         method = self.method.value
-        self.template = empirical_template(used, window, int(self.n_strong.value), float(self.max_shift.value)) \
+        sweeps = [self._sweep(s) for s in used]
+        main = max(set(sweeps), key=sweeps.count)
+        main_spectra = [s for s in used if self._sweep(s) == main]
+        template = empirical_template(main_spectra, window, int(self.n_strong.value), float(self.max_shift.value)) \
             if method == "template" else None
-        steps = {s.B.size for s in used}
+        shift = float(self.max_shift.value)
+
+        def measure(spectra, mass):
+            kw = {"mass_mg": mass} if mass > 0 else {}
+            return combined_intensity(spectra, method, template, window, ref_power_mW=ref, max_shift=shift, **kw)
+
         old = {p["aliquot"]: p["fit"].value for p in self.points}
-        self.points = []
+        points, bridges = [], {}
         for label, g in sorted(groups.items(), key=lambda kv: kv[1]["dose"]):
-            kw = {"mass_mg": g["mass"]} if g["mass"] > 0 else {}
-            r = combined_intensity(g["spectra"], method, self.template, window, ref_power_mW=ref,
-                                   max_shift=float(self.max_shift.value), **kw)
-            self.points.append({"aliquot": label, "dose": g["dose"], "files": g["files"], "result": r,
-                                "fit": w.Checkbox(value=old.get(label, True), indent=False,
-                                                  layout=w.Layout(width="40px"))})
+            by_sweep: dict = {}
+            for name, sp in zip(g["files"], g["spectra"], strict=True):
+                by_sweep.setdefault(self._sweep(sp), []).append((name, sp))
+            if len(by_sweep) > 2 or (len(by_sweep) == 2 and main not in by_sweep):
+                raise ValueError(f"aliquot {label!r} mixes sweeps that cannot be related")
+            key = main if main in by_sweep else next(iter(by_sweep))
+            files = [n for n, _ in by_sweep[key]]
+            spectra = [sp for _, sp in by_sweep[key]]
+            r = measure(spectra, g["mass"])
+            for other, items in by_sweep.items():
+                if other != key:  # measured both ways: a bridge between the sweeps
+                    ro = measure([sp for _, sp in items], g["mass"])
+                    k = r.value / ro.value
+                    sk = abs(k) * float(np.hypot(r.sigma / r.value, ro.sigma / ro.value))
+                    bridges.setdefault(other, []).append((k, sk, label))
+            points.append({"aliquot": label, "dose": g["dose"], "files": files, "spectra": spectra,
+                           "sweep": key, "result": r, "note": "",
+                           "fit": w.Checkbox(value=old.get(label, True), indent=False,
+                                             layout=w.Layout(width="40px"))})
+        notes, kind = [], "ok"
+        for p in points:
+            if p["sweep"] == main:
+                continue
+            if p["sweep"] not in bridges:
+                notes.append(f"{p['aliquot']} was measured with another sweep and no aliquot links the two; "
+                             "its intensity may be on another scale.")
+                kind = "warn"
+                continue
+            ks = np.array([b[0] for b in bridges[p["sweep"]]])
+            sks = np.array([b[1] for b in bridges[p["sweep"]]])
+            wts = 1 / sks**2
+            k, sk = float(np.sum(wts * ks) / wts.sum()), float(1 / np.sqrt(wts.sum()))
+            r = p["result"]
+            value = r.value * k
+            sigma = float(np.hypot(r.sigma * k, r.value * sk))
+            p["result"] = dataclasses.replace(r, value=value, sigma=sigma)
+            p["note"] = f"×{k:.3f}±{sk:.3f}"
+            notes.append(f"{p['aliquot']} put on the main sweep with the factor {k:.3f} ± {sk:.3f} from "
+                         f"{', '.join(b[2] for b in bridges[p['sweep']])}.")
+        self.template = template
+        self.points = points
         self._render_points()
-        self._plot_spectra(groups, window, ref)
-        note = f"{len(self.points)} aliquots, window {window.describe(used[0].freq_GHz)}."
-        if len(steps) > 1:
-            note += (" Spectra with different sweeps are measured separately; check that their"
-                     " intensities are on the same scale.")
-        self.status.value = message(note, "warn" if len(steps) > 1 else "ok")
+        self._plot_spectra(window, ref)
+        note = f"{len(points)} aliquots, window {window.describe(used[0].freq_GHz)}. " + " ".join(notes)
+        self.status.value = message(note, kind)
         self.fit()
         return self.results()
 
@@ -279,6 +336,7 @@ class DePanel:
         for p in self.points:
             r = p["result"]
             out.append({"aliquot": p["aliquot"], "dose_Gy": p["dose"], "files": " + ".join(p["files"]),
+                        "scale": p["note"],
                         "intensity": r.value, "sigma": r.sigma, "p_noise": r.p_noise, "n_repeats": r.n_repeats,
                         "chi2_red": r.chi2_red, "shift_mT": r.shift_mT, "in_fit": bool(p["fit"].value)})
         return out
@@ -295,6 +353,8 @@ class DePanel:
             r = p["result"]
             flag = " ⚠" if r.p_noise is not None and r.p_noise >= 0.01 else ""
             rep = f"{r.n_repeats}, χ²ν {r.chi2_red:.2f}" if r.n_repeats > 1 else "1"
+            if p["note"]:
+                rep += f"  {p['note']}"
             cells = [p["fit"], w.Label(p["aliquot"]), w.Label(f"{p['dose']:g}"),
                      w.Label(f"{r.value * f:.4g} ± {r.sigma * f:.2g}"),
                      w.Label("—" if r.p_noise is None else f"{r.p_noise:.3f}{flag}"), w.Label(rep)]
@@ -305,14 +365,13 @@ class DePanel:
                            "upwards, so keep them unless the measurement failed.</small>"))
         self.points_box.children = rows
 
-    def _plot_spectra(self, groups, window, ref) -> None:
+    def _plot_spectra(self, window, ref) -> None:
         from .. import plot
         from ..spectra import combine_spectra
 
         spectra, fits, labels = [], [], []
         for p in self.points:
-            g = groups[p["aliquot"]]
-            c = combine_spectra(g["spectra"], window, ref_power_mW=ref).spectrum
+            c = combine_spectra(p["spectra"], window, ref_power_mW=ref).spectrum
             m = window.mask(c.B, c.freq_GHz)
             spectra.append((c.B[m], c.y[m]))
             r = p["result"]
@@ -358,7 +417,7 @@ class DePanel:
             "window": {"width": self.width.value, "unit": self.unit.value, "center_g": self.center_g.value},
             "method": self.method.value, "template_strongest": self.n_strong.value,
             "ref_power_mW": self.ref_power.value, "max_shift_mT": self.max_shift.value,
-            "frequency_fallback_GHz": self.freq.value,
+            "frequency_fallback_GHz": self.freq.value, "sweep_kept_mT": self.keep_mT.value,
             "fit": {"model": self.model.value, "max_dose_Gy": self.max_dose.value,
                     "De_may_be_negative": self.negative.value,
                     "points": {p["aliquot"]: bool(p["fit"].value) for p in self.points}},
