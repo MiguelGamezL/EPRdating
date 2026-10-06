@@ -227,6 +227,51 @@ def intensity(
     return Intensity(float(value), sigma, method, bounds)
 
 
+def empirical_template(
+    spectra: Sequence[Spectrum],
+    window: IntensityWindow = DEFAULT_WINDOW,
+    n_strongest: int = 3,
+    max_shift: float = 0.6,
+) -> tuple[np.ndarray, np.ndarray]:
+    """Line-shape template from the strongest spectra of a series.
+
+    Each spectrum is normalised to the power and gain of the first, a cubic
+    baseline fitted outside the window is removed, and the ``n_strongest``
+    by peak-to-peak inside the window are averaged after aligning them in
+    field (:func:`~eprdating.spectra.preprocess.aligned_average`). Only
+    spectra on the same field grid as the strongest one are used. Returns
+    ``(B, shape)``, ready for :func:`intensity` (``template=(B, shape)``).
+    """
+    from .preprocess import aligned_average
+
+    spectra = list(spectra)
+    if not spectra:
+        raise ValueError("no spectra for the template")
+    p_ref = spectra[0].power_mW
+    prepared = []
+    for s in spectra:
+        B = np.asarray(s.B, float)
+        y = np.asarray(s.y, float)
+        if p_ref is not None and s.power_mW is not None:
+            y = normalise(y, power_mW=s.power_mW, ref_power_mW=p_ref)
+        if s.gain is not None:
+            y = normalise(y, gain=s.gain)
+        m = window.mask(B, s.freq_GHz)
+        y = subtract_baseline(B, y, exclude=(B[m].min(), B[m].max()), order=3)
+        prepared.append((B, y, m, float(np.ptp(y[m]))))
+    order = sorted(range(len(prepared)), key=lambda i: -prepared[i][3])
+    B0 = prepared[order[0]][0]
+
+    def same_grid(B):
+        return B.size == B0.size and np.allclose(B, B0, atol=0.25 * float(np.median(np.diff(B0))))
+
+    chosen = [i for i in order if same_grid(prepared[i][0])][:max(1, n_strongest)]
+    m0 = prepared[chosen[0]][2]
+    avg, _ = aligned_average(B0, [prepared[i][1] for i in chosen], (B0[m0].min(), B0[m0].max()),
+                             max_shift=max_shift)
+    return B0, avg
+
+
 def combine_intensities(intensities: Sequence[Intensity]) -> Intensity:
     """Weighted mean of repeated intensities of the same aliquot.
 
@@ -257,4 +302,4 @@ def combine_intensities(intensities: Sequence[Intensity]) -> Intensity:
                      n_repeats=len(items), chi2_red=chi2, repeats=items)
 
 
-__all__ = ["METHODS", "Intensity", "combine_intensities", "intensity"]
+__all__ = ["METHODS", "Intensity", "combine_intensities", "empirical_template", "intensity"]

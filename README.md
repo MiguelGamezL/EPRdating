@@ -98,6 +98,22 @@ print(sample.age_mc(n=2000, seed=42).summary())
 ```
 
 Every input accepts a number, a `(value, sigma)` tuple or a `Value`.
+
+### Interface
+
+For Jupyter and Google Colab, an interactive interface runs the whole chain
+without code: load spectra, set the doses and the intensity window, tick
+the points of the dose response, choose the model, analyse the HPGe spectra
+of the sediment and compute the age. The De and the sediment flow into the
+age tab; every tab exports its results and the settings that reproduce them.
+
+```python
+%pip install "eprdating[gui]"
+from eprdating.gui import app
+app()
+```
+
+<img src="https://raw.githubusercontent.com/MiguelGamezL/EPRdating/main/docs/img/gui.png" alt="EPRdating interface: equivalent-dose tab" width="640">
 Units: Gy, Gy/ka, ka, ppm (U, Th), % (K), mT, GHz.
 
 **Documentation:** [overview](https://github.com/MiguelGamezL/EPRdating/blob/main/docs/index.md) · [user guide](https://github.com/MiguelGamezL/EPRdating/blob/main/docs/guide.md) ·

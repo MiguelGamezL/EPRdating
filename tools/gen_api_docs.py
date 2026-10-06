@@ -42,6 +42,7 @@ PAGES = [
     ("eprdating.gamma.spectrum", "Gamma: calibration", None),
     ("eprdating.gamma.comparative", "Gamma: comparative method", None),
     ("eprdating.plot", "Plotting", None),
+    ("eprdating.gui", "Interface", None),
 ]
 
 _ROLE = re.compile(r":(?:func|class|mod|meth|attr|data):`~?([^`]+)`")

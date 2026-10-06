@@ -61,3 +61,4 @@ nav:
       - "Gamma: calibration": api/gamma.spectrum.md
       - "Gamma: comparative method": api/gamma.comparative.md
       - Plotting: api/plot.md
+      - Interface: api/gui.md

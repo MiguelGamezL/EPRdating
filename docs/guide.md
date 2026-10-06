@@ -15,6 +15,31 @@ Units everywhere: field in mT, frequency in GHz, dose in Gy, dose rate in
 Gy/ka, age in ka, U and Th in µg/g (ppm), K in %. Any input can be a number,
 a `(value, sigma)` tuple or a `Value`.
 
+### Interface (no code)
+
+In Jupyter or Google Colab:
+
+```python
+%pip install "eprdating[gui]"
+from eprdating.gui import app
+a = app()
+a
+```
+
+Three tabs. **Equivalent dose**: upload the spectra (or give a folder), set
+the added dose of each file and give the same aliquot label to repeated
+measurements, choose the intensity window, method and template, compute,
+untick points if needed, choose the model and fit. **Sediment**: upload the
+HPGe spectra, check the roles guessed from the file names (sample,
+background, IAEA references), give the masses and the water content, and
+analyse. **Age**: the De and the sediment arrive from the other tabs; fill
+the tooth and site and compute the nominal and Monte Carlo ages. Each tab
+has a *Prepare downloads* button for its results and its settings (JSON),
+which record every choice. The panels are also objects (`a.de`, `a.gamma`,
+`a.age`) that can be driven from code.
+
+![The equivalent-dose tab](img/gui.png)
+
 ---
 
 ## 1. Equivalent dose from EPR spectra

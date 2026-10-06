@@ -25,3 +25,4 @@ Generated from the docstrings by `tools/gen_api_docs.py`.
 - [Gamma: calibration](gamma.spectrum.md) — `eprdating.gamma.spectrum`
 - [Gamma: comparative method](gamma.comparative.md) — `eprdating.gamma.comparative`
 - [Plotting](plot.md) — `eprdating.plot`
+- [Interface](gui.md) — `eprdating.gui`

@@ -37,7 +37,7 @@ the other methods get no error (`nan`).
 `combine_intensities` averages intensities of the same aliquot that
 cannot be averaged as spectra (e.g. different sweep widths).
 
-**Contents:** [`METHODS`](#methods), [`Intensity`](#intensity), [`combine_intensities`](#combine_intensities), [`intensity`](#intensity)
+**Contents:** [`METHODS`](#methods), [`Intensity`](#intensity), [`combine_intensities`](#combine_intensities), [`empirical_template`](#empirical_template), [`intensity`](#intensity)
 
 ### `METHODS`
 
@@ -75,6 +75,19 @@ repeats scatter more than their errors (repositioning in the cavity,
 drift). Use it for repeats that cannot be averaged as spectra; otherwise
 `combined_intensity` is better for weak
 signals.
+
+### `empirical_template`
+
+`empirical_template(spectra: Sequence[Spectrum], window: IntensityWindow = IntensityWindow(width=100.0, unit='G', center_g=2.0023, center_mT=None), n_strongest: int = 3, max_shift: float = 0.6) -> tuple[np.ndarray, np.ndarray]`
+
+Line-shape template from the strongest spectra of a series.
+
+Each spectrum is normalised to the power and gain of the first, a cubic
+baseline fitted outside the window is removed, and the `n_strongest`
+by peak-to-peak inside the window are averaged after aligning them in
+field (`aligned_average`). Only
+spectra on the same field grid as the strongest one are used. Returns
+`(B, shape)`, ready for `intensity` (`template=(B, shape)`).
 
 ### `intensity`
 

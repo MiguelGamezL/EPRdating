@@ -25,7 +25,7 @@ from .intensity import (
     t1_b2_amplitude,
 )
 from .io import Spectrum, read_columns, read_dat, read_epr, read_par, read_series
-from .measure import Intensity, combine_intensities, intensity
+from .measure import Intensity, combine_intensities, empirical_template, intensity
 from .preprocess import (
     aligned_average,
     noise_sigma,
@@ -49,6 +49,7 @@ __all__ = [
     "combined_intensity",
     "component_vs_dose",
     "double_integral",
+    "empirical_template",
     "field_for_g",
     "g_for_field",
     "intensity",
