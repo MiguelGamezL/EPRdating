@@ -14,7 +14,8 @@
   `read_epr` and the interface. Repeats whose grids differ by a few points
   are combined. Checked on the public Calio dose series (Hakim et al. 2025):
   the published De is reproduced once the 8000 and 15 000 Gy labels of the
-  archive are exchanged (`docs/validation.md`).
+  archive are exchanged (`docs/validation.md`). The Calio spectra are
+  included (`tests/data/calio_p4`, CC-BY 4.0) and tested (`tests/test_calio.py`).
 - Double integral (`intensity(..., "double_integral")`): derivative baseline
   fitted to the sweep within one window width on each side of the window,
   absorption baseline through the outer 20 % of the window, noise injected

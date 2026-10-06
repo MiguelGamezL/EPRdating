@@ -172,8 +172,12 @@ to recover the published value (2943 Gy without 15 000 Gy, 1793 Gy without
 the template, T1-B2 and double-integral intensities give 2110-2273 Gy:
 the published 2267 ± 99 Gy is reproduced. The archive most likely has the
 8000 and 15 000 Gy folders swapped (the published analysis evidently used
-the right doses). The data are not in this repository; the analysis is
-`tests/validation/calio_ms5000.py` with the path of the unzipped archive.
+the right doses). The spectra used are in `tests/data/calio_p4` (CC-BY 4.0,
+with attribution; see its README), `tests/test_calio.py` checks the result
+on every run of the tests, and `python tests/validation/calio_ms5000.py`
+prints the full comparison.
+
+![Calio P4 dose response](img/calio_drc.png)
 
 ## Running the validation tests
 

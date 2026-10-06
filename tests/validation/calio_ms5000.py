@@ -1,8 +1,9 @@
 """De of the Calio P4 enamel powder (Hakim et al. 2025, Nature) from its public spectra.
 
-Data: Zenodo 15515771, ``Calio ESR spectra.zip`` (not in this repository).
+Data: Zenodo 15515771, ``Calio ESR spectra.zip`` (CC-BY 4.0). The spectra used
+here are in ``tests/data/calio_p4`` (see its README); the full archive works too.
 
-    python tests/validation/calio_ms5000.py "path/to/Calio ESR spectra"
+    python tests/validation/calio_ms5000.py ["path/to/Calio ESR spectra"]
 
 Prints the peak-to-peak intensities (40 G window around g = 2.000, the three
 rotations of each aliquot averaged) and SSE fits with the doses as labelled
@@ -21,6 +22,7 @@ from eprdating import fit_dose_response
 from eprdating.spectra import IntensityWindow, combined_intensity, empirical_template, read_epr
 
 PUBLISHED = (2267.0, 99.0)
+DATA = Path(__file__).resolve().parents[1] / "data" / "calio_p4"
 WINDOW = IntensityWindow(40, center_g=2.000)
 
 
@@ -58,4 +60,4 @@ def main(folder: Path) -> None:
 
 
 if __name__ == "__main__":
-    main(Path(sys.argv[1]))
+    main(Path(sys.argv[1]) if len(sys.argv) > 1 else DATA)
