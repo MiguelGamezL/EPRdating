@@ -1,7 +1,7 @@
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="docs/img/logo/eprdating_logo_dark.svg">
-    <img src="docs/img/logo/eprdating_logo.svg" alt="EPRdating" width="560">
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/MiguelGamezL/EPRdating/main/docs/img/logo/eprdating_logo_dark.png">
+    <img src="https://raw.githubusercontent.com/MiguelGamezL/EPRdating/main/docs/img/logo/eprdating_logo.png" alt="EPRdating" width="560">
   </picture>
 </p>
 
@@ -57,9 +57,11 @@ validated against both programs run as black boxes.
 ## Install
 
 ```bash
-pip install "eprdating @ git+https://github.com/MiguelGamezL/EPRdating"           # core
-pip install "eprdating[plot] @ git+https://github.com/MiguelGamezL/EPRdating"     # + matplotlib
+pip install eprdating              # core: numpy + scipy
+pip install "eprdating[plot]"      # + matplotlib, for the figures
 ```
+
+The development version: `pip install "eprdating @ git+https://github.com/MiguelGamezL/EPRdating"`.
 
 From a clone of the repository:
 
@@ -98,9 +100,9 @@ print(sample.age_mc(n=2000, seed=42).summary())
 Every input accepts a number, a `(value, sigma)` tuple or a `Value`.
 Units: Gy, Gy/ka, ka, ppm (U, Th), % (K), mT, GHz.
 
-**Documentation:** [overview](docs/index.md) · [user guide](docs/guide.md) ·
-[figures](docs/plotting.md) · [API reference](docs/api/index.md) ·
-[validation](docs/validation.md). Build the site locally with
+**Documentation:** [overview](https://github.com/MiguelGamezL/EPRdating/blob/main/docs/index.md) · [user guide](https://github.com/MiguelGamezL/EPRdating/blob/main/docs/guide.md) ·
+[figures](https://github.com/MiguelGamezL/EPRdating/blob/main/docs/plotting.md) · [API reference](https://github.com/MiguelGamezL/EPRdating/blob/main/docs/api/index.md) ·
+[validation](https://github.com/MiguelGamezL/EPRdating/blob/main/docs/validation.md). Build the site locally with
 `pip install -e '.[docs]' && mkdocs serve`.
 
 See also
