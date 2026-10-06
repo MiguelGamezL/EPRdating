@@ -41,7 +41,7 @@ Inspired by ROSY (Brennan et al. 1997, 1999) and DATA (Grün 2009), written as
 an independent, open implementation from the published equations, and
 validated against both programs run as black boxes.
 
-> **Version 0.1.0** (first release; see `CHANGELOG.md`). Validation (details in
+> **Version 0.1.1** (see `CHANGELOG.md`). Validation (details in
 > `tests/validation/`):
 >
 > | Against | Agreement |

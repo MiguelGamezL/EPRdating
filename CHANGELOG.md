@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.1.1 — 2026-10-06
+
+- Published on PyPI: `pip install eprdating`. Releases on GitHub publish to
+  PyPI automatically (trusted publishing).
+- Tests run on every push (Python 3.10 and 3.13).
+- README renders on PyPI (absolute image and link URLs); Zenodo DOI and
+  how to cite.
+- Quickstart notebook: intensity window, repeated spectra and burial
+  history; opens in Google Colab.
+
 ## 0.1.0 — 2026-10-06
 
 First public release.
