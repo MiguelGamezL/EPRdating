@@ -28,7 +28,9 @@ a
 
 Three tabs. **Equivalent dose**: upload the spectra (or give a folder), set
 the added dose of each file and give the same aliquot label to repeated
-measurements, choose the intensity window, method and template, compute,
+measurements, choose the intensity window (its width in G or mT, and its
+centre as a g value or as a field in G or mT: switching the centre unit
+converts the number with the spectra's frequency), method and template, compute,
 untick points if needed, choose the model and fit. **Sediment**: upload the
 HPGe spectra, check the roles guessed from the file names (sample,
 background, IAEA references), give the masses and the water content, and

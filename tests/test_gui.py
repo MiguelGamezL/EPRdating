@@ -88,7 +88,21 @@ def test_de_tab_from_files_to_age_tab(series):
 
     s = de.settings()
     json.dumps(s)
-    assert s["window"] == {"width": 100.0, "unit": "G", "center_g": 2.0023}
+    assert s["window"] == {"width": 100.0, "unit": "G", "center": 2.0023, "center_as": "g"}
+    # the centre can be given as a field, in G or mT, and keeps its place when the unit changes
+    de.center_mode.value = "G"
+    assert de.center_g.value == pytest.approx(3364.9, abs=0.1)
+    assert de.window().center(FREQ) == pytest.approx(336.49, abs=0.01)
+    de.center_mode.value = "mT"
+    assert de.center_g.value == pytest.approx(336.49, abs=0.01)
+    de.center_g.value = 336.0
+    de.center_mode.value = "g"
+    assert de.center_g.value == pytest.approx(2.0052, abs=1e-4)
+    de.center_mode.value = "G"
+    de.center_g.value = 3360.0
+    assert de.window().bounds(None) == pytest.approx((331.0, 341.0))
+    de.compute_btn.click()
+    assert "331.00-341.00 mT" in de.status.value
     assert s["fit"]["points"]["150 Gy"] is False
     assert de.results_csv().startswith("aliquot,dose_Gy")
     de.export_btn.click()

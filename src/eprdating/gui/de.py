@@ -16,7 +16,14 @@ import numpy as np
 
 from .. import __version__
 from ..doseresponse import fit_dose_response
-from ..spectra import IntensityWindow, combined_intensity, empirical_template, read_epr
+from ..spectra import (
+    IntensityWindow,
+    combined_intensity,
+    empirical_template,
+    field_for_g,
+    g_for_field,
+    read_epr,
+)
 from ..spectra.measure import METHODS
 from ._common import (
     STYLE,
@@ -77,7 +84,11 @@ class DePanel:
 
         self.width = w.FloatText(value=100.0, description="Window width", style=STYLE, layout=w.Layout(width="190px"))
         self.unit = w.Dropdown(options=["G", "mT"], value="G", layout=w.Layout(width="70px"))
-        self.center_g = w.FloatText(value=2.0023, description="centred on g =", style=STYLE,
+        self.center_mode = w.Dropdown(options=["g", "G", "mT"], value="g", description="centred on",
+                                      style=STYLE, layout=w.Layout(width="150px"),
+                                      tooltip="centre given as a g-value or as a field")
+        self.center_mode.observe(self._convert_center, names="value")
+        self.center_g = w.FloatText(value=2.0023, description="=", style={"description_width": "14px"},
                                     layout=w.Layout(width="190px"))
         self.method = w.Dropdown(options=list(METHODS), value="template", description="Intensity", style=STYLE)
         self.n_strong = w.BoundedIntText(value=3, min=1, max=50, description="template: strongest", style=STYLE,
@@ -120,7 +131,7 @@ class DePanel:
                    "and are averaged.</small>"),
             self.files_box, self.group_btn,
             h("2. Intensities"),
-            w.HBox([self.width, self.unit, self.center_g]),
+            w.HBox([self.width, self.unit, self.center_mode, self.center_g]),
             w.HBox([self.method, self.n_strong]),
             w.HBox([self.ref_power, self.max_shift]),
             w.HBox([self.freq, self.keep_mT]),
@@ -220,7 +231,33 @@ class DePanel:
 
     # ---- intensities -----------------------------------------------------
     def window(self) -> IntensityWindow:
-        return IntensityWindow(float(self.width.value), self.unit.value, center_g=float(self.center_g.value))
+        mode, x = self.center_mode.value, float(self.center_g.value)
+        if mode == "g":
+            return IntensityWindow(float(self.width.value), self.unit.value, center_g=x)
+        return IntensityWindow(float(self.width.value), self.unit.value, center_mT=x / 10 if mode == "G" else x)
+
+    def _frequency(self) -> float | None:
+        f = next((s.freq_GHz for s in self.spectra.values() if s.freq_GHz), None)
+        return f or (float(self.freq.value) or None)
+
+    def _convert_center(self, change) -> None:
+        """Keep the same centre when its unit changes (needs a frequency for g ↔ field)."""
+        old, new, x = change["old"], change["new"], float(self.center_g.value)
+        mT = {"G": lambda v: v / 10, "mT": lambda v: v}
+        f = self._frequency()
+        if old == "g":
+            if f is None:
+                return
+            field = field_for_g(x, f)
+        else:
+            field = mT[old](x)
+        if new == "g":
+            if f is None:
+                return
+            value = round(float(g_for_field(field, f)), 5)
+        else:
+            value = round(field * 10 if new == "G" else field, 3)
+        self.center_g.value = value
 
     def _groups(self) -> dict[str, dict]:
         groups: dict[str, dict] = {}
@@ -415,7 +452,8 @@ class DePanel:
             "eprdating": __version__,
             "files": {n: {"dose_Gy": r["dose"].value, "aliquot": r["aliquot"].value,
                           "mass_mg": r["mass"].value, "use": r["use"].value} for n, r in self.rows.items()},
-            "window": {"width": self.width.value, "unit": self.unit.value, "center_g": self.center_g.value},
+            "window": {"width": self.width.value, "unit": self.unit.value,
+                       "center": self.center_g.value, "center_as": self.center_mode.value},
             "method": self.method.value, "template_strongest": self.n_strong.value,
             "ref_power_mW": self.ref_power.value, "max_shift_mT": self.max_shift.value,
             "frequency_fallback_GHz": self.freq.value, "sweep_kept_mT": self.keep_mT.value,
