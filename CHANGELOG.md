@@ -9,6 +9,12 @@
   strongest spectra of a series.
 - Interface: the window centre can be given as a g value or as a field in
   G or mT; *Compare methods* gives De with the four intensity methods.
+- Reader for Freiberg Instruments MS5000 spectra (ESRStudio `.xml`, its
+  `.csv` export, or a folder of runs as scans): `read_ms5000`, also through
+  `read_epr` and the interface. Repeats whose grids differ by a few points
+  are combined. Checked on the public Calio dose series (Hakim et al. 2025):
+  the published De is reproduced once the 8000 and 15 000 Gy labels of the
+  archive are exchanged (`docs/validation.md`).
 - Double integral (`intensity(..., "double_integral")`): derivative baseline
   fitted to the sweep within one window width on each side of the window,
   absorption baseline through the outer 20 % of the window, noise injected

@@ -1,8 +1,8 @@
 """Reading cw-EPR spectra from disk.
 
 :func:`read_epr` reads any supported file: Bruker BES3T and ESP/WinEPR
-(:mod:`eprdating.spectra.bruker`), the ``.dat``/``.par`` pairs described
-below, and plain field/signal columns. All return a :class:`Spectrum` with
+(:mod:`eprdating.spectra.bruker`), Freiberg MS5000 (:mod:`eprdating.spectra.freiberg`),
+the ``.dat``/``.par`` pairs described below, and plain field/signal columns. All return a :class:`Spectrum` with
 the field in mT.
 
 ``.dat``/``.par`` format
@@ -175,13 +175,18 @@ def read_epr(path: str | Path, **kw) -> Spectrum:
     ``.DSC`` / ``.DTA``     Bruker BES3T (Xepr)
     ``.par`` + ``.spc``     Bruker ESP / WinEPR
     ``.dat`` + ``.par``     ``KEY : value`` + five-column ASCII (see above)
+    ``.xml`` / ``.csv``     Freiberg MS5000 (ESRStudio); a folder of MS5000
+                            runs is read as the scans of one spectrum
     ``.txt`` / ``.csv``     field and signal columns
     ======================  =============================================
     """
     from .bruker import read_bes3t, read_esp
+    from .freiberg import is_ms5000, read_ms5000
 
     path = Path(path)
     ext = path.suffix.lower()
+    if path.is_dir() or ext == ".xml" or (ext in (".csv", ".txt") and is_ms5000(path)):
+        return read_ms5000(path, **kw)
     if ext in (".dsc", ".dta"):
         return read_bes3t(path, **kw)
     if ext == ".spc" or (ext == ".par" and _sibling(path, ".spc") is not None):

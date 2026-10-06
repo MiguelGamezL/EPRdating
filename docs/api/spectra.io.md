@@ -5,8 +5,8 @@
 Reading cw-EPR spectra from disk.
 
 `read_epr` reads any supported file: Bruker BES3T and ESP/WinEPR
-(`bruker`), the `.dat`/`.par` pairs described
-below, and plain field/signal columns. All return a `Spectrum` with
+(`bruker`), Freiberg MS5000 (`freiberg`),
+the `.dat`/`.par` pairs described below, and plain field/signal columns. All return a `Spectrum` with
 the field in mT.
 
 **`.dat`/`.par` format**
@@ -88,6 +88,8 @@ Read a cw-EPR spectrum, choosing the reader from the file.
 .DSC / .DTA     Bruker BES3T (Xepr)
 .par + .spc     Bruker ESP / WinEPR
 .dat + .par     KEY : value + five-column ASCII (see above)
+.xml / .csv     Freiberg MS5000 (ESRStudio); a folder of MS5000
+                        runs is read as the scans of one spectrum
 .txt / .csv     field and signal columns
 ```
 

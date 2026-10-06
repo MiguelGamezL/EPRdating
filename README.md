@@ -21,7 +21,7 @@ HPGe spectra ─► sediment U, Th, K ─► dose rate ────────�
 tooth U-series data ─► uptake model ─────┘
 ```
 
-- **EPR spectra:** Bruker (BES3T, ESP/WinEPR) and text files; baseline,
+- **EPR spectra:** Bruker (BES3T, ESP/WinEPR), Freiberg MS5000 and text files; baseline,
   power/gain/mass normalisation, template fits (empirical or simulated with
   EPRAYA) with noise-injection errors; SSE, EXP+LIN, DSE and linear dose
   response with bootstrap De.
@@ -151,7 +151,7 @@ reference materials to U, Th, K and the infinite-matrix dose rates.
 | `gamma` | HPGe gamma spectrometry of sediments: ORTEC `.Spe`/`.Chn`, N42, ASCII and column files (`.cnf`/`.spc`/IEC through becquerel); automatic energy/resolution calibration per spectrum (no first guess, absorbs gain drift), peak areas, comparative method against IAEA RGU-1/RGTh-1/RGK-1, 226Ra/238U equilibrium check, output as `Sediment` |
 | `plot` | figures: stacked spectra with fits, dose-response with De, dose-rate budget, age distribution, gamma spectra and per-line contents |
 | `age` | generic solver `∫₀ᵀ Ḋ(t) dt = De` and the `ToothSample` model with Monte Carlo; `beta_by_segment=False` applies one beta factor to the whole U chain, as DATA and USESR do |
-| `spectra` | reading Bruker BES3T (`.DSC`/`.DTA`) and ESP/WinEPR (`.par`/`.spc`), `.dat`/`.par` and column files (`read_epr`); baseline, power/gain/mass normalisation, field alignment, pseudo-modulation and time-constant broadening of simulated shapes; intensity window (default 100 G around g = 2.0023, configurable); intensities by template fit, peak-to-peak, T1–B2 or double integral, all with noise-injection errors; weighted average of repeated spectra of an aliquot with a repeatability check; template/component fits with field shift; EPRAYA backend |
+| `spectra` | reading Bruker BES3T (`.DSC`/`.DTA`) and ESP/WinEPR (`.par`/`.spc`), Freiberg MS5000 (`.xml`), `.dat`/`.par` and column files (`read_epr`); baseline, power/gain/mass normalisation, field alignment, pseudo-modulation and time-constant broadening of simulated shapes; intensity window (default 100 G around g = 2.0023, configurable); intensities by template fit, peak-to-peak, T1–B2 or double integral, all with noise-injection errors; weighted average of repeated spectra of an aliquot with a repeatability check; template/component fits with field shift; EPRAYA backend |
 
 ## Known limitations
 
@@ -197,7 +197,7 @@ reference materials to U, Th, K and the infinite-matrix dose rates.
    the loss removed the whole U-chain beta (Rising Star, `PUBLISHED_FINDINGS.md`).
 7. **Dentine thickness.** When it is unknown the default is 2000 µm, within
    ~1 % of an infinitely thick dentine for the beta dose to the enamel.
-8. **No JEOL readers** yet (Bruker BES3T, ESP/WinEPR and text files are read).
+8. **No JEOL readers** yet (Bruker BES3T, ESP/WinEPR, Freiberg MS5000 and text files are read).
 
 ## Roadmap
 

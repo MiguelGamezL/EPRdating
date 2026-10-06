@@ -146,6 +146,35 @@ Checked in `tests/test_reference_data.py`:
 - Pseudo-modulation reproduces the optimum modulation amplitude of a
   Lorentzian line (3.5 ΔBpp).
 
+## A public MS5000 dose series: Calio (Sulawesi)
+
+Hakim et al. (2025, *Nature*, doi:10.1038/s41586-025-09348-6) published the
+spectra of a fossil *Celebochoerus* P4 enamel powder (Zenodo 15515771,
+CC-BY 4.0): natural and nine gamma doses (50-15 000 Gy), each aliquot
+measured in three rotations (120°) on a Freiberg MS5000 (2 mW, 0.1 mT, 12 mT
+sweep). Their De, from T1-B2 peak-to-peak amplitudes and an SSE fit, is
+2267 ± 99 Gy.
+
+Read with `read_epr` (the `_result.xml` of each rotation, or the folder of
+runs when there is none), intensities as the peak-to-peak amplitude in a
+40 G window around g = 2.000, rotations averaged as repeats:
+
+| dose (Gy) | 0 | 50 | 100 | 250 | 600 | 1200 | 2400 | 4000 | 8000 | 15000 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| I (×10³) | 13.03 | 12.79 | 13.28 | 13.98 | 15.45 | 18.11 | 23.47 | 26.85 | **42.53** | **34.29** |
+
+The 8000 Gy aliquot is 24 % *above* the 15 000 Gy one, which a saturating
+dose response cannot give. With the two labels as published, SSE gives
+1743 ± 389 Gy (1/I² weights, χ²ν = 3.0) and neither aliquot can be dropped
+to recover the published value (2943 Gy without 15 000 Gy, 1793 Gy without
+8000 Gy). With the two labels exchanged, SSE gives **2259 ± 297 Gy** (1/I²,
+χ²ν = 0.23) or 2273 ± 118 Gy (errors from the data and the rotations), and
+the template, T1-B2 and double-integral intensities give 2110-2273 Gy:
+the published 2267 ± 99 Gy is reproduced. The archive most likely has the
+8000 and 15 000 Gy folders swapped (the published analysis evidently used
+the right doses). The data are not in this repository; the analysis is
+`tests/validation/calio_ms5000.py` with the path of the unzipped archive.
+
 ## Running the validation tests
 
 ```bash

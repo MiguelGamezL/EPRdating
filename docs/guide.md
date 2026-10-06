@@ -61,9 +61,17 @@ s.freq_GHz, s.power_mW, s.gain, s.mod_amp_mT, s.time_constant_ms
 | `.DSC` + `.DTA` | Bruker BES3T (Xepr: E500, E580, EMXplus, EMXmicro) |
 | `.par` + `.spc` | Bruker ESP300 / WinEPR (EMX, ECS106) |
 | `.dat` + `.par` | `KEY : value` parameters + five-column ASCII (UNAL X band) |
+| `.xml` (or its `.csv` export) | Freiberg Instruments MS5000 (ESRStudio); a folder of runs `Name_1.xml` … `Name_n.xml` is read as the scans of one spectrum |
 | `.txt` / `.csv` | a field column and one or more signal columns |
 
 Bruker readers follow EasySpin's `eprload` and are checked on its test files.
+MS5000 spectra are read from the curves of the `.xml` file (field and
+signal, both sampled in time), which also hold the microwave frequency; the
+ESRStudio `.csv` export has no frequency and is read with the `.xml` next
+to it when there is one. Runs of the same measurement have a point or two
+more or less; they are combined on the field grid of the first. With a
+12 mT sweep at ~9.39 GHz the default window (100 G around g = 2.0023) does
+not fit: use e.g. `IntensityWindow(40, center_g=2.000)`.
 Anything else can be loaded by hand: `Spectrum(B=..., scans=y[None, :])`.
 
 ### Intensity window

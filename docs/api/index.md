@@ -15,6 +15,7 @@ Generated from the docstrings by `tools/gen_api_docs.py`.
 - [Alpha efficiency](alpha.md) — `eprdating.alpha`
 - [EPR spectra: reading](spectra.io.md) — `eprdating.spectra.io`
 - [EPR spectra: Bruker files](spectra.bruker.md) — `eprdating.spectra.bruker`
+- [EPR spectra: Freiberg MS5000 files](spectra.freiberg.md) — `eprdating.spectra.freiberg`
 - [EPR spectra: pre-processing](spectra.preprocess.md) — `eprdating.spectra.preprocess`
 - [EPR spectra: intensity window and scalar intensities](spectra.intensity.md) — `eprdating.spectra.intensity`
 - [EPR spectra: intensity of a spectrum](spectra.measure.md) — `eprdating.spectra.measure`

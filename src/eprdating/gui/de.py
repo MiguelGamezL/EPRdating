@@ -41,7 +41,7 @@ from ._common import (
 )
 
 #: files read as spectra; companions (.par of a .dat, .DTA of a .DSC) are found by the readers
-MAIN_SUFFIXES = (".dat", ".dsc", ".spc", ".txt", ".csv")
+MAIN_SUFFIXES = (".dat", ".dsc", ".spc", ".xml", ".txt", ".csv")
 ALL_SUFFIXES = (*MAIN_SUFFIXES, ".par", ".dta")
 MODELS = ("LIN", "SSE", "EXPLIN", "DSE")
 _DOSE_RE = re.compile(r"(\d+(?:[.,]\d+)?)\s*gy", re.IGNORECASE)
@@ -132,7 +132,7 @@ class DePanel:
             h("1. Spectra"),
             w.HBox([self.upload, self.folder, self.load_folder]),
             w.HTML(colab_hint()),
-            w.HTML("<small>.dat + .par, Bruker .DSC + .DTA or .spc + .par, text or CSV. "
+            w.HTML("<small>.dat + .par, Bruker .DSC + .DTA or .spc + .par, Freiberg MS5000 .xml, text or CSV. "
                    "Give the added dose of each file; files of the same aliquot get the same label "
                    "and are averaged.</small>"),
             self.files_box, self.group_btn,
@@ -299,9 +299,17 @@ class DePanel:
             raise ValueError("at least two aliquots are needed")
         return groups
 
-    @staticmethod
-    def _sweep(s) -> tuple[int, float]:
-        return s.B.size, round(float(np.median(np.diff(s.B))), 4)
+    def _sweep(self, s) -> tuple[float, float, float]:
+        """Sweep of a spectrum (first and last field, step), the same for
+        sweeps that differ by a few points (instruments that sample in time)."""
+        lo, hi, step = float(s.B[0]), float(s.B[-1]), float(np.median(np.diff(s.B)))
+        for k in self._sweeps:
+            tol = 0.02 * (k[1] - k[0])
+            if abs(lo - k[0]) <= tol and abs(hi - k[1]) <= tol and abs(step / k[2] - 1) < 0.02:
+                return k
+        key = (round(lo, 3), round(hi, 3), round(step, 5))
+        self._sweeps.append(key)
+        return key
 
     def _measure(self, groups: dict, window: IntensityWindow, method: str) -> tuple:
         """Intensity of every aliquot with ``method``.
@@ -314,6 +322,7 @@ class DePanel:
         Returns ``(points, notes, kind, template, ref_power)``.
         """
         used = [s for g in groups.values() for s in g["spectra"]]
+        self._sweeps: list[tuple[float, float, float]] = []
         ref = float(self.ref_power.value) or next((s.power_mW for s in used if s.power_mW), None)
         sweeps = [self._sweep(s) for s in used]
         main = max(set(sweeps), key=sweeps.count)

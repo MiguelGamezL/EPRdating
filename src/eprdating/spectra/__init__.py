@@ -1,6 +1,7 @@
 """Spectral processing: from cw-ESR spectra to intensities.
 
-* :mod:`.io`, :mod:`.bruker`  reading spectra: Bruker BES3T and ESP/WinEPR,
+* :mod:`.io`, :mod:`.bruker`, :mod:`.freiberg`  reading spectra: Bruker
+                         BES3T and ESP/WinEPR, Freiberg MS5000 (ESRStudio),
                          ``.dat``/``.par`` ASCII pairs, plain columns.
 * :mod:`.preprocess`     baseline, normalisation, alignment, modulation and
                          time-constant broadening of simulated shapes.
@@ -15,6 +16,7 @@
 from .bruker import read_bes3t, read_esp
 from .combine import Combination, combine_spectra, combined_intensity
 from .deconvolution import ComponentBasis, DeconvolutionResult, component_vs_dose
+from .freiberg import read_ms5000
 from .intensity import (
     DEFAULT_WINDOW,
     IntensityWindow,
@@ -62,6 +64,7 @@ __all__ = [
     "read_dat",
     "read_epr",
     "read_esp",
+    "read_ms5000",
     "read_par",
     "read_series",
     "subtract_baseline",

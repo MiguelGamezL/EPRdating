@@ -90,8 +90,11 @@ def _check_compatible(spectra: Sequence[Spectrum]) -> None:
     for s in spectra[1:]:
         step = float(np.median(np.diff(s.B)))
         problems = []
-        if s.B.size != ref.B.size:
-            problems.append(f"{s.B.size} vs {ref.B.size} points")
+        # instruments that sample in time (e.g. the MS5000) give a point or two
+        # more or less per sweep: the grids only need to cover the same sweep
+        overlap = min(s.B.max(), ref.B.max()) - max(s.B.min(), ref.B.min())
+        if overlap < 0.98 * np.ptp(ref.B) or np.ptp(s.B) > 1.02 * np.ptp(ref.B):
+            problems.append(f"sweep {s.B.min():.2f}-{s.B.max():.2f} vs {ref.B.min():.2f}-{ref.B.max():.2f} mT")
         if abs(step / step0 - 1) > 0.01:
             problems.append(f"field step {step:.4g} vs {step0:.4g} mT")
         for attr, label in (("mod_amp_mT", "modulation"), ("time_constant_ms", "time constant")):
