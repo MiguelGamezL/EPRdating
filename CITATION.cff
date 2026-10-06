@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+message: "If you use EPRdating, please cite it as below."
+title: "EPRdating: open ESR dating of tooth enamel in Python"
+type: software
+authors:
+  - family-names: "Gámez López"
+    given-names: "Miguel Enrique"
+    email: megamezl@unal.edu.co
+    affiliation: &unal "Grupo de Física Aplicada, Departamento de Física, Universidad Nacional de Colombia, Sede Bogotá, Colombia"
+  - family-names: "Ospina-Umaña"
+    given-names: "C. J."
+    affiliation: *unal
+  - family-names: "Castro-Millán"
+    given-names: "J. S."
+    affiliation: *unal
+  - family-names: "Almanza"
+    given-names: "O."
+    affiliation: *unal
+repository-code: "https://github.com/MiguelGamezL/EPRdating"
+license: MIT
+keywords:
+  - ESR dating
+  - EPR
+  - tooth enamel
+  - geochronology
+  - US-ESR
+  - dose rate

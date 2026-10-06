@@ -64,3 +64,10 @@ and read your files after uploading them or mounting Google Drive
 Field in mT, frequency in GHz, dose in Gy, dose rate in Gy/ka, age in ka,
 U and Th in µg/g (ppm), K in %. Inputs accept a number, a `(value, sigma)`
 tuple or a `Value`.
+
+## Authors
+
+M.E. Gámez-López, C.J. Ospina-Umaña, J.S. Castro-Millán and O. Almanza —
+Grupo de Física Aplicada, Departamento de Física, Universidad Nacional de
+Colombia, Sede Bogotá. To cite the software, see `CITATION.cff` in the
+repository.

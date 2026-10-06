@@ -9,7 +9,13 @@ description = "Open ESR dating of tooth enamel in Python: EPR and HPGe gamma spe
 readme = "README.md"
 requires-python = ">=3.10"
 license = { file = "LICENSE" }
-authors = [{ name = "Miguel Enrique Gámez López", email = "megamezl@unal.edu.co" }]
+authors = [
+  { name = "Miguel Enrique Gámez López", email = "megamezl@unal.edu.co" },
+  { name = "C. J. Ospina-Umaña" },
+  { name = "J. S. Castro-Millán" },
+  { name = "O. Almanza" },
+]
+maintainers = [{ name = "Miguel Enrique Gámez López", email = "megamezl@unal.edu.co" }]
 keywords = ["ESR dating", "EPR", "geochronology", "tooth enamel", "dose rate", "US-ESR", "gamma spectrometry", "trapped charge dating"]
 classifiers = [
   "Programming Language :: Python :: 3",
@@ -33,6 +39,8 @@ dev = ["pytest>=7", "pytest-cov", "ruff", "matplotlib>=3.7"]
 docs = ["mkdocs>=1.6,<2", "mkdocs-material>=9", "matplotlib>=3.7"]
 
 [project.urls]
+Repository = "https://github.com/MiguelGamezL/EPRdating"
+Issues = "https://github.com/MiguelGamezL/EPRdating/issues"
 "EPRAYA" = "https://github.com/eprayadev/EPRAYA"
 
 [tool.hatch.version]

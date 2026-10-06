@@ -251,6 +251,17 @@ molar. The mark of the Grupo de Física Aplicada (Universidad Nacional de
 Colombia) sits in the corner. `tools/logo/make_logo.py` redraws it (Barlow
 font, SIL Open Font License, `tools/logo/OFL.txt`).
 
+## Authors
+
+M.E. Gámez-López, C.J. Ospina-Umaña, J.S. Castro-Millán and O. Almanza,
+Grupo de Física Aplicada, Departamento de Física, Universidad Nacional de
+Colombia, Sede Bogotá. Contact: megamezl@unal.edu.co
+
+## How to cite
+
+An article describing the library is in preparation. Until then, cite the
+software through `CITATION.cff` (GitHub's "Cite this repository").
+
 ## License
 
 MIT (see `LICENSE`).
