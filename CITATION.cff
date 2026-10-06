@@ -19,6 +19,14 @@ authors:
   - family-names: "Almanza Montero"
     given-names: "Ovidio Amado"
     affiliation: *unal
+doi: 10.5281/zenodo.23192194
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.23192194
+    description: "All versions (concept DOI)"
+  - type: doi
+    value: 10.5281/zenodo.23192195
+    description: "Version 0.1.0"
 repository-code: "https://github.com/MiguelGamezL/EPRdating"
 license: MIT
 keywords:

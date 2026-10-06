@@ -7,6 +7,8 @@
 
 # EPRdating
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23192194.svg)](https://doi.org/10.5281/zenodo.23192194)
+
 Open ESR (EPR) dating of tooth enamel in Python, from raw measurements to an
 age with its uncertainty:
 
@@ -262,7 +264,14 @@ Colombia, Sede Bogotá. Contact: megamezl@unal.edu.co
 ## How to cite
 
 An article describing the library is in preparation. Until then, cite the
-software through `CITATION.cff` (GitHub's "Cite this repository").
+software (GitHub's "Cite this repository" gives the same from `CITATION.cff`):
+
+> Gámez López M.E., Ospina Umaña C.J., Castro Millán J.S., Almanza Montero O.A.
+> (2026) EPRdating: open ESR dating of tooth enamel in Python, version 0.1.0.
+> Zenodo. https://doi.org/10.5281/zenodo.23192195
+
+https://doi.org/10.5281/zenodo.23192194 always points to the latest version;
+cite the DOI of the version you used.
 
 ## License
 

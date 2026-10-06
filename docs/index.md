@@ -71,5 +71,6 @@ tuple or a `Value`.
 Miguel Enrique Gámez López ([ORCID](https://orcid.org/0000-0001-7831-3291)), Carol Jiseth Ospina Umaña,
 Juan Sebastián Castro Millán and Ovidio Amado Almanza Montero —
 Grupo de Física Aplicada, Departamento de Física, Universidad Nacional de
-Colombia, Sede Bogotá. To cite the software, see `CITATION.cff` in the
-repository.
+Colombia, Sede Bogotá. To cite the software: version 0.1.0,
+[doi:10.5281/zenodo.23192195](https://doi.org/10.5281/zenodo.23192195); all
+versions, [doi:10.5281/zenodo.23192194](https://doi.org/10.5281/zenodo.23192194).
