@@ -8,6 +8,7 @@
 # EPRdating
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23192194.svg)](https://doi.org/10.5281/zenodo.23192194)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/MiguelGamezL/EPRdating/blob/main/examples/quickstart.ipynb)
 
 Open ESR (EPR) dating of tooth enamel in Python, from raw measurements to an
 age with its uncertainty:

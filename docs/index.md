@@ -44,7 +44,7 @@ Until the package is on PyPI, install it from GitHub:
 
 Python 3.10–3.13. Works in scripts, Jupyter and Google Colab (figures show
 inline); [`examples/quickstart.ipynb`](https://github.com/MiguelGamezL/EPRdating/blob/main/examples/quickstart.ipynb)
-runs the whole chain on simulated data. In Colab, install with
+runs the whole chain on simulated data ([open it in Colab](https://colab.research.google.com/github/MiguelGamezL/EPRdating/blob/main/examples/quickstart.ipynb)). In Colab, install with
 
 ```python
 %pip install "eprdating[plot] @ git+https://github.com/MiguelGamezL/EPRdating"
