@@ -22,7 +22,7 @@ from .series import USeries
 from .uptake import DelayedUptake, EarlyUptake, LinearUptake, USModel
 from .usesr import UseriesData, USESRSample
 
-__version__ = "0.1.0.dev0"
+__version__ = "0.1.0"
 
 __all__ = [
     "AgeMC",

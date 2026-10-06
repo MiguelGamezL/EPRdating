@@ -11,9 +11,9 @@ requires-python = ">=3.10"
 license = { file = "LICENSE" }
 authors = [
   { name = "Miguel Enrique Gámez López", email = "megamezl@unal.edu.co" },
-  { name = "C. J. Ospina-Umaña" },
-  { name = "J. S. Castro-Millán" },
-  { name = "O. Almanza" },
+  { name = "Carol Jiseth Ospina Umaña" },
+  { name = "Juan Sebastián Castro Millán" },
+  { name = "Ovidio Amado Almanza Montero" },
 ]
 maintainers = [{ name = "Miguel Enrique Gámez López", email = "megamezl@unal.edu.co" }]
 keywords = ["ESR dating", "EPR", "geochronology", "tooth enamel", "dose rate", "US-ESR", "gamma spectrometry", "trapped charge dating"]

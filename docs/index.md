@@ -39,7 +39,8 @@ pip install "eprdating[spectra]"         # + EPRAYA, simulated line shapes
 pip install "eprdating[gamma-formats]"   # + becquerel: Canberra .cnf, ORTEC .spc, IEC 61455
 ```
 
-Until the first release, install from the repository: `pip install -e .`
+Until the package is on PyPI, install it from GitHub:
+`pip install "eprdating[plot] @ git+https://github.com/MiguelGamezL/EPRdating"`
 
 Python 3.10–3.13. Works in scripts, Jupyter and Google Colab (figures show
 inline); [`examples/quickstart.ipynb`](https://github.com/MiguelGamezL/EPRdating/blob/main/examples/quickstart.ipynb)
@@ -67,7 +68,8 @@ tuple or a `Value`.
 
 ## Authors
 
-M.E. Gámez-López, C.J. Ospina-Umaña, J.S. Castro-Millán and O. Almanza —
+Miguel Enrique Gámez López ([ORCID](https://orcid.org/0000-0001-7831-3291)), Carol Jiseth Ospina Umaña,
+Juan Sebastián Castro Millán and Ovidio Amado Almanza Montero —
 Grupo de Física Aplicada, Departamento de Física, Universidad Nacional de
 Colombia, Sede Bogotá. To cite the software, see `CITATION.cff` in the
 repository.

@@ -1,0 +1,52 @@
+# Changelog
+
+## 0.1.0 — 2026-10-06
+
+First public release.
+
+**EPR spectra and equivalent dose**
+- Readers: Bruker BES3T (`.DSC`/`.DTA`) and ESP/WinEPR (`.par`/`.spc`),
+  `.dat`/`.par` pairs, column text files.
+- Baseline, power/gain/mass normalisation, field alignment; pseudo-modulation
+  and time-constant broadening of simulated line shapes; EPRAYA backend
+  (optional).
+- Intensity window (default 100 G around g = 2.0023, configurable);
+  intensities by template fit, peak-to-peak, T1–B2 or double integral, with
+  noise-injection errors and a detection test (`p_noise`).
+- Weighted averaging of repeated spectra of an aliquot with a repeatability
+  check.
+- Dose-response fits (LIN, SSE, EXPLIN, DSE), weighting, maximum-dose test,
+  Birge-scaled or bootstrap De.
+
+**Sediment gamma spectrometry**
+- ORTEC `.Spe`/`.Chn`, N42 and text files; Canberra `.cnf`, ORTEC `.spc` and
+  IEC 61455 through becquerel (optional).
+- Automatic energy and resolution calibration, comparative method against
+  IAEA RGU-1/RGTh-1/RGK-1, 226Ra/238U equilibrium check.
+
+**Dose rates and ages**
+- Conversion factors of Adamiec & Aitken (1998), Guérin et al. (2011) and
+  Liritzis et al. (2013); water correction; cosmic dose rate (Prescott &
+  Hutton 1994).
+- U-series ingrowth with radon loss and measured or initial 234U/238U.
+- One-group beta attenuation per emitter and U-series segment in
+  sediment/cementum/enamel/dentine layers; configurable material
+  compositions; DATA's single chain factor as an option.
+- Energy-dependent alpha efficiency (ROSY's option).
+- Piecewise histories of sediment water, burial depth (cosmic) and gamma.
+- EU, LU and US uptake; US-ESR and CSUS-ESR; Monte Carlo over every input,
+  geometry included.
+
+**Validation**
+- ROSY 2.0: EU, LU and CU ages within −0.6 to +0.7 %.
+- DATA: EU/LU ages within −2.6 to +1.6 % (82 runs); US-ESR within −1.4 to
+  +0.7 % (29 cases); CS-US within DATA's rounding.
+- 58 published ages from nine studies within −9.5 to +3.4 %, 56 within the
+  published 1σ.
+- Conversion factors and cosmic dose rate against the R package
+  Luminescence; file readers against EasySpin and becquerel test files.
+
+**Tools**
+- Drivers for ROSY (Wine) and DATA (DOSBox-X), without the programs.
+- Synthetic additive-dose series to test analysis choices and measurement
+  designs (`tools/synthetic_dose_series.py`).

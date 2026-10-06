@@ -38,7 +38,7 @@ Inspired by ROSY (Brennan et al. 1997, 1999) and DATA (Grün 2009), written as
 an independent, open implementation from the published equations, and
 validated against both programs run as black boxes.
 
-> **Status: 0.1.0.dev0 — pre-release.** Validation (details in
+> **Version 0.1.0** (first release; see `CHANGELOG.md`). Validation (details in
 > `tests/validation/`):
 >
 > | Against | Agreement |
@@ -52,6 +52,13 @@ validated against both programs run as black boxes.
 > limitations*.
 
 ## Install
+
+```bash
+pip install "eprdating @ git+https://github.com/MiguelGamezL/EPRdating"           # core
+pip install "eprdating[plot] @ git+https://github.com/MiguelGamezL/EPRdating"     # + matplotlib
+```
+
+From a clone of the repository:
 
 ```bash
 pip install -e .                 # core: numpy + scipy only
@@ -173,17 +180,11 @@ reference materials to U, Th, K and the infinite-matrix dose rates.
 
 ## Roadmap
 
-- **v0.1** core: De, dose rate, EU/LU/US, age, Monte Carlo; validation against published ROSY/DATA ages.
-- **v0.2** spectra: EPRAYA-based deconvolution → De; comparison of intensity methods.
-- **v0.3** one-group beta attenuation in planar layers (Brennan et al. 1997) — done, with the geometry sampled in the Monte Carlo.
-- **v0.4** US-ESR, with cementum layers — done, validated against Shao et al. (2015) and Yu et al. (2026, J. Hum. Evol., De Nadale cave).
-- **v0.5** real spectra: `.dat`/`.par` reader, template fits with honest errors, EPRAYA templates with instrumental broadening — first real series (M18) processed.
-- **v0.6** sediment U/Th/K from HPGe spectra (comparative method) — reproduces an independent analysis of the corte 0 sediment within 1 %.
-- **v0.7** general use: Bruker and common gamma file formats, automatic gamma calibration, user guide; readers checked on EasySpin and becquerel test files.
-- **v0.8** CSUS-ESR; validation against DATA: EU/LU (82 runs), US-ESR and CS-US (40 cases) — `beta_by_segment` option, sediment-on-both-sides fix.
-- **v0.9** published-age benchmark: 58 ages from nine studies (DATA, USESR, ROSY).
-- **v0.10** reference data checked against their sources; configurable material compositions; water, burial-depth and gamma histories.
-- **later** JEOL readers, alpha escape at surfaces; article for *Quaternary Geochronology* (in preparation).
+- JEOL spectrometer files.
+- Alpha escape at layer surfaces (see *Known limitations*).
+- Releases on PyPI; article in *Quaternary Geochronology* (in preparation).
+
+What each release contains: `CHANGELOG.md`.
 
 ## Validation against ROSY
 
@@ -253,7 +254,8 @@ font, SIL Open Font License, `tools/logo/OFL.txt`).
 
 ## Authors
 
-M.E. Gámez-López, C.J. Ospina-Umaña, J.S. Castro-Millán and O. Almanza,
+Miguel Enrique Gámez López ([ORCID](https://orcid.org/0000-0001-7831-3291)), Carol Jiseth Ospina Umaña,
+Juan Sebastián Castro Millán and Ovidio Amado Almanza Montero —
 Grupo de Física Aplicada, Departamento de Física, Universidad Nacional de
 Colombia, Sede Bogotá. Contact: megamezl@unal.edu.co
 
