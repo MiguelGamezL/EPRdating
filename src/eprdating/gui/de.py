@@ -90,6 +90,7 @@ class DePanel:
                                    style=STYLE, layout=w.Layout(width="340px"))
         self.freq = w.FloatText(value=0.0, description="Frequency for files without one (GHz)", style=STYLE,
                                 layout=w.Layout(width="320px"))
+        self.method.observe(lambda ch: setattr(self.n_strong, "disabled", ch["new"] != "template"), names="value")
         self.compute_btn = button("Compute intensities", "play", primary=True, width="200px")
         self.compute_btn.on_click(lambda _: self._guard(self.compute))
 
