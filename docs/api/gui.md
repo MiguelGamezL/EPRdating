@@ -51,7 +51,14 @@ Every step is also a method, so the panel can be driven from code:
 
 **Members**
 
-- `compute(self) -> list[dict]` — Intensity of every aliquot (repeats averaged), then a fit.
+- `compare_methods(self) -> list[dict]` — De with every intensity method, with the same files, window, ticked
+points and model. The methods agree within their errors when the
+signal is strong and alone in the window; a systematic difference
+points to noise bias (peak-to-peak, T1-B2), baseline problems
+(double integral) or other signals in the window.
+- `comparison_csv(self) -> str`
+- `compute(self) -> list[dict]` — Intensity of every aliquot (repeats averaged; see `_measure`
+for spectra recorded with different sweeps), then a fit.
 - `fit(self)` — Dose-response fit of the ticked points.
 - `group_by_dose(self)`
 - `load(self, paths) -> list[str]` — Read the spectra among `paths` (companion files are skipped) and

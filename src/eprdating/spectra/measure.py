@@ -8,6 +8,10 @@ of four methods, always inside an :class:`~eprdating.spectra.intensity.Intensity
   with a linear baseline and a small common field shift
   (:class:`~eprdating.spectra.deconvolution.ComponentBasis`);
 * ``"peak_to_peak"``, ``"t1_b2"`` and ``"double_integral"``, for comparison.
+  For the double integral the derivative baseline is a line fitted to the
+  signal-free sweep within one window width on each side of the window, and
+  the absorption baseline a line through the outer 20 % of the window at
+  each end.
 
 The part of the sweep outside the window is taken as signal-free: after a
 polynomial baseline it gives the noise, which is injected into the measured
@@ -43,7 +47,16 @@ from dataclasses import dataclass, field
 import numpy as np
 
 from .deconvolution import ComponentBasis, DeconvolutionResult
-from .intensity import DEFAULT_WINDOW, IntensityWindow, double_integral, peak_to_peak, t1_b2_amplitude
+from .intensity import (
+    DEFAULT_WINDOW,
+    DI_END_FRACTION,
+    OUTSIDE_REACH,
+    IntensityWindow,
+    _integrate_twice,
+    outside_baseline,
+    peak_to_peak,
+    t1_b2_amplitude,
+)
 from .io import Spectrum
 from .preprocess import normalise, subtract_baseline
 
@@ -143,6 +156,71 @@ def _template_on(template, B: np.ndarray):
     return t
 
 
+def _window_noise_error(measure, yw: np.ndarray, noise: np.ndarray | None, n: int,
+                        rng: np.random.Generator) -> float:
+    """Scatter of ``measure`` when a block of the signal-free ``noise`` is
+    added to the window values ``yw`` (nan without noise)."""
+    if noise is None:
+        return float("nan")
+    draws = []
+    for _ in range(n):
+        i = rng.integers(0, noise.size - yw.size + 1)
+        blk = noise[i:i + yw.size]
+        draws.append(measure(yw + blk - blk.mean()))
+    return float(np.std(draws, ddof=1))
+
+
+def _double_integral(B: np.ndarray, y: np.ndarray, m: np.ndarray, n_noise: int, rng: np.random.Generator,
+                     noise: np.ndarray | None) -> tuple[float, float]:
+    """Double integral in the window ``m`` and its noise-injection error.
+
+    Derivative baseline: a line through the sweep within OUTSIDE_REACH window
+    widths on each side of the window (an error in it grows quadratically in
+    the double integral). Absorption baseline: a line through the outer
+    DI_END_FRACTION of the window at each end. The noise is injected over the
+    window and both baseline regions, so the error includes that of the
+    baseline. Without enough sweep beyond the window, both baselines are lines
+    through the window's end points.
+    """
+    Bw = B[m]
+    if outside_baseline(B, y, m) is None:
+        n_ends = max(3, min(20, Bw.size // 10))
+        measure = lambda v: _integrate_twice(Bw, v, n_ends)
+        return measure(y[m]), _window_noise_error(measure, y[m], noise, n_noise, rng)
+    n_ends = max(3, round(DI_END_FRACTION * Bw.size))
+    lo, hi = Bw.min(), Bw.max()
+    reach = OUTSIDE_REACH * (hi - lo)
+    region = (B >= lo - reach) & (B <= hi + reach)
+    Br, mr = B[region], m[region]
+
+    def measure(v):
+        return _integrate_twice(Bw, outside_baseline(Br, v, mr)[mr], n_ends, derivative_baseline=False)
+
+    yr = y[region]
+    value = measure(yr)
+    free = subtract_baseline(B, y, exclude=(lo, hi), order=3)
+    pool = np.concatenate([v - v.mean() for v in (free[B < lo], free[B > hi]) if v.size])
+    N = int(region.sum())
+    if pool.size < N:  # too short for the whole region: inject in the window only
+        def in_window(v):
+            z = yr.copy()
+            z[mr] = v
+            return measure(z)
+
+        return value, _window_noise_error(in_window, y[m], noise, n_noise, rng)
+    amp = np.abs(np.fft.rfft(pool))
+    draws = []
+    for _ in range(n_noise):
+        phase = np.exp(2j * np.pi * rng.random(amp.size))
+        phase[0] = 1.0
+        if pool.size % 2 == 0:
+            phase[-1] = 1.0
+        sur = np.fft.irfft(amp * phase, n=pool.size)
+        i = int(rng.integers(0, pool.size - N + 1))
+        draws.append(measure(yr + sur[i:i + N]))
+    return value, float(np.std(draws, ddof=1))
+
+
 def intensity(
     spectrum: Spectrum,
     method: str = "template",
@@ -191,7 +269,6 @@ def intensity(
                       "noise-injection errors are not available", stacklevel=2)
     Bw, yw = B[m], y[m]
     rng = np.random.default_rng(seed)
-
     if method == "template":
         if template is None:
             raise ValueError("method='template' needs a template")
@@ -204,26 +281,20 @@ def intensity(
             p_noise = float((np.sum(null >= r.amplitudes["signal"]) + 1) / (null.size + 1))
         return Intensity(r.amplitudes["signal"], r.errors["signal"], method, bounds, r.shift, r, p_noise=p_noise)
 
+    if method == "double_integral":
+        value, sigma = _double_integral(B, y, m, n_noise, rng, noise)
+        return Intensity(value, sigma, method, bounds)
+
+    if method == "t1_b2" and spectrum.freq_GHz is None:
+        raise ValueError("method='t1_b2' needs the microwave frequency")
+
     def measure(v):
         if method == "peak_to_peak":
             return peak_to_peak(Bw, v)
-        if method == "t1_b2":
-            if spectrum.freq_GHz is None:
-                raise ValueError("method='t1_b2' needs the microwave frequency")
-            return t1_b2_amplitude(Bw, v, spectrum.freq_GHz)
-        return double_integral(Bw, v, baseline_points=max(3, min(20, Bw.size // 10)))
+        return t1_b2_amplitude(Bw, v, spectrum.freq_GHz)
 
     value = measure(yw)
-    sigma = float("nan")
-    if noise is not None:
-        # the error is the scatter of the estimator when one more noise
-        # realisation of the same level is added to the measured spectrum
-        draws = []
-        for _ in range(n_noise):
-            i = rng.integers(0, noise.size - yw.size + 1)
-            blk = noise[i:i + yw.size]
-            draws.append(measure(yw + blk - blk.mean()))
-        sigma = float(np.std(draws, ddof=1))
+    sigma = _window_noise_error(measure, yw, noise, n_noise, rng)
     return Intensity(float(value), sigma, method, bounds)
 
 

@@ -162,28 +162,73 @@ def t1_b2_amplitude(
     return float(t1 - b2)
 
 
+def _integrate_twice(B: np.ndarray, y: np.ndarray, n_ends: int, derivative_baseline: bool = True) -> float:
+    """Double integral on the grid ``B``; a line through ``n_ends`` points at
+    each end is removed from the absorption (and first from the derivative,
+    if ``derivative_baseline``)."""
+    if B.size < 2 * n_ends + 2:
+        raise ValueError("too few points for the baseline; use a wider window or fewer baseline points")
+    idx = np.r_[0:n_ends, B.size - n_ends:B.size]
+
+    def debase(v):
+        return v - np.polyval(np.polyfit(B[idx], v[idx], 1), B)
+
+    if derivative_baseline:
+        y = debase(y)
+    absorption = np.concatenate([[0.0], np.cumsum(0.5 * (y[1:] + y[:-1]) * np.diff(B))])
+    return float(np.trapezoid(debase(absorption), B))
+
+
+#: the derivative baseline of the double integral is a line fitted to the
+#: signal-free sweep within OUTSIDE_REACH window widths on each side of the window
+OUTSIDE_REACH = 1.0
+#: fraction of the window, at each end, through which the absorption baseline is drawn
+DI_END_FRACTION = 0.2
+
+
+def outside_baseline(B, y, m, reach: float = OUTSIDE_REACH) -> np.ndarray | None:
+    """``y`` minus a line fitted to the points outside the window mask ``m``
+    but within ``reach`` window widths of it, on both sides; None if either
+    side has fewer than 5 such points."""
+    B = np.asarray(B, float)
+    lo, hi = B[m].min(), B[m].max()
+    W = hi - lo
+    left = (B < lo) & (B >= lo - reach * W)
+    right = (B > hi) & (B <= hi + reach * W)
+    if left.sum() < 5 or right.sum() < 5:
+        return None
+    sel = left | right
+    x = (B - 0.5 * (lo + hi)) / W
+    return np.asarray(y, float) - np.polyval(np.polyfit(x[sel], np.asarray(y, float)[sel], 1), x)
+
+
 def double_integral(B, spectrum, baseline_points: int = 20,
                     window: IntensityWindow | tuple[float, float] | None = None,
-                    freq_GHz: float | None = None) -> float:
+                    freq_GHz: float | None = None, *, baseline: str = "ends") -> float:
     """Double integral of a derivative spectrum (proportional to spin number).
 
-    A linear baseline estimated from ``baseline_points`` at each end (of the
-    ``window``, if given) is subtracted before each integration.
+    baseline : ``"ends"`` (default): a line through ``baseline_points`` at
+               each end (of the ``window``, if given) is subtracted before
+               each integration. ``"outside"`` (needs a ``window`` with at
+               least 5 points beyond it on each side): the derivative
+               baseline is a line fitted to the sweep within one window width
+               on each side of the window, which is far less noisy than a few
+               end points and does not cut into the tails of the line (an
+               error in it grows quadratically in the double integral); the
+               absorption baseline is still a line through
+               ``baseline_points`` at each end of the window.
     """
     B = np.asarray(B, float)
     y = np.asarray(spectrum, float)
+    if baseline not in ("ends", "outside"):
+        raise ValueError("baseline must be 'ends' or 'outside'")
     m = _resolve(B, window, freq_GHz)
+    if baseline == "outside":
+        if m is None:
+            raise ValueError("baseline='outside' needs a window")
+        y = outside_baseline(B, y, m)
+        if y is None:
+            raise ValueError("baseline='outside' needs at least 5 points beyond the window on each side")
     if m is not None:
         B, y = B[m], y[m]
-    if B.size < 2 * baseline_points + 2:
-        raise ValueError("too few points for the baseline; use a wider window or fewer baseline points")
-
-    def debase(x, v):
-        idx = np.r_[0:baseline_points, len(v) - baseline_points:len(v)]
-        c = np.polyfit(x[idx], v[idx], 1)
-        return v - np.polyval(c, x)
-
-    y = debase(B, y)
-    absorption = np.concatenate([[0.0], np.cumsum(0.5 * (y[1:] + y[:-1]) * np.diff(B))])
-    absorption = debase(B, absorption)
-    return float(np.trapezoid(absorption, B))
+    return _integrate_twice(B, y, baseline_points, derivative_baseline=baseline == "ends")

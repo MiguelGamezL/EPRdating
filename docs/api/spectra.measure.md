@@ -12,6 +12,10 @@ of four methods, always inside an `IntensityWindow`
   with a linear baseline and a small common field shift
   (`ComponentBasis`);
 * `"peak_to_peak"`, `"t1_b2"` and `"double_integral"`, for comparison.
+  For the double integral the derivative baseline is a line fitted to the
+  signal-free sweep within one window width on each side of the window, and
+  the absorption baseline a line through the outer 20 % of the window at
+  each end.
 
 The part of the sweep outside the window is taken as signal-free: after a
 polynomial baseline it gives the noise, which is injected into the measured

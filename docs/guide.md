@@ -31,7 +31,8 @@ the added dose of each file and give the same aliquot label to repeated
 measurements, choose the intensity window (its width in G or mT, and its
 centre as a g value or as a field in G or mT: switching the centre unit
 converts the number with the spectra's frequency), method and template, compute,
-untick points if needed, choose the model and fit. **Sediment**: upload the
+untick points if needed, choose the model and fit; *Compare methods* gives
+the De of the four intensity methods side by side. **Sediment**: upload the
 HPGe spectra, check the roles guessed from the file names (sample,
 background, IAEA references), give the masses and the water content, and
 analyse. **Age**: the De and the sediment arrive from the other tabs; fill
@@ -117,6 +118,29 @@ intensity(s, "peak_to_peak"), intensity(s, "t1_b2"), intensity(s, "double_integr
   same spectrum are added to the fitted (or measured) spectrum and the
   intensity is recomputed. This accounts for the noise correlation of the
   time constant and for the shift search, for every method.
+* `double_integral`: the derivative baseline is a line fitted to the
+  signal-free sweep within one window width on each side of the window, and
+  the absorption baseline a line through the outer 20 % of the window at
+  each end. An error in the derivative baseline grows quadratically in the
+  double integral, so a few end points are not enough: in M18-like synthetic
+  spectra this cuts the scatter of the double integral by about 40 % against
+  lines through 10 % of the window at each end (it remains two to three
+  times that of the template fit). The noise is injected over the window and both baseline
+  regions. `double_integral(..., baseline="outside")` does the same on its
+  own; its default (`"ends"`) keeps the end-point lines.
+
+**Why the methods give different De.** Rescaling every intensity by the
+same factor leaves De unchanged, but anything added to all of them shifts it
+by that amount divided by the slope, and with a weak natural signal a small
+offset is a large change in De. Peak-to-peak and T1-B2 take a maximum minus a
+minimum, which is positive even for pure noise (an upward bias of weak
+spectra); the double integral is sensitive to the baseline; other signals in
+the window (native, CO3⁻, SO2⁻) weigh differently in each method; and a line
+shape that changes with dose changes the slope differently. With a strong
+signal alone in the window the methods agree; with weak signals they agree
+only within their (large) errors. In the interface, *Compare methods*
+computes De with the four methods with the same files, window, points and
+model.
 
 **Is there a signal at all?** A template fit that searches the field
 position finds, in pure noise, the place where the noise looks most like the

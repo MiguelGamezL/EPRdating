@@ -7,6 +7,14 @@
   three tabs, with downloads of results and settings.
 - `eprdating.spectra.empirical_template`: line-shape template from the
   strongest spectra of a series.
+- Interface: the window centre can be given as a g value or as a field in
+  G or mT; *Compare methods* gives De with the four intensity methods.
+- Double integral (`intensity(..., "double_integral")`): derivative baseline
+  fitted to the sweep within one window width on each side of the window,
+  absorption baseline through the outer 20 % of the window, noise injected
+  over the window and both baseline regions. About 40 % less scatter than
+  the previous end-point baselines. `double_integral(..., baseline="outside")`
+  gives the same on its own.
 
 ## 0.1.1 — 2026-10-06
 

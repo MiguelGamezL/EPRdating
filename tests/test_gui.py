@@ -109,6 +109,27 @@ def test_de_tab_from_files_to_age_tab(series):
     assert "download=" in de.export_html.value
 
 
+def test_compare_methods(series):
+    _folder, paths = series
+    de = app().de
+    de.load(paths)
+    de.group_by_dose()
+    de.compute()
+    de.set_point("250 Gy", False)
+    de.compare_btn.click()
+    rows = {r["method"]: r for r in de.comparison}
+    assert set(rows) == {"template", "peak_to_peak", "t1_b2", "double_integral"}
+    for r in rows.values():
+        assert r["points"] == 5 and not r["problem"]
+        assert abs(r["De_Gy"] - DE_TRUE) < 3 * r["sigma_Gy"] + 10, r
+    assert "within the errors" in de.compare_html.value
+    de.export_btn.click()
+    assert "eprdating_De_methods.csv" in de.export_html.value
+    assert de.comparison_csv().startswith("method,De_Gy")
+    de.compute()  # new intensities: the comparison is cleared
+    assert de.comparison == [] and de.compare_html.value == ""
+
+
 def test_de_tab_reports_problems_in_the_panel(series):
     _folder, paths = series
     de = app().de

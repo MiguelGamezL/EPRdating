@@ -125,3 +125,35 @@ def test_detection_test_false_alarm_rate():
     strong = intensity(spectrum(5.0, sigma=0.5, rng=rng), template=(B, SHAPE), n_noise=10, n_null=200)
     assert strong.p_noise < 0.01 and strong.detected() is True
     assert intensity(spectrum(5.0, sigma=0.5, rng=rng), "peak_to_peak").detected() is None
+
+
+def test_double_integral_baseline_from_outside_the_window():
+    m = DEFAULT_WINDOW.mask(B, F)
+    clean = spectrum(5.0)  # sloped baseline, no noise
+    ref = double_integral(B, 5.0 * SHAPE, window=DEFAULT_WINDOW, freq_GHz=F, baseline="outside")
+    assert ref > 0
+    # a sloped baseline is removed exactly by the line fitted outside the window
+    assert double_integral(clean.B, clean.y, window=DEFAULT_WINDOW, freq_GHz=F,
+                           baseline="outside") == pytest.approx(ref, rel=1e-6)
+    with pytest.raises(ValueError, match="needs a window"):
+        double_integral(B, clean.y, baseline="outside")
+    with pytest.raises(ValueError, match="'ends' or 'outside'"):
+        double_integral(B, clean.y, window=DEFAULT_WINDOW, freq_GHz=F, baseline="spline")
+    # with noise, intensity() (baseline outside the window) scatters less than the
+    # baseline through the window's end points, and its error matches its scatter
+    rng = np.random.default_rng(4)
+    new, err, ends = [], [], []
+    for _ in range(150):
+        s = spectrum(5.0, sigma=0.5, rng=rng)
+        r = intensity(s, "double_integral", n_noise=60)
+        new.append(r.value)
+        err.append(r.sigma)
+        ends.append(double_integral(s.B[m], s.y[m], baseline_points=10))
+    assert np.std(new) < 0.75 * np.std(ends)
+    assert np.mean(new) == pytest.approx(ref, rel=0.1)
+    assert np.mean(err) == pytest.approx(np.std(new, ddof=1), rel=0.25)
+    # without sweep beyond the window it falls back to the end points
+    narrow = Spectrum(B=B[m], scans=clean.scans[:, m], freq_GHz=F)
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore")
+        assert np.isfinite(intensity(narrow, "double_integral").value)

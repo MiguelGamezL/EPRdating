@@ -36,6 +36,7 @@ from ._common import (
     message,
     scale_of,
     show_figure,
+    table_html,
     uploaded,
 )
 
@@ -67,6 +68,7 @@ class DePanel:
         self.points: list[dict] = []
         self.template = None
         self.drc = None
+        self.comparison: list[dict] = []
         self._build()
 
     # ---- widgets ---------------------------------------------------------
@@ -116,6 +118,10 @@ class DePanel:
         self.fit_btn.on_click(lambda _: self._guard(self.fit))
         self.fit_out = w.Output()
         self.fit_text = w.HTML()
+        self.compare_btn = button("Compare methods", "balance-scale", width="170px")
+        self.compare_btn.on_click(lambda _: self._guard(self.compare_methods))
+        self.compare_html = w.HTML()
+        self.compare_out = w.Output()
         self.export_btn = button("Prepare downloads", "download")
         self.export_btn.on_click(lambda _: self._guard(self._export))
         self.export_html = w.HTML()
@@ -140,6 +146,9 @@ class DePanel:
             self.points_box,
             w.HBox([self.model, self.max_dose]), self.negative, self.fit_btn,
             self.fit_text, self.fit_out,
+            w.HTML("<small>The same De with the four intensity methods (same files, window, ticked points "
+                   "and model):</small>"),
+            self.compare_btn, self.compare_html, self.compare_out,
             h("4. Export"),
             w.HBox([self.export_btn, self.export_html]),
         ])
@@ -294,19 +303,18 @@ class DePanel:
     def _sweep(s) -> tuple[int, float]:
         return s.B.size, round(float(np.median(np.diff(s.B))), 4)
 
-    def compute(self) -> list[dict]:
-        """Intensity of every aliquot (repeats averaged), then a fit.
+    def _measure(self, groups: dict, window: IntensityWindow, method: str) -> tuple:
+        """Intensity of every aliquot with ``method``.
 
         Spectra recorded with another sweep than most (e.g. a wide survey
         sweep of the natural) are measured on their own. An aliquot measured
         both ways bridges the two: the ratio of its intensities puts the
         other-sweep aliquots on the scale of the main sweep.
+
+        Returns ``(points, notes, kind, template, ref_power)``.
         """
-        groups = self._groups()
-        window = self.window()
         used = [s for g in groups.values() for s in g["spectra"]]
         ref = float(self.ref_power.value) or next((s.power_mW for s in used if s.power_mW), None)
-        method = self.method.value
         sweeps = [self._sweep(s) for s in used]
         main = max(set(sweeps), key=sweeps.count)
         main_spectra = [s for s in used if self._sweep(s) == main]
@@ -318,7 +326,6 @@ class DePanel:
             kw = {"mass_mg": mass} if mass > 0 else {}
             return combined_intensity(spectra, method, template, window, ref_power_mW=ref, max_shift=shift, **kw)
 
-        old = {p["aliquot"]: p["fit"].value for p in self.points}
         points, bridges = [], {}
         for label, g in sorted(groups.items(), key=lambda kv: kv[1]["dose"]):
             by_sweep: dict = {}
@@ -337,9 +344,7 @@ class DePanel:
                     sk = abs(k) * float(np.hypot(r.sigma / r.value, ro.sigma / ro.value))
                     bridges.setdefault(other, []).append((k, sk, label))
             points.append({"aliquot": label, "dose": g["dose"], "files": files, "spectra": spectra,
-                           "sweep": key, "result": r, "note": "",
-                           "fit": w.Checkbox(value=old.get(label, True), indent=False,
-                                             layout=w.Layout(width="40px"))})
+                           "sweep": key, "result": r, "note": ""})
         notes, kind = [], "ok"
         for p in points:
             if p["sweep"] == main:
@@ -360,11 +365,30 @@ class DePanel:
             p["note"] = f"×{k:.3f}±{sk:.3f}"
             notes.append(f"{p['aliquot']} put on the main sweep with the factor {k:.3f} ± {sk:.3f} from "
                          f"{', '.join(b[2] for b in bridges[p['sweep']])}.")
+            if not (k > 0 and sk < 0.5 * k):
+                notes.append(f"With the {method} method that factor is poorly determined, so "
+                             f"{p['aliquot']} carries little weight.")
+                kind = "warn"
+        return points, notes, kind, template, ref
+
+    def compute(self) -> list[dict]:
+        """Intensity of every aliquot (repeats averaged; see :meth:`_measure`
+        for spectra recorded with different sweeps), then a fit."""
+        groups = self._groups()
+        window = self.window()
+        points, notes, kind, template, ref = self._measure(groups, window, self.method.value)
+        old = {p["aliquot"]: p["fit"].value for p in self.points}
+        for p in points:
+            p["fit"] = w.Checkbox(value=old.get(p["aliquot"], True), indent=False, layout=w.Layout(width="40px"))
         self.template = template
         self.points = points
+        self.comparison = []  # from other intensities
+        self.compare_html.value = ""
+        self.compare_out.clear_output()
         self._render_points()
         self._plot_spectra(window, ref)
-        note = f"{len(points)} aliquots, window {window.describe(used[0].freq_GHz)}. " + " ".join(notes)
+        freq = next(s.freq_GHz for g in groups.values() for s in g["spectra"])
+        note = f"{len(points)} aliquots, window {window.describe(freq)}. " + " ".join(notes)
         self.status.value = message(note, kind)
         self.fit()
         return self.results()
@@ -425,14 +449,7 @@ class DePanel:
         if not self.points:
             raise ValueError("compute the intensities first")
         use = [p for p in self.points if p["fit"].value]
-        if len(use) < 3:
-            raise ValueError("at least three points are needed for the fit")
-        D = np.array([p["dose"] for p in use])
-        I = np.array([p["result"].value for p in use])
-        S = np.array([p["result"].sigma for p in use])
-        md = float(self.max_dose.value) or None
-        self.drc = fit_dose_response(D, I, self.model.value, sigma=S if np.all(np.isfinite(S) & (S > 0)) else None,
-                                     max_dose=md, De_min=-np.inf if self.negative.value else 0.0)
+        self.drc = self._fit(use)
         excluded = [(p["dose"], p["result"].value, p["result"].sigma) for p in self.points if not p["fit"].value]
         from .. import plot
 
@@ -444,6 +461,91 @@ class DePanel:
         if self.on_de is not None and np.isfinite(d.De):
             self.on_de(float(d.De), float(d.De_sigma))
         return self.drc
+
+    def _fit(self, use: list[dict]):
+        if len(use) < 3:
+            raise ValueError("at least three points are needed for the fit")
+        D = np.array([p["dose"] for p in use])
+        I = np.array([p["result"].value for p in use])
+        S = np.array([p["result"].sigma for p in use])
+        md = float(self.max_dose.value) or None
+        return fit_dose_response(D, I, self.model.value, sigma=S if np.all(np.isfinite(S) & (S > 0)) else None,
+                                 max_dose=md, De_min=-np.inf if self.negative.value else 0.0)
+
+    # ---- comparison of methods ---------------------------------------------
+    def compare_methods(self) -> list[dict]:
+        """De with every intensity method, with the same files, window, ticked
+        points and model. The methods agree within their errors when the
+        signal is strong and alone in the window; a systematic difference
+        points to noise bias (peak-to-peak, T1-B2), baseline problems
+        (double integral) or other signals in the window."""
+        groups = self._groups()
+        window = self.window()
+        ticked = {p["aliquot"]: bool(p["fit"].value) for p in self.points}
+        rows = []
+        for method in METHODS:
+            try:
+                points, _notes, _kind, _t, _ref = self._measure(groups, window, method)
+                use = [p for p in points if ticked.get(p["aliquot"], True)]
+                d = self._fit(use)
+                rows.append({"method": method, "De_Gy": float(d.De), "sigma_Gy": float(d.De_sigma),
+                             "chi2_red": float(d.chi2_red), "points": len(use), "problem": ""})
+            except Exception as e:  # noqa: BLE001 - one method failing does not stop the others
+                rows.append({"method": method, "De_Gy": float("nan"), "sigma_Gy": float("nan"),
+                             "chi2_red": float("nan"), "points": 0, "problem": f"{type(e).__name__}: {e}"})
+        self.comparison = rows
+        self._show_comparison(rows)
+        return rows
+
+    def _show_comparison(self, rows: list[dict]) -> None:
+        import matplotlib.pyplot as plt
+
+        ok = [r for r in rows if np.isfinite(r["De_Gy"])]
+        shown = []
+        for r in rows:
+            current = " ◀" if r["method"] == self.method.value else ""
+            shown.append({"method": r["method"] + current,
+                          "De": "—" if not np.isfinite(r["De_Gy"]) else f"{r['De_Gy']:.4g} ± {r['sigma_Gy']:.2g}",
+                          "chi2": "—" if not np.isfinite(r["chi2_red"]) else f"{r['chi2_red']:.2f}",
+                          "n": r["points"] or "—", "problem": r["problem"]})
+        text = ""
+        if len(ok) > 1:
+            De = np.array([r["De_Gy"] for r in ok])
+            sig = np.array([r["sigma_Gy"] for r in ok])
+            spread = float(np.ptp(De))
+            typical = float(np.median(sig))
+            verdict = ("the differences are within the errors" if spread <= 2 * typical else
+                       "the methods disagree by more than their errors: look for noise bias, baseline "
+                       "problems or other signals in the window")
+            text = (f"<p>Range of De between methods: {spread:.3g} Gy; typical error {typical:.2g} Gy: "
+                    f"{verdict}. The methods are not independent (same spectra), so agreement is "
+                    "expected only within the errors.</p>")
+        self.compare_html.value = (table_html(shown, [("method", "method"), ("De", "De (Gy)"),
+                                                      ("chi2", "χ²ν"), ("n", "points"), ("problem", "")])
+                                   + text)
+        if not ok:
+            self.compare_out.clear_output()
+            return
+        fig, ax = plt.subplots(figsize=(6, 0.5 + 0.55 * len(ok)))
+        y = np.arange(len(ok))[::-1]
+        ax.errorbar([r["De_Gy"] for r in ok], y, xerr=[r["sigma_Gy"] for r in ok], fmt="o", color="#1f6feb",
+                    ecolor="#57606a", elinewidth=1.5, capsize=3)
+        ax.set_yticks(y, [r["method"] for r in ok])
+        ax.axvline(0, color="#d0d7de", lw=1, zorder=0)
+        ax.set_xlabel("De (Gy)")
+        ax.spines[["top", "right"]].set_visible(False)
+        ax.set_ylim(-0.6, len(ok) - 0.4)
+        fig.tight_layout()
+        show_figure(self.compare_out, fig)
+
+    def comparison_csv(self) -> str:
+        if not self.comparison:
+            return ""
+        buf = io.StringIO()
+        wr = csv.DictWriter(buf, fieldnames=list(self.comparison[0]))
+        wr.writeheader()
+        wr.writerows(self.comparison)
+        return buf.getvalue()
 
     # ---- export ------------------------------------------------------------
     def settings(self) -> dict:
@@ -474,6 +576,9 @@ class DePanel:
         return buf.getvalue()
 
     def _export(self) -> None:
-        self.export_html.value = (download_link("eprdating_intensities.csv", self.results_csv(), "intensities (CSV)")
-                                  + download_link("eprdating_De_settings.json",
-                                                  json.dumps(self.settings(), indent=2), "settings (JSON)"))
+        html = (download_link("eprdating_intensities.csv", self.results_csv(), "intensities (CSV)")
+                + download_link("eprdating_De_settings.json", json.dumps(self.settings(), indent=2),
+                                "settings (JSON)"))
+        if self.comparison:
+            html += download_link("eprdating_De_methods.csv", self.comparison_csv(), "methods (CSV)")
+        self.export_html.value = html

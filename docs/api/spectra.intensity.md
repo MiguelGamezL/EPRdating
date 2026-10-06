@@ -16,7 +16,7 @@ noise. A wider window may take in other radicals (native signal, CO3-, SO2-,
 methyl) that the intensity method does not describe; a narrower one leaves
 few points for the baseline.
 
-**Contents:** [`IntensityWindow`](#intensitywindow), [`double_integral`](#double_integral), [`field_for_g`](#field_for_g), [`g_for_field`](#g_for_field), [`peak_to_peak`](#peak_to_peak), [`t1_b2_amplitude`](#t1_b2_amplitude)
+**Contents:** [`IntensityWindow`](#intensitywindow), [`double_integral`](#double_integral), [`field_for_g`](#field_for_g), [`g_for_field`](#g_for_field), [`outside_baseline`](#outside_baseline), [`peak_to_peak`](#peak_to_peak), [`t1_b2_amplitude`](#t1_b2_amplitude)
 
 ### `IntensityWindow`
 
@@ -43,12 +43,11 @@ For instance `IntensityWindow()` is 100 G around g = 2.0023,
 
 ### `double_integral`
 
-`double_integral(B, spectrum, baseline_points: int = 20, window: IntensityWindow | tuple[float, float] | None = None, freq_GHz: float | None = None) -> float`
+`double_integral(B, spectrum, baseline_points: int = 20, window: IntensityWindow | tuple[float, float] | None = None, freq_GHz: float | None = None, *, baseline: str = 'ends') -> float`
 
 Double integral of a derivative spectrum (proportional to spin number).
 
-A linear baseline estimated from `baseline_points` at each end (of the
-`window`, if given) is subtracted before each integration.
+- `baseline`: `"ends"` (default): a line through `baseline_points` at each end (of the `window`, if given) is subtracted before each integration. `"outside"` (needs a `window` with at least 5 points beyond it on each side): the derivative baseline is a line fitted to the sweep within one window width on each side of the window, which is far less noisy than a few end points and does not cut into the tails of the line (an error in it grows quadratically in the double integral); the absorption baseline is still a line through `baseline_points` at each end of the window.
 
 ### `field_for_g`
 
@@ -61,6 +60,14 @@ Resonance field (mT) for a given g at microwave frequency `freq_GHz`.
 `g_for_field(B_mT, freq_GHz: float)`
 
 g-value at field `B_mT` (mT).
+
+### `outside_baseline`
+
+`outside_baseline(B, y, m, reach: float = 1.0) -> np.ndarray | None`
+
+`y` minus a line fitted to the points outside the window mask `m`
+but within `reach` window widths of it, on both sides; None if either
+side has fewer than 5 such points.
 
 ### `peak_to_peak`
 
