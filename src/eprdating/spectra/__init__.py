@@ -9,6 +9,9 @@
                          double-integral intensities.
 * :mod:`.measure`        intensity of a spectrum inside the window, with errors.
 * :mod:`.combine`        weighted average of repeated spectra of an aliquot.
+* :mod:`.fragments`      (optional) enamel fragments measured at several
+                         angles: merged spectrum, angular profile, X-ray
+                         calibration.
 * :mod:`.deconvolution`  non-negative decomposition into component shapes.
 * :mod:`.epraya_backend` (optional) component shapes simulated with EPRAYA.
 """
@@ -16,6 +19,15 @@
 from .bruker import read_bes3t, read_esp
 from .combine import Combination, combine_spectra, combined_intensity
 from .deconvolution import ComponentBasis, DeconvolutionResult, component_vs_dose
+from .fragments import (
+    AngularSpectrum,
+    XrayCalibration,
+    angular_profile,
+    angular_set,
+    fragment_intensity,
+    merge_angular,
+    parse_angular_name,
+)
 from .freiberg import read_ms5000
 from .intensity import (
     DEFAULT_WINDOW,
@@ -39,13 +51,17 @@ from .preprocess import (
 
 __all__ = [
     "DEFAULT_WINDOW",
+    "AngularSpectrum",
     "Combination",
     "ComponentBasis",
     "DeconvolutionResult",
     "Intensity",
     "IntensityWindow",
     "Spectrum",
+    "XrayCalibration",
     "aligned_average",
+    "angular_profile",
+    "angular_set",
     "combine_intensities",
     "combine_spectra",
     "combined_intensity",
@@ -53,10 +69,13 @@ __all__ = [
     "double_integral",
     "empirical_template",
     "field_for_g",
+    "fragment_intensity",
     "g_for_field",
     "intensity",
+    "merge_angular",
     "noise_sigma",
     "normalise",
+    "parse_angular_name",
     "peak_to_peak",
     "pseudo_modulation",
     "read_bes3t",

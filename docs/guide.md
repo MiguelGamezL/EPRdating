@@ -214,6 +214,49 @@ combine_spectra([...]).summary()    # weights, noise and rejected scans
   survey sweep) are measured separately and combined with
   `combine_intensities`, a weighted mean with the same repeatability check.
 
+### Enamel fragments (optional)
+
+For fragments measured at several goniometer angles in up to three
+orientations (the non-destructive protocol of Grün et al. 2008 and
+Joannes-Boyau 2013), each irradiation step is measured on the average of its
+angular spectra, the *merged spectrum*. Nothing here is used unless you call
+it; powder analyses are unaffected.
+
+```python
+from eprdating import fit_dose_response
+from eprdating.spectra import (IntensityWindow, XrayCalibration, angular_set, angular_profile,
+                               fragment_intensity, read_epr)
+
+window = IntensityWindow(40, center_mT=336.1)          # MS5000 .csv exports have no frequency
+steps = {0: natural_files, 90: files_90s, 360: files_360s, ...}   # X-ray time (s): files
+times, I, S = [], [], []
+for t, files in steps.items():
+    items = angular_set([read_epr(f) for f in files])   # orientation and angle from the names
+    r = fragment_intensity(items, "peak_to_peak", window=window)
+    times.append(t); I.append(r.value); S.append(r.sigma)
+drc = fit_dose_response(times, I, "SSE", sigma=S)      # De in seconds
+De, De_sigma = XrayCalibration(0.235, 0.012).De(drc.De, drc.De_sigma)   # Gy
+angular_profile(items, window=window)                  # intensity per angle, per orientation
+```
+
+* Names such as `S_900s_X_gon_40dg_result.csv` give the orientation (X, Y,
+  Z) and the angle; another naming is read with `parse_angular_name(name,
+  pattern)` (a regular expression with groups `orientation` and `angle`) or
+  by building `AngularSpectrum(spectrum, orientation, angle)` directly.
+* `merge_angular` averages the angles of each orientation and then the
+  orientations, so that each weighs the same even if an angle is missing
+  (`balance=False` averages all spectra alike); spectra recorded at another
+  frequency are put on a common g scale.
+* The error is the noise of the merged spectrum. `orientation_scatter=True`
+  adds the scatter between orientations; it describes the anisotropy of the
+  fragment, which is largely the same at every step, so it is off by default.
+* The X-ray dose rate (Gy/s, calibrated against a known gamma dose) is kept
+  out of the fit: De is fitted in seconds and converted with the calibration
+  error added.
+* Not implemented: the separation of oriented and non-oriented CO2- radicals
+  ("isotropic correction") that some laboratories apply to the merged
+  spectrum before reading T1-B2.
+
 ### Dose-response and De
 
 ```python

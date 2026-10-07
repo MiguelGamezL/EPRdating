@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Optional protocol for enamel fragments measured at several angles
+  (`eprdating.spectra.fragments`): orientation and angle from file names,
+  orientation-balanced merged spectrum, angular profile, intensity of the
+  merged spectrum, X-ray calibration (De fitted in seconds, converted with
+  the calibration error). The isotropic correction is not included.
 - Alpha escape at the enamel surfaces (`ToothSample(alpha_escape=True)`,
   optional, also in the interface): own alphas leaving the unstripped enamel
   and alphas entering from dentine, sediment or cementum, per emitter

@@ -52,6 +52,7 @@ nav:
       - "Spectra: reading": api/spectra.io.md
       - "Spectra: Bruker": api/spectra.bruker.md
       - "Spectra: Freiberg MS5000": api/spectra.freiberg.md
+      - "Spectra: fragments": api/spectra.fragments.md
       - "Spectra: pre-processing": api/spectra.preprocess.md
       - "Spectra: intensity window": api/spectra.intensity.md
       - "Spectra: measuring": api/spectra.measure.md

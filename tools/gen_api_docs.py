@@ -33,6 +33,7 @@ PAGES = [
     ("eprdating.spectra.io", "EPR spectra: reading", None),
     ("eprdating.spectra.bruker", "EPR spectra: Bruker files", None),
     ("eprdating.spectra.freiberg", "EPR spectra: Freiberg MS5000 files", None),
+    ("eprdating.spectra.fragments", "EPR spectra: enamel fragments (optional)", None),
     ("eprdating.spectra.preprocess", "EPR spectra: pre-processing", None),
     ("eprdating.spectra.intensity", "EPR spectra: intensity window and scalar intensities", None),
     ("eprdating.spectra.measure", "EPR spectra: intensity of a spectrum", None),
