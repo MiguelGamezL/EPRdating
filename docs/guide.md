@@ -33,8 +33,9 @@ the added dose of each file and give the same aliquot label to repeated
 measurements, choose the intensity window (its width in G or mT, and its
 centre as a g value or as a field in G or mT: switching the centre unit
 converts the number with the spectra's frequency), method and template, compute,
-untick points if needed, choose the model and fit; *Compare methods* gives
-the De of the four intensity methods side by side. **Sediment**: upload the
+untick points if needed, choose the model and the weights (measured errors,
+1/I² or equal) and fit; *Compare methods* gives the De of the four
+intensity methods side by side. **Sediment**: upload the
 HPGe spectra, check the roles guessed from the file names (sample,
 background, IAEA references), give the masses and the water content, and
 analyse. **Age**: the De and the sediment arrive from the other tabs; fill

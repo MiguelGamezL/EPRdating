@@ -113,6 +113,11 @@ class DePanel:
                                 layout=w.Layout(width="160px"))
         self.max_dose = w.FloatText(value=0.0, description="Max dose (Gy, 0 = all)", style=STYLE,
                                     layout=w.Layout(width="220px"))
+        self.weights = w.Dropdown(
+            options=[("measured errors (noise, repeats)", "errors"), ("1/I² (relative)", "1/I^2"),
+                     ("equal", "none")],
+            value="errors", description="Weights", style=STYLE, layout=w.Layout(width="330px"),
+            tooltip="1/I²: every point with the same relative error, common practice in ESR dating")
         self.negative = checkbox("allow De < 0 (shows where the data extrapolate)")
         self.fit_btn = button("Fit", "line-chart", primary=True, width="120px")
         self.fit_btn.on_click(lambda _: self._guard(self.fit))
@@ -144,7 +149,7 @@ class DePanel:
             self.compute_btn, self.status, self.spectra_out,
             h("3. Dose response"),
             self.points_box,
-            w.HBox([self.model, self.max_dose]), self.negative, self.fit_btn,
+            w.HBox([self.model, self.max_dose, self.weights]), self.negative, self.fit_btn,
             self.fit_text, self.fit_out,
             w.HTML("<small>The same De with the four intensity methods (same files, window, ticked points "
                    "and model):</small>"),
@@ -466,10 +471,20 @@ class DePanel:
         show_figure(self.fit_out, ax.figure)
         d = self.drc
         self.fit_text.value = (f"<b>De = {d.De:.4g} ± {d.De_sigma:.2g} Gy</b> &nbsp; ({d.model}, "
-                               f"{len(use)} points, χ²ν = {d.chi2_red:.2f})")
+                               f"{len(use)} points, weights {self.weights.label}, {self._fit_quality(d)})")
         if self.on_de is not None and np.isfinite(d.De):
             self.on_de(float(d.De), float(d.De_sigma))
         return self.drc
+
+    def _fit_quality(self, d) -> str:
+        """χ²ν with measured errors; with 1/I² the relative scatter about the
+        curve (√χ²ν, since the errors are |I|); nothing for equal weights."""
+        if self.weights.value == "1/I^2" or (self.weights.value == "errors" and d.sigma is not None
+                                               and np.allclose(d.sigma, np.abs(d.intensity))):
+            return f"scatter {100 * np.sqrt(d.chi2_red):.2g} %"
+        if self.weights.value == "none" or d.sigma is None:
+            return "equal weights"
+        return f"χ²ν = {d.chi2_red:.2f}"
 
     def _fit(self, use: list[dict]):
         if len(use) < 3:
@@ -478,8 +493,13 @@ class DePanel:
         I = np.array([p["result"].value for p in use])
         S = np.array([p["result"].sigma for p in use])
         md = float(self.max_dose.value) or None
-        return fit_dose_response(D, I, self.model.value, sigma=S if np.all(np.isfinite(S) & (S > 0)) else None,
-                                 max_dose=md, De_min=-np.inf if self.negative.value else 0.0)
+        kw = {"max_dose": md, "De_min": -np.inf if self.negative.value else 0.0}
+        if self.weights.value == "errors" and np.all(np.isfinite(S) & (S > 0)):
+            return fit_dose_response(D, I, self.model.value, sigma=S, **kw)
+        # 1/I² (relative errors, scaled by the scatter) or equal weights; also
+        # the fallback when some measured errors are missing
+        weighting = "1/I^2" if self.weights.value == "1/I^2" else "none"
+        return fit_dose_response(D, I, self.model.value, weighting=weighting, **kw)
 
     # ---- comparison of methods ---------------------------------------------
     def compare_methods(self) -> list[dict]:
@@ -568,7 +588,7 @@ class DePanel:
             "method": self.method.value, "template_strongest": self.n_strong.value,
             "ref_power_mW": self.ref_power.value, "max_shift_mT": self.max_shift.value,
             "frequency_fallback_GHz": self.freq.value, "sweep_kept_mT": self.keep_mT.value,
-            "fit": {"model": self.model.value, "max_dose_Gy": self.max_dose.value,
+            "fit": {"model": self.model.value, "max_dose_Gy": self.max_dose.value, "weights": self.weights.value,
                     "De_may_be_negative": self.negative.value,
                     "points": {p["aliquot"]: bool(p["fit"].value) for p in self.points}},
             "De_Gy": None if self.drc is None else [self.drc.De, self.drc.De_sigma],

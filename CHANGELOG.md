@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Interface: weights of the dose-response fit (measured errors, 1/I² or
+  equal); with 1/I² the fit reports the relative scatter about the curve.
 - Optional protocol for enamel fragments measured at several angles
   (`eprdating.spectra.fragments`): orientation and angle from file names,
   orientation-balanced merged spectrum, angular profile, intensity of the

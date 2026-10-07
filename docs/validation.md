@@ -170,7 +170,8 @@ dose response cannot give. With the two labels as published, SSE gives
 to recover the published value (2943 Gy without 15 000 Gy, 1793 Gy without
 8000 Gy). With the two labels exchanged, SSE gives **2259 ± 297 Gy** (1/I²,
 χ²ν = 0.23) or 2273 ± 118 Gy (errors from the data and the rotations), and
-the template, T1-B2 and double-integral intensities give 2110-2273 Gy:
+the template, T1-B2 and double-integral intensities give 2110-2273 Gy (in
+the interface, peak-to-peak with 1/I² weights: 2286 ± 150 Gy):
 the published 2267 ± 99 Gy is reproduced. The archive most likely has the
 8000 and 15 000 Gy folders swapped (the published analysis evidently used
 the right doses). The spectra used are in `tests/data/calio_p4` (CC-BY 4.0,

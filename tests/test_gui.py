@@ -85,6 +85,14 @@ def test_de_tab_from_files_to_age_tab(series):
     de.model.value = "SSE"
     de.fit_btn.click()
     assert de.drc.model == "SSE"
+    de.weights.value = "1/I^2"
+    de.fit()
+    assert "scatter" in de.fit_text.value and de.settings()["fit"]["weights"] == "1/I^2"
+    assert np.allclose(de.drc.sigma, np.abs(de.drc.intensity))
+    de.weights.value = "none"
+    de.fit()
+    assert de.drc.sigma is None and "equal weights" in de.fit_text.value
+    de.weights.value = "errors"
 
     s = de.settings()
     json.dumps(s)
