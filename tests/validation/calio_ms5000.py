@@ -52,10 +52,12 @@ def main(folder: Path) -> None:
         S = np.array([r.sigma for r in rs])
         print(f"\n{method}: " + "  ".join(f"{d:g}:{i:.0f}" for d, i in zip(doses, I, strict=True)))
         for label, D in (("as labelled", doses), ("8000 <-> 15000", swapped)):
-            for wl, sig in (("1/I^2", 0.05 * I), ("data", S)):
-                f = fit_dose_response(D, I, "SSE", sigma=sig)
-                print(f"  SSE {label:15s} weights {wl:6s} De = {f.De:6.0f} ± {f.De_sigma:4.0f} Gy  "
-                      f"(chi2_red {f.chi2_red:.2f})")
+            f = fit_dose_response(D, I, "SSE", weighting="1/I^2")
+            print(f"  SSE {label:15s} weights 1/I^2  De = {f.De:6.0f} ± {f.De_sigma:4.0f} Gy  "
+                  f"(scatter {100 * np.sqrt(f.chi2_red):.1f} %)")
+            f = fit_dose_response(D, I, "SSE", sigma=S)
+            print(f"  SSE {label:15s} weights data   De = {f.De:6.0f} ± {f.De_sigma:4.0f} Gy  "
+                  f"(chi2_red {f.chi2_red:.1f})")
     print(f"\npublished (SSE): {PUBLISHED[0]:.0f} ± {PUBLISHED[1]:.0f} Gy")
 
 

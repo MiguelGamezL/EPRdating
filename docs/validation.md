@@ -166,12 +166,11 @@ runs when there is none), intensities as the peak-to-peak amplitude in a
 
 The 8000 Gy aliquot is 24 % *above* the 15 000 Gy one, which a saturating
 dose response cannot give. With the two labels as published, SSE gives
-1743 ± 389 Gy (1/I² weights, χ²ν = 3.0) and neither aliquot can be dropped
+1743 ± 389 Gy (1/I² weights, relative scatter 8.6 %) and neither aliquot can be dropped
 to recover the published value (2943 Gy without 15 000 Gy, 1793 Gy without
-8000 Gy). With the two labels exchanged, SSE gives **2259 ± 297 Gy** (1/I²,
-χ²ν = 0.23) or 2273 ± 118 Gy (errors from the data and the rotations), and
-the template, T1-B2 and double-integral intensities give 2110-2273 Gy (in
-the interface, peak-to-peak with 1/I² weights: 2286 ± 150 Gy):
+8000 Gy). With the two labels exchanged, SSE gives **2259 ± 142 Gy** (1/I²,
+relative scatter 2.4 %) or 2273 ± 118 Gy (errors from the data and the rotations), and
+the template, T1-B2 and double-integral intensities give 2110-2273 Gy:
 the published 2267 ± 99 Gy is reproduced. The archive most likely has the
 8000 and 15 000 Gy folders swapped (the published analysis evidently used
 the right doses). The spectra used are in `tests/data/calio_p4` (CC-BY 4.0,

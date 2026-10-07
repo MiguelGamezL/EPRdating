@@ -47,8 +47,9 @@ def test_published_De_with_the_8000_and_15000_Gy_labels_exchanged(series):
     assert I[doses == 8000][0] > 1.2 * I[doses == 15000][0]
     swapped = doses.copy()
     swapped[doses == 8000], swapped[doses == 15000] = 15000, 8000
-    f = fit_dose_response(swapped, I, "SSE", sigma=0.05 * I)
+    f = fit_dose_response(swapped, I, "SSE", weighting="1/I^2")
     assert f.De == pytest.approx(PUBLISHED[0], abs=PUBLISHED[1])
-    assert f.chi2_red < 1
-    labelled = fit_dose_response(doses, I, "SSE", sigma=0.05 * I)
-    assert labelled.chi2_red > 2 and labelled.De < 0.85 * PUBLISHED[0]
+    assert f.De_sigma < 1.5 * PUBLISHED[1]
+    assert np.sqrt(f.chi2_red) < 0.04  # relative scatter about the curve
+    labelled = fit_dose_response(doses, I, "SSE", weighting="1/I^2")
+    assert np.sqrt(labelled.chi2_red) > 0.07 and labelled.De < 0.85 * PUBLISHED[0]
