@@ -23,7 +23,7 @@ import numpy as np
 from scipy.optimize import brentq
 
 from ._types import ValueLike, as_value
-from .alpha import natural_u_k_ratio, segment_k_ratios
+from .alpha import escape_fractions, natural_u_k_ratio, segment_k_ratios, th232_k_ratio
 from .beta import BetaGeometry
 from .dose_rate import (
     DEFAULT_FACTORS,
@@ -200,6 +200,17 @@ class ToothSample:
         (as in ROSY): k varies with alpha energy as R(E)/E, so each U-series
         segment gets its own efficiency (see :mod:`eprdating.alpha`).
     alpha_eref : reference alpha energy for ``k_alpha`` in MeV (ROSY: 5.3).
+    alpha_escape : account for alpha particles crossing the enamel surfaces
+        (needs a :class:`~eprdating.onegroup.ToothLayers` geometry; default
+        False, as DATA). Alphas born within their range (12-40 µm) of a
+        surface partly leave the enamel, and those of the dentine, the
+        sediment (or cementum) partly enter it; both are averaged over the
+        enamel left after stripping, emitter by emitter (see
+        :func:`eprdating.alpha.escape_fractions`). The incoming alphas appear
+        as the components "dentine alpha" and "sediment alpha" (or
+        "cementum alpha"). With 20-40 µm stripped on each side the effect
+        vanishes; without stripping it is about R/(8T) per surface (~1 % for
+        300 µm of enamel).
     dentine_water : water content used for the dentine beta contribution.
     enamel_water : water content of the enamel (corrects the internal alpha
         and beta dose rates, Zimmerman coefficients).
@@ -258,6 +269,7 @@ class ToothSample:
     u234_u238_is: str = "present"
     alpha_eref: float = 5.3
     beta_by_segment: bool = True
+    alpha_escape: bool = False
 
     _SCALARS = (
         "De", "enamel_U", "dentine_U", "k_alpha", "dentine_water",
@@ -426,15 +438,72 @@ class ToothSample:
                 cem_beta = v["cementum_U"] * cU["beta"] / (1.0 + v["cementum_water"]) * og["cementum_U"]
             else:
                 cem_beta, Gb_c = 0.0, None
+        alpha_in: list[DoseRateComponent] = []
+        if self.alpha_escape:
+            k_scale, Ga_e, alpha_in = self._alpha_escape(v, cf, use, usd, usc, up_d, up_c)
         en_alpha = water_correction(k_scale * v["k_alpha"] * v["enamel_U"] * cU["alpha"], v["enamel_water"], "alpha")
         en_beta = water_correction(en_beta, v["enamel_water"], "beta")
         return [
             DoseRateComponent("enamel alpha", en_alpha, up_e, Ga_e),
+            *alpha_in,
             DoseRateComponent("enamel beta", en_beta, up_e, Gb_e),
             DoseRateComponent("dentine beta", den_beta, up_d, Gb_d),
             DoseRateComponent("cementum beta", cem_beta, up_c, Gb_c),
             *self._external(v, cf),
         ]
+
+    def _alpha_escape(self, v, cf, use, usd, usc, up_d, up_c):
+        """Enamel alpha with escape through its surfaces, and the alpha dose
+        entering it from the neighbouring layers: ``(k_scale, G, components)``."""
+        if not isinstance(self.beta, ToothLayers):
+            raise TypeError("alpha_escape needs a ToothLayers geometry (thicknesses and stripping)")
+        geo = (self.beta.nominal_values() if not self.sample_geometry else
+               {k: v.get("geo_" + k, as_value(getattr(self.beta, k)).value) for k in self.beta.GEOMETRY})
+        energy = self.alpha_efficiency == "energy"
+        outer = self.beta.cementum if geo["cementum_um"] > 0 else self.beta.sediment
+        key = (geo["enamel_um"], geo["strip_outer_um"], geo["strip_inner_um"], geo["enamel_density"],
+               energy, self.alpha_eref, outer.key)
+        cache = self.__dict__.setdefault("_alpha_cache", {})
+        if key not in cache:
+            if len(cache) > 8:
+                cache.clear()
+            cache[key] = escape_fractions(*key[:4], energy=energy, e_ref=self.alpha_eref,
+                                          material=self.beta.enamel, outer_material=outer,
+                                          inner_material=self.beta.dentine)
+        esc = cache[key]
+        seg_k = segment_k_ratios(self.alpha_eref) if energy else dict.fromkeys(esc["own"], 1.0)
+        part = self._partition()["alpha"]
+
+        def weights(side):
+            w = {s: seg_k[s] * esc[side][s] for s in part}
+            norm = sum(part[s] * w[s] for s in part)
+            return norm, ({s: x / norm for s, x in w.items()} if norm > 0 else None)
+
+        k_alpha, cU = v["k_alpha"], cf.get("U", "alpha").value
+        k_own, w_own = weights("own")
+        G_own = use.G("alpha", w_own) if use else None
+        comps = []
+        k_in, w_in = weights("inner")
+        rate = water_correction(k_alpha * k_in * v["dentine_U"] * cU, v["dentine_water"], "alpha")
+        comps.append(DoseRateComponent("dentine alpha", rate, up_d, usd.G("alpha", w_in) if usd and w_in else None))
+        k_out, w_out = weights("outer")
+        if geo["cementum_um"] > 0:
+            rate = water_correction(k_alpha * k_out * v["cementum_U"] * cU, v["cementum_water"], "alpha")
+            comps.append(DoseRateComponent("cementum alpha", rate, up_c,
+                                           usc.G("alpha", w_out) if usc and w_out else None))
+        else:
+            U, ura = v["sed_U"], v.get("sed_U_ra226")
+            mult = dict.fromkeys(part, 1.0)
+            if ura is not None and U > 0:
+                mult["Rn222"] = ura / U
+                mult["Th230"] = 1.0 + (ura / U - 1.0) * RA226_SHARE_OF_TH230["alpha"]
+            u_frac = sum(part[s] * seg_k[s] * esc["outer"][s] * mult[s] for s in part)
+            th_k = th232_k_ratio(self.alpha_eref) if energy else 1.0
+            dry = (U * cU * u_frac
+                   + v["sed_Th"] * cf.get("Th", "alpha").value * th_k * esc["outer"]["Th232"])
+            comps.append(DoseRateComponent("sediment alpha",
+                                           water_correction(k_alpha * dry, v["sed_water"], "alpha")))
+        return k_own, G_own, comps
 
     def _external(self, v: dict[str, float], cf: ConversionFactors) -> list[DoseRateComponent]:
         """Sediment beta, gamma and cosmic components, following any history."""

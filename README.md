@@ -232,8 +232,13 @@ reference materials to U, Th, K and the infinite-matrix dose rates.
    1994, DRAC's tables) agrees with Luminescence's within 2.5 %; under less
    than ~1.5 hg/cm² (about 0.8 m of sediment) the two fits of the soft
    component differ by up to 7 % (`tests/test_reference_data.py`).
-5. **Alpha escape at layer surfaces** is not modelled (ROSY's alpha dose is
-   ~1 % lower for 300 µm enamel without stripping).
+5. **Alpha escape at layer surfaces** is optional (`alpha_escape=True`,
+   needs a `ToothLayers` geometry; off by default, as in DATA). It matters
+   only for enamel not stripped beyond the alpha range (12–40 µm): ~1 % of
+   the enamel alpha dose for 300 µm, plus the alphas entering from dentine
+   and sediment. Tracks are straight with constant stopping per emitter;
+   the incoming alpha dose from dentine is ~12 % above ROSY's (a
+   component below 1 % of the total in realistic cases).
 6. **Radon loss from the sediment** is entered as a 226Ra deficit
    (`Sediment(U_ra226=...)`) and lowers only the 226Ra-onward part of the U
    chain (about 59 % of its beta dose). Published USESR values behave as if
@@ -245,7 +250,6 @@ reference materials to U, Th, K and the infinite-matrix dose rates.
 ## Roadmap
 
 - JEOL spectrometer files.
-- Alpha escape at layer surfaces (see *Known limitations*).
 - Releases on PyPI; article in *Quaternary Geochronology* (in preparation).
 
 What each release contains: `CHANGELOG.md`.

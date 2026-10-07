@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Alpha escape at the enamel surfaces (`ToothSample(alpha_escape=True)`,
+  optional, also in the interface): own alphas leaving the unstripped enamel
+  and alphas entering from dentine, sediment or cementum, per emitter
+  (`eprdating.alpha.escape_fractions`). Brings unstripped ROSY reference
+  ages from up to 5-8 % to within 0.5-2.5 %.
 - Interactive interface for Jupyter and Google Colab (`eprdating.gui.app`,
   extra `gui`): equivalent dose, sediment gamma spectrometry and age in
   three tabs, with downloads of results and settings.

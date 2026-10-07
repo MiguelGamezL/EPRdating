@@ -17,6 +17,7 @@ reference cases. Details: [`tests/validation/ROSY_FINDINGS.md`](../tests/validat
 | One-group beta attenuation (O'Brien et al. 1964, no fitted parameter) | dentine factors to three decimals; self-dose 1–2.5 %; sediment 2–5 % |
 | Full ages, EU/LU/CU, 20–330 ka, incl. the six real teeth of Brennan et al. (1997) | **−0.6 to +0.7 %** |
 | Monte Carlo uncertainties vs ROSY's errors | within 25 % (geometry sampled) |
+| Alpha escape at the enamel surfaces (`alpha_escape=True`, unstripped enamel 300–3000 µm) | ages within 0.5 % (enamel U), 2 % (dentine U only), 2.5 % (sediment U only); without it up to 5 % and 8 % |
 
 ## Dose rates and ages: DATA
 

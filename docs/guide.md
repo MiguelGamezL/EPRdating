@@ -309,6 +309,16 @@ plot.plot_dose_rate(sample.age())
 plot.plot_age_distribution(mc, reference=(0.56, 2.44))   # e.g. a radiocarbon range
 ```
 
+**Alpha particles near the surfaces.** Alphas travel 12–40 µm in enamel.
+Within that distance of a surface part of the enamel's own alpha dose
+leaves, and alphas from the dentine, the sediment (or the cementum) enter.
+Stripping 20–40 µm from each side removes both; for unstripped enamel
+`ToothSample(..., alpha_escape=True)` accounts for them (needs a
+`ToothLayers` geometry), emitter by emitter, averaged over the enamel left
+after stripping. The incoming alphas appear as the components
+`"dentine alpha"` and `"sediment alpha"` (or `"cementum alpha"`). It is off
+by default, as in DATA; ROSY includes it.
+
 With U-series data of the dental tissues use `USESRSample` (combined
 U-series/ESR): `age()` solves the uptake parameter of each tissue with the
 age (US-ESR, Grün et al. 1988) and `age(model="CSUS")` takes the U as taken

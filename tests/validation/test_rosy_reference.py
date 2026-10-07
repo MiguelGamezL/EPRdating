@@ -193,3 +193,36 @@ def test_ages_with_onegroup_and_energy_alpha_within_1_percent(cid):
             uptake_enamel=USModel(pe), uptake_dentine=USModel(pd), factors="adamiec_aitken_1998", **env,
         )
         assert s.age().age == pytest.approx(RES[cid][mode]["age"] / 1000, rel=0.01), mode
+
+
+# --- alpha escape at the enamel surfaces --------------------------------------
+ESCAPE_CASES = {c: tol for c, tol in
+                [(c, 0.005) for c in RES if c.startswith(("D_", "H_"))]
+                + [(c, 0.02) for c in RES if c.startswith("E_")]
+                + [(c, 0.025) for c in RES if c.startswith("F_sedU10_enThick")]}
+
+
+@pytest.mark.parametrize("cid", sorted(ESCAPE_CASES))
+def test_alpha_escape_brings_unstripped_ages_closer_to_rosy(cid):
+    """ROSY accounts for alphas crossing the enamel surfaces (none of these
+    cases is stripped). With ``alpha_escape`` the enamel-thickness trend and
+    the alphas entering from dentine and sediment follow ROSY: within 0.5 %
+    (D, H), 2 % (dentine U only) and 2.5 % (sediment U only), against up to
+    5 % and 8 % without it (see ROSY_FINDINGS.md)."""
+    p = CASES[cid]
+    geo = ToothLayers(enamel_um=_v(p["thick_en"]), dentine_um=_v(p["thick_den"]),
+                      enamel_density=_v(p["density_en"]), dentine_density=_v(p["density_den"]),
+                      sediment_density=_v(p["density_sed"]))
+    if p["env_option"] == 2:
+        env = {"gamma": None, "cosmic": cosmic_dose_rate_sea_level(_v(p["depth"]), _v(p["overburden_density"]))}
+    else:
+        env = {"gamma": _v(p["gamma_cosmic"]) / 1000, "cosmic": 0.0}
+    for mode, pp in (("EU", -1.0), ("LU", 0.0)):
+        s = ToothSample(
+            De=_v(p["De"]), enamel_U=_v(p["U_en"]), dentine_U=_v(p["U_den"]),
+            sediment=Sediment(U=_v(p["U_sed"]), Th=_v(p["Th_sed"]), K=_v(p["K_sed"]),
+                              water=_v(p["water_sed"]) / 100),
+            beta=geo, k_alpha=_v(p["alpha_eff"]), uptake_enamel=USModel(pp), uptake_dentine=USModel(pp),
+            factors="adamiec_aitken_1998", alpha_efficiency="energy", alpha_escape=True, **env,
+        )
+        assert s.age().age == pytest.approx(RES[cid][mode]["age"] / 1000, rel=ESCAPE_CASES[cid]), mode

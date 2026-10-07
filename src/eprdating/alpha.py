@@ -105,3 +105,112 @@ def natural_u_k_ratio(e_ref: float = 5.3, material: Material = HYDROXYAPATITE) -
         num += w * seg[s]
         den += w
     return num / den
+
+
+# --------------------------------------------------------------------------
+# Alpha escape at layer surfaces
+# --------------------------------------------------------------------------
+#
+# An alpha particle born within its range R of a surface may leave the layer,
+# and alphas from the neighbouring medium may enter it. With straight tracks
+# and an efficiency proportional to track length (see above), a point at
+# depth x (u = x/R <= 1) loses the fraction
+#
+#     e(u) = [(1 - u) + u ln u] / 2
+#
+# of the track length of its own alphas through that surface (isotropic
+# emission), and receives the same fraction e(u) of the infinite-matrix alpha
+# dose of the medium on the other side, scaled by the ratio of the alpha
+# ranges per unit mass in that medium and in the layer (an alpha crossing
+# a medium of shorter mass range has less of its track left for the layer:
+# 0.89 for dentine, 0.96 for silica against hydroxyapatite). Averaged over a
+# whole layer of thickness T >= R the loss is R/(8T) per surface. Each
+# emitter has its own range.
+
+#: alpha emitters of the 232Th chain: (energy in MeV, energy released per
+#: decay of the chain parent in MeV), Adamiec & Aitken (1998); 212Bi decays
+#: by alpha in 36 % of cases, 212Po follows the other 64 %.
+TH232_EMITTERS = [(4.01, 4.01), (5.42, 5.42), (5.69, 5.69), (6.29, 6.29), (6.78, 6.78),
+                  (6.05, 0.36 * 6.05), (8.78, 0.64 * 8.78)]
+
+
+def _escape_integral(u: float) -> float:
+    """∫_0^u e(t) dt, with e(t) = [(1 - t) + t ln t]/2 for t <= 1 and 0 beyond."""
+    u = min(max(u, 0.0), 1.0)
+    if u == 0.0:
+        return 0.0
+    return 0.5 * (u - 0.75 * u * u + 0.5 * u * u * math.log(u))
+
+
+def surface_fraction(a_um: float, b_um: float, range_um: float) -> float:
+    """Mean of e(x/R) over distances x from a surface between ``a_um`` and
+    ``b_um``: the fraction of the alpha track length lost through that
+    surface (or received from beyond it), averaged over the slice."""
+    if b_um <= a_um:
+        x = max(a_um, 0.0)
+        u = x / range_um
+        return 0.0 if u >= 1 else 0.5 * ((1 - u) + (u * math.log(u) if u > 0 else 0.0))
+    return range_um * (_escape_integral(b_um / range_um) - _escape_integral(a_um / range_um)) / (b_um - a_um)
+
+
+def slab_fractions(thickness_um: float, strip_outer_um: float, strip_inner_um: float,
+                   range_um: float) -> tuple[float, float, float]:
+    """``(own, from_outer, from_inner)`` for the measured part of a layer.
+
+    own        : fraction of the layer's own infinite-matrix alpha dose kept;
+    from_outer : fraction of the outer medium's infinite-matrix alpha dose
+                 received (likewise ``from_inner``).
+    The measured part is what remains after stripping ``strip_outer_um`` and
+    ``strip_inner_um`` from the two faces.
+    """
+    a, b = strip_outer_um, thickness_um - strip_inner_um
+    if b < a:
+        raise ValueError("the stripping removes the whole layer")
+    outer = surface_fraction(a, b, range_um)
+    inner = surface_fraction(strip_inner_um, thickness_um - strip_outer_um, range_um)
+    return 1.0 - outer - inner, outer, inner
+
+
+def _weighted(emitters, fn, energy: bool, e_ref: float, material: Material) -> float:
+    w = [x * (k_ratio(E, e_ref, material) if energy else 1.0) for E, x in emitters]
+    return sum(wi * fn(E) for wi, (E, _) in zip(w, emitters, strict=True)) / sum(w)
+
+
+def escape_fractions(thickness_um: float, strip_outer_um: float = 0.0, strip_inner_um: float = 0.0,
+                     density: float = 3.0, energy: bool = False, e_ref: float = 5.3,
+                     material: Material = HYDROXYAPATITE, outer_material: Material | None = None,
+                     inner_material: Material | None = None) -> dict:
+    """Alpha escape for a layer, per U-series segment and for the 232Th chain.
+
+    Returns ``{"own": {segment: f}, "outer": {...}, "inner": {...}}`` with the
+    U-series segments of :data:`ALPHA_EMITTERS` and ``"Th232"``; each value is
+    averaged over the emitters of the segment weighted by their alpha dose
+    (times the relative efficiency k(E)/k_ref when ``energy``). Ranges are
+    those in ``material`` at ``density`` (g/cm³); the incoming fractions are
+    scaled by the mass-range ratio of ``outer_material`` / ``inner_material``
+    (the neighbouring media) to ``material`` when they are given.
+    """
+    out: dict = {"own": {}, "outer": {}, "inner": {}}
+    chains = {**ALPHA_EMITTERS, "Th232": TH232_EMITTERS}
+    fractions = {}
+    for emitters in chains.values():
+        for E, _ in emitters:
+            if E not in fractions:
+                r_mass = alpha_range(E, material)
+                own, outer, inner = slab_fractions(thickness_um, strip_outer_um, strip_inner_um,
+                                                   r_mass / density * 1e4)  # range in µm
+                if outer_material is not None:
+                    outer *= alpha_range(E, outer_material) / r_mass
+                if inner_material is not None:
+                    inner *= alpha_range(E, inner_material) / r_mass
+                fractions[E] = (own, outer, inner)
+    for seg, emitters in chains.items():
+        for i, key in enumerate(("own", "outer", "inner")):
+            out[key][seg] = _weighted(emitters, lambda E, i=i: fractions[E][i], energy, e_ref, material)
+    return out
+
+
+def th232_k_ratio(e_ref: float = 5.3, material: Material = HYDROXYAPATITE) -> float:
+    """k/k_ref for the 232Th chain in secular equilibrium."""
+    tot = sum(x for _, x in TH232_EMITTERS)
+    return sum(x * k_ratio(E, e_ref, material) for E, x in TH232_EMITTERS) / tot

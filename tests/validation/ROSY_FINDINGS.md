@@ -163,8 +163,37 @@ within −0.2 to +2.6 % (largest for total radon loss and the youngest case),
 and full ages with one-group beta plus energy-dependent alpha agree with ROSY
 within **−0.6 to +0.7 %** (−0.58 to +0.67 %; mean |deviation| 0.4 %, against 0.6 % with constant
 k). A small residual remains for thin enamel (300 µm: ROSY's alpha dose is
-~1 % lower), which suggests ROSY also accounts for alpha escape at the layer
-surfaces; EPRdating does not.
+~1 % lower), because ROSY also accounts for alpha escape at the layer
+surfaces; see below.
+
+## Alpha escape at the enamel surfaces (`alpha_escape=True`)
+
+ROSY reports, for unstripped enamel, an alpha dose to the enamel from the
+dentine U and from the sediment U and Th, inversely proportional to the
+enamel thickness (dentine U 10 ppm: 24.3, 12.6, 7.8, 5.3 µGy/a for 300, 600,
+1000, 1500 µm), and an enamel self alpha dose slightly lower for thin
+enamel. EPRdating models both with straight tracks: a point at depth x loses
+through a surface the fraction e(u) = [(1 − u) + u ln u]/2 (u = x/R) of the
+track length of its own alphas and receives the same fraction of the
+neighbour's infinite-matrix alpha dose, scaled by the ratio of mass ranges
+(dentine/enamel 0.89, silica/enamel 0.96); per emitter, with its CSDA range
+in enamel, averaged over the enamel left after stripping. Nothing is fitted
+to ROSY. Against the reference cases (EU, age-averaged rates at ROSY's age):
+
+| Component | Without | With `alpha_escape` |
+|---|---|---|
+| Enamel self alpha, 300 → 3000 µm | +1.2 → −0.2 % (trend with thickness) | −0.4 → −0.3 % (no trend) |
+| Alpha from sediment U (10 ppm) / Th (30 ppm) | missing | +3.9 % / +2.3 % |
+| Alpha from dentine U | missing | +12 to +16 % |
+
+Ages: enamel-thickness series within 0.25 % (were −1.05 % at 300 µm),
+realistic cases H within 0.11 % (were +0.67 %), dentine-U-only cases within
+−0.85 to −1.9 % (were +2.8 to +5.1 %), sediment-U-only cases +0.6 to +2.0 %
+(were +6.3 to +8.3 %), sediment Th only +3.7 % (was +13.3 %). The remaining
++12 % on the dentine alphas is not explained (ROSY's dentine stopping power
+or a different treatment of the crossing); it is below 1 % of the total dose
+in realistic cases. Stripped cases (Brennan et al. 1997) are unchanged.
+`test_alpha_escape_brings_unstripped_ages_closer_to_rosy` checks these.
 
 `ToothSample(alpha_efficiency="energy")` selects this option; the default
 remains a constant k, as in DATA.

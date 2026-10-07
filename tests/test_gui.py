@@ -196,7 +196,10 @@ def test_age_tab():
     age.cosmic_mode.value = "given"
     age.gamma_mode.value = "measured in situ"
     age.gamma.value_widget.value = 0.6
+    age.alpha_escape.value = True
     age.compute()
+    assert "dentine alpha" in age.result.components
+    assert age.settings()["alpha_escape"] is True
     json.dumps(age.settings())
     age.export_btn.click()
     assert "download=" in age.export_html.value

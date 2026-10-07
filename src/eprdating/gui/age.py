@@ -66,6 +66,8 @@ class AgePanel:
         self.r_d = v("²³⁴U/²³⁸U dentine", 1.0, 0.0, "")
         self.rn_d = v("Radon loss dentine", 0.0, 0.0, "(0-1)")
         self.by_segment = checkbox("beta attenuation per U-series segment (as ROSY; untick for DATA's single factor)")
+        self.alpha_escape = checkbox("alpha escape at the enamel surfaces (as ROSY; matters without stripping)",
+                                     value=False)
         self.factors = w.Dropdown(options=available_factor_sets(), value="guerin_2011",
                                   description="Conversion factors", style=STYLE)
 
@@ -109,7 +111,7 @@ class AgePanel:
             w.HBox([w.VBox([self.dentine_water, self.enamel_water]),
                     w.VBox([self.k_alpha, self.alpha_mode])]),
             w.HBox([self.up_e, self.p_e]), w.HBox([self.up_d, self.p_d]),
-            self.by_segment, self.factors,
+            self.by_segment, self.alpha_escape, self.factors,
             h("3. Sediment and site"),
             w.HBox([w.VBox([self.sed_U, self.sed_Th, self.sed_K]), w.VBox([self.sed_Ura, self.sed_water])]),
             self.sed_note,
@@ -181,6 +183,7 @@ class AgePanel:
             uptake_enamel=self._uptake(self.up_e, self.p_e), uptake_dentine=self._uptake(self.up_d, self.p_d),
             u234_u238_enamel=rv(self.r_e), u234_u238_dentine=rv(self.r_d), radon_loss_dentine=rv(self.rn_d),
             factors=self.factors.value, beta_by_segment=bool(self.by_segment.value),
+            alpha_escape=bool(self.alpha_escape.value),
         )
 
     def compute(self):
@@ -215,6 +218,7 @@ class AgePanel:
             **{k: rv(b) for k, b in boxes.items()},
             "alpha_efficiency": self.alpha_mode.value, "uptake_enamel": [self.up_e.value, self.p_e.value],
             "uptake_dentine": [self.up_d.value, self.p_d.value], "beta_by_segment": self.by_segment.value,
+            "alpha_escape": self.alpha_escape.value,
             "factors": self.factors.value, "gamma_mode": self.gamma_mode.value,
             "cosmic_mode": self.cosmic_mode.value,
             "site": {"depth_m": self.depth.value, "density": self.density.value, "lat": self.lat.value,
