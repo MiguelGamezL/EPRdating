@@ -15,9 +15,11 @@ Units everywhere: field in mT, frequency in GHz, dose in Gy, dose rate in
 Gy/ka, age in ka, U and Th in µg/g (ppm), K in %. Any input can be a number,
 a `(value, sigma)` tuple or a `Value`.
 
-### Interface (no code)
+### Interface (optional, no code)
 
-In Jupyter or Google Colab:
+The rest of this guide uses the functions directly, which is all the package needs. For
+Jupyter or Google Colab there is also an interface (extra `gui`) that calls the
+same functions:
 
 ```python
 %pip install "eprdating[gui]"

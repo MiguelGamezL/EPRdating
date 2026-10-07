@@ -55,6 +55,8 @@ and read your files after uploading them or mounting Google Drive
 ## Where to go next
 
 - **[User guide](guide.md)** — the three steps with working code.
+  An optional interface for Jupyter/Colab (`pip install "eprdating[gui]"`) runs
+  the same steps without code.
 - **[Figures](plotting.md)** — what each plotting function draws.
 - **[API reference](api/index.md)** — every public function and class.
 - **[Validation](validation.md)** — what has been checked, against what.

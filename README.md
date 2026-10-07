@@ -59,6 +59,7 @@ validated against both programs run as black boxes.
 ```bash
 pip install eprdating              # core: numpy + scipy
 pip install "eprdating[plot]"      # + matplotlib, for the figures
+pip install "eprdating[gui]"       # + ipywidgets, for the optional interface
 ```
 
 The development version: `pip install "eprdating @ git+https://github.com/MiguelGamezL/EPRdating"`.
@@ -78,11 +79,47 @@ because it pulls JAX, numba, ipywidgets and tkinter.
 
 ## Quick start
 
-```python
-from eprdating import (fit_dose_response, ToothSample, ToothLayers, Sediment,
-                       LinearUptake, cosmic_dose_rate)
+EPRdating can be used in two ways that run the same code: calling its
+functions from any Python script or notebook, or through an optional
+interface for Jupyter and Google Colab. The interface is a convenience
+layer; everything it does is available as functions.
 
-drc = fit_dose_response(dose, intensity, model="SSE", weighting="1/I^2")
+### With code
+
+From spectra to De: read the spectra of each aliquot (repeated
+measurements are averaged), measure the intensity in a field window and fit
+the dose response.
+
+```python
+from eprdating import fit_dose_response
+from eprdating.spectra import IntensityWindow, combined_intensity, read_epr
+
+window = IntensityWindow(100, center_g=2.0023)   # the default; or center_mT=336.5, unit="mT"
+aliquots = {                                     # added dose (Gy): files of that aliquot
+    0: ["nat_rot1.DSC", "nat_rot2.DSC"],
+    100: ["100Gy_rot1.DSC", "100Gy_rot2.DSC"],
+    300: ["300Gy_rot1.DSC", "300Gy_rot2.DSC"],
+    1000: ["1000Gy_rot1.DSC", "1000Gy_rot2.DSC"],
+}
+doses, I, S = [], [], []
+for dose, files in aliquots.items():
+    r = combined_intensity([read_epr(f) for f in files], "peak_to_peak", window=window)
+    doses.append(dose); I.append(r.value); S.append(r.sigma)
+
+drc = fit_dose_response(doses, I, model="SSE", sigma=S)
+print(drc.De, drc.De_sigma)
+```
+
+`read_epr` reads Bruker, Freiberg MS5000, `.dat`/`.par` and text files. The
+intensity can also be `"t1_b2"`, `"double_integral"` or `"template"` (a
+line-shape fit; `empirical_template` builds the template from the strongest
+spectra). `tests/validation/calio_ms5000.py` is a complete example on a
+public dose series.
+
+From De to age:
+
+```python
+from eprdating import ToothSample, ToothLayers, Sediment, LinearUptake, cosmic_dose_rate
 
 sample = ToothSample(
     De=(drc.De, drc.De_sigma),
@@ -99,13 +136,15 @@ print(sample.age_mc(n=2000, seed=42).summary())
 
 Every input accepts a number, a `(value, sigma)` tuple or a `Value`.
 
-### Interface
+### Interface (optional)
 
 For Jupyter and Google Colab, an interactive interface runs the whole chain
 without code: load spectra, set the doses and the intensity window, tick
-the points of the dose response, choose the model, analyse the HPGe spectra
-of the sediment and compute the age. The De and the sediment flow into the
-age tab; every tab exports its results and the settings that reproduce them.
+the points of the dose response, choose the model, compare the intensity
+methods, analyse the HPGe spectra of the sediment and compute the age. The
+De and the sediment flow into the age tab; every tab exports its results and
+the settings (JSON) that reproduce them with the functions above. It needs
+the `gui` extra; the rest of the package does not.
 
 ```python
 %pip install "eprdating[gui]"
@@ -114,6 +153,10 @@ app()
 ```
 
 <img src="https://raw.githubusercontent.com/MiguelGamezL/EPRdating/main/docs/img/gui.png" alt="EPRdating interface: equivalent-dose tab" width="640">
+
+The tabs are also objects that can be driven from code (`a = app()`, then
+`a.de.load(files)`, `a.de.compute()`, `a.de.fit()`, `a.de.compare_methods()`).
+
 Units: Gy, Gy/ka, ka, ppm (U, Th), % (K), mT, GHz.
 
 **Documentation:** [overview](https://github.com/MiguelGamezL/EPRdating/blob/main/docs/index.md) · [user guide](https://github.com/MiguelGamezL/EPRdating/blob/main/docs/guide.md) ·

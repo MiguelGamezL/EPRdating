@@ -5,6 +5,8 @@
 - Interactive interface for Jupyter and Google Colab (`eprdating.gui.app`,
   extra `gui`): equivalent dose, sediment gamma spectrometry and age in
   three tabs, with downloads of results and settings.
+- README: quick start from spectra to De with the functions; the interface
+  is presented as optional (extra `gui`).
 - `eprdating.spectra.empirical_template`: line-shape template from the
   strongest spectra of a series.
 - Interface: the window centre can be given as a g value or as a field in
