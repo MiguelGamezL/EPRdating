@@ -336,11 +336,12 @@ An article describing the library is in preparation. Until then, cite the
 software (GitHub's "Cite this repository" gives the same from `CITATION.cff`):
 
 > Gámez López M.E., Ospina Umaña C.J., Castro Millán J.S., Almanza Montero O.A.
-> (2026) EPRdating: open ESR dating of tooth enamel in Python, version 0.1.0.
-> Zenodo. https://doi.org/10.5281/zenodo.23192195
+> (2026) EPRdating: open ESR dating of tooth enamel in Python, version 0.2.0.
+> Zenodo. https://doi.org/10.5281/zenodo.23224989
 
 https://doi.org/10.5281/zenodo.23192194 always points to the latest version;
-cite the DOI of the version you used.
+cite the DOI of the version you used (0.2.0: 10.5281/zenodo.23224989; 0.1.1:
+10.5281/zenodo.23193495; 0.1.0: 10.5281/zenodo.23192195).
 
 ## License
 
