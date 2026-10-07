@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.2.0 — 2026-10-07
 
 - Interface: weights of the dose-response fit (measured errors, 1/I² or
   equal); with 1/I² the fit reports the relative scatter about the curve.

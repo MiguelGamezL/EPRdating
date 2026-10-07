@@ -41,13 +41,14 @@ Inspired by ROSY (Brennan et al. 1997, 1999) and DATA (Grün 2009), written as
 an independent, open implementation from the published equations, and
 validated against both programs run as black boxes.
 
-> **Version 0.1.1** (see `CHANGELOG.md`). Validation (details in
+> **Version 0.2.0** (see `CHANGELOG.md`). Validation (details in
 > `tests/validation/`):
 >
 > | Against | Agreement |
 > |---|---|
 > | ROSY 2.0: EU, LU and CU ages, incl. the six teeth of Brennan et al. (1997) | −0.6 to +0.7 % (`ROSY_FINDINGS.md`) |
 > | DATA: EU and LU ages, one beta factor for the U chain as DATA | −2.6 to +1.6 % (`DATA_FINDINGS.md`) |
+> | Real dose series: Calio P4 enamel (Hakim et al. 2025, public MS5000 spectra), SSE De | 2259–2286 Gy vs published 2267 ± 99 Gy (`docs/validation.md`) |
 > | DATA: US-ESR and CS-US ages | −1.4 to +0.7 %; CS-US within DATA's 1 ka rounding |
 > | 58 published ages from nine studies (DATA, USESR, ROSY) | −9.5 to +3.4 %, 56 within the published 1σ (`PUBLISHED_FINDINGS.md`) |
 >
@@ -151,6 +152,8 @@ the `gui` extra; the rest of the package does not.
 from eprdating.gui import app
 app()
 ```
+
+[![Open the interface in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/MiguelGamezL/EPRdating/blob/main/examples/interface.ipynb)
 
 <img src="https://raw.githubusercontent.com/MiguelGamezL/EPRdating/main/docs/img/gui.png" alt="EPRdating interface: equivalent-dose tab" width="640">
 
