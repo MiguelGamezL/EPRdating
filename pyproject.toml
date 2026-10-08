@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "eprdating"
 dynamic = ["version"]
-description = "Open ESR dating of tooth enamel in Python: EPR and HPGe gamma spectra, dose rates with one-group beta attenuation, EU/LU/US-ESR/CSUS-ESR ages with Monte Carlo uncertainties; validated against ROSY, DATA and published ages."
+description = "Open ESR dating of tooth enamel in Python: EPR spectra to equivalent dose, HPGe gamma spectrometry of the sediment, dose rates with one-group beta attenuation, EU/LU/US-ESR/CSUS-ESR ages with Monte Carlo uncertainties, optional Jupyter/Colab interface; validated against ROSY, DATA, published ages and public raw spectra."
 readme = "README.md"
 requires-python = ">=3.10"
 license = { file = "LICENSE" }
@@ -16,7 +16,7 @@ authors = [
   { name = "Ovidio Amado Almanza Montero" },
 ]
 maintainers = [{ name = "Miguel Enrique Gámez López", email = "megamezl@unal.edu.co" }]
-keywords = ["ESR dating", "EPR", "geochronology", "tooth enamel", "dose rate", "US-ESR", "gamma spectrometry", "trapped charge dating"]
+keywords = ["ESR dating", "EPR", "geochronology", "tooth enamel", "dose rate", "US-ESR", "gamma spectrometry", "trapped charge dating", "equivalent dose", "Jupyter"]
 classifiers = [
   "Programming Language :: Python :: 3",
   "Programming Language :: Python :: 3.10",
