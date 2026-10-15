@@ -170,8 +170,9 @@ Units: Gy, Gy/ka, ka, ppm (U, Th), % (K), mT, GHz.
 See also
 `examples/quickstart.py` and `examples/deconvolution_epraya.py`.
 
-`examples/dose_series_dat.py` runs a real additive-dose series from raw
-spectra to De: it reads `.dat`/`.par` files, builds the CO2- template (the
+`examples/dose_series_dat.py` runs an additive-dose series from raw
+spectra to De: it reads `.dat`/`.par` files listed in a design table (file,
+dose, aliquot), builds the CO2- template (the
 field-aligned average of the strong spectra, or the orthorhombic CO2- radical
 simulated with EPRAYA and broadened by the time constant), averages the
 repeated spectra of each aliquot, fits the amplitude inside the intensity

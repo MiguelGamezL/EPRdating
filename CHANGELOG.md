@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+- `examples/dose_series_dat.py` and `tools/synthetic_dose_series.py` read
+  the series from a design table (file, dose, aliquot, exclude) instead of
+  a hard-coded series; `--bridge` names the aliquot measured on both sweeps.
+
 ## 0.2.0 — 2026-10-07
 
 - Interface: weights of the dose-response fit (measured errors, 1/I² or

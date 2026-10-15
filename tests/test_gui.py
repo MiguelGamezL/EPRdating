@@ -51,9 +51,9 @@ def series(tmp_path):
 
 
 def test_names():
-    assert dose_from_name("M18_200Gy_19mW.dat") == "200"
+    assert dose_from_name("S_200Gy_19mW.dat") == "200"
     assert dose_from_name("tooth_12,5 Gy.DSC") == "12.5"
-    assert dose_from_name("M18_3_19mW_4SCAN.dat") == ""
+    assert dose_from_name("S_3_19mW_4SCAN.dat") == ""
     assert guess_role("fondo_24h.txt") == "background"
     assert guess_role("RGU1_24h.Spe") == "U"
     assert guess_role("RGTh1.Spe") == "Th"

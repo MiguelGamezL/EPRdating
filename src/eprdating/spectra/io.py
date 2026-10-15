@@ -27,8 +27,8 @@ acquisition leaves a trailing incomplete scan, which is dropped.
 
 The field column is CF ± SW/2, i.e. it is built on the *set* centre field.
 :func:`read_dat` moves it by ``CF_ - CF`` so that the axis is the actual
-field (``actual_field=False`` keeps the raw axis). For the M18 series this
-correction (+0.4 mT) brings the CO2- signal to within 0.05 mT of the
+field (``actual_field=False`` keeps the raw axis). In a tested series this
+correction (+0.4 mT) brought the CO2- signal to within 0.05 mT of the
 simulated one (literature g-values, nominal 9.43 GHz). Fields are in mT, as
 everywhere in :mod:`eprdating`.
 """
@@ -55,7 +55,7 @@ class Spectrum:
     params  : acquisition parameters as read from the file (raw units).
     freq_GHz, power_mW : microwave frequency and power (for the .dat/.par
               format the power comes from the file name, e.g.
-              ``M18_3_19mW_4SCAN.dat``).
+              ``S_3_19mW_4SCAN.dat``).
     gain    : receiver gain as a linear factor (None if unknown).
     mod_amp_mT, time_constant_ms : field modulation (peak to peak) and
               lock-in time constant, when the file gives them in known units.

@@ -49,7 +49,7 @@ baseline jump before averaging.
 
 ```python
 drc = fit_dose_response(doses, amplitudes, "SSE", sigma=errors)
-plot.plot_dose_response(drc, excluded=[(100, 7.3, 8.4)])
+plot.plot_dose_response(drc, excluded=[(400, 31.0, 1.2)])
 ```
 
 Points with their errors, the fitted curve extrapolated to zero intensity,

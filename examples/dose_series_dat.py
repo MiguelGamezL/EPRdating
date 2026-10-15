@@ -2,15 +2,25 @@
 
 Usage::
 
-    python examples/dose_series_dat.py FOLDER [--window-G 100] [--center-g 2.0023]
-                                              [--no-repeats] [--exclude-undetected ALPHA]
-                                              [--epraya] [--plot out.png]
+    python examples/dose_series_dat.py FOLDER DESIGN.csv [--window-G 100] [--center-g 2.0023]
+                                       [--bridge NARROW WIDE] [--no-repeats]
+                                       [--exclude-undetected ALPHA] [--epraya] [--plot out.png]
 
-The series below is the M18 enamel sample (aliquots irradiated in 20 Gy
-steps, 4 scans at 19 mW; the natural aliquot measured on a wide sweep, 1 scan
-at 18 mW). Aliquots 1 and 9 were also measured with a single scan; those
-repeats are averaged with the 4-scan spectra. Edit ``SERIES`` and
-``REPEATS`` for other samples. The data are not part of the repository.
+``DESIGN.csv`` lists the spectra of the series, one per row::
+
+    file,dose,aliquot,exclude
+    S_N.dat,0,,
+    S_50Gy.dat,50,a50,
+    S_50Gy_repeat.dat,50,a50,
+    S_400Gy.dat,400,,tube cracked during the measurement
+
+``aliquot`` (optional) groups the spectra of one aliquot: they are averaged,
+the first one listed is the main spectrum. ``exclude`` (optional) gives the
+reason to leave an aliquot out of the fits; it is still measured and drawn.
+When some aliquots (e.g. the natural) were measured on a wider sweep,
+``--bridge NARROW WIDE`` names one aliquot measured both ways, which puts
+the wide sweeps on the scale of the narrow ones. The data are not part of
+the repository.
 
 Steps
 -----
@@ -20,7 +30,7 @@ Steps
    or, with ``--epraya``, the orthorhombic CO2- radical simulated with EPRAYA
    and broadened (linewidth, modulation, lock-in time constant, field offset
    fitted to that average);
-3. each aliquot: its repeated spectra are averaged (normalised to 19 mW,
+3. each aliquot: its repeated spectra are averaged (normalised to one power,
    weighted by their noise) and the template amplitude is fitted inside the
    window (linear baseline, common field shift within ±0.6 mT), with errors
    by noise injection; the repeats are checked against each other; a
@@ -28,8 +38,8 @@ Steps
    amplitude (``p_noise``). ``--exclude-undetected 0.01`` leaves out the
    aliquots above that level, for comparison only: dropping undetected
    aliquots biases De upwards (see ``tools/synthetic_dose_series.py``);
-4. the wide-sweep natural aliquot is put on the scale of the narrow sweeps
-   with an aliquot measured both ways;
+4. with ``--bridge``, wide-sweep aliquots are put on the scale of the narrow
+   sweeps with an aliquot measured both ways;
 5. linear dose-response fits (De allowed to be negative, errors inflated by
    the Birge ratio) for several point selections.
 """
@@ -37,6 +47,7 @@ Steps
 from __future__ import annotations
 
 import argparse
+import csv
 import itertools
 import warnings
 from pathlib import Path
@@ -56,17 +67,38 @@ from eprdating.spectra import (
     time_constant_filter,
 )
 
-# main file of each aliquot -> added dose (Gy)
-SERIES = {"M18_0_18mW.dat": 0.0, **{f"M18_{i}_19mW_4SCAN.dat": 20.0 * i for i in range(1, 10)}}
-# further spectra of the same aliquot, same sweep (averaged with the main one)
-REPEATS = {"M18_1_19mW_4SCAN.dat": ["M18_1_19mW.dat"], "M18_9_19mW_4SCAN.dat": ["M18_9_19mW.dat"]}
-EXCLUDED = {"M18_5_19mW_4SCAN.dat": "no detectable signal at 100 Gy (failed measurement)"}
-# same aliquot measured with the narrow and the wide sweep (for the natural)
-BRIDGE = ("M18_9_19mW_4SCAN.dat", "M18_9_19mW_TOTAL.dat")
 WIDE_SWEEP_KEEP = (305.0, 370.0)  # mT kept from the wide sweeps
-REF_POWER = 19.0  # mW
 SCALE = 1e8  # intensities in readable units
 MAX_SHIFT = 0.6  # mT
+
+
+class Design:
+    """The series as read from ``DESIGN.csv``.
+
+    ``series``: main file of each aliquot -> added dose (Gy); ``repeats``:
+    further spectra of that aliquot; ``excluded``: main file -> reason."""
+
+    def __init__(self, path: Path, bridge: tuple[str, str] | None = None):
+        groups: dict[str, list[tuple[str, float]]] = {}
+        self.excluded: dict[str, str] = {}
+        with open(path, newline="", encoding="utf-8-sig") as fh:
+            for row in csv.DictReader(fh):
+                name = row["file"].strip()
+                if not name:
+                    continue
+                key = (row.get("aliquot") or "").strip() or name
+                groups.setdefault(key, []).append((name, float(row["dose"])))
+                if (row.get("exclude") or "").strip():
+                    self.excluded[groups[key][0][0]] = row["exclude"].strip()
+        self.series = {g[0][0]: g[0][1] for g in groups.values()}
+        self.repeats = {g[0][0]: [n for n, _ in g[1:]] for g in groups.values() if len(g) > 1}
+        self.bridge = bridge
+
+    def strong(self) -> list[str]:
+        """Main files of the upper half of the added doses (template)."""
+        doses = [d for f, d in self.series.items() if d > 0 and f not in self.excluded]
+        cut = float(np.median(doses)) if doses else 0.0
+        return [f for f, d in self.series.items() if d >= cut and d > 0 and f not in self.excluded]
 
 
 def load(folder: Path, name: str):
@@ -74,9 +106,9 @@ def load(folder: Path, name: str):
     return s.window(*WIDE_SWEEP_KEEP) if s.B.size > 1000 else s
 
 
-def empirical_template(spectra, window: IntensityWindow):
+def empirical_template(spectra, window: IntensityWindow, ref_power_mW: float | None = None):
     """Field-aligned average of strong spectra (same sweep), baseline removed."""
-    comb = [combine_spectra([s], window, ref_power_mW=REF_POWER).spectrum for s in spectra]
+    comb = [combine_spectra([s], window, ref_power_mW=ref_power_mW).spectrum for s in spectra]
     B = comb[0].B
     m = window.mask(B, comb[0].freq_GHz)
     ys = []
@@ -115,59 +147,64 @@ def epraya_template(B_ref, avg, window: IntensityWindow, freq_GHz: float):
     return make
 
 
-def measure_series(folder: Path, window: IntensityWindow = DEFAULT_WINDOW, repeats: bool = True,
-                   epraya: bool = False):
+def measure_series(folder: Path, design: Design, window: IntensityWindow = DEFAULT_WINDOW,
+                   repeats: bool = True, epraya: bool = False):
     """Intensity of every aliquot. Returns ``(rows, shown)``: rows are
     ``(file, dose, value, sigma, Intensity)`` in ``SCALE`` units; ``shown``
     maps each file to ``(B, y, fitted)`` inside the window, for plotting."""
-    groups = {f: [f, *(REPEATS.get(f, []) if repeats else [])] for f in SERIES}
+    groups = {f: [f, *(design.repeats.get(f, []) if repeats else [])] for f in design.series}
     spectra = {n: load(folder, n) for g in groups.values() for n in g}
-    spectra[BRIDGE[1]] = load(folder, BRIDGE[1])
-    strong = [spectra[f] for f, d in SERIES.items() if d >= 60 and f not in EXCLUDED]
-    B_ref, avg = empirical_template(strong, window)
+    strong = [spectra[f] for f in design.strong()]
+    ref_power = strong[0].power_mW
+    B_ref, avg = empirical_template(strong, window, ref_power)
     template = epraya_template(B_ref, avg, window, strong[0].freq_GHz) if epraya else (B_ref, avg)
+    kw = {"template": template, "window": window, "max_shift": MAX_SHIFT, "ref_power_mW": ref_power}
 
     res, shown = {}, {}
     for f, names in groups.items():
-        kw = {"template": template, "window": window, "max_shift": MAX_SHIFT}
         with warnings.catch_warnings():
             warnings.simplefilter("ignore", UserWarning)
-            res[f] = combined_intensity([spectra[n] for n in names], ref_power_mW=REF_POWER, **kw)
-            c = combine_spectra([spectra[n] for n in names], window, ref_power_mW=REF_POWER).spectrum
+            res[f] = combined_intensity([spectra[n] for n in names], **kw)
+            c = combine_spectra([spectra[n] for n in names], window, ref_power_mW=ref_power).spectrum
         m = window.mask(c.B, c.freq_GHz)
         shown[f] = (c.B[m], c.y[m] * SCALE, res[f].fit.fitted * SCALE)
-    wide = intensity(spectra[BRIDGE[1]], template=template, window=window, ref_power_mW=REF_POWER,
-                     max_shift=MAX_SHIFT)
-    k = res[BRIDGE[0]].value / wide.value
-    sk = k * np.hypot(res[BRIDGE[0]].sigma / res[BRIDGE[0]].value, wide.sigma / wide.value)
     print(f"intensity window: {window.describe(strong[0].freq_GHz)}")
-    print(f"narrow/wide sweep factor = {k:.3f} ± {sk:.3f}\n")
 
-    step0 = float(np.median(np.diff(spectra[BRIDGE[0]].B)))
+    k, sk, step0 = 1.0, 0.0, None
+    if design.bridge:
+        narrow, wide_name = design.bridge
+        wide = intensity(load(folder, wide_name), **kw)
+        k = res[narrow].value / wide.value
+        sk = k * np.hypot(res[narrow].sigma / res[narrow].value, wide.sigma / wide.value)
+        step0 = float(np.median(np.diff(spectra[narrow].B)))
+        print(f"narrow/wide sweep factor = {k:.3f} ± {sk:.3f}")
+    print()
+
     rows = []
-    for f, d in SERIES.items():
+    for f, d in design.series.items():
         r = res[f]
         A, s = r.value * SCALE, r.sigma * SCALE
-        if float(np.median(np.diff(spectra[f].B))) > 1.1 * step0:  # wide sweep -> narrow-sweep scale
+        if step0 and float(np.median(np.diff(spectra[f].B))) > 1.1 * step0:  # wide -> narrow scale
             A, s = A * k, np.hypot(s * k, A * sk)  # right side uses the unscaled A
             B, y, fit = shown[f]
             shown[f] = (B, y * k, fit * k)
         rows.append((f, d, A, s, r))
-        note = f"  excluded: {EXCLUDED[f]}" if f in EXCLUDED else ""
+        note = f"  excluded: {design.excluded[f]}" if f in design.excluded else ""
         rep = (f"  ({r.n_repeats} spectra, chi2_red = {r.chi2_red:.2f})" if r.n_repeats > 1 else "")
-        print(f"{f:26s} {d:5.0f} Gy  I = {A:6.2f} ± {s:5.2f}  shift {r.shift_mT:+.2f} mT  "
+        print(f"{f:26s} {d:7.1f} Gy  I = {A:6.2f} ± {s:5.2f}  shift {r.shift_mT:+.2f} mT  "
               f"p_noise {r.p_noise:.3f}{rep}{note}")
     return rows, shown
 
 
-def fit_selections(rows, alpha: float | None = None):
+def fit_selections(rows, excluded=(), alpha: float | None = None):
     """Linear fits for several selections. With ``alpha``, aliquots whose
     signal is not detected at that false-alarm level are left out too."""
-    ok = [r for r in rows if r[0] not in EXCLUDED and (alpha is None or r[4].detected(alpha) is not False)]
+    ok = [r for r in rows if r[0] not in excluded and (alpha is None or r[4].detected(alpha) is not False)]
+    half = float(np.median([r[1] for r in ok])) if ok else 0.0
     sel = {
         "all aliquots": ok,
         "irradiated only": [r for r in ok if r[1] > 0],
-        "up to 80 Gy": [r for r in ok if r[1] <= 80],
+        f"up to {half:g} Gy": [r for r in ok if r[1] <= half],
     }
     sel = {k: v for k, v in sel.items() if len(v) >= 3}
     return {name: fit_dose_response([r[1] for r in rr], [r[2] for r in rr], "LIN", sigma=[r[3] for r in rr],
@@ -177,8 +214,11 @@ def fit_selections(rows, alpha: float | None = None):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("folder", type=Path)
+    ap.add_argument("design", type=Path, help="CSV with columns file, dose[, aliquot][, exclude]")
     ap.add_argument("--window-G", type=float, default=100.0, help="intensity window width (G)")
     ap.add_argument("--center-g", type=float, default=2.0023, help="g-value at the window centre")
+    ap.add_argument("--bridge", nargs=2, metavar=("NARROW", "WIDE"),
+                    help="one aliquot measured on the narrow and on the wide sweep")
     ap.add_argument("--no-repeats", action="store_true", help="use only the main spectrum of each aliquot")
     ap.add_argument("--exclude-undetected", type=float, metavar="ALPHA",
                     help="leave out aliquots whose signal is not detected at this false-alarm level")
@@ -187,12 +227,13 @@ def main():
     a = ap.parse_args()
 
     window = IntensityWindow(a.window_G, "G", center_g=a.center_g)
-    rows, shown = measure_series(a.folder, window, repeats=not a.no_repeats, epraya=a.epraya)
+    design = Design(a.design, tuple(a.bridge) if a.bridge else None)
+    rows, shown = measure_series(a.folder, design, window, repeats=not a.no_repeats, epraya=a.epraya)
     print()
     if a.exclude_undetected is not None:
         out = [f"{r[1]:.0f} Gy" for r in rows if r[4].detected(a.exclude_undetected) is False]
         print(f"not detected at {a.exclude_undetected:g}, left out: {', '.join(out) or 'none'}")
-    fits = fit_selections(rows, a.exclude_undetected)
+    fits = fit_selections(rows, design.excluded, a.exclude_undetected)
     for name, f in fits.items():
         print(f"{name:24s} De = {f.De:6.1f} ± {f.De_sigma:5.1f} Gy   chi2_red = {f.chi2_red:.1f}")
 
@@ -200,17 +241,19 @@ def main():
         import matplotlib.pyplot as plt
 
         fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(11, 4.5))
+        gap = 1.2 * max(np.ptp(shown[f][1]) for f, *_ in rows)
         for i, (f, d, *_rest) in enumerate(rows):
             B, y, fit = shown[f]
-            ax1.plot(B, y - y.mean() + 40 * i, color="0.7", lw=0.8)
-            ax1.plot(B, fit - y.mean() + 40 * i, color="C0" if f not in EXCLUDED else "C3", lw=1.3)
-            ax1.text(B.max() + 0.2, 40 * i, f"{d:.0f} Gy", va="center", fontsize=8)
+            ax1.plot(B, y - y.mean() + gap * i, color="0.7", lw=0.8)
+            ax1.plot(B, fit - y.mean() + gap * i, color="C3" if f in design.excluded else "C0", lw=1.3)
+            ax1.text(B.max() + 0.2, gap * i, f"{d:g} Gy", va="center", fontsize=8)
         ax1.set_xlabel("B (mT)")
         ax1.set_yticks([])
         ax1.set_title("spectra and template fits")
         for f, d, A, s, _ in rows:
-            ax2.errorbar(d, A, s, fmt="o", color="C3" if f in EXCLUDED else "k", ms=4)
-        x = np.linspace(-60, 200, 10)
+            ax2.errorbar(d, A, s, fmt="o", color="C3" if f in design.excluded else "k", ms=4)
+        dmax = max(r[1] for r in rows)
+        x = np.linspace(-0.35 * dmax, 1.1 * dmax, 10)
         for (name, fit), c in zip(fits.items(), ("C0", "C1", "C2"), strict=False):
             ax2.plot(x, fit.predict(x), color=c, label=f"{name}: De = {fit.De:.0f} ± {fit.De_sigma:.0f} Gy")
         ax2.axhline(0, color="0.5", lw=0.5)

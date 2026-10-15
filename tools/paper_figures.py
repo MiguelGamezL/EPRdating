@@ -1,9 +1,8 @@
 """Figures of the EPRdating article (PDF), from the validation data.
 
-    python tools/paper_figures.py OUTDIR [--m18 FOLDER]
+    python tools/paper_figures.py OUTDIR
 
-fig2_m18.pdf needs the M18 spectra (not in the repository); the others use
-only the reference data under tests/validation.
+The figures use only the reference data under tests/validation.
 """
 
 from __future__ import annotations
@@ -17,11 +16,10 @@ import matplotlib
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-import numpy as np
 
-from eprdating import Sediment, ToothLayers, ToothSample, USModel, fit_dose_response, plot
+from eprdating import Sediment, ToothLayers, ToothSample, USModel
 from eprdating.dose_rate import cosmic_dose_rate_sea_level
-from eprdating.plot import CATEGORICAL, GRID, INK, INK_2, INK_3, SURFACE
+from eprdating.plot import CATEGORICAL, GRID, INK_2, INK_3, SURFACE
 from eprdating.usesr import th230_u234
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -55,30 +53,6 @@ def _save(fig, out):
     fig.savefig(out.with_suffix(".png"), dpi=200, facecolor=SURFACE)
     plt.close(fig)
     print("wrote", out)
-
-
-# --- Fig. 2: M18 ----------------------------------------------------------------
-def fig_m18(folder: Path, out: Path):
-    import dose_series_dat as ds
-
-    rows, shown = ds.measure_series(folder)  # default window: 100 G around g = 2.0023
-    used = [r for r in rows if r[0] not in ds.EXCLUDED]
-    drc = fit_dose_response([r[1] for r in used], [r[2] for r in used], "LIN", sigma=[r[3] for r in used],
-                            De_min=-np.inf)
-
-    fig, (a1, a2) = plt.subplots(1, 2, figsize=(7.2, 3.6), facecolor=SURFACE, gridspec_kw={"width_ratios": [1, 1.15]})
-    keep = [f for f in ds.SERIES if f not in ds.EXCLUDED]
-    spectra = [(shown[f][0], shown[f][1]) for f in keep]
-    fits = [(shown[f][0], shown[f][2]) for f in keep]
-    plot.plot_spectra(spectra, [f"{ds.SERIES[f]:.0f} Gy" for f in keep], fits=fits, ax=a1)
-    a1.set_title("a  Spectra and template fits", loc="left", fontsize=9, color=INK)
-    ex = [(r[1], r[2], r[3]) for r in rows if r[0] in ds.EXCLUDED]
-    plot.plot_dose_response(drc, excluded=ex, ax=a2, intensity_label="CO$_2^-$ amplitude (a.u.)")
-    a2.set_xlim(-140, 205)  # keeps the De label inside the axes
-    a2.set_title("b  Dose response (linear)", loc="left", fontsize=9, color=INK)
-    fig.tight_layout(w_pad=3.0)
-    _save(fig, out)
-    return drc
 
 
 # --- Fig. 3: ROSY --------------------------------------------------------------------
@@ -218,13 +192,9 @@ def main():
     warnings.filterwarnings("ignore")
     ap = argparse.ArgumentParser()
     ap.add_argument("out", type=Path)
-    ap.add_argument("--m18", type=Path)
     a = ap.parse_args()
     a.out.mkdir(parents=True, exist_ok=True)
     sys.path.insert(0, str(ROOT / "tools"))
-    if a.m18:
-        drc = fig_m18(a.m18, a.out / "fig2_m18.pdf")
-        print(f"  M18 linear fit, all points: De = {drc.De:.1f} ± {drc.De_sigma:.1f} Gy, chi2_red = {drc.chi2_red:.1f}")
     fig_rosy(a.out / "fig3_rosy.pdf")
     fig_beta(a.out / "fig4_beta.pdf")
     fig_useries(a.out / "fig5_useries.pdf")

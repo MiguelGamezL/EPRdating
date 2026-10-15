@@ -76,7 +76,7 @@ class DePanel:
         self.upload = w.FileUpload(accept=",".join(ALL_SUFFIXES + (".DSC", ".DTA")), multiple=True,
                                    description="Upload spectra", layout=w.Layout(width="180px"))
         self.upload.observe(self._on_upload, names="value")
-        self.folder = w.Text(placeholder="folder, e.g. /content/drive/MyDrive/M18", layout=w.Layout(width="420px"))
+        self.folder = w.Text(placeholder="folder, e.g. /content/drive/MyDrive/spectra", layout=w.Layout(width="420px"))
         self.load_folder = button("Load folder", "folder-open", width="140px")
         self.load_folder.on_click(lambda _: self._guard(self._load_folder))
         self.files_box = w.VBox()

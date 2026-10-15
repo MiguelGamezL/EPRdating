@@ -47,7 +47,7 @@ def test_names():
     assert parse_angular_name("BF_ESR_06_Nat_Z_2_gon_100dg_result") == ("Z", 100.0)
     assert parse_angular_name("tooth_or-b_angle15", r"or-(?P<orientation>\w)_angle(?P<angle>\d+)") == ("B", 15.0)
     with pytest.raises(ValueError):
-        parse_angular_name("M18_3_19mW_4SCAN")
+        parse_angular_name("S_3_19mW_4SCAN")
 
 
 def test_merge_balances_orientations():

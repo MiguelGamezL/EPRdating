@@ -54,7 +54,7 @@ which record every choice. The panels are also objects (`a.de`, `a.gamma`,
 
 ```python
 from eprdating.spectra import read_epr
-s = read_epr("M18_3_19mW_4SCAN.dat")     # or .DSC/.DTA, .par/.spc, .csv
+s = read_epr("S_3_19mW_4SCAN.dat")       # or .DSC/.DTA, .par/.spc, .csv
 s.B, s.scans, s.y                        # field (mT), scans, scan average
 s.freq_GHz, s.power_mW, s.gain, s.mod_amp_mT, s.time_constant_ms
 ```
@@ -133,7 +133,7 @@ intensity(s, "peak_to_peak"), intensity(s, "t1_b2"), intensity(s, "double_integr
   signal-free sweep within one window width on each side of the window, and
   the absorption baseline a line through the outer 20 % of the window at
   each end. An error in the derivative baseline grows quadratically in the
-  double integral, so a few end points are not enough: in M18-like synthetic
+  double integral, so a few end points are not enough: in synthetic weak-signal
   spectra this cuts the scatter of the double integral by about 40 % against
   lines through 10 % of the window at each end (it remains two to three
   times that of the template fit). The noise is injected over the window and both baseline
@@ -165,7 +165,7 @@ In synthetic noise-only spectra, 5 % fall below `p_noise = 0.05`, as they
 should.
 
 Use `p_noise` as a flag, not as a rule to drop points from the dose
-response. In synthetic M18-like series (`tools/synthetic_dose_series.py`),
+response. In synthetic series of weak signals (`tools/synthetic_dose_series.py`),
 leaving out the aliquots not detected at 1 % biased De upwards (+15 to +60 %
 for De = 20 Gy, up to +8 % for 50 Gy): the weak aliquots that survive are those whose noise
 happened to be positive. Keeping every aliquot, or leaving out only the
@@ -187,7 +187,7 @@ each), average the spectra and measure the average: weak signals gain
 ```python
 from eprdating.spectra import combined_intensity, combine_spectra
 
-r = combined_intensity([read_epr("M18_9_19mW.dat"), read_epr("M18_9_19mW_4SCAN.dat")],
+r = combined_intensity([read_epr("S_9_19mW.dat"), read_epr("S_9_19mW_4SCAN.dat")],
                        template=(B_t, y_t), ref_power_mW=19.0)
 r.value, r.sigma, r.n_repeats, r.chi2_red, r.repeats
 combine_spectra([...]).summary()    # weights, noise and rejected scans
@@ -273,7 +273,7 @@ inflated by the Birge ratio when `chi2_red > 1` (scatter between aliquots).
 ```python
 from eprdating import plot
 plot.plot_spectra(spectra, ["0 Gy", "20 Gy", ...], window=(333, 341), fits=fit_results)
-plot.plot_dose_response(drc, excluded=[(100, 7.3, 8.4)])
+plot.plot_dose_response(drc, excluded=[(400, 31.0, 1.2)])
 ```
 
 `examples/dose_series_dat.py` runs a complete series. All figures:
